@@ -1,6 +1,4 @@
-package java.com.kodeir.enzim2016.logic;
-
-import java.util.List;
+package com.kodeir.enzim2016.logic;
 
 /**
  * Created by Rowan on 11.06.2016.

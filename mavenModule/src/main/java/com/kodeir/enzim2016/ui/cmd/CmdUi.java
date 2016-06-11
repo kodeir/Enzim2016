@@ -1,12 +1,12 @@
-package java.com.kodeir.enzim2016.ui.cmd;
+package com.kodeir.enzim2016.ui.cmd;
 
-import java.com.kodeir.enzim2016.logic.Diagnosis;
-import java.com.kodeir.enzim2016.logic.EnzimLogic;
-import java.com.kodeir.enzim2016.patients.Patient;
+import com.kodeir.enzim2016.logic.Diagnosis;
+import com.kodeir.enzim2016.logic.EnzimLogic;
+import com.kodeir.enzim2016.patients.Patient;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.SyncFailedException;
 
 /**
  * Created by Rowan on 11.06.2016.
@@ -33,36 +33,37 @@ public class CmdUi {
 
     private void createPatient(){
         System.out.println("Enter patient name");
-        String name = readFromConsole();
+        String name = readStringFromConsole();
         System.out.println("Enter patient surname");
-        String surname = readFromConsole();
+        String surname = readStringFromConsole();
         patient = new Patient(name,surname);
+        System.out.println("Patient: " + name + " " + surname);
         System.out.println("--");
     }
 
     private void fillCoefficients(){
         System.out.println("Enter AsT");
-        patient.setAsT(Float.parseFloat(readFromConsole()));
+        patient.setAsT(readFloatFromConsole());
         System.out.println("Enter AlT");
-        patient.setAlT(Float.parseFloat(readFromConsole()));
+        patient.setAlT(readFloatFromConsole());
         System.out.println("Enter KFK");
-        patient.setKFK(Float.parseFloat(readFromConsole()));
+        patient.setKFK(readFloatFromConsole());
         System.out.println("Enter LDG");
-        patient.setLDG(Float.parseFloat(readFromConsole()));
+        patient.setLDG(readFloatFromConsole());
         System.out.println("Enter ShF");
-        patient.setShF(Float.parseFloat(readFromConsole()));
+        patient.setShF(readFloatFromConsole());
         System.out.println("Enter GGTP");
-        patient.setGGTP(Float.parseFloat(readFromConsole()));
+        patient.setGGTP(readFloatFromConsole());
         System.out.println("Enter GlDG");
-        patient.setGlDG(Float.parseFloat(readFromConsole()));
+        patient.setGlDG(readFloatFromConsole());
         System.out.println("Enter AsAT");
-        patient.setAsAT(Float.parseFloat(readFromConsole()));
+        patient.setAsAT(readFloatFromConsole());
         System.out.println("Enter AlAT");
-        patient.setAlAT(Float.parseFloat(readFromConsole()));
+        patient.setAlAT(readFloatFromConsole());
         System.out.println("Enter HE");
-        patient.setHE(Float.parseFloat(readFromConsole()));
+        patient.setHE(readFloatFromConsole());
         System.out.println("Enter HE");
-        patient.setHE(Float.parseFloat(readFromConsole()));
+        patient.setHE(readFloatFromConsole());
         System.out.println("--");
     }
 
@@ -71,14 +72,28 @@ public class CmdUi {
         diagnosis.diagnose(patient.getAsT(),patient.getAlT(),patient.getKFK(),patient.getLDG(),patient.getShF(),patient.getGGTP(),patient.getGlDG(),patient.getAsAT(),patient.getAlAT(),patient.getHE(),patient.getGDG());
     }
 
-    private String readFromConsole(){
+    private String readStringFromConsole(){
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
         String consoleInput = null;
         try {
             consoleInput = bufferedReader.readLine();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Wrong input!");
+            consoleInput = readStringFromConsole();
         }
         return consoleInput;
     }
+
+    private float readFloatFromConsole(){
+        float coefficient = 0.0f;
+        try {
+            coefficient = Float.parseFloat(readStringFromConsole());
+        } catch (NumberFormatException e) {
+            System.out.println("Wrong input!");
+            coefficient = readFloatFromConsole();
+        }
+        return coefficient;
+    }
+
+
 }

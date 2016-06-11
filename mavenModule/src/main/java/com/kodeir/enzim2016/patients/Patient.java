@@ -1,4 +1,4 @@
-package java.com.kodeir.enzim2016.patients;
+package com.kodeir.enzim2016.patients;
 
 import java.util.ArrayList;
 import java.util.List;
