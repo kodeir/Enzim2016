@@ -3,9 +3,6 @@ package com.kodeir.enzim2016.logic;
 import com.kodeir.enzim2016.patients.Patient;
 import com.kodeir.enzim2016.thesaurus.Organs;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * Copyright (c) 2007, 2016 Vyacheslav Ryabinin and/or his affiliates. All rights reserved.
  *

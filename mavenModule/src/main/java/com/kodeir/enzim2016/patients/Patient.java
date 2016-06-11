@@ -40,10 +40,10 @@ public class Patient {
         this.ShF = shF;
         this.GGTP = GGTP;
         this.GlDG = glDG;
-        this.AsAT = asAT;
-        this.AlAT = alAT;
+        this.AsAT = asAT; //?
+        this.AlAT = alAT; //?
         this.HE = HE;
-        this.GDG = GDG;
+        this.GDG = GDG; //?
     }
 
     public String getName() {
