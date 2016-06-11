@@ -23,6 +23,9 @@ public class Patient {
     private float HE;
     private float GDG;
 
+    private String injeredOrgan;
+    private String disease;
+
     public Patient(String name, String surname) {
         this(name, surname, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     }
@@ -145,5 +148,21 @@ public class Patient {
 
     public void setGDG(float GDG) {
         this.GDG = GDG;
+    }
+
+    public String getInjeredOrgan(){
+        return injeredOrgan;
+    }
+
+    public void setInjeredOrgan(String injeredOrgan){
+        this.injeredOrgan = injeredOrgan;
+    }
+
+    public String getDisease(){
+        return disease;
+    }
+
+    public void setDisease(String disease){
+        this.disease = disease;
     }
 }

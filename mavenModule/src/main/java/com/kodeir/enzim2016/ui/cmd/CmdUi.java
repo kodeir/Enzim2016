@@ -69,7 +69,9 @@ public class CmdUi {
 
     private void doDiagnostic(){
         Diagnosis diagnosis = new EnzimLogic();
-        diagnosis.diagnose(patient.getAsT(),patient.getAlT(),patient.getKFK(),patient.getLDG(),patient.getShF(),patient.getGGTP(),patient.getGlDG(),patient.getAsAT(),patient.getAlAT(),patient.getHE(),patient.getGDG());
+        diagnosis.diagnose(patient);
+        System.out.println(patient.getInjeredOrgan());
+        System.out.println(patient.getDisease());
     }
 
     private String readStringFromConsole(){
