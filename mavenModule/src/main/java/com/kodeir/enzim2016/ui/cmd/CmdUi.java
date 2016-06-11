@@ -62,8 +62,8 @@ public class CmdUi {
         patient.setAlAT(readFloatFromConsole());
         System.out.println("Enter HE");
         patient.setHE(readFloatFromConsole());
-        System.out.println("Enter HE");
-        patient.setHE(readFloatFromConsole());
+        System.out.println("Enter GDG");
+        patient.setGDG(readFloatFromConsole());
         System.out.println("--");
     }
 
@@ -74,11 +74,11 @@ public class CmdUi {
 
     private String readStringFromConsole(){
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
-        String consoleInput = null;
+        String consoleInput;
         try {
             consoleInput = bufferedReader.readLine();
         } catch (IOException e) {
-            System.out.println("Wrong input!");
+            System.out.println("Wrong input! Try again.");
             consoleInput = readStringFromConsole();
         }
         return consoleInput;
@@ -89,7 +89,7 @@ public class CmdUi {
         try {
             coefficient = Float.parseFloat(readStringFromConsole());
         } catch (NumberFormatException e) {
-            System.out.println("Wrong input!");
+            System.out.println("Wrong input! Try again.");
             coefficient = readFloatFromConsole();
         }
         return coefficient;

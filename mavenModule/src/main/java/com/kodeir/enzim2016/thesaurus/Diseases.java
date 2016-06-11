@@ -1,9 +1,9 @@
-package com.kodeir.enzim2016.logic;
+package com.kodeir.enzim2016.thesaurus;
 
 /**
  * Created by Rowan on 11.06.2016.
  */
-public enum Diagnoses {
+public enum Diseases {
 
     CHRONIC_HEPATITIS("Chronic hepatitis","Хронический гепатит"),
     ACUTE_VIRAL_HEPATITIS("Acute viral hepatitis","Острый вирусный гепатит"),
@@ -15,7 +15,7 @@ public enum Diagnoses {
     private String en;
     private String ru;
 
-    Diagnoses(String en, String ru) {
+    Diseases(String en, String ru) {
         this.en = en;
         this.ru = ru;
     }
