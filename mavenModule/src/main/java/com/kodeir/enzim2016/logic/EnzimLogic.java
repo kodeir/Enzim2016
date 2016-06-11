@@ -10,5 +10,7 @@ public class EnzimLogic implements Diagnosis {
         return null;
     }
 
-    private
+    private String defineInjuredOrgan(){
+        return null;
+    }
 }
