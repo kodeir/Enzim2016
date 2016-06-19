@@ -5,6 +5,12 @@ package com.kodeir.enzim2016.thesaurus;
  */
 public enum Diseases {
 
+    INGECTIOUS_MONONUCLEOSIS("Infectious mononucleosis","Инфекционный мононуклеоз"),
+
+    OBSTRUCTIVE_JAUNDICE("Obstructive jaundice","Обтурационная желтуха"),
+
+    TOXIC_DAMAGE("Toxic damage","Токсическое повреждение"),
+
     CHRONIC_HEPATITIS("Chronic hepatitis","Хронический гепатит"),
     ACUTE_VIRAL_HEPATITIS("Acute viral hepatitis","Острый вирусный гепатит"),
     ALCOHOLIC_HEPATITIS("Alcoholic hepatitis","Алкогольный гепатит"),

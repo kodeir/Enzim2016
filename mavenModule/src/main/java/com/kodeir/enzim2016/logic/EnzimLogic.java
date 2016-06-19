@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.logic;
 
 import com.kodeir.enzim2016.patients.Patient;
+import com.kodeir.enzim2016.thesaurus.Diseases;
 import com.kodeir.enzim2016.thesaurus.Organs;
 
 /*
@@ -98,11 +99,60 @@ public class EnzimLogic implements Diagnosis {
     }
 
     private String defineDisease(){
-        if (patient.getAsT() > 49 && patient.getAsT() < 51) {
-            if (patient.getAlT() > 149 && patient.getAlT() < 151){
+        if (isBetween(patient.getAsT(), 41, 151)) {
+            // de Ritis 0.1-0.5
+            if (isBetween(patient.getAsT()/patient.getAlT(), 0.1f, 0.6f)) {
+                if (isBetween(patient.getLDG(), 591, 2751)){
+                    return Diseases.INGECTIOUS_MONONUCLEOSIS.getEn();
+                } else if (isBetween(patient.getLDG(), 150, 591)){
+                    if (patient.getShF() > 270){
+                        if (isBetween(patient.getGlDG(),11,76)){
+                            if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
+                                return Diseases.OBSTRUCTIVE_JAUNDICE.getEn() + " ? ";
+                            } else if (isBetween(((patient.getAsT()+patient.getAlT())/patient.getGlDG()),40,51)){
+                                return Diseases.OBSTRUCTIVE_JAUNDICE.getEn();
+                            } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 40){
+                                return Diseases.OBSTRUCTIVE_JAUNDICE.getEn() + " ? ";
+                            }
+                        } else if (isBetween(patient.getGlDG(),0,11)){
+                            if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
+                                return Diseases.TOXIC_DAMAGE.getEn();
+                            } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 51){
+                                return Diseases.TOXIC_DAMAGE.getEn() + " ? ";
+                            }
+                        } else {
+                            return "GlDG is not in the range of >80. Diagnose can't be done.";
+                        }
+                    } else if (isBetween(patient.getShF(),80,271)){
+
+                    } else {
+                        return "ShF is not in the range of >80. Diagnose can't be done.";
+                    }
+                } else {
+                    return "LDG is not in the range of 150-2750. Diagnose can't be done.";
+                }
+            // de Ritis 0.6-0.9
+            } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.6f, 1)) {
+            // de Ritis >1
+            } else if (patient.getAsT()/patient.getAlT() >= 1) {
 
             }
         }
         return null;
+    }
+
+    /**
+     *
+     * @param numberToCheck number to check between lowest and highest
+     * @param lowest number >= lowest
+     * @param highest number < highest (which means that highest should be expected+1)
+     * @return
+     */
+    private boolean isBetween(float numberToCheck, float lowest, float highest){
+        if (numberToCheck >= lowest && numberToCheck < highest) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }
