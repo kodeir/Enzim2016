@@ -49,54 +49,60 @@ public class EnzimLogic implements Diagnosis {
 
     public void diagnose(Patient patient) {
         this.patient = patient;
-        patient.setInjeredOrgan(defineInjuredOrgan());
+        patient.setInjuredOrgan(defineInjuredOrgan());
         patient.setDisease(defineDisease());
     }
 
     private String defineInjuredOrgan(){
-        if (patient.getAsT() > 49 && patient.getAsT() < 51) {
-            if (patient.getAlT() > 19 && patient.getAlT() < 21){
+        if (patient.getAsT() >= 41 && patient.getAsT() < 151) {
+            if (patient.getAlT() >= 41 && patient.getAlT() < 251){
                 return Organs.LIVER_N_TRACT.getEn();
-            } else if (patient.getAlT() > 99 && patient.getAlT() < 101){
-                if (patient.getKFK() > 14 && patient.getKFK() < 16){
-                    if (patient.getLDG() > 149 && patient.getLDG() < 151){
-                        if (patient.getShF() > 119 && patient.getShF() < 121){
-                            if (patient.getGGTP() > 74 && patient.getGGTP() < 76){
+            } else if (patient.getAlT() >= 0 && patient.getAlT() < 41){
+                if (patient.getKFK() >= 15 && patient.getKFK() < 176){
+                    if (patient.getLDG() >= 150 && patient.getLDG() < 591){
+                        if (patient.getShF() >= 80  && patient.getShF() < 271){
+                            if (patient.getGGTP() >= 0 && patient.getGGTP() < 51){
                                 return Organs.LIVER.getEn();
                             } else {
-                                return "ShF and/or GGTP is not in the range. Diagnose can't be done.";
+                                return "GGTP is not in the range of 0-50. Diagnose can't be done.";
                             }
-                        } else if (patient.getShF() > 449 && patient.getShF() < 501){
-                            if (patient.getGGTP() > 14 && patient.getGGTP() < 16){
+                        } else if (patient.getShF() >= 271){
+                            if (patient.getGGTP() >= 51 && patient.getGGTP() < 151){
                                 return Organs.BONE_TISSUE.getEn();
-                            } else if (patient.getGGTP() > 749 && patient.getGGTP() < 751){
+                            } else if (patient.getGGTP() >= 151 && patient.getGGTP() < 951){
                                 return Organs.LIVER_N_TRACT.getEn();
                             } else {
-                                return "ShF and/or GGTP is not in the range. Diagnose can't be done.";
+                                return "GGTP is not in the range of 51-951. Diagnose can't be done.";
                             }
+                        } else {
+                            return "ShF is not in the range of >80 . Diagnose can't be done.";
                         }
-                    } else if (patient.getLDG() > 2499 && patient.getLDG() < 2501) {
+                    } else if (patient.getLDG() >= 591 && patient.getLDG() < 2751) {
                         return Organs.BLOOD.getEn();
                     } else {
-                        return "LDG <> 150, or <> 2500. Diagnose can't be done.";
+                        return "LDG is not in the range of 150-2750. Diagnose can't be done.";
                     }
-                } else if (patient.getKFK() > 249 && patient.getKFK() < 251) {
+                } else if (patient.getKFK() >= 176 && patient.getKFK() < 501) {
                     return Organs.HEART.getEn();
-                } else if (patient.getKFK() > 1499 && patient.getKFK() < 1501) {
+                } else if (patient.getKFK() >= 501 && patient.getKFK() < 1751) {
                     return Organs.SKELETAL_MUSCLE.getEn();
                 } else {
-                    return "KFK <> 15, or <> 250, or 1500. Diagnose can't be done.";
+                    return "KFK is not in the range of 15-1750. Diagnose can't be done.";
                 }
             } else {
-                return "AlT <> 20, or <> 100. Diagnose can't be done.";
+                return "AlT is not in the range of 0-250. Diagnose can't be done.";
             }
         } else {
-            return "AsT <> 50. Diagnose can't be done.";
+            return "AsT is not in the range of 41-150. Diagnose can't be done.";
         }
-        return null;
     }
 
     private String defineDisease(){
+        if (patient.getAsT() > 49 && patient.getAsT() < 51) {
+            if (patient.getAlT() > 149 && patient.getAlT() < 151){
+
+            }
+        }
         return null;
     }
 }

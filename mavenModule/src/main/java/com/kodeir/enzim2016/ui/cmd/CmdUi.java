@@ -37,7 +37,7 @@ public class CmdUi {
         System.out.println("Enter patient surname");
         String surname = readStringFromConsole();
         patient = new Patient(name,surname);
-        System.out.println("Patient: " + name + " " + surname);
+        System.out.println("Your patient is: " + name + " " + surname);
         System.out.println("--");
     }
 
@@ -56,22 +56,16 @@ public class CmdUi {
         patient.setGGTP(readFloatFromConsole());
         System.out.println("Enter GlDG");
         patient.setGlDG(readFloatFromConsole());
-        System.out.println("Enter AsAT");
-        patient.setAsAT(readFloatFromConsole());
-        System.out.println("Enter AlAT");
-        patient.setAlAT(readFloatFromConsole());
         System.out.println("Enter HE");
         patient.setHE(readFloatFromConsole());
-        System.out.println("Enter GDG");
-        patient.setGDG(readFloatFromConsole());
         System.out.println("--");
     }
 
     private void doDiagnostic(){
         Diagnosis diagnosis = new EnzimLogic();
         diagnosis.diagnose(patient);
-        System.out.println(patient.getInjeredOrgan());
-        System.out.println(patient.getDisease());
+        System.out.println("Injured organ is: " + patient.getInjuredOrgan());
+        System.out.println("Disease is: " + patient.getDisease());
     }
 
     private String readStringFromConsole(){

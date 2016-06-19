@@ -18,19 +18,16 @@ public class Patient {
     private float ShF;
     private float GGTP;
     private float GlDG;
-    private float AsAT;
-    private float AlAT;
     private float HE;
-    private float GDG;
 
-    private String injeredOrgan;
+    private String injuredOrgan;
     private String disease;
 
     public Patient(String name, String surname) {
-        this(name, surname, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
+        this(name, surname, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     }
 
-    public Patient(String name, String surname, float asT, float alT, float KFK, float LDG, float shF, float GGTP, float glDG, float asAT, float alAT, float HE, float GDG) {
+    public Patient(String name, String surname, float asT, float alT, float KFK, float LDG, float shF, float GGTP, float glDG, float HE) {
         this.name = name;
         this.surname = surname;
         this.AsT = asT;
@@ -40,10 +37,7 @@ public class Patient {
         this.ShF = shF;
         this.GGTP = GGTP;
         this.GlDG = glDG;
-        this.AsAT = asAT; //?
-        this.AlAT = alAT; //?
         this.HE = HE;
-        this.GDG = GDG; //?
     }
 
     public String getName() {
@@ -118,22 +112,6 @@ public class Patient {
         GlDG = glDG;
     }
 
-    public float getAsAT() {
-        return AsAT;
-    }
-
-    public void setAsAT(float asAT) {
-        AsAT = asAT;
-    }
-
-    public float getAlAT() {
-        return AlAT;
-    }
-
-    public void setAlAT(float alAT) {
-        AlAT = alAT;
-    }
-
     public float getHE() {
         return HE;
     }
@@ -142,20 +120,12 @@ public class Patient {
         this.HE = HE;
     }
 
-    public float getGDG() {
-        return GDG;
+    public String getInjuredOrgan(){
+        return injuredOrgan;
     }
 
-    public void setGDG(float GDG) {
-        this.GDG = GDG;
-    }
-
-    public String getInjeredOrgan(){
-        return injeredOrgan;
-    }
-
-    public void setInjeredOrgan(String injeredOrgan){
-        this.injeredOrgan = injeredOrgan;
+    public void setInjuredOrgan(String injuredOrgan){
+        this.injuredOrgan = injuredOrgan;
     }
 
     public String getDisease(){
