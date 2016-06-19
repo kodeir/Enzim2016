@@ -9,8 +9,10 @@ public enum Diseases {
     ACUTE_VIRAL_HEPATITIS("Acute viral hepatitis","Острый вирусный гепатит"),
     ALCOHOLIC_HEPATITIS("Alcoholic hepatitis","Алкогольный гепатит"),
     CIRRHOSIS("Cirrhosis","Цирроз"),
+    BILIARY_CIRRHOSIS("Biliary cirrhosis","Желчные циррозы"),
     INTRAHEPATIC_CHOLESTASIS("Intrahepatic cholestasis","Внутрипеченочный холестаз"),
-    EXTRAHEPATIC_CHOLESTASIS("Extrahepatic cholestasis","Внепеченочный холестаз");
+    EXTRAHEPATIC_CHOLESTASIS("Extrahepatic cholestasis","Внепеченочный холестаз"),
+    POSTHEPATITIS_CIRRHOSIS("Posthepatitis cirrhosis","Постгепатические циррозы");
 
     private String en;
     private String ru;
