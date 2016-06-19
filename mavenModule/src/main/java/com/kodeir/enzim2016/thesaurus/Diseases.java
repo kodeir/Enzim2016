@@ -12,8 +12,12 @@ public enum Diseases {
     TOXIC_DAMAGE("Toxic damage","Токсическое повреждение"),
 
     CHRONIC_HEPATITIS("Chronic hepatitis","Хронический гепатит"),
+
     ACUTE_VIRAL_HEPATITIS("Acute viral hepatitis","Острый вирусный гепатит"),
+    VIRAL_HEPATITIS("Viral hepatitis","Острый вирусный гепатит"),
     ALCOHOLIC_HEPATITIS("Alcoholic hepatitis","Алкогольный гепатит"),
+
+
     CIRRHOSIS("Cirrhosis","Цирроз"),
     BILIARY_CIRRHOSIS("Biliary cirrhosis","Желчные циррозы"),
     INTRAHEPATIC_CHOLESTASIS("Intrahepatic cholestasis","Внутрипеченочный холестаз"),

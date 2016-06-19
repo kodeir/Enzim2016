@@ -100,44 +100,83 @@ public class EnzimLogic implements Diagnosis {
 
     private String defineDisease(){
         if (isBetween(patient.getAsT(), 41, 151)) {
-            // de Ritis 0.1-0.5
             if (isBetween(patient.getAsT()/patient.getAlT(), 0.1f, 0.6f)) {
-                if (isBetween(patient.getLDG(), 591, 2751)){
-                    return Diseases.INGECTIOUS_MONONUCLEOSIS.getEn();
-                } else if (isBetween(patient.getLDG(), 150, 591)){
-                    if (patient.getShF() > 270){
-                        if (isBetween(patient.getGlDG(),11,76)){
-                            if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
-                                return Diseases.OBSTRUCTIVE_JAUNDICE.getEn() + " ? ";
-                            } else if (isBetween(((patient.getAsT()+patient.getAlT())/patient.getGlDG()),40,51)){
-                                return Diseases.OBSTRUCTIVE_JAUNDICE.getEn();
-                            } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 40){
-                                return Diseases.OBSTRUCTIVE_JAUNDICE.getEn() + " ? ";
-                            }
-                        } else if (isBetween(patient.getGlDG(),0,11)){
-                            if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
-                                return Diseases.TOXIC_DAMAGE.getEn();
-                            } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 51){
-                                return Diseases.TOXIC_DAMAGE.getEn() + " ? ";
-                            }
-                        } else {
-                            return "GlDG is not in the range of >80. Diagnose can't be done.";
-                        }
-                    } else if (isBetween(patient.getShF(),80,271)){
+                return deRitisRatio_01_05();
+            } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.6f, 1)) {
+                return deRitisRatio_06_09();
+            } else if (patient.getAsT()/patient.getAlT() >= 1) {
+                return deRitisRatio_1();
+            } else {
+                return "Calculation error";
+            }
+        } else {
+            return "Calculation error";
+        }
+    }
 
+    private String deRitisRatio_01_05(){
+        if (isBetween(patient.getLDG(), 591, 2751)){
+            return Diseases.INGECTIOUS_MONONUCLEOSIS.getEn();
+        } else if (isBetween(patient.getLDG(), 150, 591)){
+            if (patient.getShF() > 270){
+                if (isBetween(patient.getGlDG(),11,76)){
+                    if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
+                        return Diseases.OBSTRUCTIVE_JAUNDICE.getEn() + " ? ";
+                    } else if (isBetween(((patient.getAsT()+patient.getAlT())/patient.getGlDG()),40,51)){
+                        return Diseases.OBSTRUCTIVE_JAUNDICE.getEn();
+                    } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 40){
+                        return Diseases.OBSTRUCTIVE_JAUNDICE.getEn() + " ? ";
                     } else {
-                        return "ShF is not in the range of >80. Diagnose can't be done.";
+                        return "Calculation error";
+                    }
+                } else if (isBetween(patient.getGlDG(),0,11)){
+                    if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
+                        return Diseases.TOXIC_DAMAGE.getEn();
+                    } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 51){
+                        return Diseases.TOXIC_DAMAGE.getEn() + " ? ";
+                    } else {
+                        return "Calculation error";
                     }
                 } else {
-                    return "LDG is not in the range of 150-2750. Diagnose can't be done.";
+                    return "GlDG is not in the range of >80. Diagnose can't be done.";
                 }
-            // de Ritis 0.6-0.9
-            } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.6f, 1)) {
-            // de Ritis >1
-            } else if (patient.getAsT()/patient.getAlT() >= 1) {
-
+            } else if (isBetween(patient.getShF(),80,271)){
+                if (patient.getGGTP() >= 151){
+                    if (patient.getGGTP()/patient.getAsT() >= 7){
+                        return Diseases.ALCOHOLIC_HEPATITIS.getEn() + " ? ";
+                    } else if (isBetween((patient.getGGTP()/patient.getAsT()),3,7)){
+                        return Diseases.ALCOHOLIC_HEPATITIS.getEn();
+                    } else if (patient.getGGTP()/patient.getAsT() < 3){
+                        return Diseases.ALCOHOLIC_HEPATITIS.getEn() + " ? ";
+                    } else {
+                        return "Calculation error";
+                    }
+                } else if (patient.getGGTP() < 150){
+                    if (patient.getGGTP()/patient.getAsT() >= 4){
+                        return Diseases.VIRAL_HEPATITIS.getEn() + " ? ";
+                    } else if (isBetween((patient.getGGTP()/patient.getAsT()),1,4)){
+                        return Diseases.VIRAL_HEPATITIS.getEn();
+                    } else if (patient.getGGTP()/patient.getAsT() < 1){
+                        return Diseases.VIRAL_HEPATITIS.getEn() + " ? ";
+                    } else {
+                        return "Calculation error";
+                    }
+                } else {
+                    return "GlDG is not in the range of >80. Diagnose can't be done.";
+                }
+            } else {
+                return "ShF is not in the range of >80. Diagnose can't be done.";
             }
+        } else {
+            return "LDG is not in the range of 150-2750. Diagnose can't be done.";
         }
+    }
+
+    private String deRitisRatio_06_09(){
+        return null;
+    }
+
+    private String deRitisRatio_1(){
         return null;
     }
 
