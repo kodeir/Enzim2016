@@ -100,10 +100,10 @@ public class EnzimLogic implements Diagnosis {
 
     private String defineDisease(){
         if (isBetween(patient.getAsT(), 41, 151)) {
-            System.out.println(patient.getAsT()/patient.getAlT());
-            if (isBetween(patient.getAsT()/patient.getAlT(), 0.1f, 0.51f)) {
+            System.out.println("AsT / AlT = " + patient.getAsT()/patient.getAlT());
+            if (isBetween(patient.getAsT()/patient.getAlT(), 0.1f, 0.6f)) {
                 return deRitisRatio_01_05();
-            } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.51f, 1)) {
+            } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.6f, 1)) {
                 return deRitisRatio_06_09();
             } else if (patient.getAsT()/patient.getAlT() >= 1) {
                 return deRitisRatio_1();
@@ -292,13 +292,9 @@ public class EnzimLogic implements Diagnosis {
      * @param numberToCheck number to check between lowest and highest
      * @param lowest number >= lowest
      * @param highest number < highest (which means that highest should be expected+1)
-     * @return
+     * @return true if numberToCheck is >= lowest and < highest
      */
     private boolean isBetween(float numberToCheck, float lowest, float highest){
-        if (numberToCheck >= lowest && numberToCheck < highest) {
-            return true;
-        } else {
-            return false;
-        }
+        return (numberToCheck >= lowest && numberToCheck < highest);
     }
 }
