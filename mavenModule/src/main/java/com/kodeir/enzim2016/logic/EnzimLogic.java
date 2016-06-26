@@ -100,9 +100,10 @@ public class EnzimLogic implements Diagnosis {
 
     private String defineDisease(){
         if (isBetween(patient.getAsT(), 41, 151)) {
-            if (isBetween(patient.getAsT()/patient.getAlT(), 0.1f, 0.6f)) {
+            System.out.println(patient.getAsT()/patient.getAlT());
+            if (isBetween(patient.getAsT()/patient.getAlT(), 0.1f, 0.51f)) {
                 return deRitisRatio_01_05();
-            } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.6f, 1)) {
+            } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.51f, 1)) {
                 return deRitisRatio_06_09();
             } else if (patient.getAsT()/patient.getAlT() >= 1) {
                 return deRitisRatio_1();
@@ -173,11 +174,117 @@ public class EnzimLogic implements Diagnosis {
     }
 
     private String deRitisRatio_06_09(){
-        return null;
+        if (isBetween(patient.getShF(), 371, 1501)){
+            return deRitisRatio_06_09_HE_calcs();
+        } else if (isBetween(patient.getShF(), 80, 371)){
+            if (patient.getGGTP() >= 11) {
+                return deRitisRatio_06_09_HE_calcs();
+            } else if (isBetween(patient.getGGTP(), 0, 11)){
+                return Diseases.CHRONIC_AGGRESSIVE_HEPATITIS.getEn();
+            } else {
+                return "GGTP is not in the range of 80-1500. Diagnose can't be done.";
+            }
+        } else {
+            return "ShF is not in the range of 80-1500. Diagnose can't be done.";
+        }
+    }
+
+    private String deRitisRatio_06_09_HE_calcs(){
+        if (isBetween(patient.getHE(),2701,3751)){
+            return Diseases.FATTY_LIVER.getEn();
+        } else if (isBetween(patient.getHE(),1751,2701)){
+            if (patient.getGlDG() >= 11){
+                return Diseases.OBSTRUCTIVE_JAUNDICE.getEn();
+            } else if (isBetween(patient.getGlDG(), 0, 11)) {
+                if (patient.getGGTP()/patient.getAsT() >= 4){
+                    return Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getEn() + " ? ";
+                } else if (isBetween((patient.getGGTP()/patient.getAsT()),1,4)){
+                    return Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getEn();
+                } else if (patient.getGGTP()/patient.getAsT() < 1){
+                    return Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getEn() + " ? ";
+                } else {
+                    return "Calculation error";
+                }
+            } else {
+                return "GGTP/AST is not in the range of > 0. Diagnose can't be done.";
+            }
+        } else if (isBetween(patient.getHE(),1201,1751)){
+            if (patient.getGGTP() / patient.getAsT() >= 2){
+                return Diseases.CHRONIC_PERSISTENT_HEPATITIS.getEn() + " ? ";
+            } else if (isBetween(patient.getGGTP() / patient.getAsT(), 0, 2)) {
+                return Diseases.CHRONIC_PERSISTENT_HEPATITIS.getEn();
+            } else {
+                return "GGTP/AST is not in the range of > 0. Diagnose can't be done.";
+            }
+        } else if (isBetween(patient.getHE(),500,1201)){
+            return Diseases.TOXIC_DAMAGE.getEn();
+        } else {
+            return "HE is not in the range of 80-1500. Diagnose can't be done.";
+        }
     }
 
     private String deRitisRatio_1(){
-        return null;
+        if (patient.getHE() >= 1501){
+            if (patient.getGGTP() >= 251){
+                return deRitisRatio_1_ShF_calcs();
+            } else if (isBetween(patient.getGGTP(),151,251)){
+                return Diseases.CHRONIC_AGGRESSIVE_HEPATITIS.getEn();
+            } else if (patient.getGGTP() < 151){
+                return Diseases.NONSPECIFIC_REACTIVE_HEPATITIS.getEn();
+            } else {
+                return "Calculation error";
+            }
+        } else if (isBetween(patient.getHE(), 500, 1501)){
+            if (patient.getGGTP() >= 351){
+                return Diseases.LIVER_METASTASES.getEn() + " ? " + " , " + Diseases.BILIARY_CIRRHOSIS.getEn() + " ? ";
+            } else if (isBetween(patient.getGGTP(),151,351)){
+                return deRitisRatio_1_ShF_calcs();
+            } else if (patient.getGGTP() < 151){
+                return Diseases.POSTHEPATITIS_CIRRHOSIS.getEn();
+            } else {
+                return "Calculation error";
+            }
+        } else {
+            return "HE is not in the range of 80-1500. Diagnose can't be done.";
+        }
+    }
+
+    private String deRitisRatio_1_ShF_calcs(){
+        if (isBetween(patient.getShF(), 471, 1501)) {
+            if (isBetween(patient.getGlDG(), 11, 76)){
+                if ((patient.getAsT() + patient.getAlT())/patient.getGlDG() >= 11){
+                    return Diseases.LIVER_METASTATIC_TUMOR_NODULES.getEn() + " ? ";
+                } else if (isBetween(((patient.getAsT() + patient.getAlT())/patient.getGlDG()),0,11)){
+                    return Diseases.LIVER_METASTATIC_TUMOR_NODULES.getEn();
+                } else {
+                    return "(AsT+AlT)/GLDG is not in the range of > 0. Diagnose can't be done.";
+                }
+            } else if (isBetween(patient.getGlDG(), 0, 11)){
+                if ((patient.getAsT() + patient.getAlT())/patient.getGlDG() >= 21){
+                    return Diseases.BILIARY_CIRRHOSIS.getEn() + " ? ";
+                } else if (isBetween(((patient.getAsT() + patient.getAlT())/patient.getGlDG()),5,21)){
+                    return Diseases.BILIARY_CIRRHOSIS.getEn();
+                } else if ((patient.getAsT() + patient.getAlT())/patient.getGlDG() < 5){
+                    return Diseases.BILIARY_CIRRHOSIS.getEn() + " ? ";
+                } else {
+                    return "Calculation error";
+                }
+            } else {
+                return "GlDG is not in the range of 0-75. Diagnose can't be done.";
+            }
+        } else if (isBetween(patient.getShF(), 80, 471)){
+            if (patient.getGGTP()/patient.getAsT() >= 7){
+                return Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getEn() + " ? ";
+            } else if (isBetween((patient.getGGTP()/patient.getAsT()),3,7)){
+                return Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getEn();
+            } else if (patient.getGGTP()/patient.getAsT() < 3){
+                return Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getEn() + " ? ";
+            } else {
+                return "Calculation error";
+            }
+        } else {
+            return "ShF is not in the range of 80-1500. Diagnose can't be done.";
+        }
     }
 
     /**

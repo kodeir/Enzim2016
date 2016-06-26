@@ -27,7 +27,7 @@ public class Patient {
         this(name, surname, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
     }
 
-    public Patient(String name, String surname, float asT, float alT, float KFK, float LDG, float shF, float GGTP, float glDG, float HE) {
+    public Patient(String name, String surname, float asT, float alT, float KFK, float LDG, float shF, float GGTP, float HE, float glDG) {
         this.name = name;
         this.surname = surname;
         this.AsT = asT;
