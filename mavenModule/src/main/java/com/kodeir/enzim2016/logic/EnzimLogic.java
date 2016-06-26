@@ -61,15 +61,11 @@ public class EnzimLogic implements Diagnosis {
             } else if (patient.getAlT() >= 0 && patient.getAlT() < 41){
                 if (patient.getKFK() >= 15 && patient.getKFK() < 176){
                     if (patient.getLDG() >= 150 && patient.getLDG() < 591){
-                        if (patient.getShF() >= 80  && patient.getShF() < 271){
-                            if (patient.getGGTP() >= 0 && patient.getGGTP() < 51){
-                                return Organs.LIVER.getEn();
-                            } else {
-                                return "GGTP is not in the range of 0-50. Diagnose can't be done.";
-                            }
-                        } else if (patient.getShF() >= 271){
-                            if (patient.getGGTP() >= 51 && patient.getGGTP() < 151){
+                        if (patient.getShF() >= 80 ){
+                            if (patient.getGGTP() >= 0 && patient.getGGTP() < 51) {
                                 return Organs.BONE_TISSUE.getEn();
+                            } else if (patient.getGGTP() >= 51 && patient.getGGTP() < 151){
+                                return Organs.LIVER.getEn();
                             } else if (patient.getGGTP() >= 151 && patient.getGGTP() < 951){
                                 return Organs.LIVER_N_TRACT.getEn();
                             } else {
