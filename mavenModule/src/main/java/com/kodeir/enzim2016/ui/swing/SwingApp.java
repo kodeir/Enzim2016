@@ -37,14 +37,31 @@ public class SwingApp {
     }
 
     private void addComponentsToPane(Container pane){
-        pane.setLayout(new GridBagLayout());
+        SwingUtilities.invokeLater(() -> {
+            pane.setLayout(new GridBagLayout());
+            constraints = new GridBagConstraints();
 
-        newPatientBtn = new JButton("Button 1");
-        pane.add(newPatientBtn, setConstraints(0.5, HORIZONTAL, 0, 0));
+            newPatientBtn = new JButton("Button 1");
+            pane.add(newPatientBtn, setConstraints(0.5, HORIZONTAL, 0, 0));
 
-        openDatabaseBtn = new JButton("Button 1");
-        pane.add(openDatabaseBtn, setConstraints(0.5, HORIZONTAL, 1, 0));
+            openDatabaseBtn = new JButton("Button 1");
+            pane.add(openDatabaseBtn, setConstraints(0.5, HORIZONTAL, 1, 0));
 
+            setupFrame(pane);
+        });
+    }
+
+    private void setupFrame(Container pane){
+        frame.pack();
+        frame.setLocationRelativeTo(null);
+        frame.setResizable(true);
+        frame.setVisible(true);
+    }
+
+    private void clearFrame(){
+        SwingUtilities.invokeLater(() -> {
+            frame.getContentPane().removeAll();
+        });
     }
 
     private GridBagConstraints setConstraints(double weightx, int fill, int gridx, int gridy){

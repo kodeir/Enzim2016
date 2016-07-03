@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016;
 
 import com.kodeir.enzim2016.ui.cmd.CmdUi;
+import com.kodeir.enzim2016.ui.swing.SwingApp;
 
 /*
  * Copyright (c) 2007, 2016 Vyacheslav Ryabinin and/or his affiliates. All rights reserved.
@@ -45,6 +46,7 @@ import com.kodeir.enzim2016.ui.cmd.CmdUi;
 public class Enzim {
 
     public static void main(String[] args) {
-        CmdUi.startCmd();
+        //CmdUi.startCmd();
+        SwingApp.startSwing();
     }
 }
