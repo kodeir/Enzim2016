@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
 import com.kodeir.enzim2016.ui.swing.SwingApp;
+import com.kodeir.enzim2016.ui.swing.tree.DiagnosesTree;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -39,6 +40,8 @@ public class SwingAppListener implements ActionListener{
     }
 
     private void createTreePanel(){
-        JOptionPane.showMessageDialog(null, "under construction");
+        swingApp.clearFrame();
+        DiagnosesTree tree = new DiagnosesTree();
+        swingApp.setupFrame(tree);
     }
 }

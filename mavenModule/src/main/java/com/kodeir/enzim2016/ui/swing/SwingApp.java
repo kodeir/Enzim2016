@@ -63,34 +63,34 @@ public class SwingApp {
             constraints = new GridBagConstraints();
 
             newPatientBtn = new JButton("new P icon");
-            pane.add(newPatientBtn, setConstraints(0.5, HORIZONTAL, 0, 0));
+            pane.add(newPatientBtn, setConstraintsHorizontal(0.5, 0, 0));
 
             label = new JLabel("создать нового пациента");
-            pane.add(label, setConstraints(0.5, HORIZONTAL, 1, 0));
+            pane.add(label, setConstraintsHorizontal(0.5, 1, 0));
 
             openDatabaseBtn = new JButton("new DB icon");
-            pane.add(openDatabaseBtn, setConstraints(0.5, HORIZONTAL, 0, 1));
+            pane.add(openDatabaseBtn, setConstraintsHorizontal(0.5, 0, 1));
 
             label = new JLabel("открыть базу данных");
-            pane.add(label, setConstraints(0.5, HORIZONTAL, 1, 1));
+            pane.add(label, setConstraintsHorizontal(0.5, 1, 1));
 
             showTreeButton = new JButton("tree icon");
-            pane.add(showTreeButton, setConstraints(0.5, HORIZONTAL, 0, 2));
+            pane.add(showTreeButton, setConstraintsHorizontal(0.5, 0, 2));
 
             label = new JLabel("посмотреть дерево диагнозов");
-            pane.add(label, setConstraints(0.5, HORIZONTAL, 1, 2));
+            pane.add(label, setConstraintsHorizontal(0.5, 1, 2));
 
             exitBtn = new JButton("exit icon");
-            pane.add(exitBtn, setConstraints(0.5, HORIZONTAL, 0, 3));
+            pane.add(exitBtn, setConstraintsHorizontal(0.5, 0, 3));
 
             label = new JLabel("выход");
-            pane.add(label, setConstraints(0.5, HORIZONTAL, 1, 3));
+            pane.add(label, setConstraintsHorizontal(0.5, 1, 3));
 
             setupFrame(pane);
         });
     }
 
-    private void setupFrame(Container pane){
+    public void setupFrame(Container pane){
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
@@ -105,15 +105,15 @@ public class SwingApp {
         getExitBtn().addActionListener(new SwingAppListener(this));
     }
 
-    private void clearFrame(){
+    public void clearFrame(){
         SwingUtilities.invokeLater(() -> {
             frame.getContentPane().removeAll();
         });
     }
 
-    private GridBagConstraints setConstraints(double weightx, int fill, int gridx, int gridy){
+    private GridBagConstraints setConstraintsHorizontal(double weightx, int gridx, int gridy){
         constraints.weightx = weightx;
-        constraints.fill = fill;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = gridx;
         constraints.gridy = gridy;
         return constraints;
