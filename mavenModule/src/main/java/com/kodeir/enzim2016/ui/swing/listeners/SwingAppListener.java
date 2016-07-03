@@ -42,6 +42,6 @@ public class SwingAppListener implements ActionListener{
     private void createTreePanel(){
         swingApp.clearFrame();
         DiagnosesTree tree = new DiagnosesTree();
-        swingApp.setupFrame(tree);
+        swingApp.setupFrame();
     }
 }

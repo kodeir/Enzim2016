@@ -36,8 +36,8 @@ public class Patient {
         this.LDG = LDG;
         this.ShF = shF;
         this.GGTP = GGTP;
-        this.GlDG = glDG;
         this.HE = HE;
+        this.GlDG = glDG;
     }
 
     public String getName() {
