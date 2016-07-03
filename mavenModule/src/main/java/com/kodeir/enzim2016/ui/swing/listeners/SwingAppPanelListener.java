@@ -5,6 +5,7 @@ import com.kodeir.enzim2016.ui.swing.SwingAppPanel;
 import com.kodeir.enzim2016.ui.swing.tree.DiagnosesTree;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -46,7 +47,7 @@ public class SwingAppPanelListener implements ActionListener{
         swingApp.clearFrame();
         SwingUtilities.invokeLater(() -> {
             DiagnosesTree tree = new DiagnosesTree();
-            swingApp.setupFrame(tree);
+            swingApp.setupFrame(tree, Frame.MAXIMIZED_BOTH);
         });
 
     }

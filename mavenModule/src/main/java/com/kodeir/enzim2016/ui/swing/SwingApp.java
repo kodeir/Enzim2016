@@ -37,15 +37,16 @@ public class SwingApp {
     private void addComponents(){
         SwingUtilities.invokeLater(() -> {
             swingAppPanel = new SwingAppPanel();
-            setupFrame(swingAppPanel);
+            setupFrame(swingAppPanel, Frame.NORMAL);
         });
     }
 
-    public void setupFrame(Component component){
+    public void setupFrame(Component component, int maximized){
         frame.getContentPane().add(component);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
+        frame.setExtendedState(maximized);
         frame.setVisible(true);
         addListeners();
     }
