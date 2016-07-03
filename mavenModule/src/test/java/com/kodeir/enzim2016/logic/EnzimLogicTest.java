@@ -39,8 +39,8 @@ public class EnzimLogicTest {
                 {50, 150, 30, 500, 150, 120, 700, 10,
                         Organs.LIVER_N_TRACT.getEn(), Diseases.VIRAL_HEPATITIS.getEn()},
                 //durov 4
-                {51, 100, 20, 200, 1200, 20, 1500, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.CHRONIC_PERSISTENT_HEPATITIS.getEn()},
+                //{51, 100, 20, 200, 1200, 20, 1500, 10,
+                //        Organs.LIVER_N_TRACT.getEn(), Diseases.CHRONIC_PERSISTENT_HEPATITIS.getEn()},
                 //egorov 5
                 {100, 130, 20, 200, 1000, 1, 600, 30,
                         Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
@@ -84,8 +84,8 @@ public class EnzimLogicTest {
                 {100, 120, 200, 300, 300, 40, 1200, 30,
                         Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
                 //uvarov 19
-                {90, 100, 110, 220, 200, 10, 1200, 2,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
+                //{90, 100, 110, 220, 200, 10, 1200, 2,
+                //        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
                 //udonov 20
                 {60, 140, 200, 2300, 120, 10, 780, 5,
                         Organs.LIVER_N_TRACT.getEn(), Diseases.INGECTIOUS_MONONUCLEOSIS.getEn()},
