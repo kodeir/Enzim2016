@@ -289,28 +289,82 @@ public class DiagnosesTree extends JPanel {
         deRitis06_09_Node.add(SHF_Node_0);
         deRitis06_09_Node.add(SHF_Node_1);
 
+        SHF_Node_0.add(add_HE_Node_0());
+        SHF_Node_0.add(add_HE_Node_1());
+        SHF_Node_0.add(add_HE_Node_2());
+        SHF_Node_0.add(add_HE_Node_3());
+
+        GGTP_Node_0 = new DefaultMutableTreeNode("ГГТП > 11");
+        GGTP_Node_1 = new DefaultMutableTreeNode("ГГТП 0-10");
+        SHF_Node_1.add(GGTP_Node_0);
+        SHF_Node_1.add(GGTP_Node_1);
+
+        GGTP_Node_0.add(add_HE_Node_0());
+        GGTP_Node_0.add(add_HE_Node_1());
+        GGTP_Node_0.add(add_HE_Node_2());
+        GGTP_Node_0.add(add_HE_Node_3());
+
+        result = new DefaultMutableTreeNode(Diseases.CHRONIC_PERSISTENT_HEPATITIS.getRu());
+        GGTP_Node_1.add(result);
+
+        // deRitis 1
+
+        DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode("ХЭ > 1500");
+        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode("ХЭ 500-1500");
+        deRitis1_Node.add(HE_Node_0);
+        deRitis1_Node.add(HE_Node_1);
+
+        GGTP_Node_0 = new DefaultMutableTreeNode("ГГТП > 250");
+        GGTP_Node_1 = new DefaultMutableTreeNode("ГГТП 151-250");
+        DefaultMutableTreeNode GGTP_Node_2 = new DefaultMutableTreeNode("ГГТП < 151");
+        HE_Node_0.add(GGTP_Node_0);
+        HE_Node_0.add(GGTP_Node_1);
+        HE_Node_0.add(GGTP_Node_2);
+
+        GGTP_Node_0.add(add_SHF_Node_0());
+        GGTP_Node_0.add(add_SHF_Node_1());
+
+        result = new DefaultMutableTreeNode(Diseases.CHRONIC_AGGRESSIVE_HEPATITIS.getRu());
+        GGTP_Node_1.add(result);
+        result = new DefaultMutableTreeNode(Diseases.NONSPECIFIC_REACTIVE_HEPATITIS.getRu());
+        GGTP_Node_2.add(result);
+
+        GGTP_Node_0 = new DefaultMutableTreeNode("ГГТП > 350");
+        GGTP_Node_1 = new DefaultMutableTreeNode("ГГТП 151-350");
+        GGTP_Node_2 = new DefaultMutableTreeNode("ГГТП < 151");
+        HE_Node_1.add(GGTP_Node_0);
+        HE_Node_1.add(GGTP_Node_1);
+        HE_Node_1.add(GGTP_Node_2);
+        result = new DefaultMutableTreeNode(Diseases.LIVER_METASTASES.getRu() + " ? " + Diseases.BILIARY_CIRRHOSIS.getRu() + " ? ");
+        GGTP_Node_0.add(result);
+
+        GGTP_Node_1.add(add_SHF_Node_0());
+        GGTP_Node_1.add(add_SHF_Node_1());
+
+        result = new DefaultMutableTreeNode(Diseases.POSTHEPATITIS_CIRRHOSIS.getRu());
+        GGTP_Node_2.add(result);
+
+        return disease;
+    }
+
+    private DefaultMutableTreeNode add_HE_Node_0() {
         DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode("ХЭ 2701-3750");
-        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode("ХЭ 1751-2700");
-        DefaultMutableTreeNode HE_Node_2 = new DefaultMutableTreeNode("ХЭ 1201-1750");
-        DefaultMutableTreeNode HE_Node_3 = new DefaultMutableTreeNode("ХЭ 500-1200");
-
-        SHF_Node_0.add(HE_Node_0);
-        SHF_Node_0.add(HE_Node_1);
-        SHF_Node_0.add(HE_Node_2);
-        SHF_Node_0.add(HE_Node_3);
-
-        result = new DefaultMutableTreeNode(Diseases.FATTY_LIVER.getRu());
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.FATTY_LIVER.getRu());
         HE_Node_0.add(result);
+        return HE_Node_0;
+    }
 
-        GLDG_Node_0 = new DefaultMutableTreeNode("ГЛДГ > 10");
-        GLDG_Node_1 = new DefaultMutableTreeNode("ГЛДГ 0-10");
+    private DefaultMutableTreeNode add_HE_Node_1() {
+        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode("ХЭ 1751-2700");
+        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode("ГЛДГ > 10");
+        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode("ГЛДГ 0-10");
         HE_Node_1.add(GLDG_Node_0);
         HE_Node_1.add(GLDG_Node_1);
-        result = new DefaultMutableTreeNode(Diseases.OBSTRUCTIVE_JAUNDICE.getRu());
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.OBSTRUCTIVE_JAUNDICE.getRu());
         GLDG_Node_0.add(result);
-        GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 3");
-        GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 1-3");
-        GGTP_AsT_Node_2 = new DefaultMutableTreeNode("ГГТП/АСТ <1");
+        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 3");
+        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 1-3");
+        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode("ГГТП/АСТ <1");
         GLDG_Node_1.add(GGTP_AsT_Node_0);
         GLDG_Node_1.add(GGTP_AsT_Node_1);
         GLDG_Node_1.add(GGTP_AsT_Node_2);
@@ -320,20 +374,73 @@ public class DiagnosesTree extends JPanel {
         GGTP_AsT_Node_1.add(result);
         result = new DefaultMutableTreeNode(Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getRu() + " ? ");
         GGTP_AsT_Node_2.add(result);
+        return HE_Node_1;
+    }
 
-        GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 1");
-        GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 0-1");
+    private DefaultMutableTreeNode add_HE_Node_2() {
+        DefaultMutableTreeNode HE_Node_2 = new DefaultMutableTreeNode("ХЭ 1201-1750");
+        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 1");
+        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 0-1");
         HE_Node_2.add(GGTP_AsT_Node_0);
         HE_Node_2.add(GGTP_AsT_Node_1);
-        result = new DefaultMutableTreeNode(Diseases.CHRONIC_PERSISTENT_HEPATITIS.getRu() + " ? ");
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.CHRONIC_PERSISTENT_HEPATITIS.getRu() + " ? ");
         GGTP_AsT_Node_0.add(result);
         result = new DefaultMutableTreeNode(Diseases.CHRONIC_PERSISTENT_HEPATITIS.getRu());
         GGTP_AsT_Node_1.add(result);
+        return HE_Node_2;
+    }
 
-        result = new DefaultMutableTreeNode(Diseases.TOXIC_DAMAGE.getRu());
+    private DefaultMutableTreeNode add_HE_Node_3() {
+        DefaultMutableTreeNode HE_Node_3 = new DefaultMutableTreeNode("ХЭ 500-1200");
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.TOXIC_DAMAGE.getRu());
         HE_Node_3.add(result);
+        return HE_Node_3;
+    }
 
-        return disease;
+    private DefaultMutableTreeNode add_SHF_Node_0() {
+        DefaultMutableTreeNode SHF_Node_0 = new DefaultMutableTreeNode("ЩФ 471-1500");
+        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode("ГЛДГ 11-75");
+        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode("ГЛДГ 0-10");
+        SHF_Node_0.add(GLDG_Node_0);
+        SHF_Node_0.add(GLDG_Node_1);
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ > 10");
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ 0-10");
+        GLDG_Node_0.add(AsT_AlT_GLDG_Node_0);
+        GLDG_Node_0.add(AsT_AlT_GLDG_Node_1);
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.LIVER_METASTATIC_TUMOR_NODULES.getRu() + " ? ");
+        AsT_AlT_GLDG_Node_0.add(result);
+        result = new DefaultMutableTreeNode(Diseases.LIVER_METASTATIC_TUMOR_NODULES.getRu());
+        AsT_AlT_GLDG_Node_1.add(result);
+        AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ > 20");
+        AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ 5-20");
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_2 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ < 5");
+        GLDG_Node_1.add(AsT_AlT_GLDG_Node_0);
+        GLDG_Node_1.add(AsT_AlT_GLDG_Node_1);
+        GLDG_Node_1.add(AsT_AlT_GLDG_Node_2);
+        result = new DefaultMutableTreeNode(Diseases.BILIARY_CIRRHOSIS.getRu() + " ? ");
+        AsT_AlT_GLDG_Node_0.add(result);
+        result = new DefaultMutableTreeNode(Diseases.BILIARY_CIRRHOSIS.getRu());
+        AsT_AlT_GLDG_Node_1.add(result);
+        result = new DefaultMutableTreeNode(Diseases.BILIARY_CIRRHOSIS.getRu() + " ? ");
+        AsT_AlT_GLDG_Node_2.add(result);
+        return SHF_Node_0;
+    }
+
+    private DefaultMutableTreeNode add_SHF_Node_1() {
+        DefaultMutableTreeNode SHF_Node_1 = new DefaultMutableTreeNode("ЩФ 80-470");
+        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 6");
+        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 3-6");
+        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode("ГГТП/АСТ < 3");
+        SHF_Node_1.add(GGTP_AsT_Node_0);
+        SHF_Node_1.add(GGTP_AsT_Node_1);
+        SHF_Node_1.add(GGTP_AsT_Node_2);
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getRu() + " ? ");
+        GGTP_AsT_Node_0.add(result);
+        result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getRu());
+        GGTP_AsT_Node_1.add(result);
+        result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getRu() + " ? ");
+        GGTP_AsT_Node_2.add(result);
+        return SHF_Node_1;
     }
 
     public float[] getFloats(){
