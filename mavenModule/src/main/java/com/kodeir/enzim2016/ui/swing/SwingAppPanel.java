@@ -34,10 +34,10 @@ public class SwingAppPanel extends JPanel {
 
     public SwingAppPanel(){
         this.setLayout(new GridBagLayout());
-        this.addNewPatient();
-        this.addOpenDatabase();
-        this.addShowTree();
-        this.addExit();
+        addNewPatient();
+        addOpenDatabase();
+        addShowTree();
+        addExit();
     }
 
     public void addNewPatient(){
@@ -71,6 +71,4 @@ public class SwingAppPanel extends JPanel {
         label = new JLabel("выход");
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 3));
     }
-
-
 }

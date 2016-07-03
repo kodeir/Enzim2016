@@ -96,7 +96,6 @@ public class EnzimLogic implements Diagnosis {
 
     private String defineDisease(){
         if (isBetween(patient.getAsT(), 41, 151)) {
-            System.out.println("AsT / AlT = " + patient.getAsT()/patient.getAlT());
             if (isBetween(patient.getAsT()/patient.getAlT(), 0.1f, 0.6f)) {
                 return deRitisRatio_01_05();
             } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.6f, 1)) {
