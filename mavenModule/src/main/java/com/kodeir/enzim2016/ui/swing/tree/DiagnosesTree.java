@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class DiagnosesTree extends Container {
 
-    private GridBagConstraints constraints;
+    private JLabel label;
 
     private JTextField astField;
     private JTextField altField;
@@ -30,7 +30,6 @@ public class DiagnosesTree extends Container {
 
     public DiagnosesTree(){
         this.setLayout(new GridBagLayout());
-        constraints = new GridBagConstraints();
         addFields();
         addResultButton();
         addResults();
@@ -38,12 +37,28 @@ public class DiagnosesTree extends Container {
     }
 
     private void addFields(){
+        label = new JLabel("АСТ");
+        this.add(label, SwingCommons.setConstraintsHorizontal(0.5,0,0));
+        label = new JLabel("АЛТ");
+        this.add(label, SwingCommons.setConstraintsHorizontal(0.5,1,0));
+        label = new JLabel("КФК");
+        this.add(label, SwingCommons.setConstraintsHorizontal(0.5,2,0));
+        label = new JLabel("ЛДГ");
+        this.add(label, SwingCommons.setConstraintsHorizontal(0.5,3,0));
 
+        astField = new JTextField();
+        this.add(astField, SwingCommons.setConstraintsHorizontal(0.5,0,1));
+        altField = new JTextField();
+        this.add(altField, SwingCommons.setConstraintsHorizontal(0.5,1,1));
+        kfkField = new JTextField();
+        this.add(kfkField, SwingCommons.setConstraintsHorizontal(0.5,2,1));
+        ldgField = new JTextField();
+        this.add(ldgField, SwingCommons.setConstraintsHorizontal(0.5,3,1));
     }
 
     private void addResultButton(){
         getResult = new JButton("Диагностировать");
-        SwingCommons.setConstraintsHorizontal(0.5,1,4,2);
+        this.add(getResult, SwingCommons.setConstraintsHorizontal(0.5,1,4,2));
     }
 
     private void addResults(){

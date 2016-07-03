@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
 import com.kodeir.enzim2016.ui.swing.SwingApp;
+import com.kodeir.enzim2016.ui.swing.SwingAppPanel;
 import com.kodeir.enzim2016.ui.swing.tree.DiagnosesTree;
 
 import javax.swing.*;
@@ -10,23 +11,25 @@ import java.awt.event.ActionListener;
 /**
  * Created by Rowan on 03.07.2016.
  */
-public class SwingAppListener implements ActionListener{
+public class SwingAppPanelListener implements ActionListener{
 
     private SwingApp swingApp;
+    private SwingAppPanel swingAppPanel;
 
-    public SwingAppListener(SwingApp swingApp){
+    public SwingAppPanelListener(SwingApp swingApp, SwingAppPanel swingAppPanel){
+        this.swingAppPanel = swingAppPanel;
         this.swingApp = swingApp;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(swingApp.getNewPatientBtn())) {
+        if (e.getSource().equals(swingAppPanel.getNewPatientBtn())) {
             createNewPatientPanel();
-        } else if (e.getSource().equals(swingApp.getOpenDatabaseBtn())) {
+        } else if (e.getSource().equals(swingAppPanel.getOpenDatabaseBtn())) {
             createDatabasePanel();
-        } else if (e.getSource().equals(swingApp.getShowTreeButton())) {
+        } else if (e.getSource().equals(swingAppPanel.getShowTreeButton())) {
             createTreePanel();
-        } else if (e.getSource().equals(swingApp.getExitBtn())) {
+        } else if (e.getSource().equals(swingAppPanel.getExitBtn())) {
             System.exit(0);
         }
     }
@@ -41,7 +44,10 @@ public class SwingAppListener implements ActionListener{
 
     private void createTreePanel(){
         swingApp.clearFrame();
-        DiagnosesTree tree = new DiagnosesTree();
-        swingApp.setupFrame();
+        SwingUtilities.invokeLater(() -> {
+            DiagnosesTree tree = new DiagnosesTree();
+            swingApp.setupFrame(tree);
+        });
+
     }
 }

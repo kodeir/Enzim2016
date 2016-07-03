@@ -1,6 +1,6 @@
 package com.kodeir.enzim2016.ui.swing;
 
-import com.kodeir.enzim2016.ui.swing.listeners.SwingAppListener;
+import com.kodeir.enzim2016.ui.swing.listeners.SwingAppPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,28 +11,7 @@ import java.awt.*;
 public class SwingApp {
 
     private JFrame frame;
-
-    private JLabel label;
-    private JButton newPatientBtn;
-    private JButton openDatabaseBtn;
-    private JButton showTreeButton;
-    private JButton exitBtn;
-
-    public JButton getNewPatientBtn() {
-        return newPatientBtn;
-    }
-
-    public JButton getOpenDatabaseBtn() {
-        return openDatabaseBtn;
-    }
-
-    public JButton getShowTreeButton() {
-        return showTreeButton;
-    }
-
-    public JButton getExitBtn() {
-        return exitBtn;
-    }
+    private SwingAppPanel swingAppPanel;
 
     public SwingApp(){
         initialize();
@@ -52,43 +31,18 @@ public class SwingApp {
     private void initialize(){
         frame = new JFrame("Enzim 2016");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        addComponentsToPane(frame.getContentPane());
+        addComponents();
     }
 
-    private void addComponentsToPane(Container pane){
+    private void addComponents(){
         SwingUtilities.invokeLater(() -> {
-            pane.setLayout(new GridBagLayout());
-
-            newPatientBtn = new JButton("new P icon");
-            pane.add(newPatientBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 0));
-
-            label = new JLabel("создать нового пациента");
-            pane.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 0));
-
-            openDatabaseBtn = new JButton("new DB icon");
-            pane.add(openDatabaseBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 1));
-
-            label = new JLabel("открыть базу данных");
-            pane.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 1));
-
-            showTreeButton = new JButton("tree icon");
-            pane.add(showTreeButton, SwingCommons.setConstraintsHorizontal(0.5, 0, 2));
-
-            label = new JLabel("посмотреть дерево диагнозов");
-            pane.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 2));
-
-            exitBtn = new JButton("exit icon");
-            pane.add(exitBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 3));
-
-            label = new JLabel("выход");
-            pane.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 3));
-
-            //setupFrame(pane);
-            setupFrame();
+            swingAppPanel = new SwingAppPanel();
+            setupFrame(swingAppPanel);
         });
     }
 
-    public void setupFrame(){
+    public void setupFrame(Component component){
+        frame.getContentPane().add(component);
         frame.pack();
         frame.setLocationRelativeTo(null);
         frame.setResizable(true);
@@ -96,17 +50,17 @@ public class SwingApp {
         addListeners();
     }
 
-    private void addListeners(){
-        getNewPatientBtn().addActionListener(new SwingAppListener(this));
-        getOpenDatabaseBtn().addActionListener(new SwingAppListener(this));
-        getShowTreeButton().addActionListener(new SwingAppListener(this));
-        getExitBtn().addActionListener(new SwingAppListener(this));
-    }
-
     public void clearFrame(){
         SwingUtilities.invokeLater(() -> {
             frame.getContentPane().removeAll();
         });
+    }
+
+    private void addListeners(){
+        swingAppPanel.getNewPatientBtn().addActionListener(new SwingAppPanelListener(this, swingAppPanel));
+        swingAppPanel.getOpenDatabaseBtn().addActionListener(new SwingAppPanelListener(this, swingAppPanel));
+        swingAppPanel.getShowTreeButton().addActionListener(new SwingAppPanelListener(this, swingAppPanel));
+        swingAppPanel.getExitBtn().addActionListener(new SwingAppPanelListener(this, swingAppPanel));
     }
 
 }
