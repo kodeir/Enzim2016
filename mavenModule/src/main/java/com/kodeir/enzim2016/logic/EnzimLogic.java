@@ -34,6 +34,8 @@ import com.kodeir.enzim2016.patients.Patient;
 import com.kodeir.enzim2016.thesaurus.Diseases;
 import com.kodeir.enzim2016.thesaurus.Organs;
 
+import java.util.ResourceBundle;
+
 /**
  * Created by Sergei Riabinin on 11.06.2016.
  *
@@ -111,7 +113,9 @@ public class EnzimLogic implements Diagnosis {
 
     private String deRitisRatio_01_05(){
         if (isBetween(patient.getLDG(), 591, 2751)){
-            return Diseases.INGECTIOUS_MONONUCLEOSIS.getEn();
+            ResourceBundle rb = ResourceBundle.getBundle("rb");
+            //String test = rb.getString("INFECTIOUS_MONONUCLEOSIS");
+            return rb.getString("diseases.INFECTIOUS_MONONUCLEOSIS");
         } else if (isBetween(patient.getLDG(), 150, 591)){
             if (patient.getShF() > 270){
                 if (isBetween(patient.getGlDG(),11,76)){
