@@ -9,7 +9,7 @@ import java.util.logging.Level;
 import java.util.logging.LogManager;
 
 /**
- * Created by Rowan on 10.07.2016.
+ * Created by Sergei Riabinin on 10.07.2016.
  */
 public class Database {
 
