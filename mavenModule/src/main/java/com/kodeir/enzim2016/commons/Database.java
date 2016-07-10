@@ -30,9 +30,20 @@ public class Database {
     }
     */
 
-    public boolean setConnection(String url, String user, String password){
+    public boolean setConnectionExist(String database, String user, String password){
         try {
-            connection = DriverManager.getConnection(url, user, password);
+            connection = DriverManager.getConnection("jdbc:h2:~/data/" + database + ";CIPHER=AES;IFEXISTS=TRUE", user, password);
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            return false;
+            //return printSqlException(e, "Failed to open connection to " + url + " with user = " + user + "!");
+        }
+    }
+
+    public boolean setConnectionNew(String database, String user, String password){
+        try {
+            connection = DriverManager.getConnection("jdbc:h2:~/data/" + database + ";CIPHER=AES", user, password);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
