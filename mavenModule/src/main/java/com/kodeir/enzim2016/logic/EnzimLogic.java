@@ -48,85 +48,104 @@ import java.util.ResourceBundle;
 public class EnzimLogic implements Diagnosis {
 
     private Patient patient;
+    private ResourceBundle rb = ResourceBundle.getBundle("rb");
+
+    private float AsT;
+    private float AlT;
+    private float KFK;
+    private float LDG;
+    private float ShF;
+    private float GGTP;
+    private float GlDG;
+    private float HE;
 
     public void diagnose(Patient patient) {
-        this.patient = patient;
+        setPatient(patient);
         patient.setInjuredOrgan(defineInjuredOrgan());
         patient.setDisease(defineDisease());
     }
 
+    private void setPatient(Patient patient){
+        this.patient = patient;
+        this.AsT = patient.getAsT();
+        this.AlT = patient.getAlT();
+        this.KFK = patient.getKFK();
+        this.LDG = patient.getLDG();
+        this.ShF = patient.getShF();
+        this.GGTP = patient.getGGTP();
+        this.HE = patient.getHE();
+        this.GlDG = patient.getGlDG();
+    }
+
     private String defineInjuredOrgan(){
-        if (patient.getAsT() >= 41 && patient.getAsT() < 151) {
-            if (patient.getAlT() >= 41 && patient.getAlT() < 251){
-                return Organs.LIVER_N_TRACT.getEn();
-            } else if (patient.getAlT() >= 0 && patient.getAlT() < 41){
-                if (patient.getKFK() >= 15 && patient.getKFK() < 176){
-                    if (patient.getLDG() >= 150 && patient.getLDG() < 591){
-                        if (patient.getShF() >= 80 ){
-                            if (patient.getGGTP() >= 0 && patient.getGGTP() < 51) {
-                                return Organs.BONE_TISSUE.getEn();
-                            } else if (patient.getGGTP() >= 51 && patient.getGGTP() < 151){
-                                return Organs.LIVER.getEn();
-                            } else if (patient.getGGTP() >= 151 && patient.getGGTP() < 951){
-                                return Organs.LIVER_N_TRACT.getEn();
+        if (isBetween(AsT,41,151)) {
+            if (isBetween(AlT,41,251)){
+                return rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT");
+            } else if (isBetween(AlT,0,41)){
+                if (isBetween(KFK,15,176)){
+                    if (isBetween(LDG,150,591)){
+                        if (ShF >= 80 ){
+                            if (isBetween(GGTP,0,51)) {
+                                return rb.getString("organs.BONE_TISSUE");
+                            } else if (isBetween(GGTP,51,151)){
+                                return rb.getString("organs.LIVER");
+                            } else if (isBetween(GGTP,151,951)){
+                                return rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT");
                             } else {
-                                return "GGTP is not in the range of 51-951. Diagnose can't be done.";
+                                return rb.getString("errors.ggtp");
                             }
                         } else {
-                            return "ShF is not in the range of >80 . Diagnose can't be done.";
+                            return rb.getString("errors.shf");
                         }
-                    } else if (patient.getLDG() >= 591 && patient.getLDG() < 2751) {
-                        return Organs.BLOOD.getEn();
+                    } else if (isBetween(LDG,591,2751)) {
+                        return rb.getString("organs.BLOOD");
                     } else {
-                        return "LDG is not in the range of 150-2750. Diagnose can't be done.";
+                        return rb.getString("errors.ldg");
                     }
-                } else if (patient.getKFK() >= 176 && patient.getKFK() < 501) {
-                    return Organs.HEART.getEn();
-                } else if (patient.getKFK() >= 501 && patient.getKFK() < 1751) {
-                    return Organs.SKELETAL_MUSCLE.getEn();
+                } else if (isBetween(KFK,176,501)) {
+                    return rb.getString("organs.HEART");
+                } else if (isBetween(KFK,501,1751)) {
+                    return rb.getString("organs.SKELETAL_MUSCLE");
                 } else {
-                    return "KFK is not in the range of 15-1750. Diagnose can't be done.";
+                    return rb.getString("errors.kfk");
                 }
             } else {
-                return "AlT is not in the range of 0-250. Diagnose can't be done.";
+                return rb.getString("errors.alt");
             }
         } else {
-            return "AsT is not in the range of 41-150. Diagnose can't be done.";
+            return rb.getString("errors.ast");
         }
     }
 
     private String defineDisease(){
-        if (isBetween(patient.getAsT(), 41, 151)) {
-            if (isBetween(patient.getAsT()/patient.getAlT(), 0.1f, 0.6f)) {
+        if (isBetween(AsT, 41, 151)) {
+            if (isBetween(AsT/AlT, 0.1f, 0.6f)) {
                 return deRitisRatio_01_05();
-            } else if (isBetween(patient.getAsT()/patient.getAlT(), 0.6f, 1)) {
+            } else if (isBetween(AsT/AlT, 0.6f, 1)) {
                 return deRitisRatio_06_09();
-            } else if (patient.getAsT()/patient.getAlT() >= 1) {
+            } else if (AsT/AlT >= 1) {
                 return deRitisRatio_1();
             } else {
-                return "Calculation error";
+                return rb.getString("errors.calcError");
             }
         } else {
-            return "Calculation error";
+            return rb.getString("errors.calcError");
         }
     }
 
     private String deRitisRatio_01_05(){
-        if (isBetween(patient.getLDG(), 591, 2751)){
-            ResourceBundle rb = ResourceBundle.getBundle("rb");
-            //String test = rb.getString("INFECTIOUS_MONONUCLEOSIS");
-            return rb.getString("diseases.INFECTIOUS_MONONUCLEOSIS");
-        } else if (isBetween(patient.getLDG(), 150, 591)){
-            if (patient.getShF() > 270){
-                if (isBetween(patient.getGlDG(),11,76)){
-                    if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
-                        return Diseases.OBSTRUCTIVE_JAUNDICE.getEn() + " ? ";
-                    } else if (isBetween(((patient.getAsT()+patient.getAlT())/patient.getGlDG()),40,51)){
-                        return Diseases.OBSTRUCTIVE_JAUNDICE.getEn();
-                    } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 40){
-                        return Diseases.OBSTRUCTIVE_JAUNDICE.getEn() + " ? ";
+        if (isBetween(LDG, 591, 2751)){
+            return rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS");
+        } else if (isBetween(LDG, 150, 591)){
+            if (ShF > 270){
+                if (isBetween(LDG,11,76)){
+                    if (((AsT+AlT)/GlDG >= 51) ||
+                        ((AsT+AlT)/GlDG < 40)) {
+                        return rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ";
+                    } else if (isBetween(((AsT+AlT)/GlDG),40,51)){
+                        return rb.getString("diseases.OBSTRUCTIVE_JAUNDICE");
                     } else {
-                        return "Calculation error";
+                        return rb.getString("errors.calcError");
                     }
                 } else if (isBetween(patient.getGlDG(),0,11)){
                     if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
@@ -134,7 +153,7 @@ public class EnzimLogic implements Diagnosis {
                     } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 51){
                         return Diseases.TOXIC_DAMAGE.getEn() + " ? ";
                     } else {
-                        return "Calculation error";
+                        return rb.getString("errors.calcError");
                     }
                 } else {
                     return "GlDG is not in the range of >80. Diagnose can't be done.";
@@ -148,7 +167,7 @@ public class EnzimLogic implements Diagnosis {
                     } else if (patient.getGGTP()/patient.getAsT() < 3){
                         return Diseases.ALCOHOLIC_HEPATITIS.getEn() + " ? ";
                     } else {
-                        return "Calculation error";
+                        return rb.getString("errors.calcError");
                     }
                 } else if (patient.getGGTP() < 150){
                     if (patient.getGGTP()/patient.getAsT() >= 4){
@@ -158,7 +177,7 @@ public class EnzimLogic implements Diagnosis {
                     } else if (patient.getGGTP()/patient.getAsT() < 1){
                         return Diseases.VIRAL_HEPATITIS.getEn() + " ? ";
                     } else {
-                        return "Calculation error";
+                        return rb.getString("errors.calcError");
                     }
                 } else {
                     return "GlDG is not in the range of >80. Diagnose can't be done.";

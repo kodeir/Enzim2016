@@ -7,8 +7,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.ResourceBundle;
 
 import static org.junit.Assert.*;
@@ -63,7 +61,7 @@ public class EnzimLogicTest {
                         Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
                 //mechnikov 11
                 {55, 150, 200, 2000, 200, 10, 1200, 5,
-                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.INFECTIOUS_MONONUCLEOSIS")},
+                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
                 //nosov 12
                 {60, 60, 1050, 1000, 130, 1, 1300, 10,
                         Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
@@ -90,7 +88,7 @@ public class EnzimLogicTest {
                 //        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
                 //udonov 20
                 {60, 140, 200, 2300, 120, 10, 780, 5,
-                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.INFECTIOUS_MONONUCLEOSIS")},
+                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
                 //faronov 21
                 {140, 60, 40, 200, 100, 20, 700, 20,
                         Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
@@ -105,7 +103,7 @@ public class EnzimLogicTest {
                         Organs.LIVER_N_TRACT.getEn(), Diseases.BILIARY_CIRRHOSIS.getEn() + " ? "},
                 //shuvalov 25
                 {50, 150, 100, 700, 300, 60, 700, 10,
-                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.INFECTIOUS_MONONUCLEOSIS")},
+                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
                 //emanoylov 26
                 {100, 200, 100, 230, 100, 200, 1300, 20,
                         Organs.LIVER_N_TRACT.getEn(), Diseases.ALCOHOLIC_HEPATITIS.getEn() + " ? "},
