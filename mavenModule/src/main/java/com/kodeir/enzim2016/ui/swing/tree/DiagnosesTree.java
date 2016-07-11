@@ -38,7 +38,7 @@ import com.kodeir.enzim2016.ui.swing.listeners.DiagnosesTreeListener;
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import java.awt.*;
-import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 /**
  * Created by Rowan on 03.07.2016.
@@ -47,6 +47,8 @@ import java.util.ArrayList;
 
 //TODO get rid of spaghetti and get an xml
 public class DiagnosesTree extends JPanel {
+
+    private ResourceBundle rb = ResourceBundle.getBundle("rb");
 
     private JLabel label;
 
@@ -148,7 +150,7 @@ public class DiagnosesTree extends JPanel {
         injuredOrgan = new JLabel("");
         this.add(injuredOrgan, SwingCommons.setConstraintsHorizontal(0.5,1,5,3));
 
-        label = new JLabel("Заболевание:");
+        label = new JLabel(rb.getString("diseases.Disease"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,0,6));
         disease = new JLabel("");
         this.add(disease, SwingCommons.setConstraintsHorizontal(0.5,1,6,3));
