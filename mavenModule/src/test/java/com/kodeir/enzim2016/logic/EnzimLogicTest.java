@@ -1,8 +1,6 @@
 package com.kodeir.enzim2016.logic;
 
 import com.kodeir.enzim2016.patients.Patient;
-import com.kodeir.enzim2016.thesaurus.Diseases;
-import com.kodeir.enzim2016.thesaurus.Organs;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
@@ -28,91 +26,91 @@ public class EnzimLogicTest {
         return new Object[][] {
                 //agamanov 0
                 {100, 1, 200, 200, 100, 1, 700, 13,
-                        Organs.HEART.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.HEART"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //barabanov 1
                 {130, 20, 120, 200, 1200, 300, 800, 2,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.BILIARY_CIRRHOSIS.getEn() + " ? "},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? "},
                 //veneaminov 2
                 {64, 50, 180, 2500, 1200, 20, 1200, 2,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //gurev 3
                 {50, 150, 30, 500, 150, 120, 700, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.VIRAL_HEPATITIS.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.HEPATITIS_VIRAL")},
                 //durov 4
-                //{51, 100, 20, 200, 1200, 20, 1500, 10,
-                //        Organs.LIVER_N_TRACT.getEn(), Diseases.CHRONIC_PERSISTENT_HEPATITIS.getEn()},
+                {51, 100, 20, 200, 1200, 20, 1500, 10,
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.TOXIC_DAMAGE") + " ? "},
                 //egorov 5
                 {100, 130, 20, 200, 1000, 1, 600, 30,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.TOXIC_DAMAGE")},
                 //zuravlev 6
                 {80, 90, 200, 1200, 1500, 200, 1200, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.TOXIC_DAMAGE")},
                 //zenkin 7
                 {120, 120, 1500, 200, 1000, 200, 600, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.BILIARY_CIRRHOSIS.getEn() + " ? "},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? "},
                 //karenina 8
                 {68, 102, 200, 300, 230, 20, 789, 20,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.TOXIC_DAMAGE")},
                 //kirilov 9
                 {110, 60, 100, 500, 200, 10, 1000, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //leonidov 10
                 {120, 100, 100, 230, 200, 1, 1400, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //mechnikov 11
                 {55, 150, 200, 2000, 200, 10, 1200, 5,
-                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
                 //nosov 12
                 {60, 60, 1050, 1000, 130, 1, 1300, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //ogurcov 13
                 {68, 20, 130, 1000, 100, 20, 1200, 10,
-                        Organs.BLOOD.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.BLOOD"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //pirogov 14
                 {70, 20, 130, 200, 100, 20, 1300, 2,
-                        Organs.BONE_TISSUE.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.BONE_TISSUE"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //ryabinin 15
                 {42, 40, 100, 1000, 600, 12, 1600, 50,
-                        Organs.BLOOD.getEn(), Diseases.NONSPECIFIC_REACTIVE_HEPATITIS.getEn()},
+                        rb.getString("organs.BLOOD"), rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE")},
                 //serebryanyi 16
                 {50, 100, 100, 200, 120, 20, 700, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.VIRAL_HEPATITIS.getEn() + " ? "},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.HEPATITIS_VIRAL") + " ? "},
                 //sukarev 17
                 {60, 60, 200, 200, 200, 10, 700, 10,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //timiryazev 18
                 {100, 120, 200, 300, 300, 40, 1200, 30,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.TOXIC_DAMAGE")},
                 //uvarov 19
-                //{90, 100, 110, 220, 200, 10, 1200, 2,
-                //        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
+                {90, 100, 110, 220, 200, 10, 1200, 2,
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE")},
                 //udonov 20
                 {60, 140, 200, 2300, 120, 10, 780, 5,
-                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
                 //faronov 21
                 {140, 60, 40, 200, 100, 20, 700, 20,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.POSTHEPATITIS_CIRRHOSIS.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")},
                 //hudyakov 22
                 {140, 50, 1700, 200, 120, 230, 820, 4,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getEn() + " ? "},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? "},
                 //cereteli 23
                 {50, 130, 130, 400, 1000, 30, 1100, 2,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.TOXIC_DAMAGE.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.TOXIC_DAMAGE")},
                 //chekmincev 24
                 {130, 40, 100, 300, 1200, 200, 1300, 5,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.BILIARY_CIRRHOSIS.getEn() + " ? "},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? "},
                 //shuvalov 25
                 {50, 150, 100, 700, 300, 60, 700, 10,
-                        Organs.LIVER_N_TRACT.getEn(), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")},
                 //emanoylov 26
                 {100, 200, 100, 230, 100, 200, 1300, 20,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.ALCOHOLIC_HEPATITIS.getEn() + " ? "},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? "},
                 //umashev 27
                 {60, 20, 120, 1000, 100, 200, 1400, 3,
-                        Organs.BLOOD.getEn(), Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getEn()},
+                        rb.getString("organs.BLOOD"), rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC")},
                 //hacker 28
                 {50, 60, 100, 300, 80, 12, 1500, 70,
-                        Organs.LIVER_N_TRACT.getEn(), Diseases.CHRONIC_PERSISTENT_HEPATITIS.getEn()},
+                        rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"), rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT")},
 
 
         };

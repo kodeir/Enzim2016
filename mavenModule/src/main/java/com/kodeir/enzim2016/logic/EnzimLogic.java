@@ -31,8 +31,6 @@
 package com.kodeir.enzim2016.logic;
 
 import com.kodeir.enzim2016.patients.Patient;
-import com.kodeir.enzim2016.thesaurus.Diseases;
-import com.kodeir.enzim2016.thesaurus.Organs;
 
 import java.util.ResourceBundle;
 
@@ -92,28 +90,28 @@ public class EnzimLogic implements Diagnosis {
                             } else if (isBetween(GGTP,151,951)){
                                 return rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT");
                             } else {
-                                return rb.getString("errors.ggtp");
+                                return rb.getString("errors.calc.ggtp.btwn.0_950");
                             }
                         } else {
-                            return rb.getString("errors.shf");
+                            return rb.getString("errors.shf.more.80");
                         }
                     } else if (isBetween(LDG,591,2751)) {
                         return rb.getString("organs.BLOOD");
                     } else {
-                        return rb.getString("errors.ldg");
+                        return rb.getString("errors.calc.ldg.btwn.150_2750");
                     }
                 } else if (isBetween(KFK,176,501)) {
                     return rb.getString("organs.HEART");
                 } else if (isBetween(KFK,501,1751)) {
                     return rb.getString("organs.SKELETAL_MUSCLE");
                 } else {
-                    return rb.getString("errors.kfk");
+                    return rb.getString("errors.calc.kfk.btwn.15_1750");
                 }
             } else {
-                return rb.getString("errors.alt");
+                return rb.getString("errors.calc.alt.btwn.0_250");
             }
         } else {
-            return rb.getString("errors.ast");
+            return rb.getString("errors.calc.ast.btwn.41-150");
         }
     }
 
@@ -126,10 +124,10 @@ public class EnzimLogic implements Diagnosis {
             } else if (AsT/AlT >= 1) {
                 return deRitisRatio_1();
             } else {
-                return rb.getString("errors.calcError");
+                return rb.getString("errors.calc.error");
             }
         } else {
-            return rb.getString("errors.calcError");
+            return rb.getString("errors.calc.ast.btwn.41-150");
         }
     }
 
@@ -138,169 +136,162 @@ public class EnzimLogic implements Diagnosis {
             return rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS");
         } else if (isBetween(LDG, 150, 591)){
             if (ShF > 270){
-                if (isBetween(LDG,11,76)){
-                    if (((AsT+AlT)/GlDG >= 51) ||
-                        ((AsT+AlT)/GlDG < 40)) {
+                if (isBetween(GlDG,11,76)){
+                    if (((AsT+AlT)/GlDG >= 51) || ((AsT+AlT)/GlDG < 40)) {
                         return rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ";
                     } else if (isBetween(((AsT+AlT)/GlDG),40,51)){
                         return rb.getString("diseases.OBSTRUCTIVE_JAUNDICE");
                     } else {
-                        return rb.getString("errors.calcError");
+                        return rb.getString("errors.calc.error");
                     }
-                } else if (isBetween(patient.getGlDG(),0,11)){
-                    if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() >= 51){
-                        return Diseases.TOXIC_DAMAGE.getEn();
-                    } else if ((patient.getAsT()+patient.getAlT())/patient.getGlDG() < 51){
-                        return Diseases.TOXIC_DAMAGE.getEn() + " ? ";
+                } else if (isBetween(GlDG,0,11)){
+                    if ((AsT+AlT)/GlDG >= 51){
+                        return rb.getString("diseases.TOXIC_DAMAGE");
+                    } else if ((AsT+AlT)/GlDG < 51){
+                        return rb.getString("diseases.TOXIC_DAMAGE") + " ? ";
                     } else {
-                        return rb.getString("errors.calcError");
+                        return rb.getString("errors.calc.error");
                     }
                 } else {
-                    return "GlDG is not in the range of >80. Diagnose can't be done.";
+                    return rb.getString("errors.calc.gldg.btwn.0_75");
                 }
-            } else if (isBetween(patient.getShF(),80,271)){
-                if (patient.getGGTP() >= 151){
-                    if (patient.getGGTP()/patient.getAsT() >= 7){
-                        return Diseases.ALCOHOLIC_HEPATITIS.getEn() + " ? ";
-                    } else if (isBetween((patient.getGGTP()/patient.getAsT()),3,7)){
-                        return Diseases.ALCOHOLIC_HEPATITIS.getEn();
-                    } else if (patient.getGGTP()/patient.getAsT() < 3){
-                        return Diseases.ALCOHOLIC_HEPATITIS.getEn() + " ? ";
+            } else if (isBetween(ShF,80,271)){
+                if (GGTP >= 151){
+                    if ((GGTP/AsT >= 7) || (GGTP/AsT < 3)){
+                        return rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ";
+                    } else if (isBetween((GGTP/AsT),3,7)){
+                        return rb.getString("diseases.HEPATITIS_ALCOHOLIC");
                     } else {
-                        return rb.getString("errors.calcError");
+                        return rb.getString("errors.calc.error");
                     }
-                } else if (patient.getGGTP() < 150){
-                    if (patient.getGGTP()/patient.getAsT() >= 4){
-                        return Diseases.VIRAL_HEPATITIS.getEn() + " ? ";
-                    } else if (isBetween((patient.getGGTP()/patient.getAsT()),1,4)){
-                        return Diseases.VIRAL_HEPATITIS.getEn();
-                    } else if (patient.getGGTP()/patient.getAsT() < 1){
-                        return Diseases.VIRAL_HEPATITIS.getEn() + " ? ";
+                } else if (GGTP < 150){
+                    if ((GGTP/AsT >= 4) || (GGTP/AsT < 1)){
+                        return rb.getString("diseases.HEPATITIS_VIRAL") + " ? ";
+                    } else if (isBetween((GGTP/AsT),1,4)){
+                        return rb.getString("diseases.HEPATITIS_VIRAL");
                     } else {
-                        return rb.getString("errors.calcError");
+                        return rb.getString("errors.calc.error");
                     }
                 } else {
-                    return "GlDG is not in the range of >80. Diagnose can't be done.";
+                    return rb.getString("errors.calc.error");
                 }
             } else {
-                return "ShF is not in the range of >80. Diagnose can't be done.";
+                return rb.getString("errors.shf.more.80");
             }
         } else {
-            return "LDG is not in the range of 150-2750. Diagnose can't be done.";
+            return rb.getString("errors.calc.ldg.btwn.150_2750");
         }
     }
 
     private String deRitisRatio_06_09(){
-        if (isBetween(patient.getShF(), 371, 1501)){
+        if (isBetween(ShF, 371, 1501)){
             return deRitisRatio_06_09_HE_calcs();
-        } else if (isBetween(patient.getShF(), 80, 371)){
-            if (patient.getGGTP() >= 11) {
+        } else if (isBetween(ShF, 80, 371)){
+            if (GGTP >= 11) {
                 return deRitisRatio_06_09_HE_calcs();
-            } else if (isBetween(patient.getGGTP(), 0, 11)){
-                return Diseases.CHRONIC_AGGRESSIVE_HEPATITIS.getEn();
+            } else if (isBetween(GGTP, 0, 11)){
+                return rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE");
             } else {
-                return "GGTP is not in the range of 80-1500. Diagnose can't be done.";
+                return rb.getString("errors.calc.ggtp.less.0");
             }
         } else {
-            return "ShF is not in the range of 80-1500. Diagnose can't be done.";
+            return rb.getString("errors.shf.btwn.80_1500");
         }
     }
 
     private String deRitisRatio_06_09_HE_calcs(){
-        if (isBetween(patient.getHE(),2701,3751)){
-            return Diseases.FATTY_LIVER.getEn();
-        } else if (isBetween(patient.getHE(),1751,2701)){
-            if (patient.getGlDG() >= 11){
-                return Diseases.OBSTRUCTIVE_JAUNDICE.getEn();
-            } else if (isBetween(patient.getGlDG(), 0, 11)) {
-                if (patient.getGGTP()/patient.getAsT() >= 4){
-                    return Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getEn() + " ? ";
-                } else if (isBetween((patient.getGGTP()/patient.getAsT()),1,4)){
-                    return Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getEn();
-                } else if (patient.getGGTP()/patient.getAsT() < 1){
-                    return Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getEn() + " ? ";
+        if (isBetween(HE,2701,3751)){
+            return rb.getString("diseases.FATTY_LIVER");
+        } else if (isBetween(HE,1751,2701)){
+            if (GlDG >= 11){
+                return rb.getString("diseases.OBSTRUCTIVE_JAUNDICE");
+            } else if (isBetween(GlDG, 0, 11)) {
+                if ((GGTP/AsT >= 4) || (GGTP/AsT < 1)){
+                    return rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ";
+                } else if (isBetween((GGTP/AsT),1,4)){
+                    return rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC");
                 } else {
-                    return "Calculation error";
+                    return rb.getString("errors.calc.error");
                 }
             } else {
-                return "GGTP/AST is not in the range of > 0. Diagnose can't be done.";
+                return rb.getString("errors.calc.ggtp_ast.more.0");
             }
-        } else if (isBetween(patient.getHE(),1201,1751)){
-            if (patient.getGGTP() / patient.getAsT() >= 2){
-                return Diseases.CHRONIC_PERSISTENT_HEPATITIS.getEn() + " ? ";
-            } else if (isBetween(patient.getGGTP() / patient.getAsT(), 0, 2)) {
-                return Diseases.CHRONIC_PERSISTENT_HEPATITIS.getEn();
+        } else if (isBetween(HE,1201,1751)){
+            if (GGTP / AsT >= 2){
+                return rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? ";
+            } else if (isBetween(GGTP / AsT, 0, 2)) {
+                return rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT");
             } else {
-                return "GGTP/AST is not in the range of > 0. Diagnose can't be done.";
+                return rb.getString("errors.calc.ggtp_ast.more.0");
             }
-        } else if (isBetween(patient.getHE(),500,1201)){
-            return Diseases.TOXIC_DAMAGE.getEn();
+        } else if (isBetween(HE,500,1201)){
+            return rb.getString("diseases.TOXIC_DAMAGE");
         } else {
-            return "HE is not in the range of 80-1500. Diagnose can't be done.";
+            return rb.getString("errors.calc.he.btwn.500_3750");
         }
     }
 
     private String deRitisRatio_1(){
-        if (patient.getHE() >= 1501){
-            if (patient.getGGTP() >= 251){
+        if (HE >= 1501){
+            if (GGTP >= 251){
                 return deRitisRatio_1_ShF_calcs();
-            } else if (isBetween(patient.getGGTP(),151,251)){
-                return Diseases.CHRONIC_AGGRESSIVE_HEPATITIS.getEn();
-            } else if (patient.getGGTP() < 151){
-                return Diseases.NONSPECIFIC_REACTIVE_HEPATITIS.getEn();
+            } else if (isBetween(GGTP,151,251)){
+                return rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE");
+            } else if (GGTP < 151){
+                return rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE");
             } else {
-                return "Calculation error";
+                return rb.getString("errors.calc.error");
             }
-        } else if (isBetween(patient.getHE(), 500, 1501)){
-            if (patient.getGGTP() >= 351){
-                return Diseases.LIVER_METASTASES.getEn() + " ? " + " , " + Diseases.BILIARY_CIRRHOSIS.getEn() + " ? ";
-            } else if (isBetween(patient.getGGTP(),151,351)){
+        } else if (isBetween(HE, 500, 1501)){
+            if (GGTP >= 351){
+                return rb.getString("diseases.LIVER_METASTASES") + " ? " + " , " + rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ";
+            } else if (isBetween(GGTP,151,351)){
                 return deRitisRatio_1_ShF_calcs();
-            } else if (patient.getGGTP() < 151){
-                return Diseases.POSTHEPATITIS_CIRRHOSIS.getEn();
+            } else if (GGTP < 151){
+                return rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS");
             } else {
-                return "Calculation error";
+                return rb.getString("errors.calc.error");
             }
         } else {
-            return "HE is not in the range of 80-1500. Diagnose can't be done.";
+            return rb.getString("errors.calc.he.less.500");
         }
     }
 
     private String deRitisRatio_1_ShF_calcs(){
-        if (isBetween(patient.getShF(), 471, 1501)) {
-            if (isBetween(patient.getGlDG(), 11, 76)){
-                if ((patient.getAsT() + patient.getAlT())/patient.getGlDG() >= 11){
-                    return Diseases.LIVER_METASTATIC_TUMOR_NODULES.getEn() + " ? ";
-                } else if (isBetween(((patient.getAsT() + patient.getAlT())/patient.getGlDG()),0,11)){
-                    return Diseases.LIVER_METASTATIC_TUMOR_NODULES.getEn();
+        if (isBetween(ShF, 471, 1501)) {
+            if (isBetween(GlDG, 11, 76)){
+                if ((AsT + AlT)/GlDG >= 11){
+                    return rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? ";
+                } else if (isBetween(((AsT + AlT)/GlDG),0,11)){
+                    return rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES");
                 } else {
-                    return "(AsT+AlT)/GLDG is not in the range of > 0. Diagnose can't be done.";
+                    return rb.getString("errors.calc.ast_alt_gldg.more.0");
                 }
-            } else if (isBetween(patient.getGlDG(), 0, 11)){
-                if ((patient.getAsT() + patient.getAlT())/patient.getGlDG() >= 21){
-                    return Diseases.BILIARY_CIRRHOSIS.getEn() + " ? ";
-                } else if (isBetween(((patient.getAsT() + patient.getAlT())/patient.getGlDG()),5,21)){
-                    return Diseases.BILIARY_CIRRHOSIS.getEn();
-                } else if ((patient.getAsT() + patient.getAlT())/patient.getGlDG() < 5){
-                    return Diseases.BILIARY_CIRRHOSIS.getEn() + " ? ";
+            } else if (isBetween(GlDG, 0, 11)){
+                if ((AsT + AlT)/GlDG >= 21){
+                    return rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ";
+                } else if (isBetween(((AsT + AlT)/GlDG),5,21)){
+                    return rb.getString("diseases.CIRRHOSIS_BILIARY");
+                } else if ((AsT + AlT)/GlDG < 5){
+                    return rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ";
                 } else {
-                    return "Calculation error";
+                    return rb.getString("errors.calc.error");
                 }
             } else {
-                return "GlDG is not in the range of 0-75. Diagnose can't be done.";
+                return rb.getString("errors.calc.gldg.btwn.0_75");
             }
-        } else if (isBetween(patient.getShF(), 80, 471)){
-            if (patient.getGGTP()/patient.getAsT() >= 7){
-                return Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getEn() + " ? ";
-            } else if (isBetween((patient.getGGTP()/patient.getAsT()),3,7)){
-                return Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getEn();
-            } else if (patient.getGGTP()/patient.getAsT() < 3){
-                return Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getEn() + " ? ";
+        } else if (isBetween(ShF, 80, 471)){
+            if (GGTP/AsT >= 7){
+                return rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ";
+            } else if (isBetween((GGTP/AsT),3,7)){
+                return rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC");
+            } else if (GGTP/AsT < 3){
+                return rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ";
             } else {
-                return "Calculation error";
+                return rb.getString("errors.calc.error");
             }
         } else {
-            return "ShF is not in the range of 80-1500. Diagnose can't be done.";
+            return rb.getString("errors.shf.btwn.80_1500");
         }
     }
 
