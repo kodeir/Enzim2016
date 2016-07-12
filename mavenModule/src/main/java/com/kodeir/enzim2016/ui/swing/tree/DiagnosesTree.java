@@ -102,13 +102,13 @@ public class DiagnosesTree extends JPanel {
     }
 
     private void addFields(){
-        label = new JLabel("АСТ");
+        label = new JLabel(rb.getString("coefficients.ast"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,0,0));
-        label = new JLabel("АЛТ");
+        label = new JLabel(rb.getString("coefficients.alt"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,1,0));
-        label = new JLabel("КФК");
+        label = new JLabel(rb.getString("coefficients.kfk"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,2,0));
-        label = new JLabel("ЛДГ");
+        label = new JLabel(rb.getString("coefficients.ldg"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,3,0));
 
         astField = new JTextField();
