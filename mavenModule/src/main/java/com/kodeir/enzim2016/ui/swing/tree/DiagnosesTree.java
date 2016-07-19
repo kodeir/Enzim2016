@@ -30,8 +30,6 @@
 
 package com.kodeir.enzim2016.ui.swing.tree;
 
-import com.kodeir.enzim2016.thesaurus.Diseases;
-import com.kodeir.enzim2016.thesaurus.Organs;
 import com.kodeir.enzim2016.ui.swing.SwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.DiagnosesTreeListener;
 
@@ -64,8 +62,6 @@ public class DiagnosesTree extends JPanel {
     private JButton doDiagnoseBtn;
     private JLabel injuredOrgan;
     private JLabel disease;
-
-    private JTree tree;
 
     private float floatChecker;
     private float[] floats;
@@ -120,13 +116,13 @@ public class DiagnosesTree extends JPanel {
         ldgField = new JTextField();
         this.add(ldgField, SwingCommons.setConstraintsHorizontal(0.5,3,1));
 
-        label = new JLabel("ЩФ");
+        label = new JLabel(rb.getString("coefficients.shf"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,0,2));
-        label = new JLabel("ГГТП");
+        label = new JLabel(rb.getString("coefficients.ggtp"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,1,2));
-        label = new JLabel("ХЭ");
+        label = new JLabel(rb.getString("coefficients.he"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,2,2));
-        label = new JLabel("ГЛДГ");
+        label = new JLabel(rb.getString("coefficients.gldg"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,3,2));
 
         shfField = new JTextField();
@@ -140,12 +136,12 @@ public class DiagnosesTree extends JPanel {
     }
 
     private void addResultButton(){
-        doDiagnoseBtn = new JButton("Диагностировать");
+        doDiagnoseBtn = new JButton(rb.getString("diagnose.do"));
         this.add(doDiagnoseBtn, SwingCommons.setConstraintsHorizontal(0.5,1,4,2));
     }
 
     private void addResults(){
-        label = new JLabel("Поверждённый орган:");
+        label = new JLabel(rb.getString("organs.Injured_organ"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5,0,5));
         injuredOrgan = new JLabel("");
         this.add(injuredOrgan, SwingCommons.setConstraintsHorizontal(0.5,1,5,3));
@@ -162,7 +158,7 @@ public class DiagnosesTree extends JPanel {
         root.add(createInjuredOrganBranch());
         root.add(createDiseaseBranch());
 
-        tree = new JTree(root);
+        JTree tree = new JTree(root);
         tree.setRootVisible(false);
         tree.setMinimumSize(new Dimension(1000,500));
 
@@ -172,151 +168,153 @@ public class DiagnosesTree extends JPanel {
     }
 
     private DefaultMutableTreeNode createInjuredOrganBranch(){
-        DefaultMutableTreeNode injuredOrgan = new DefaultMutableTreeNode("Повреждённый орган");
+        DefaultMutableTreeNode injuredOrgan = new DefaultMutableTreeNode(rb.getString("organs.Injured_organ"));
 
-        DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode("АСТ 41-150");
+        DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast.41_150"));
         injuredOrgan.add(AsT_Node);
-        DefaultMutableTreeNode AlT_Node_0 = new DefaultMutableTreeNode("АлТ 41-250");
-        DefaultMutableTreeNode AlT_Node_1 = new DefaultMutableTreeNode("АлТ 0-40");
+        DefaultMutableTreeNode AlT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.41_250"));
+        DefaultMutableTreeNode AlT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.0_40"));
         AsT_Node.add(AlT_Node_0);
         AsT_Node.add(AlT_Node_1);
-        DefaultMutableTreeNode diagnose = new DefaultMutableTreeNode(Organs.LIVER_N_TRACT.getRu());
+        DefaultMutableTreeNode diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER")
+                + rb.getString("organs.BILIARY_TRACT"));
         AlT_Node_0.add(diagnose);
-        DefaultMutableTreeNode KFK_Node_0 = new DefaultMutableTreeNode("КФК 501-1750");
-        DefaultMutableTreeNode KFK_Node_1 = new DefaultMutableTreeNode("КФК 176-500");
-        DefaultMutableTreeNode KFK_Node_2 = new DefaultMutableTreeNode("КФК 15-175");
+        DefaultMutableTreeNode KFK_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.kfk.501_1750"));
+        DefaultMutableTreeNode KFK_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.kfk.176_500"));
+        DefaultMutableTreeNode KFK_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.kfk.15_175"));
         AlT_Node_1.add(KFK_Node_0);
         AlT_Node_1.add(KFK_Node_1);
         AlT_Node_1.add(KFK_Node_2);
-        diagnose = new DefaultMutableTreeNode(Organs.SKELETAL_MUSCLE.getRu());
+        diagnose = new DefaultMutableTreeNode(rb.getString("organs.SKELETAL_MUSCLE"));
         KFK_Node_0.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(Organs.HEART.getRu());
+        diagnose = new DefaultMutableTreeNode(rb.getString("organs.HEART"));
         KFK_Node_1.add(diagnose);
-        DefaultMutableTreeNode LDG_Node_0 = new DefaultMutableTreeNode("ЛДГ 591-2750");
-        DefaultMutableTreeNode LDG_Node_1 = new DefaultMutableTreeNode("ЛДГ 150-590");
+        DefaultMutableTreeNode LDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.591_2750"));
+        DefaultMutableTreeNode LDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.150_590"));
         KFK_Node_2.add(LDG_Node_0);
         KFK_Node_2.add(LDG_Node_1);
-        diagnose = new DefaultMutableTreeNode(Organs.BLOOD.getRu());
+        diagnose = new DefaultMutableTreeNode(rb.getString("organs.BLOOD"));
         LDG_Node_0.add(diagnose);
-        DefaultMutableTreeNode SHF_Node = new DefaultMutableTreeNode("ЩФ >80");
+        DefaultMutableTreeNode SHF_Node = new DefaultMutableTreeNode(rb.getString("coefficients.shf.more.80"));
         LDG_Node_1.add(SHF_Node);
-        DefaultMutableTreeNode GGTP_Node_0 = new DefaultMutableTreeNode("ГГТП 151-950");
-        DefaultMutableTreeNode GGTP_Node_1 = new DefaultMutableTreeNode("ГГТП 51-150");
-        DefaultMutableTreeNode GGTP_Node_2 = new DefaultMutableTreeNode("ГГТП 0-50");
+        DefaultMutableTreeNode GGTP_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.151_950"));
+        DefaultMutableTreeNode GGTP_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.51_150"));
+        DefaultMutableTreeNode GGTP_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.0_50"));
         SHF_Node.add(GGTP_Node_0);
         SHF_Node.add(GGTP_Node_1);
         SHF_Node.add(GGTP_Node_2);
-        diagnose = new DefaultMutableTreeNode(Organs.LIVER_N_TRACT.getRu());
+        diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER")
+                + rb.getString("organs.BILIARY_TRACT"));
         GGTP_Node_0.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(Organs.LIVER.getRu());
+        diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER"));
         GGTP_Node_1.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(Organs.BONE_TISSUE.getRu());
+        diagnose = new DefaultMutableTreeNode(rb.getString("organs.BONE_TISSUE"));
         GGTP_Node_2.add(diagnose);
 
         return injuredOrgan;
     }
 
     private DefaultMutableTreeNode createDiseaseBranch(){
-        DefaultMutableTreeNode disease = new DefaultMutableTreeNode("Болезнь");
+        DefaultMutableTreeNode disease = new DefaultMutableTreeNode(rb.getString("diseases.Disease"));
 
-        DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode("АСТ 41-150");
+        DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast.41_150"));
         disease.add(AsT_Node);
 
-        DefaultMutableTreeNode deRitis01_05_Node = new DefaultMutableTreeNode("АсТ/АлТ 0.1-0.5");
-        DefaultMutableTreeNode deRitis06_09_Node = new DefaultMutableTreeNode("АсТ/АлТ 0.6-0.9");
-        DefaultMutableTreeNode deRitis1_Node = new DefaultMutableTreeNode("АсТ/АлТ > 1");
+        DefaultMutableTreeNode deRitis01_05_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt.01_05"));
+        DefaultMutableTreeNode deRitis06_09_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt.06_09"));
+        DefaultMutableTreeNode deRitis1_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt.more.1"));
 
         AsT_Node.add(deRitis01_05_Node);
         AsT_Node.add(deRitis06_09_Node);
         AsT_Node.add(deRitis1_Node);
 
-        DefaultMutableTreeNode LDG_Node_0 = new DefaultMutableTreeNode("ЛДГ 591-2750");
-        DefaultMutableTreeNode LDG_Node_1 = new DefaultMutableTreeNode("ЛДГ 150-590");
+        DefaultMutableTreeNode LDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.591_2750"));
+        DefaultMutableTreeNode LDG_Node_1 = new DefaultMutableTreeNode("coefficients.ldg.150_590");
 
         deRitis01_05_Node.add(LDG_Node_0);
         deRitis01_05_Node.add(LDG_Node_1);
 
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.INGECTIOUS_MONONUCLEOSIS.getRu());
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS"));
         LDG_Node_0.add(result);
 
-        DefaultMutableTreeNode SHF_Node_0 = new DefaultMutableTreeNode("ЩФ > 270");
-        DefaultMutableTreeNode SHF_Node_1 = new DefaultMutableTreeNode("ЩФ 80-270");
+        DefaultMutableTreeNode SHF_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.more.270"));
+        DefaultMutableTreeNode SHF_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.80_270"));
 
         LDG_Node_1.add(SHF_Node_0);
         LDG_Node_1.add(SHF_Node_1);
 
-        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode("ГЛДГ 11-75");
-        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode("ГЛДГ 0-10");
+        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.11_75"));
+        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
 
         SHF_Node_0.add(GLDG_Node_0);
         SHF_Node_0.add(GLDG_Node_1);
 
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ > 50");
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ 40-50");
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_2 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ < 40");
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.50"));
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.40_50"));
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.less.40"));
 
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_0);
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_1);
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_2);
 
-        result = new DefaultMutableTreeNode(Diseases.OBSTRUCTIVE_JAUNDICE.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ");
         AsT_AlT_GLDG_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.OBSTRUCTIVE_JAUNDICE.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
         AsT_AlT_GLDG_Node_1.add(result);
-        result = new DefaultMutableTreeNode(Diseases.OBSTRUCTIVE_JAUNDICE.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ");
         AsT_AlT_GLDG_Node_2.add(result);
 
-        AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ > 50");
-        AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ <= 50");
+        AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.50"));
+        AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.less.50"));
 
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_0);
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_1);
 
-        result = new DefaultMutableTreeNode(Diseases.TOXIC_DAMAGE.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.TOXIC_DAMAGE"));
         AsT_AlT_GLDG_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.TOXIC_DAMAGE.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.TOXIC_DAMAGE") + " ? ");
         AsT_AlT_GLDG_Node_1.add(result);
 
-        DefaultMutableTreeNode GGTP_Node_0 = new DefaultMutableTreeNode("ГГТП > 150");
-        DefaultMutableTreeNode GGTP_Node_1 = new DefaultMutableTreeNode("ГГТП <= 150");
+        DefaultMutableTreeNode GGTP_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.more.150"));
+        DefaultMutableTreeNode GGTP_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.less.150"));
 
         SHF_Node_1.add(GGTP_Node_0);
         SHF_Node_1.add(GGTP_Node_1);
 
-        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 6");
-        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 3-6");
-        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode("ГГТП/АСТ < 3");
+        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.6"));
+        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.3_6"));
+        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
 
         GGTP_Node_0.add(GGTP_AsT_Node_0);
         GGTP_Node_0.add(GGTP_AsT_Node_1);
         GGTP_Node_0.add(GGTP_AsT_Node_2);
 
-        result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_HEPATITIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ");
         GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_HEPATITIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_ALCOHOLIC"));
         GGTP_AsT_Node_1.add(result);
-        result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_HEPATITIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ");
         GGTP_AsT_Node_2.add(result);
 
-        GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 3");
-        GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 1-3");
-        GGTP_AsT_Node_2 = new DefaultMutableTreeNode("ГГТП/АСТ <1");
+        GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.3"));
+        GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.1_3"));
+        GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.1"));
 
         GGTP_Node_1.add(GGTP_AsT_Node_0);
         GGTP_Node_1.add(GGTP_AsT_Node_1);
         GGTP_Node_1.add(GGTP_AsT_Node_2);
 
-        result = new DefaultMutableTreeNode(Diseases.VIRAL_HEPATITIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_VIRAL") + " ? ");
         GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.VIRAL_HEPATITIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_VIRAL"));
         GGTP_AsT_Node_1.add(result);
-        result = new DefaultMutableTreeNode(Diseases.VIRAL_HEPATITIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_VIRAL") + " ? ");
         GGTP_AsT_Node_2.add(result);
 
         // de ritis 0.6-0.9
 
-        SHF_Node_0 = new DefaultMutableTreeNode("ЩФ 371-1500");
-        SHF_Node_1 = new DefaultMutableTreeNode("ЩФ 80-370");
+        SHF_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.371_1500"));
+        SHF_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.80_370"));
 
         deRitis06_09_Node.add(SHF_Node_0);
         deRitis06_09_Node.add(SHF_Node_1);
@@ -326,8 +324,8 @@ public class DiagnosesTree extends JPanel {
         SHF_Node_0.add(add_HE_Node_2());
         SHF_Node_0.add(add_HE_Node_3());
 
-        GGTP_Node_0 = new DefaultMutableTreeNode("ГГТП > 11");
-        GGTP_Node_1 = new DefaultMutableTreeNode("ГГТП 0-10");
+        GGTP_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.more.11"));
+        GGTP_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.0_10"));
         SHF_Node_1.add(GGTP_Node_0);
         SHF_Node_1.add(GGTP_Node_1);
 
@@ -336,19 +334,19 @@ public class DiagnosesTree extends JPanel {
         GGTP_Node_0.add(add_HE_Node_2());
         GGTP_Node_0.add(add_HE_Node_3());
 
-        result = new DefaultMutableTreeNode(Diseases.CHRONIC_PERSISTENT_HEPATITIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC"));
         GGTP_Node_1.add(result);
 
         // deRitis 1
 
-        DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode("ХЭ > 1500");
-        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode("ХЭ 500-1500");
+        DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.he.more.1500"));
+        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.he.500_1500"));
         deRitis1_Node.add(HE_Node_0);
         deRitis1_Node.add(HE_Node_1);
 
-        GGTP_Node_0 = new DefaultMutableTreeNode("ГГТП > 250");
-        GGTP_Node_1 = new DefaultMutableTreeNode("ГГТП 151-250");
-        DefaultMutableTreeNode GGTP_Node_2 = new DefaultMutableTreeNode("ГГТП < 151");
+        GGTP_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.more.250"));
+        GGTP_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.151_250"));
+        DefaultMutableTreeNode GGTP_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.less.151"));
         HE_Node_0.add(GGTP_Node_0);
         HE_Node_0.add(GGTP_Node_1);
         HE_Node_0.add(GGTP_Node_2);
@@ -356,121 +354,121 @@ public class DiagnosesTree extends JPanel {
         GGTP_Node_0.add(add_SHF_Node_0());
         GGTP_Node_0.add(add_SHF_Node_1());
 
-        result = new DefaultMutableTreeNode(Diseases.CHRONIC_AGGRESSIVE_HEPATITIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE"));
         GGTP_Node_1.add(result);
-        result = new DefaultMutableTreeNode(Diseases.NONSPECIFIC_REACTIVE_HEPATITIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE"));
         GGTP_Node_2.add(result);
 
-        GGTP_Node_0 = new DefaultMutableTreeNode("ГГТП > 350");
-        GGTP_Node_1 = new DefaultMutableTreeNode("ГГТП 151-350");
-        GGTP_Node_2 = new DefaultMutableTreeNode("ГГТП < 151");
+        GGTP_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.more.350"));
+        GGTP_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.151_350"));
+        GGTP_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.less.151"));
         HE_Node_1.add(GGTP_Node_0);
         HE_Node_1.add(GGTP_Node_1);
         HE_Node_1.add(GGTP_Node_2);
-        result = new DefaultMutableTreeNode(Diseases.LIVER_METASTASES.getRu() + " ? " + Diseases.BILIARY_CIRRHOSIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.LIVER_METASTASES") + " ? " + rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
         GGTP_Node_0.add(result);
 
         GGTP_Node_1.add(add_SHF_Node_0());
         GGTP_Node_1.add(add_SHF_Node_1());
 
-        result = new DefaultMutableTreeNode(Diseases.POSTHEPATITIS_CIRRHOSIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS"));
         GGTP_Node_2.add(result);
 
         return disease;
     }
 
     private DefaultMutableTreeNode add_HE_Node_0() {
-        DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode("ХЭ 2701-3750");
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.FATTY_LIVER.getRu());
+        DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.he.2701_3750"));
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.FATTY_LIVER"));
         HE_Node_0.add(result);
         return HE_Node_0;
     }
 
     private DefaultMutableTreeNode add_HE_Node_1() {
-        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode("ХЭ 1751-2700");
-        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode("ГЛДГ > 10");
-        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode("ГЛДГ 0-10");
+        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.he.1751_2700"));
+        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.more.10"));
+        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
         HE_Node_1.add(GLDG_Node_0);
         HE_Node_1.add(GLDG_Node_1);
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.OBSTRUCTIVE_JAUNDICE.getRu());
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
         GLDG_Node_0.add(result);
-        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 3");
-        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 1-3");
-        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode("ГГТП/АСТ <1");
+        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.3"));
+        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.1_3"));
+        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
         GLDG_Node_1.add(GGTP_AsT_Node_0);
         GLDG_Node_1.add(GGTP_AsT_Node_1);
         GLDG_Node_1.add(GGTP_AsT_Node_2);
-        result = new DefaultMutableTreeNode(Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
         GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC"));
         GGTP_AsT_Node_1.add(result);
-        result = new DefaultMutableTreeNode(Diseases.CHRONIC_ALCOHOLIC_TOXIC_HEPATITIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
         GGTP_AsT_Node_2.add(result);
         return HE_Node_1;
     }
 
     private DefaultMutableTreeNode add_HE_Node_2() {
-        DefaultMutableTreeNode HE_Node_2 = new DefaultMutableTreeNode("ХЭ 1201-1750");
-        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 1");
-        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 0-1");
+        DefaultMutableTreeNode HE_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.he.1201-1750"));
+        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.1"));
+        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.0_1"));
         HE_Node_2.add(GGTP_AsT_Node_0);
         HE_Node_2.add(GGTP_AsT_Node_1);
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.CHRONIC_PERSISTENT_HEPATITIS.getRu() + " ? ");
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? ");
         GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.CHRONIC_PERSISTENT_HEPATITIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT"));
         GGTP_AsT_Node_1.add(result);
         return HE_Node_2;
     }
 
     private DefaultMutableTreeNode add_HE_Node_3() {
-        DefaultMutableTreeNode HE_Node_3 = new DefaultMutableTreeNode("ХЭ 500-1200");
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.TOXIC_DAMAGE.getRu());
+        DefaultMutableTreeNode HE_Node_3 = new DefaultMutableTreeNode(rb.getString("coefficients.he.500_1200"));
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.TOXIC_DAMAGE"));
         HE_Node_3.add(result);
         return HE_Node_3;
     }
 
     private DefaultMutableTreeNode add_SHF_Node_0() {
-        DefaultMutableTreeNode SHF_Node_0 = new DefaultMutableTreeNode("ЩФ 471-1500");
-        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode("ГЛДГ 11-75");
-        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode("ГЛДГ 0-10");
+        DefaultMutableTreeNode SHF_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.471_1500"));
+        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.11_75"));
+        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
         SHF_Node_0.add(GLDG_Node_0);
         SHF_Node_0.add(GLDG_Node_1);
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ > 10");
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ 0-10");
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.10"));
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.0_10"));
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_0);
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_1);
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.LIVER_METASTATIC_TUMOR_NODULES.getRu() + " ? ");
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? ");
         AsT_AlT_GLDG_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.LIVER_METASTATIC_TUMOR_NODULES.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES"));
         AsT_AlT_GLDG_Node_1.add(result);
-        AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ > 20");
-        AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ 5-20");
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_2 = new DefaultMutableTreeNode("(АСТ + АЛТ) / ГЛДГ < 5");
+        AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.20"));
+        AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.5_20"));
+        DefaultMutableTreeNode AsT_AlT_GLDG_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.less.5"));
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_0);
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_1);
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_2);
-        result = new DefaultMutableTreeNode(Diseases.BILIARY_CIRRHOSIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
         AsT_AlT_GLDG_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.BILIARY_CIRRHOSIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_BILIARY"));
         AsT_AlT_GLDG_Node_1.add(result);
-        result = new DefaultMutableTreeNode(Diseases.BILIARY_CIRRHOSIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
         AsT_AlT_GLDG_Node_2.add(result);
         return SHF_Node_0;
     }
 
     private DefaultMutableTreeNode add_SHF_Node_1() {
-        DefaultMutableTreeNode SHF_Node_1 = new DefaultMutableTreeNode("ЩФ 80-470");
-        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode("ГГТП/АСТ > 6");
-        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode("ГГТП/АСТ 3-6");
-        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode("ГГТП/АСТ < 3");
+        DefaultMutableTreeNode SHF_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.80_470"));
+        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.6"));
+        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.3_6"));
+        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
         SHF_Node_1.add(GGTP_AsT_Node_0);
         SHF_Node_1.add(GGTP_AsT_Node_1);
         SHF_Node_1.add(GGTP_AsT_Node_2);
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getRu() + " ? ");
+        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
         GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getRu());
+        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC"));
         GGTP_AsT_Node_1.add(result);
-        result = new DefaultMutableTreeNode(Diseases.ALCOHOLIC_TOXIC_CIRRHOSIS.getRu() + " ? ");
+        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
         GGTP_AsT_Node_2.add(result);
         return SHF_Node_1;
     }
@@ -480,96 +478,108 @@ public class DiagnosesTree extends JPanel {
     }
 
     public boolean setFloats(){
-        StringBuffer missed = new StringBuffer("Не введены следущюие коэффициенты: ");
-        StringBuffer wrong = new StringBuffer("Для следующих коэффициентов введено неверное значение: ");
+        StringBuilder missed = new StringBuilder(rb.getString("errors.coefficients.missed"));
+        StringBuilder wrong = new StringBuilder(rb.getString("errors.coefficients.wrong"));
 
         floats = new float[8];
-        float checker;
 
         if (!astField.getText().equals("")){
             if (parseFloatFromString(astField.getText())){
                 floats[0] = floatChecker;
             } else {
-                wrong.append(" АСТ");
+                wrong.append(" ");
+                wrong.append(rb.getString("coefficients.ast"));
             }
         } else {
-            missed.append(" АСТ");
+            missed.append(" ");
+            missed.append(rb.getString("coefficients.ast"));
         }
         if (!altField.getText().equals("")){
             if (parseFloatFromString(altField.getText())){
                 floats[1] = floatChecker;
             } else {
-                wrong.append(" АЛТ");
+                wrong.append(" ");
+                wrong.append(rb.getString("coefficients.alt"));
             }
         } else {
-            missed.append(" АЛТ");
+            missed.append(" ");
+            missed.append(rb.getString("coefficients.alt"));
         }
         if (!kfkField.getText().equals("")){
             if (parseFloatFromString(kfkField.getText())){
                 floats[2] = floatChecker;
             } else {
-                wrong.append(" КФК");
+                wrong.append(" ");
+                wrong.append(rb.getString("coefficients.kfk"));
             }
         } else {
-            missed.append(" КФК");
+            missed.append(" ");
+            missed.append(rb.getString("coefficients.kfk"));
         }
         if (!ldgField.getText().equals("")){
             if (parseFloatFromString(ldgField.getText())){
                 floats[3] = floatChecker;
             } else {
-                wrong.append(" ЛДГ");
+                wrong.append(" ");
+                wrong.append(rb.getString("coefficients.ldg"));
             }
         } else {
-            missed.append(" ЛДГ");
+            missed.append(" ");
+            missed.append(rb.getString("coefficients.ldg"));
         }
         if (!shfField.getText().equals("")){
             if (parseFloatFromString(shfField.getText())){
                 floats[4] = floatChecker;
             } else {
-                wrong.append(" ЩФ");
+                wrong.append(" ");
+                wrong.append(rb.getString("coefficients.shf"));
             }
         } else {
-            missed.append(" ЩФ");
+            missed.append(" ");
+            missed.append(rb.getString("coefficients.shf"));
         }
         if (!ggtpField.getText().equals("")){
             if (parseFloatFromString(ggtpField.getText())){
                 floats[5] = floatChecker;
             } else {
-                wrong.append(" ГГТП");
+                wrong.append(" ");
+                wrong.append(rb.getString("coefficients.ggtp"));
             }
         } else {
-            missed.append(" ГГТП");
+            missed.append(" ");
+            missed.append(rb.getString("coefficients.ggtp"));
         }
         if (!heField.getText().equals("")){
             if (parseFloatFromString(heField.getText())){
                 floats[6] = floatChecker;
             } else {
-                wrong.append(" ХЭ");
+                wrong.append(" ");
+                wrong.append(rb.getString("coefficients.he"));
             }
         } else {
-            missed.append(" ХЭ");
+            missed.append(" ");
+            missed.append(rb.getString("coefficients.he"));
         }
         if (!gldgField.getText().equals("")){
             if (parseFloatFromString(gldgField.getText())){
                 floats[7] = floatChecker;
             } else {
-                wrong.append(" ГЛДГ");
+                wrong.append(" ");
+                wrong.append(rb.getString("coefficients.gldg"));
             }
         } else {
-            missed.append(" ГЛДГ");
+            missed.append(" ");
+            missed.append(rb.getString("coefficients.gldg"));
         }
 
         missedCoefficients = missed.toString();
         wrongCoefficients = wrong.toString();
 
-        if (!missedCoefficients.equals("Не введены следущюие коэффициенты: ") || !wrongCoefficients.equals("Для следующих коэффициентов введено неверное значение: ")){
-            return false;
-        } else {
-            return true;
-        }
+        return missedCoefficients.equals(rb.getString("errors.coefficients.missed"))
+                && wrongCoefficients.equals(rb.getString("errors.coefficients.wrong"));
     }
 
-    public void addListeners(){
+    private void addListeners(){
         doDiagnoseBtn.addActionListener(new DiagnosesTreeListener(this));
     }
 
