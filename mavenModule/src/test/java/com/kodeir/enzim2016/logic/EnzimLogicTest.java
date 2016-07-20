@@ -10,7 +10,7 @@ import java.util.ResourceBundle;
 import static org.junit.Assert.*;
 
 /**
- * Created by Rowan on 19.06.2016.
+ * Created by Sergei Riabinin on 19.06.2016.
  */
 @RunWith(Parameterized.class)
 public class EnzimLogicTest {

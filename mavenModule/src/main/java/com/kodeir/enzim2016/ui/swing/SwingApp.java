@@ -4,14 +4,16 @@ import com.kodeir.enzim2016.ui.swing.listeners.SwingAppPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ResourceBundle;
 
 /**
- * Created by Rowan on 03.07.2016.
+ * Created by Sergei Riabinin on 03.07.2016.
  */
 public class SwingApp {
 
     private JFrame frame;
     private SwingAppPanel swingAppPanel;
+    private ResourceBundle rb = ResourceBundle.getBundle("rb");
 
     public SwingApp(){
         initialize();
@@ -29,7 +31,7 @@ public class SwingApp {
     }
 
     private void initialize(){
-        frame = new JFrame("Enzim 2016");
+        frame = new JFrame(rb.getString("interface.name"));
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         addComponents();
     }
@@ -52,9 +54,7 @@ public class SwingApp {
     }
 
     public void clearFrame(){
-        SwingUtilities.invokeLater(() -> {
-            frame.getContentPane().removeAll();
-        });
+        SwingUtilities.invokeLater(() -> frame.getContentPane().removeAll());
     }
 
     private void addListeners(){

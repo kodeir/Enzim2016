@@ -14,8 +14,8 @@ import java.util.logging.LogManager;
 public class Database {
 
     //private static final LogManager log = new LogManager(Database.class.getName());
-    Connection connection = null;
-    Statement statement = null;
+    private Connection connection = null;
+    private Statement statement = null;
 
     /*
     private boolean printSqlException(SQLException e, String message){
@@ -30,9 +30,9 @@ public class Database {
     }
     */
 
-    public boolean setConnectionExist(String database, String user, String password){
+    public boolean setConnectionIfDbExist(String database, String user, String password){
         try {
-            connection = DriverManager.getConnection("jdbc:h2:~/data/" + database + ";CIPHER=AES;IFEXISTS=TRUE", user, password);
+            connection = DriverManager.getConnection("jdbc:h2:./data/" + database + ";CIPHER=AES;IFEXISTS=TRUE", user, password);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -41,9 +41,9 @@ public class Database {
         }
     }
 
-    public boolean setConnectionNew(String database, String user, String password){
+    public boolean setConnection(String database, String user, String password){
         try {
-            connection = DriverManager.getConnection("jdbc:h2:~/data/" + database + ";CIPHER=AES", user, password);
+            connection = DriverManager.getConnection("jdbc:h2:./data/" + database + ";CIPHER=AES", user, password);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -77,6 +77,54 @@ public class Database {
             return false;
             //return printSqlException(e, "Failed to close connection.");
         }
+    }
+
+    public boolean setStatement(){
+        try {
+            statement = connection.createStatement();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean closeStatement(){
+        try {
+            statement.close();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean runExecuteUpdateQuery(String sql){
+        try {
+            statement.executeUpdate(sql);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean runExecute(String sql){
+        try {
+            statement.execute(sql);
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean connectionIsNull(){
+        return connection == null;
+    }
+
+    public boolean statementIsNull(){
+        return statement == null;
     }
 
 }

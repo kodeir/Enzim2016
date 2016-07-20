@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Created by Rowan on 03.07.2016.
+ * Created by Sergei Riabinin on 03.07.2016.
  */
 public class DiagnosesTreeListener implements ActionListener {
 

@@ -3,7 +3,7 @@ package com.kodeir.enzim2016;
 import org.junit.Test;
 
 /**
- * Created by rowan on 5/31/16.
+ * Created by Sergei Riabinin on 5/31/16.
  */
 public class EnzimTest {
 

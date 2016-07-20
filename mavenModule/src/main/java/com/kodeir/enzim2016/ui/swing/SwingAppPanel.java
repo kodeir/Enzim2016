@@ -1,14 +1,15 @@
 package com.kodeir.enzim2016.ui.swing;
 
-import com.kodeir.enzim2016.ui.swing.listeners.SwingAppPanelListener;
-
 import javax.swing.*;
 import java.awt.*;
+import java.util.ResourceBundle;
 
 /**
- * Created by Rowan on 03.07.2016.
+ * Created by Sergei Riabinin on 03.07.2016.
  */
 public class SwingAppPanel extends JPanel {
+
+    private ResourceBundle rb = ResourceBundle.getBundle("rb");
 
     private JLabel label;
     private JButton newPatientBtn;
@@ -44,7 +45,7 @@ public class SwingAppPanel extends JPanel {
         newPatientBtn = new JButton("new P icon");
         this.add(newPatientBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 0));
 
-        label = new JLabel("создать нового пациента");
+        label = new JLabel(rb.getString("interface.create.new_patient"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 0));
     }
 
@@ -52,7 +53,7 @@ public class SwingAppPanel extends JPanel {
         openDatabaseBtn = new JButton("new DB icon");
         this.add(openDatabaseBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 1));
 
-        label = new JLabel("открыть базу данных");
+        label = new JLabel(rb.getString("interface.open.database"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 1));
     }
 
@@ -60,7 +61,7 @@ public class SwingAppPanel extends JPanel {
         showTreeButton = new JButton("tree icon");
         this.add(showTreeButton, SwingCommons.setConstraintsHorizontal(0.5, 0, 2));
 
-        label = new JLabel("посмотреть дерево диагнозов");
+        label = new JLabel(rb.getString("interface.open.tree"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 2));
     }
 
@@ -68,7 +69,7 @@ public class SwingAppPanel extends JPanel {
         exitBtn = new JButton("exit icon");
         this.add(exitBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 3));
 
-        label = new JLabel("выход");
+        label = new JLabel(rb.getString("interface.exit"));
         this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 3));
     }
 }
