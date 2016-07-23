@@ -32,28 +32,52 @@ package com.kodeir.enzim2016.commons;
 
 import com.kodeir.enzim2016.patients.Patient;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by Sergei Riabinin on 23.07.2016.
  */
 public class InitialDatabase {
 
-    private Database database;
-    private List<Patient> patients;
+    private static ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
-    private String testDbName = "enzim2016db";
-    private String testDbUser = "defaultUser";
-    private String testDbPwd = "default password";
+    private static Database database;
+    private static List<Patient> patients;
 
-    public InitialDatabase(){
-        createPatients();
-        createDatabase();
+    private static String initialDbName = "enzim2016";
+    private static String initialDbUser = "defaultUser";
+    private static String initialDbPwd = "default password";
+    private static String dbParams = ";DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;CIPHER=AES";
+
+    public static String createInitialDatabase(){
+        if (checkIfDbFileExists()){
+            return rb.getString("interface.create.initial_database.exists");
+        } else {
+            deleteDatabase();
+            createPatients();
+            createDatabase();
+            return rb.getString("interface.create.initial_database.created");
+        }
     }
 
-    private void createPatients(){
+    private static boolean checkIfDbFileExists(){
+        return (new File("./data/"+initialDbName+".mv.db").exists());
+    }
+
+    private static void deleteDatabase(){
+        database = new Database();
+
+        database.setConnection(initialDbName + dbParams, initialDbUser, initialDbPwd);
+        database.setStatement();
+        database.runExecute("SHUTDOWN");
+        org.h2.tools.DeleteDbFiles.execute("./data",initialDbName,true);
+    }
+
+    private static void createPatients(){
         patients = new ArrayList<Patient>();
         patients.add(new Patient("name","agamanov",100, 1, 200, 200, 100, 1, 700, 13));
         patients.add(new Patient("name","barabanov",130, 20, 120, 200, 1200, 300, 800, 2));
@@ -85,12 +109,12 @@ public class InitialDatabase {
         patients.add(new Patient("name","umashev",60, 20, 120, 1000, 100, 200, 1400, 3));
         patients.add(new Patient("name","hacker",50, 60, 100, 300, 80, 12, 1500, 70));
     }
-    private void createDatabase(){
+    private static void createDatabase(){
         database = new Database();
-        database.setConnection(testDbName, testDbUser, testDbPwd);
+        database.setConnection(initialDbName, initialDbUser, initialDbPwd);
         database.setStatement();
 
-        database.runExecuteUpdateQuery("CREATE TABLE PATIENTS (" +
+        database.runExecuteUpdateQuery("CREATE TABLE IF NOT EXISTS PATIENTS (" +
                 "patient_id IDENTITY" +
                 ", name VARCHAR(255)" +
                 ", surname VARCHAR(255)" +
@@ -98,7 +122,7 @@ public class InitialDatabase {
                 ")"
         );
 
-        database.runExecuteUpdateQuery("CREATE TABLE COEFFICIENTS (" +
+        database.runExecuteUpdateQuery("CREATE TABLE IF NOT EXISTS COEFFICIENTS (" +
                 "coefficient_id BIGINT auto_increment primary key" +
                 ", date_inserted DATE" +
                 ", patient_id BIGINT" +

@@ -30,37 +30,29 @@
 
 package com.kodeir.enzim2016.commons;
 
-import org.junit.BeforeClass;
 import org.junit.Test;
 
-import javax.xml.crypto.Data;
+import java.util.ResourceBundle;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 /**
  * Created by Sergei Riabinin on 23.07.2016.
  */
 public class InitialDatabaseTest {
 
-    private InitialDatabase initialDatabase;
-    private static Database database = new Database();
+    private static ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
-    private static String testDbName = "enzim2016db";
-    private static String testDbUser = "defaultUser";
-    private static String testDbPwd = "default password";
-    private static String dbParams = ";DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1";
-
-    @BeforeClass
-    public static void deleteDB(){
-        database.setConnection(testDbName + dbParams, testDbUser, testDbPwd);
-        database.setStatement();
-        database.runExecute("SHUTDOWN");
-        org.h2.tools.DeleteDbFiles.execute("./data",testDbName,true);
+    /*
+    @Test
+    public void createInitialDatabaseTest(){
+        assertEquals(rb.getString("interface.create.initial_database.created"), InitialDatabase.createInitialDatabase());
     }
+    */
 
     @Test
-    public void createTest(){
-        initialDatabase = new InitialDatabase();
+    public void createInitialDatabaseTest(){
+        assertEquals(rb.getString("interface.create.initial_database.exists"), InitialDatabase.createInitialDatabase());
     }
 
 }
