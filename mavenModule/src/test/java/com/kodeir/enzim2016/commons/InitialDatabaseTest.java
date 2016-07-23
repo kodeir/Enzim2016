@@ -43,6 +43,12 @@ public class InitialDatabaseTest {
 
     private static ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
+    private String initialDbName = "enzim2016";
+    private String initialDbUser = "defaultUser";
+    private String initialDbPwd = "default password";
+    private String dbParams = ";CIPHER=AES";
+    private Database database;
+
     /*
     @Test
     public void createInitialDatabaseTest(){
@@ -53,6 +59,15 @@ public class InitialDatabaseTest {
     @Test
     public void createInitialDatabaseTest(){
         assertEquals(rb.getString("interface.create.initial_database.exists"), InitialDatabase.createInitialDatabase());
+    }
+
+    @Test
+    public void select(){
+        database = new Database();
+        database.setConnection(initialDbName + dbParams, initialDbUser, initialDbPwd);
+        database.setStatement();
+        database.runExecute("SELECT *" +
+                "FROM ")
     }
 
 }

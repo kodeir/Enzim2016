@@ -51,7 +51,7 @@ public class InitialDatabase {
     private static String initialDbName = "enzim2016";
     private static String initialDbUser = "defaultUser";
     private static String initialDbPwd = "default password";
-    private static String dbParams = ";DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1;CIPHER=AES";
+    private static String dbParams = ";CIPHER=AES";
 
     public static String createInitialDatabase(){
         if (checkIfDbFileExists()){
@@ -70,7 +70,6 @@ public class InitialDatabase {
 
     private static void deleteDatabase(){
         database = new Database();
-
         database.setConnection(initialDbName + dbParams, initialDbUser, initialDbPwd);
         database.setStatement();
         database.runExecute("SHUTDOWN");

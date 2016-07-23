@@ -1,10 +1,7 @@
 package com.kodeir.enzim2016.commons;
 
 import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 
@@ -116,6 +113,16 @@ public class Database {
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
+        }
+    }
+
+    //TODO get rid of null
+    public ResultSet runSelectQuery(String sql){
+        try {
+            return statement.executeQuery(sql);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
