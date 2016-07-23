@@ -45,14 +45,13 @@ public class DatabaseTest {
     private static String testDbPwd = "password password";
     private static String dbParams = ";DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1";
     private static String createTablePatients = "CREATE TABLE PATIENTS (" +
-            "patientId INTEGER not NULL" +
+            "patientId INTEGER AUTO_INCREMENT PRIMARY KEY" +
             ", name VARCHAR(255)" +
             ", surname VARCHAR(255)" +
             ", birthDate DATE" +
             ")";
-    private static String insertIntoPatients = "INSERT INTO PATIENTS VALUES (" +
-            "0" +
-            ", 'Name'" +
+    private static String insertIntoPatients = "INSERT INTO PATIENTS(NAME, SURNAME, BIRTHDATE) VALUES(" +
+            "'Name'" +
             ", 'Surname'" +
             ", '2001-01-01'" +
             ")";

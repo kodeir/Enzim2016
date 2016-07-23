@@ -1,5 +1,6 @@
 package com.kodeir.enzim2016.patients;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +11,8 @@ public class Patient {
 
     private String name;
     private String surname;
+
+    //private LocalDate birthDate;
 
     private float AsT;
     private float AlT;
