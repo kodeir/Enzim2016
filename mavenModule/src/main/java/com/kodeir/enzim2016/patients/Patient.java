@@ -138,4 +138,13 @@ public class Patient {
     public void setDisease(String disease){
         this.disease = disease;
     }
+
+    public String toString(){
+        String newLine = System.getProperty("line.separator");
+        return "Patient: " + name + " " + surname + ", "
+                + newLine
+                + "Coefficients: " + AsT + ", " + AlT + ", " + KFK + ", " + LDG + ", " + ShF + ", " + GGTP + ", " + GlDG + ", " + HE
+                + newLine
+                + newLine;
+    }
 }

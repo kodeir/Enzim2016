@@ -30,9 +30,12 @@
 
 package com.kodeir.enzim2016.commons;
 
+import com.kodeir.enzim2016.patients.Patient;
 import org.junit.Test;
 
-import java.util.ResourceBundle;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
@@ -48,6 +51,8 @@ public class InitialDatabaseTest {
     private String initialDbPwd = "default password";
     private String dbParams = ";CIPHER=AES";
     private Database database;
+
+    private List<Patient> patients;
 
     /*
     @Test
@@ -66,8 +71,20 @@ public class InitialDatabaseTest {
         database = new Database();
         database.setConnection(initialDbName + dbParams, initialDbUser, initialDbPwd);
         database.setStatement();
-        database.runExecute("SELECT *" +
-                "FROM ")
+        ResultSet rs = database.runSelectQuery("SELECT * " +
+                "FROM PATIENTS P " +
+                "JOIN COEFFICIENTS C " +
+                "ON P.patient_id = C.patient_id");
+        patients = new ArrayList<>();
+        try {
+            while (rs.next()){
+                patients.add(new Patient(rs.getString("NAME"),rs.getString("SURNAME"),
+                        rs.getFloat("AST"),rs.getFloat("ALT"),rs.getFloat("KFK"),rs.getFloat("LDG"),
+                        rs.getFloat("SHF"),rs.getFloat("GGTP"),rs.getFloat("GLDG"),rs.getFloat("HE")));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        System.out.println(Arrays.toString(patients.toArray()));
     }
-
 }
