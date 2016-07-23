@@ -1,5 +1,7 @@
 package com.kodeir.enzim2016.ui.swing;
 
+import com.kodeir.enzim2016.commons.UTF8Control;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ResourceBundle;
@@ -9,7 +11,7 @@ import java.util.ResourceBundle;
  */
 public class SwingAppPanel extends JPanel {
 
-    private ResourceBundle rb = ResourceBundle.getBundle("rb");
+    private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private JLabel label;
     private JButton newPatientBtn;

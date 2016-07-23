@@ -30,7 +30,10 @@
 
 package com.kodeir.enzim2016.commons;
 
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import javax.xml.crypto.Data;
 
 import static org.junit.Assert.*;
 
@@ -39,7 +42,21 @@ import static org.junit.Assert.*;
  */
 public class InitialDatabaseTest {
 
-    InitialDatabase initialDatabase;
+    private InitialDatabase initialDatabase;
+    private static Database database = new Database();
+
+    private static String testDbName = "enzim2016db";
+    private static String testDbUser = "defaultUser";
+    private static String testDbPwd = "default password";
+    private static String dbParams = ";DB_CLOSE_ON_EXIT=FALSE;DB_CLOSE_DELAY=-1";
+
+    @BeforeClass
+    public static void deleteDB(){
+        database.setConnection(testDbName + dbParams, testDbUser, testDbPwd);
+        database.setStatement();
+        database.runExecute("SHUTDOWN");
+        org.h2.tools.DeleteDbFiles.execute("./data",testDbName,true);
+    }
 
     @Test
     public void createTest(){

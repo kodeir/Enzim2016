@@ -127,4 +127,14 @@ public class Database {
         return statement == null;
     }
 
+    public boolean commit(){
+        try {
+            connection.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 }

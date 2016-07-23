@@ -30,6 +30,7 @@
 
 package com.kodeir.enzim2016.ui.swing.tree;
 
+import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.SwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.DiagnosesTreeListener;
 
@@ -46,7 +47,7 @@ import java.util.ResourceBundle;
 //TODO get rid of spaghetti and get an xml
 public class DiagnosesTree extends JPanel {
 
-    private ResourceBundle rb = ResourceBundle.getBundle("rb");
+    private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private JLabel label;
 

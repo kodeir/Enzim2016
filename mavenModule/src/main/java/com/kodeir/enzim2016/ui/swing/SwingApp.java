@@ -1,5 +1,6 @@
 package com.kodeir.enzim2016.ui.swing;
 
+import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.listeners.SwingAppPanelListener;
 
 import javax.swing.*;
@@ -13,7 +14,7 @@ public class SwingApp {
 
     private JFrame frame;
     private SwingAppPanel swingAppPanel;
-    private ResourceBundle rb = ResourceBundle.getBundle("rb");
+    private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     public SwingApp(){
         initialize();

@@ -32,11 +32,9 @@ package com.kodeir.enzim2016.commons;
 
 import com.kodeir.enzim2016.patients.Patient;
 
-import java.sql.ResultSet;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.ResourceBundle;
 
 /**
  * Created by Sergei Riabinin on 23.07.2016.
@@ -49,24 +47,6 @@ public class InitialDatabase {
     private String testDbName = "enzim2016db";
     private String testDbUser = "defaultUser";
     private String testDbPwd = "default password";
-    private String createTablePatients = "CREATE TABLE PATIENTS (" +
-            "patientId IDENTITY" +
-            ", name VARCHAR(255)" +
-            ", surname VARCHAR(255)" +
-            ", birthDate DATE" +
-            ")";
-    private String createTableCoefficients = "CREATE TABLE COEFFICIENTS (" +
-            "date_inserted DATE PRIMARY KEY" +
-            ", FOREIGN KEY patientId REFERENCES PATIENTS(patientId)" +
-            ", AST FLOAT" +
-            ", ALT FLOAT" +
-            ", KFK FLOAT" +
-            ", LDG FLOAT" +
-            ", SHF FLOAT" +
-            ", GGTP FLOAT" +
-            ", GLDG FLOAT" +
-            ", HE FLOAT" +
-            ")";
 
     public InitialDatabase(){
         createPatients();
@@ -109,8 +89,31 @@ public class InitialDatabase {
         database = new Database();
         database.setConnection(testDbName, testDbUser, testDbPwd);
         database.setStatement();
-        database.runExecuteUpdateQuery(createTablePatients);
-        database.runExecuteUpdateQuery(createTableCoefficients);
+
+        database.runExecuteUpdateQuery("CREATE TABLE PATIENTS (" +
+                "patient_id IDENTITY" +
+                ", name VARCHAR(255)" +
+                ", surname VARCHAR(255)" +
+                ", birthDate DATE" +
+                ")"
+        );
+
+        database.runExecuteUpdateQuery("CREATE TABLE COEFFICIENTS (" +
+                "coefficient_id BIGINT auto_increment primary key" +
+                ", date_inserted DATE" +
+                ", patient_id BIGINT" +
+                ", foreign key (patient_id) references public.PATIENTS(patient_id)" +
+                ", AST FLOAT" +
+                ", ALT FLOAT" +
+                ", KFK FLOAT" +
+                ", LDG FLOAT" +
+                ", SHF FLOAT" +
+                ", GGTP FLOAT" +
+                ", GLDG FLOAT" +
+                ", HE FLOAT" +
+                ")"
+        );
+
         for (Patient p: patients) {
             String insertIntoPatients = "INSERT INTO PATIENTS(NAME, SURNAME, BIRTHDATE) VALUES(" +
                     "'" + p.getName() + "'" +
@@ -119,7 +122,7 @@ public class InitialDatabase {
                     ")";
             database.runExecuteUpdateQuery(insertIntoPatients);
 
-            String insertIntoCoefficients = "INSERT INTO COEFFICIENTS(date_inserted, patientId, AST, ALT, KFK, LDG, SHF, GGTP, GLDG, HE) VALUES(" +
+            String insertIntoCoefficients = "INSERT INTO COEFFICIENTS(date_inserted, patient_id, AST, ALT, KFK, LDG, SHF, GGTP, GLDG, HE) VALUES(" +
                     "'" + LocalDate.now() + "'" +
                     ", (SELECT IDENTITY())" +
                     ", " + p.getAsT() +
@@ -132,7 +135,7 @@ public class InitialDatabase {
                     ", " + p.getHE() +
                     ")";
             database.runExecuteUpdateQuery(insertIntoCoefficients);
-        }
 
+        }
     }
 }
