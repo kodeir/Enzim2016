@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,33 +46,33 @@ public class SwingAppPanel extends JPanel {
 
     public void addNewPatient(){
         newPatientBtn = new JButton("new P icon");
-        this.add(newPatientBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 0));
+        this.add(newPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 0));
 
         label = new JLabel(rb.getString("interface.create.new_patient"));
-        this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 0));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 0));
     }
 
     public void addOpenDatabase(){
         openDatabaseBtn = new JButton("new DB icon");
-        this.add(openDatabaseBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 1));
+        this.add(openDatabaseBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
 
         label = new JLabel(rb.getString("interface.open.database"));
-        this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 1));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 1));
     }
 
     public void addShowTree(){
         showTreeButton = new JButton("tree icon");
-        this.add(showTreeButton, SwingCommons.setConstraintsHorizontal(0.5, 0, 2));
+        this.add(showTreeButton, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
 
         label = new JLabel(rb.getString("interface.open.tree"));
-        this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 2));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 2));
     }
 
     public void addExit(){
         exitBtn = new JButton("exit icon");
-        this.add(exitBtn, SwingCommons.setConstraintsHorizontal(0.5, 0, 3));
+        this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
 
         label = new JLabel(rb.getString("interface.exit"));
-        this.add(label, SwingCommons.setConstraintsHorizontal(0.5, 1, 3));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 3));
     }
 }
