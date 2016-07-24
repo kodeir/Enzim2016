@@ -32,6 +32,7 @@ package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
+import com.kodeir.enzim2016.ui.swing.listeners.EnzimPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -72,6 +73,7 @@ public class EnzimPanel extends JPanel {
         addOpenDatabase();
         addShowTree();
         addExit();
+        addListeners();
     }
 
     public void addNewPatient(){
@@ -104,5 +106,12 @@ public class EnzimPanel extends JPanel {
 
         label = new JLabel(rb.getString("interface.exit"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5, 1, 3));
+    }
+
+    private void addListeners(){
+        getNewPatientBtn().addActionListener(new EnzimPanelListener(this));
+        getOpenDatabaseBtn().addActionListener(new EnzimPanelListener(this));
+        getShowTreeButton().addActionListener(new EnzimPanelListener(this));
+        getExitBtn().addActionListener(new EnzimPanelListener(this));
     }
 }

@@ -13,14 +13,12 @@ import java.awt.event.ActionListener;
 /**
  * Created by Sergei Riabinin on 03.07.2016.
  */
-public class SwingAppPanelListener implements ActionListener{
+public class EnzimPanelListener implements ActionListener{
 
-    private SwingApp swingApp;
     private EnzimPanel enzimPanel;
 
-    public SwingAppPanelListener(SwingApp swingApp, EnzimPanel enzimPanel){
+    public EnzimPanelListener(EnzimPanel enzimPanel){
         this.enzimPanel = enzimPanel;
-        this.swingApp = swingApp;
     }
 
     @Override

@@ -32,7 +32,7 @@ package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
-import com.kodeir.enzim2016.ui.swing.listeners.DiagnosesTreeListener;
+import com.kodeir.enzim2016.ui.swing.listeners.TreeListener;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -581,7 +581,7 @@ public class TreePanel extends JPanel {
     }
 
     private void addListeners(){
-        doDiagnoseBtn.addActionListener(new DiagnosesTreeListener(this));
+        doDiagnoseBtn.addActionListener(new TreeListener(this));
     }
 
     private boolean parseFloatFromString(String s){

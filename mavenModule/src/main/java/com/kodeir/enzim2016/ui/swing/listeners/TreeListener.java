@@ -12,11 +12,11 @@ import java.awt.event.ActionListener;
 /**
  * Created by Sergei Riabinin on 03.07.2016.
  */
-public class DiagnosesTreeListener implements ActionListener {
+public class TreeListener implements ActionListener {
 
     private TreePanel treePanel;
 
-    public DiagnosesTreeListener (TreePanel treePanel){
+    public TreeListener(TreePanel treePanel){
         this.treePanel = treePanel;
     }
 

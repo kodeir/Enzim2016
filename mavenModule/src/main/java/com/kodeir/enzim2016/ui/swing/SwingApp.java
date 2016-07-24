@@ -2,7 +2,6 @@ package com.kodeir.enzim2016.ui.swing;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
-import com.kodeir.enzim2016.ui.swing.listeners.SwingAppPanelListener;
 import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 
 import javax.swing.*;
@@ -14,12 +13,13 @@ import java.util.ResourceBundle;
  */
 public class SwingApp {
 
-    private JFrame frame;
-    private EnzimPanel enzimPanel;
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
+    private JFrame frame;
+
     public SwingApp(){
-        initialize();
+        frame = new EnzimFrame(rb.getString("interface.name"), new EnzimPanel());
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 
     public static void startSwing() {
@@ -30,24 +30,6 @@ public class SwingApp {
                 e.printStackTrace();
             }
         });
-    }
-
-    private void initialize(){
-        enzimPanel = new EnzimPanel();
-        frame = new EnzimFrame(rb.getString("interface.name"), enzimPanel);
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        addListeners();
-    }
-
-    public void clearFrame(){
-        SwingUtilities.invokeLater(() -> frame.getContentPane().removeAll());
-    }
-
-    private void addListeners(){
-        enzimPanel.getNewPatientBtn().addActionListener(new SwingAppPanelListener(this, enzimPanel));
-        enzimPanel.getOpenDatabaseBtn().addActionListener(new SwingAppPanelListener(this, enzimPanel));
-        enzimPanel.getShowTreeButton().addActionListener(new SwingAppPanelListener(this, enzimPanel));
-        enzimPanel.getExitBtn().addActionListener(new SwingAppPanelListener(this, enzimPanel));
     }
 
 }
