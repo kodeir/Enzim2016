@@ -1,10 +1,13 @@
 package com.kodeir.enzim2016.logic;
 
-import com.kodeir.enzim2016.patients.Patient;
+import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.pi.Coefficients;
+import com.kodeir.enzim2016.pi.Patient;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 import static org.junit.Assert.*;
@@ -14,12 +17,12 @@ import static org.junit.Assert.*;
  */
 @RunWith(Parameterized.class)
 public class EnzimLogicTest {
-    Patient patient;
+
+    private static ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
+
+    Coefficients coefficients;
     String injuredOrgan;
     String disease;
-    String name = "Test_Name";
-    String surname = "Test_Surname";
-    static ResourceBundle rb = ResourceBundle.getBundle("rb");
 
     @Parameterized.Parameters
     public static Object[][] patientData() {
@@ -118,7 +121,7 @@ public class EnzimLogicTest {
 
     public EnzimLogicTest(float asT, float alT, float KFK, float LDG, float shF, float GGTP, float HE, float glDG,
                           String injuredOrgan, String disease){
-        patient = new Patient(name, surname, asT, alT, KFK, LDG, shF, GGTP, HE, glDG);
+        coefficients = new Coefficients(0, 0, asT, alT, KFK, LDG, shF, GGTP, HE, glDG, LocalDate.now());
         this.injuredOrgan = injuredOrgan;
         this.disease = disease;
     }
@@ -126,8 +129,7 @@ public class EnzimLogicTest {
     @Test
     public void testDiagnose() throws Exception {
         Diagnosis diagnosis = new EnzimLogic();
-        diagnosis.diagnose(patient);
-        assertEquals(injuredOrgan, patient.getInjuredOrgan());
-        assertEquals(disease, patient.getDisease());
+        assertEquals(injuredOrgan, diagnosis.defineInjuredOrgan(coefficients));
+        assertEquals(disease, diagnosis.defineDisease(coefficients));
     }
 }

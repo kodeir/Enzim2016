@@ -30,7 +30,8 @@
 
 package com.kodeir.enzim2016.commons;
 
-import com.kodeir.enzim2016.patients.Patient;
+import com.kodeir.enzim2016.pi.Coefficients;
+import com.kodeir.enzim2016.pi.Patient;
 import org.junit.Test;
 
 import java.sql.ResultSet;
@@ -54,17 +55,17 @@ public class InitialDatabaseTest {
 
     private List<Patient> patients;
 
-    /*
+
     @Test
     public void createInitialDatabaseTest(){
         assertEquals(rb.getString("interface.create.initial_database.created"), InitialDatabase.createInitialDatabase());
     }
-    */
 
-    @Test
-    public void createInitialDatabaseTest(){
-        assertEquals(rb.getString("interface.create.initial_database.exists"), InitialDatabase.createInitialDatabase());
-    }
+
+    //@Test
+    //public void createInitialDatabaseTest(){
+    //    assertEquals(rb.getString("interface.create.initial_database.exists"), InitialDatabase.createInitialDatabase());
+    //}
 
     @Test
     public void select(){
@@ -76,15 +77,24 @@ public class InitialDatabaseTest {
                 "JOIN COEFFICIENTS C " +
                 "ON P.patient_id = C.patient_id");
         patients = new ArrayList<>();
+
         try {
             while (rs.next()){
-                patients.add(new Patient(rs.getString("NAME"),rs.getString("SURNAME"),
+                Coefficients coefficients = new Coefficients(rs.getLong("COEFFICIENT_ID"),rs.getLong("PATIENT_ID"),
                         rs.getFloat("AST"),rs.getFloat("ALT"),rs.getFloat("KFK"),rs.getFloat("LDG"),
-                        rs.getFloat("SHF"),rs.getFloat("GGTP"),rs.getFloat("GLDG"),rs.getFloat("HE")));
+                        rs.getFloat("SHF"),rs.getFloat("GGTP"),rs.getFloat("GLDG"),rs.getFloat("HE"),
+                        rs.getDate("CHECKUP_DATE").toLocalDate());
+                List<Coefficients> coefficientses = new ArrayList<>();
+                coefficientses.add(coefficients);
+                patients.add(new Patient(rs.getLong("PATIENT_ID"),
+                        rs.getString("NAME"),rs.getString("SURNAME"),rs.getString("PATRONYMIC"),
+                        rs.getDate("BIRTHDATE").toLocalDate(),
+                        coefficientses));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+
         System.out.println(Arrays.toString(patients.toArray()));
     }
 }

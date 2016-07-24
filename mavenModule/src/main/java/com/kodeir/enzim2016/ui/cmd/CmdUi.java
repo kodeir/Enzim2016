@@ -2,7 +2,7 @@ package com.kodeir.enzim2016.ui.cmd;
 
 import com.kodeir.enzim2016.logic.Diagnosis;
 import com.kodeir.enzim2016.logic.EnzimLogic;
-import com.kodeir.enzim2016.patients.Patient;
+import com.kodeir.enzim2016.pi.Patient;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -26,11 +26,12 @@ public class CmdUi {
     private void runCmd(){
         System.out.println("Enzim 2016");
         System.out.println("--");
-        createPatient();
-        fillCoefficients();
-        doDiagnostic();
+        //createPatient();
+        //fillCoefficients();
+        //doDiagnostic();
     }
 
+    /*
     private void createPatient(){
         System.out.println("Enter patient name");
         String name = readStringFromConsole();
@@ -90,6 +91,6 @@ public class CmdUi {
         }
         return coefficient;
     }
-
+*/
 
 }

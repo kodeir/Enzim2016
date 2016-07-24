@@ -31,7 +31,8 @@
 package com.kodeir.enzim2016.logic;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
-import com.kodeir.enzim2016.patients.Patient;
+import com.kodeir.enzim2016.pi.Coefficients;
+import com.kodeir.enzim2016.pi.Patient;
 
 import java.util.ResourceBundle;
 
@@ -46,7 +47,6 @@ import java.util.ResourceBundle;
  */
 public class EnzimLogic implements Diagnosis {
 
-    private Patient patient;
     private static ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private float AsT;
@@ -58,25 +58,19 @@ public class EnzimLogic implements Diagnosis {
     private float GlDG;
     private float HE;
 
-    public void diagnose(Patient patient) {
-        setPatient(patient);
-        patient.setInjuredOrgan(defineInjuredOrgan());
-        patient.setDisease(defineDisease());
+    private void setCoefficients(Coefficients coefficients){
+        this.AsT = coefficients.getAst();
+        this.AlT = coefficients.getAlt();
+        this.KFK = coefficients.getKfk();
+        this.LDG = coefficients.getLdg();
+        this.ShF = coefficients.getShf();
+        this.GGTP = coefficients.getGgtp();
+        this.HE = coefficients.getHe();
+        this.GlDG = coefficients.getGldg();
     }
 
-    private void setPatient(Patient patient){
-        this.patient = patient;
-        this.AsT = patient.getAsT();
-        this.AlT = patient.getAlT();
-        this.KFK = patient.getKFK();
-        this.LDG = patient.getLDG();
-        this.ShF = patient.getShF();
-        this.GGTP = patient.getGGTP();
-        this.HE = patient.getHE();
-        this.GlDG = patient.getGlDG();
-    }
-
-    private String defineInjuredOrgan(){
+    public String defineInjuredOrgan(Coefficients coefficients){
+        setCoefficients(coefficients);
         if (isBetween(AsT,41,151)) {
             if (isBetween(AlT,41,251)){
                 return rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT");
@@ -116,7 +110,8 @@ public class EnzimLogic implements Diagnosis {
         }
     }
 
-    private String defineDisease(){
+    public String defineDisease(Coefficients coefficients){
+        setCoefficients(coefficients);
         if (isBetween(AsT, 41, 151)) {
             if (isBetween(AsT/AlT, 0.1f, 0.6f)) {
                 return deRitisRatio_01_05();
