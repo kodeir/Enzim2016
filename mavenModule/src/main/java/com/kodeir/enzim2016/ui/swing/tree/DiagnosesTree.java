@@ -230,7 +230,7 @@ public class DiagnosesTree extends JPanel {
         AsT_Node.add(deRitis1_Node);
 
         DefaultMutableTreeNode LDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.591_2750"));
-        DefaultMutableTreeNode LDG_Node_1 = new DefaultMutableTreeNode("coefficients.ldg.150_590");
+        DefaultMutableTreeNode LDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.150_590"));
 
         deRitis01_05_Node.add(LDG_Node_0);
         deRitis01_05_Node.add(LDG_Node_1);

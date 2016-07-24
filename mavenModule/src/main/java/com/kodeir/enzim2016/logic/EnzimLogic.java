@@ -30,6 +30,7 @@
 
 package com.kodeir.enzim2016.logic;
 
+import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.patients.Patient;
 
 import java.util.ResourceBundle;
@@ -46,7 +47,7 @@ import java.util.ResourceBundle;
 public class EnzimLogic implements Diagnosis {
 
     private Patient patient;
-    private ResourceBundle rb = ResourceBundle.getBundle("rb");
+    private static ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private float AsT;
     private float AlT;
