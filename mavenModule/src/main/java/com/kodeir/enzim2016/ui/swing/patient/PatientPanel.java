@@ -31,7 +31,7 @@
 package com.kodeir.enzim2016.ui.swing.patient;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
-import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimDateField;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimTextField;
@@ -92,91 +92,91 @@ public class PatientPanel extends JPanel {
 
     private void addPatientComponents(){
         label = new EnzimLabel("New patient");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,0,2));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,0,2));
 
         //Name
         label = new EnzimLabel("Name");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,1,1));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,1,1));
         patientNameField = new EnzimTextField(300,25);
-        this.add(patientNameField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,1,3));
+        this.add(patientNameField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,1,3));
 
         //Surname
         label = new EnzimLabel("Surname");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,2,1));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,2,1));
         patientSurnameField = new EnzimTextField(300,25);
-        this.add(patientSurnameField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,2,3));
+        this.add(patientSurnameField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,2,3));
 
         //Patronymic
         label = new EnzimLabel("Patronymic");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,3,1));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,3,1));
         patientPatronymicField = new EnzimTextField(300,25);
-        this.add(patientPatronymicField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,3,3));
+        this.add(patientPatronymicField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,3,3));
 
         //Birthdate
         label = new EnzimLabel("Birthdate");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,4,1));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,4,1));
         patientBirthdateField = new EnzimDateField();
-        this.add(patientBirthdateField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,4));
+        this.add(patientBirthdateField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,4));
         label = new EnzimLabel("(yyyy-mm-dd)");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,4));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,4));
     }
 
     private void addCoefficientsComponents(){
         label = new JLabel("Coefficients");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,5,2));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,5,2));
 
         label = new EnzimLabel(rb.getString("coefficients.ast"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,6,1));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,6,1));
         label = new EnzimLabel(rb.getString("coefficients.alt"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,6));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,6));
         label = new EnzimLabel(rb.getString("coefficients.kfk"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,6));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,6));
         label = new EnzimLabel(rb.getString("coefficients.ldg"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,6));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,6));
 
         astField = new EnzimTextField();
-        this.add(astField, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,7));
+        this.add(astField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,7));
         altField = new EnzimTextField();
-        this.add(altField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,7));
+        this.add(altField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,7));
         kfkField = new EnzimTextField();
-        this.add(kfkField, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,7));
+        this.add(kfkField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,7));
         ldgField = new EnzimTextField();
-        this.add(ldgField, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,7));
+        this.add(ldgField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,7));
 
         label = new EnzimLabel(rb.getString("coefficients.shf"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,8));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,8));
         label = new EnzimLabel(rb.getString("coefficients.ggtp"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,8));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,8));
         label = new EnzimLabel(rb.getString("coefficients.he"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,8));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,8));
         label = new EnzimLabel(rb.getString("coefficients.gldg"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,8));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,8));
 
         shfField = new JTextField();
-        this.add(shfField, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,9));
+        this.add(shfField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,9));
         ggtpField = new JTextField();
-        this.add(ggtpField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,9));
+        this.add(ggtpField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,9));
         heField = new JTextField();
-        this.add(heField, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,9));
+        this.add(heField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,9));
         gldgField = new JTextField();
-        this.add(gldgField, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,9));
+        this.add(gldgField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,9));
 
         label = new EnzimLabel("Checkup Date");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,10,2));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,10,2));
         checkupDateField = new JFormattedTextField(new SimpleDateFormat("yyyy-mm-dd"));
         setupDateTextField(patientBirthdateField);
-        this.add(checkupDateField, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,10,2));
+        this.add(checkupDateField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,10,2));
     }
 
     private void addButtons(){
         addCoefficientsBtn = new JButton("Add new coefficients");
-        this.add(addCoefficientsBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,11,2));
+        this.add(addCoefficientsBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,11,2));
 
         addPatientBtn = new JButton("Add patient to the database");
-        this.add(addPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,12,2));
+        this.add(addPatientBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,12,2));
 
         returnBtn = new JButton("Return with no changes");
-        this.add(returnBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,12,2));
+        this.add(returnBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,12,2));
     }
 
     private void setupDateTextField(JFormattedTextField textField){

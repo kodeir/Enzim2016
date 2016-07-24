@@ -35,7 +35,7 @@ import java.awt.*;
 /**
  * Created by Sergei Riabinin on 03.07.2016.
  */
-public class EnzimSwingCommons {
+public class EnzimGridBagConstraints {
 
     public static GridBagConstraints setConstraintsHorizontal(double weightx, int gridx, int gridy){
         return setConstraintsHorizontal(weightx, gridx, gridy, 1);
