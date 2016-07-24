@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.listeners.SwingAppPanelListener;
 
 import javax.swing.*;
@@ -23,8 +24,7 @@ public class SwingApp {
     public static void startSwing() {
         EventQueue.invokeLater(() -> {
             try {
-                SwingApp swingApp = new SwingApp();
-                swingApp.frame.setVisible(true);
+                new SwingApp();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -32,25 +32,9 @@ public class SwingApp {
     }
 
     private void initialize(){
-        frame = new JFrame(rb.getString("interface.name"));
-        //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        addComponents();
-    }
-
-    private void addComponents(){
-        SwingUtilities.invokeLater(() -> {
-            swingAppPanel = new SwingAppPanel();
-            setupFrame(swingAppPanel, Frame.NORMAL);
-        });
-    }
-
-    public void setupFrame(Component component, int maximized){
-        frame.getContentPane().add(component);
-        frame.pack();
-        frame.setLocationRelativeTo(null);
-        frame.setResizable(true);
-        frame.setExtendedState(maximized);
-        frame.setVisible(true);
+        swingAppPanel = new SwingAppPanel();
+        frame = new EnzimFrame(rb.getString("interface.name"), swingAppPanel);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         addListeners();
     }
 

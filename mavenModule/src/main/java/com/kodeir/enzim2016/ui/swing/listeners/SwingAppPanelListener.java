@@ -2,6 +2,7 @@ package com.kodeir.enzim2016.ui.swing.listeners;
 
 import com.kodeir.enzim2016.ui.swing.SwingApp;
 import com.kodeir.enzim2016.ui.swing.SwingAppPanel;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.patient.PatientPanel;
 import com.kodeir.enzim2016.ui.swing.tree.DiagnosesTree;
 
@@ -38,7 +39,7 @@ public class SwingAppPanelListener implements ActionListener{
 
     private void createNewPatientPanel(){
         PatientPanel patientPanel = new PatientPanel();
-        setupPanel(patientPanel);
+        setupPanel("New patient", patientPanel);
     }
 
     private void createDatabasePanel(){
@@ -46,29 +47,10 @@ public class SwingAppPanelListener implements ActionListener{
     }
 
     private void createTreePanel(){
-        setupPanel(new DiagnosesTree());
+        setupPanel("Diagnoses Tree", new DiagnosesTree());
     }
 
-    private void setupPanel(JPanel panel){
-        //swingApp.clearFrame();
-        //SwingUtilities.invokeLater(() -> swingApp.setupFrame(panel, Frame.NORMAL));
-
-        JFrame frame = new JFrame("");
-        EventQueue.invokeLater(() -> {
-            try {
-                frame.setVisible(true);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        });
-        SwingUtilities.invokeLater(() -> {
-            swingAppPanel = new SwingAppPanel();
-            frame.getContentPane().add(panel);
-            frame.pack();
-            frame.setLocationRelativeTo(null);
-            frame.setResizable(true);
-            frame.setExtendedState(Frame.NORMAL);
-            frame.setVisible(true);
-        });
+    private void setupPanel(String frameName, JPanel panel){
+        new EnzimFrame(frameName, panel);
     }
 }
