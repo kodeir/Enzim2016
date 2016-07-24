@@ -28,7 +28,7 @@
  *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.kodeir.enzim2016.ui.swing.tree;
+package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
@@ -44,8 +44,8 @@ import java.util.ResourceBundle;
  *
  */
 
-//TODO get rid of spaghetti and get an xml
-public class DiagnosesTree extends JPanel {
+//TODO get rid of spaghetti and get an xml?
+public class TreePanel extends JPanel {
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
@@ -89,7 +89,7 @@ public class DiagnosesTree extends JPanel {
         return wrongCoefficients;
     }
 
-    public DiagnosesTree(){
+    public TreePanel(){
         this.setLayout(new GridBagLayout());
         addFields();
         addResultButton();
@@ -582,7 +582,6 @@ public class DiagnosesTree extends JPanel {
 
     private void addListeners(){
         doDiagnoseBtn.addActionListener(new DiagnosesTreeListener(this));
-        //addWin
     }
 
     private boolean parseFloatFromString(String s){

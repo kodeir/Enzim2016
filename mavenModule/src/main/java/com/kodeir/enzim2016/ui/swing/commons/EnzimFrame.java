@@ -30,8 +30,6 @@
 
 package com.kodeir.enzim2016.ui.swing.commons;
 
-import com.kodeir.enzim2016.ui.swing.SwingAppPanel;
-
 import javax.swing.*;
 import java.awt.*;
 

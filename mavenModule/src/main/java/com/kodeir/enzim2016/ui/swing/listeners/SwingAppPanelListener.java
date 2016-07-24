@@ -1,13 +1,12 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
 import com.kodeir.enzim2016.ui.swing.SwingApp;
-import com.kodeir.enzim2016.ui.swing.SwingAppPanel;
+import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
-import com.kodeir.enzim2016.ui.swing.patient.PatientPanel;
-import com.kodeir.enzim2016.ui.swing.tree.DiagnosesTree;
+import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
+import com.kodeir.enzim2016.ui.swing.panels.TreePanel;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -17,22 +16,22 @@ import java.awt.event.ActionListener;
 public class SwingAppPanelListener implements ActionListener{
 
     private SwingApp swingApp;
-    private SwingAppPanel swingAppPanel;
+    private EnzimPanel enzimPanel;
 
-    public SwingAppPanelListener(SwingApp swingApp, SwingAppPanel swingAppPanel){
-        this.swingAppPanel = swingAppPanel;
+    public SwingAppPanelListener(SwingApp swingApp, EnzimPanel enzimPanel){
+        this.enzimPanel = enzimPanel;
         this.swingApp = swingApp;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource().equals(swingAppPanel.getNewPatientBtn())) {
+        if (e.getSource().equals(enzimPanel.getNewPatientBtn())) {
             createNewPatientPanel();
-        } else if (e.getSource().equals(swingAppPanel.getOpenDatabaseBtn())) {
+        } else if (e.getSource().equals(enzimPanel.getOpenDatabaseBtn())) {
             createDatabasePanel();
-        } else if (e.getSource().equals(swingAppPanel.getShowTreeButton())) {
+        } else if (e.getSource().equals(enzimPanel.getShowTreeButton())) {
             createTreePanel();
-        } else if (e.getSource().equals(swingAppPanel.getExitBtn())) {
+        } else if (e.getSource().equals(enzimPanel.getExitBtn())) {
             System.exit(0);
         }
     }
@@ -47,7 +46,7 @@ public class SwingAppPanelListener implements ActionListener{
     }
 
     private void createTreePanel(){
-        setupPanel("Diagnoses Tree", new DiagnosesTree());
+        setupPanel("Diagnoses Tree", new TreePanel());
     }
 
     private void setupPanel(String frameName, JPanel panel){

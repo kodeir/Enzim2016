@@ -28,7 +28,7 @@
  *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.kodeir.enzim2016.ui.swing.patient;
+package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
