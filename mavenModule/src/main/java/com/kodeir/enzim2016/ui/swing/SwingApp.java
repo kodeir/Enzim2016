@@ -33,7 +33,7 @@ public class SwingApp {
 
     private void initialize(){
         frame = new JFrame(rb.getString("interface.name"));
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         addComponents();
     }
 

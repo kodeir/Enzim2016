@@ -582,6 +582,7 @@ public class DiagnosesTree extends JPanel {
 
     private void addListeners(){
         doDiagnoseBtn.addActionListener(new DiagnosesTreeListener(this));
+        //addWin
     }
 
     private boolean parseFloatFromString(String s){
