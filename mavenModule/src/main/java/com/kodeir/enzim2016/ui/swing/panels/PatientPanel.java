@@ -67,16 +67,11 @@ public class PatientPanel extends JPanel {
     private JTextField gldgField;
     private JFormattedTextField checkupDateField;
 
-    private JButton addCoefficientsBtn;
     private JButton addPatientBtn;
     private JButton returnBtn;
 
     public JButton getAddPatientBtn() {
         return addPatientBtn;
-    }
-
-    public JButton getAddCoefficientsBtn() {
-        return addCoefficientsBtn;
     }
 
     public JButton getReturnBtn() {
@@ -152,39 +147,26 @@ public class PatientPanel extends JPanel {
         label = new EnzimLabel(rb.getString("coefficients.gldg"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,8));
 
-        shfField = new JTextField();
+        shfField = new EnzimTextField();
         this.add(shfField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,9));
-        ggtpField = new JTextField();
+        ggtpField = new EnzimTextField();
         this.add(ggtpField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,9));
-        heField = new JTextField();
+        heField = new EnzimTextField();
         this.add(heField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,9));
-        gldgField = new JTextField();
+        gldgField = new EnzimTextField();
         this.add(gldgField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,9));
 
         label = new EnzimLabel("Checkup Date");
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,10,2));
-        checkupDateField = new JFormattedTextField(new SimpleDateFormat("yyyy-mm-dd"));
-        setupDateTextField(patientBirthdateField);
+        checkupDateField = new EnzimDateField();
         this.add(checkupDateField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,10,2));
     }
 
     private void addButtons(){
-        addCoefficientsBtn = new JButton("Add new coefficients");
-        this.add(addCoefficientsBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,11,2));
-
         addPatientBtn = new JButton("Add patient to the database");
-        this.add(addPatientBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,12,2));
+        this.add(addPatientBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,11,2));
 
         returnBtn = new JButton("Return with no changes");
-        this.add(returnBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,12,2));
-    }
-
-    private void setupDateTextField(JFormattedTextField textField){
-        try {
-            MaskFormatter maskFormatter = new MaskFormatter("####-##-##");
-            maskFormatter.install(textField);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+        this.add(returnBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,12,2));
     }
 }

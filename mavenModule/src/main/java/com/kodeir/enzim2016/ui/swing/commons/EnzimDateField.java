@@ -46,7 +46,7 @@ public class EnzimDateField extends JFormattedTextField {
     }
 
     public EnzimDateField(int width, int height){
-        super(new SimpleDateFormat("yyyy-mm-dd"));
+        super(new SimpleDateFormat("YYYY-MM-dd"));
         setupDateTextField();
         setPreferredSize(new Dimension(width,height));
     }
