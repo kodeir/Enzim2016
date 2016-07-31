@@ -39,7 +39,7 @@ import java.awt.*;
 public class EnzimTextField extends JTextField {
 
     public EnzimTextField(){
-        this(100,25);
+        this(150,25);
     }
 
     public EnzimTextField(int width, int height){

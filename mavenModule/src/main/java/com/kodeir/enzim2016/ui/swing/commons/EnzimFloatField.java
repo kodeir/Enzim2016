@@ -40,7 +40,7 @@ import java.text.DecimalFormat;
 public class EnzimFloatField extends JFormattedTextField {
 
     public EnzimFloatField(){
-        this(100, 25);
+        this(150, 25);
     }
 
     public EnzimFloatField(int width, int height){

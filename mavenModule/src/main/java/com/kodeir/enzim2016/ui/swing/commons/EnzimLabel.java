@@ -39,7 +39,7 @@ import java.awt.*;
 public class EnzimLabel extends JLabel {
 
     public EnzimLabel(){
-        this("",100,25);
+        this("",150,25);
     }
 
     public EnzimLabel(String labelText){

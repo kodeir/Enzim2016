@@ -146,13 +146,17 @@ public class TreePanel extends JPanel {
     private void addResults(){
         label = new EnzimLabel(rb.getString("organs.Injured_organ"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,5,2));
+
         injuredOrgan = new JLabel("");
-        this.add(injuredOrgan, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,5,2));
+        injuredOrgan.setFont(new Font(injuredOrgan.getFont().getFontName(), Font.BOLD, injuredOrgan.getFont().getSize()+2));
+        this.add(injuredOrgan, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,6,4));
 
         label = new EnzimLabel(rb.getString("diseases.Disease"));
-        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,6,2));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,7,2));
+
         disease = new JLabel("");
-        this.add(disease, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,6,2));
+        disease.setFont(new Font(disease.getFont().getFontName(), Font.BOLD, disease.getFont().getSize()+2));
+        this.add(disease, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,8,4));
 
     }
 
@@ -163,11 +167,11 @@ public class TreePanel extends JPanel {
 
         JTree tree = new JTree(root);
         tree.setRootVisible(false);
-        tree.setMinimumSize(new Dimension(1000,500));
+        tree.setMinimumSize(new Dimension(600,500));
 
         JScrollPane scrollPane = new JScrollPane(tree);
-        scrollPane.setMinimumSize(new Dimension(1000,500));
-        this.add(scrollPane, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,7,4));
+        scrollPane.setMinimumSize(new Dimension(600,500));
+        this.add(scrollPane, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,9,4));
     }
 
     private DefaultMutableTreeNode createInjuredOrganBranch(){

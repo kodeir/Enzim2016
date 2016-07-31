@@ -42,7 +42,7 @@ import java.text.SimpleDateFormat;
 public class EnzimDateField extends JFormattedTextField {
 
     public EnzimDateField(){
-        this(100, 25);
+        this(150, 25);
     }
 
     public EnzimDateField(int width, int height){
