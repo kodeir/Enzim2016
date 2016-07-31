@@ -34,8 +34,8 @@ public class TreeListener implements ActionListener {
             float[] floats = treePanel.getFloats();
             Coefficients coefficients = new Coefficients(0, 0, floats[0], floats[1], floats[2], floats[3], floats[4], floats[5], floats[6], floats[7], LocalDate.now());
             Diagnosis diagnosis = new EnzimLogic();
-            treePanel.setInjuredOrgan(diagnosis.defineInjuredOrgan(coefficients));
-            treePanel.setDisease(diagnosis.defineDisease(coefficients));
+            treePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.defineInjuredOrgan(coefficients));
+            treePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(coefficients));
         } else {
             JOptionPane.showMessageDialog(null, treePanel.getMissedCoefficients());
             JOptionPane.showMessageDialog(null, treePanel.getWrongCoefficients());

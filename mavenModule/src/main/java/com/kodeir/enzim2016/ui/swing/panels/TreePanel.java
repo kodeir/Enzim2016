@@ -63,8 +63,7 @@ public class TreePanel extends JPanel {
     private JTextField gldgField;
 
     private JButton doDiagnoseBtn;
-    private JLabel injuredOrgan;
-    private JLabel disease;
+    private DiagnosePanel diagnosePanel;
 
     private float floatChecker;
     private float[] floats;
@@ -75,12 +74,8 @@ public class TreePanel extends JPanel {
         return doDiagnoseBtn;
     }
 
-    public void setInjuredOrgan(String s) {
-        injuredOrgan.setText(s);
-    }
-
-    public void setDisease(String s) {
-        disease.setText(s);
+    public DiagnosePanel getDiagnosePanel() {
+        return diagnosePanel;
     }
 
     public String getMissedCoefficients() {
@@ -144,20 +139,8 @@ public class TreePanel extends JPanel {
     }
 
     private void addResults(){
-        label = new EnzimLabel(rb.getString("organs.Injured_organ"));
-        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,5,2));
-
-        injuredOrgan = new JLabel("");
-        injuredOrgan.setFont(new Font(injuredOrgan.getFont().getFontName(), Font.BOLD, injuredOrgan.getFont().getSize()+2));
-        this.add(injuredOrgan, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,6,4));
-
-        label = new EnzimLabel(rb.getString("diseases.Disease"));
-        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,7,2));
-
-        disease = new JLabel("");
-        disease.setFont(new Font(disease.getFont().getFontName(), Font.BOLD, disease.getFont().getSize()+2));
-        this.add(disease, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,8,4));
-
+        diagnosePanel = new DiagnosePanel();
+        this.add(diagnosePanel, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,5,4,4));
     }
 
     private void addTree(){

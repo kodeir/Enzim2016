@@ -28,32 +28,32 @@ public class PatientPIPanel extends JPanel{
         return patientNameField;
     }
 
-    public void setPatientNameField(JTextField patientNameField) {
-        this.patientNameField = patientNameField;
+    public void setPatientNameField(String s) {
+        patientNameField.setText(s);
     }
 
     public JTextField getPatientSurnameField() {
         return patientSurnameField;
     }
 
-    public void setPatientSurnameField(JTextField patientSurnameField) {
-        this.patientSurnameField = patientSurnameField;
+    public void setPatientSurnameField(String s) {
+        patientSurnameField.setText(s);
     }
 
     public JTextField getPatientPatronymicField() {
         return patientPatronymicField;
     }
 
-    public void setPatientPatronymicField(JTextField patientPatronymicField) {
-        this.patientPatronymicField = patientPatronymicField;
+    public void setPatientPatronymicField(String s) {
+        patientPatronymicField.setText(s);
     }
 
     public JFormattedTextField getPatientBirthdateField() {
         return patientBirthdateField;
     }
 
-    public void setPatientBirthdateField(JFormattedTextField patientBirthdateField) {
-        this.patientBirthdateField = patientBirthdateField;
+    public void setPatientBirthdateField(String s) {
+        patientBirthdateField.setText(s);
     }
 
     public PatientPIPanel(){

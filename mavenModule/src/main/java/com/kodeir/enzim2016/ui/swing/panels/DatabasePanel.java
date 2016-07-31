@@ -23,8 +23,9 @@ public class DatabasePanel extends JPanel {
     private JPanel patientPIPanel;
 
     private JTable coefficientsTable;
-    private JLabel injuredOrgan;
-    private JLabel disease;
+
+    private DiagnosePanel diagnosePanel;
+
     private JButton addNewCoefficients;
 
     private JFrame frame;
@@ -59,7 +60,7 @@ public class DatabasePanel extends JPanel {
         this.add(scrollPane, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,0,1,14));
 
         addNewPatient = new JButton(rb.getString("interface.patient.add"));
-        this.add(addNewPatient, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,14,1));
+        this.add(addNewPatient, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,15,1));
     }
 
     private void addPatientPIPanel() {
@@ -77,12 +78,13 @@ public class DatabasePanel extends JPanel {
     }
 
     private void addDiagnosePanel() {
-
+        diagnosePanel = new DiagnosePanel();
+        this.add(diagnosePanel, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,11,4,4));
     }
 
     private void addExitButton() {
         exitBtn = new JButton(rb.getString("interface.database.close"));
-        this.add(exitBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,4,14,1));
+        this.add(exitBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,4,15,1));
     }
 
     private void addListeners(){
