@@ -4,6 +4,7 @@ import com.kodeir.enzim2016.commons.Database;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.SwingApp;
+import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
 import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
@@ -46,7 +47,8 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createDatabasePanel(){
-        JOptionPane.showMessageDialog(null, "under construction");
+        DatabasePanel databasePanel = new DatabasePanel();
+        databasePanel.setFrame(setupPanel(rb.getString("interface.database"), databasePanel));
     }
 
     private void createTreePanel(){
