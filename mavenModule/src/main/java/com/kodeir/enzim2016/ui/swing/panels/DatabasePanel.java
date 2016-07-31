@@ -21,10 +21,6 @@ public class DatabasePanel extends JPanel {
     private JButton addNewPatient;
 
     private JPanel patientPIPanel;
-    private JTextField name;
-    private JTextField surname;
-    private JTextField patronymic;
-    private JFormattedTextField birthdate;
 
     private JTable coefficientsTable;
     private JLabel injuredOrgan;
@@ -59,7 +55,8 @@ public class DatabasePanel extends JPanel {
 
     private void addPatientsPanel() {
         patientsList = new JList<>();
-        this.add(patientsList, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,0,1,14));
+        JScrollPane scrollPane = new JScrollPane(patientsList);
+        this.add(scrollPane, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,0,1,14));
 
         addNewPatient = new JButton(rb.getString("interface.patient.add"));
         this.add(addNewPatient, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,14,1));
@@ -71,7 +68,12 @@ public class DatabasePanel extends JPanel {
     }
 
     private void addCoefficientsPanel() {
+        coefficientsTable = new JTable();
+        JScrollPane scrollPane = new JScrollPane(coefficientsTable);
+        this.add(scrollPane, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,5,4,5));
 
+        addNewCoefficients = new JButton(rb.getString("interface.database.add_coefficients"));
+        this.add(addNewCoefficients, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,10,4));
     }
 
     private void addDiagnosePanel() {

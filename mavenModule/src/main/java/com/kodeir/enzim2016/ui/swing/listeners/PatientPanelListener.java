@@ -138,35 +138,35 @@ public class PatientPanelListener implements ActionListener {
     }
 
     private boolean checkName(){
-        if (patientPanel.getPatientNameField().getText().equals("")){
+        if (patientPanel.getPatientPIPanel().getPatientNameField().getText().equals("")){
             return false;
         } else {
-            name = patientPanel.getPatientNameField().getText();
+            name = patientPanel.getPatientPIPanel().getPatientNameField().getText();
             return true;
         }
     }
 
     private boolean checkSurname(){
-        if (patientPanel.getPatientSurnameField().getText().equals("")){
+        if (patientPanel.getPatientPIPanel().getPatientSurnameField().getText().equals("")){
             return false;
         } else {
-            surname = patientPanel.getPatientSurnameField().getText();
+            surname = patientPanel.getPatientPIPanel().getPatientSurnameField().getText();
             return true;
         }
     }
 
     private boolean checkPatronymic(){
-        if (patientPanel.getPatientPatronymicField().getText().equals("")){
+        if (patientPanel.getPatientPIPanel().getPatientPatronymicField().getText().equals("")){
             return false;
         } else {
-            patronymic = patientPanel.getPatientPatronymicField().getText();
+            patronymic = patientPanel.getPatientPIPanel().getPatientPatronymicField().getText();
             return true;
         }
     }
 
     private boolean checkBirthdate(){
-        if (checkDate(patientPanel.getPatientBirthdateField().getText())){
-            birthDate = LocalDate.parse(patientPanel.getPatientBirthdateField().getText());
+        if (checkDate(patientPanel.getPatientPIPanel().getPatientBirthdateField().getText())){
+            birthDate = LocalDate.parse(patientPanel.getPatientPIPanel().getPatientBirthdateField().getText());
             return true;
         } else {
             return false;
