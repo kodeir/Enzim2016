@@ -42,11 +42,16 @@ public class EnzimGridBagConstraints {
     }
 
     public static GridBagConstraints setConstraintsHorizontal(double weightx, int gridx, int gridy, int gridwidth){
+        return setConstraintsHorizontal(weightx, gridx, gridy, gridwidth, 1);
+    }
+
+    public static GridBagConstraints setConstraintsHorizontal(double weightx, int gridx, int gridy, int gridwidth, int gridheight){
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.weightx = weightx;
         constraints.gridx = gridx;
         constraints.gridy = gridy;
         constraints.gridwidth = gridwidth;
+        constraints.gridheight = gridheight;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         return constraints;
     }
