@@ -4,6 +4,7 @@ import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
+import java.util.logging.Logger;
 
 /**
  * Created by Sergei Riabinin on 10.07.2016.
@@ -34,7 +35,7 @@ public class Database {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
-            //return printSqlException(e, "Failed to open connection to " + url + " with user = " + user + "!");
+            //return printSqlException(e, "Failed to open connection to " + database + " with user = " + user + "!");
         }
     }
 
@@ -45,7 +46,7 @@ public class Database {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             return false;
-            //return printSqlException(e, "Failed to open connection to " + url + " with user = " + user + "!");
+            //return printSqlException(e, "Failed to open connection to " + database + " with user = " + user + "!");
         }
     }
 
@@ -53,8 +54,8 @@ public class Database {
         try{
             if (statement != null) {
                 statement.close();
-                return true;
                 //log.log(Level.FINE, "Statement was closed successfully.");
+                return true;
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -142,6 +143,11 @@ public class Database {
             e.printStackTrace();
             return false;
         }
+    }
+
+    private void deleteDatabase(String dbName){
+        runExecute("SHUTDOWN");
+        org.h2.tools.DeleteDbFiles.execute("./data",dbName,true);
     }
 
 }

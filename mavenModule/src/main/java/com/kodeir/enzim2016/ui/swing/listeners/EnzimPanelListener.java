@@ -1,5 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
+import com.kodeir.enzim2016.commons.Database;
+import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.ui.swing.SwingApp;
 import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
@@ -36,7 +38,7 @@ public class EnzimPanelListener implements ActionListener{
 
     private void createNewPatientPanel(){
         PatientPanel patientPanel = new PatientPanel();
-        setupPanel("New patient", patientPanel);
+        patientPanel.setFrame(setupPanel("New patient", patientPanel));
     }
 
     private void createDatabasePanel(){
@@ -47,7 +49,8 @@ public class EnzimPanelListener implements ActionListener{
         setupPanel("Diagnoses Tree", new TreePanel());
     }
 
-    private void setupPanel(String frameName, JPanel panel){
-        new EnzimFrame(frameName, panel);
+    private EnzimFrame setupPanel(String frameName, JPanel panel){
+        return new EnzimFrame(frameName, panel);
     }
+
 }

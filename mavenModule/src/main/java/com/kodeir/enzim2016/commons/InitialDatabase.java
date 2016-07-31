@@ -49,39 +49,23 @@ public class InitialDatabase {
 
     private static Database database;
     private static List<Patient> patients;
-    private static List<Coefficients> coefficientsArray;
-    private static List<Diagnose> diagnoses;
-
-    private static String initialDbName = "enzim2016";
-    private static String initialDbUser = "defaultUser";
-    private static String initialDbPwd = "default password";
-    private static String dbParams = ";CIPHER=AES";
 
     public static String createInitialDatabase(){
-        if (checkIfDbFileExists()){
-            return rb.getString("interface.create.initial_database.exists");
-        } else {
-            deleteDatabase();
-            createPatients();
-            createDatabase();
+        createPatients();
+        if (createDatabase()){
+            insertData();
             return rb.getString("interface.create.initial_database.created");
+        } else {
+            return rb.getString("interface.create.initial_database.error");
         }
     }
 
-    private static boolean checkIfDbFileExists(){
-        return (new File("./data/"+initialDbName+".mv.db").exists());
-    }
-
-    private static void deleteDatabase(){
-        database = new Database();
-        database.setConnection(initialDbName + dbParams, initialDbUser, initialDbPwd);
-        database.setStatement();
-        database.runExecute("SHUTDOWN");
-        org.h2.tools.DeleteDbFiles.execute("./data",initialDbName,true);
+    public static boolean checkIfDbFileExists(){
+        return (new File("./data/"+PropertyHandler.getInstance().getValue("datasource.url")+".mv.db").exists());
     }
 
     private static void createPatients(){
-        patients = new ArrayList<Patient>();
+        patients = new ArrayList<>();
         patients.add(createPatient(0,"name","agamanov","patron",100, 1, 200, 200, 100, 1, 700, 13));
         patients.add(createPatient(1,"name","barabanov","patron",130, 20, 120, 200, 1200, 300, 800, 2));
         patients.add(createPatient(2,"name","veneaminov","patron",64, 50, 180, 2500, 1200, 20, 1200, 2));
@@ -115,86 +99,31 @@ public class InitialDatabase {
 
     private static Patient createPatient(long id, String name, String surname, String patron, float asT, float alT, float kfk, float ldg, float shF, float ggtp, float he, float glDG){
         Coefficients coefficients = new Coefficients(0, 0, asT, alT, kfk, ldg, shF, ggtp, he, glDG, LocalDate.now());
-        coefficientsArray = new ArrayList<>();
+        List<Coefficients> coefficientsArray = new ArrayList<>();
         coefficientsArray.add(coefficients);
         return new Patient(id,name,surname,patron,LocalDate.now(),coefficientsArray);
     }
 
-    private static void createDatabase(){
+    private static boolean createDatabase(){
         database = new Database();
-        database.setConnection(initialDbName, initialDbUser, initialDbPwd);
-        database.setStatement();
-
-        database.runExecuteUpdateQuery("CREATE TABLE IF NOT EXISTS PATIENTS (" +
-                "  patient_id IDENTITY" +
-                ", name VARCHAR(255)" +
-                ", surname VARCHAR(255)" +
-                ", patronymic VARCHAR(255)" +
-                ", birthDate DATE" +
-                ")"
-        );
-
-        database.runExecuteUpdateQuery("CREATE TABLE IF NOT EXISTS COEFFICIENTS (" +
-                "  coefficient_id BIGINT AUTO_INCREMENT NOT NULL" +
-                ", checkup_date DATE" +
-                ", patient_id BIGINT" +
-                ", foreign key (patient_id) references public.PATIENTS(patient_id)" +
-                ", AST FLOAT" +
-                ", ALT FLOAT" +
-                ", KFK FLOAT" +
-                ", LDG FLOAT" +
-                ", SHF FLOAT" +
-                ", GGTP FLOAT" +
-                ", GLDG FLOAT" +
-                ", HE FLOAT" +
-                ")"
-        );
-
-        for (Patient p: patients) {
-            String insertIntoPatients = "INSERT INTO PATIENTS(NAME, SURNAME, PATRONYMIC, BIRTHDATE) VALUES(" +
-                    "  '" + p.getName() + "'" +
-                    ", '" + p.getSurname() + "'" +
-                    ", '" + p.getPatronymic() + "'" +
-                    ", '" + p.getBirthDate() + "'" +
-                    ")";
-            database.runExecuteUpdateQuery(insertIntoPatients);
-
-            float ast = 0f;
-            float alt = 0f;
-            float kfk = 0f;
-            float ldg = 0f;
-            float shf = 0f;
-            float ggtp = 0f;
-            float he = 0f;
-            float gldg = 0f;
-
-            List<Coefficients> coefficients = p.getCoefficients();
-            for (Coefficients c: coefficients){
-                ast = c.getAst();
-                alt = c.getAlt();
-                kfk = c.getKfk();
-                ldg = c.getLdg();
-                shf = c.getShf();
-                ggtp = c.getGgtp();
-                he = c.getHe();
-                gldg = c.getGldg();
-            }
-
-            String insertIntoCoefficients = "INSERT INTO COEFFICIENTS(checkup_date, patient_id, AST, ALT, KFK, LDG, SHF, GGTP, GLDG, HE) VALUES(" +
-                    " '" + LocalDate.now() + "'" +
-                    ", (SELECT IDENTITY())" +
-                    ", " + ast +
-                    ", " + alt +
-                    ", " + kfk +
-                    ", " + ldg +
-                    ", " + shf +
-                    ", " + ggtp +
-                    ", " + gldg +
-                    ", " + he +
-                    ")";
-            database.runExecuteUpdateQuery(insertIntoCoefficients);
-
+        if (PatientsDatabase.connectToDatabaseAnyway(database)){
+            database.setStatement();
+            database.runExecuteUpdateQuery(PatientsDatabase.createTablePatients);
+            database.runExecuteUpdateQuery(PatientsDatabase.createTableCoefficients);
+            return true;
+        } else {
+            return false;
         }
     }
 
+    private static void insertData(){
+        for (Patient p: patients) {
+            database.runExecuteUpdateQuery(PatientsDatabase.insertToPatiens(p.getName(), p.getSurname(), p.getPatronymic(), p.getBirthDate()));
+            List<Coefficients> coefficients = p.getCoefficients();
+            for (Coefficients c: coefficients){
+                database.runExecuteUpdateQuery(PatientsDatabase.insertToCoefficients(LocalDate.now(),
+                        c.getAst(),c.getAlt(),c.getKfk(),c.getLdg(),c.getShf(),c.getGgtp(),c.getHe(),c.getGldg()));
+            }
+        }
+    }
 }

@@ -32,6 +32,8 @@ package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimTextField;
 import com.kodeir.enzim2016.ui.swing.listeners.TreeListener;
 
 import javax.swing.*;
@@ -99,40 +101,40 @@ public class TreePanel extends JPanel {
     }
 
     private void addFields(){
-        label = new JLabel(rb.getString("coefficients.ast"));
+        label = new EnzimLabel(rb.getString("coefficients.ast"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,0));
-        label = new JLabel(rb.getString("coefficients.alt"));
+        label = new EnzimLabel(rb.getString("coefficients.alt"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,0));
-        label = new JLabel(rb.getString("coefficients.kfk"));
+        label = new EnzimLabel(rb.getString("coefficients.kfk"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,0));
-        label = new JLabel(rb.getString("coefficients.ldg"));
+        label = new EnzimLabel(rb.getString("coefficients.ldg"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,0));
 
-        astField = new JTextField();
+        astField = new EnzimTextField();
         this.add(astField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,1));
-        altField = new JTextField();
+        altField = new EnzimTextField();
         this.add(altField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,1));
-        kfkField = new JTextField();
+        kfkField = new EnzimTextField();
         this.add(kfkField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,1));
-        ldgField = new JTextField();
+        ldgField = new EnzimTextField();
         this.add(ldgField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,1));
 
-        label = new JLabel(rb.getString("coefficients.shf"));
+        label = new EnzimLabel(rb.getString("coefficients.shf"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,2));
-        label = new JLabel(rb.getString("coefficients.ggtp"));
+        label = new EnzimLabel(rb.getString("coefficients.ggtp"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,2));
-        label = new JLabel(rb.getString("coefficients.he"));
+        label = new EnzimLabel(rb.getString("coefficients.he"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,2));
-        label = new JLabel(rb.getString("coefficients.gldg"));
+        label = new EnzimLabel(rb.getString("coefficients.gldg"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,2));
 
-        shfField = new JTextField();
+        shfField = new EnzimTextField();
         this.add(shfField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,3));
-        ggtpField = new JTextField();
+        ggtpField = new EnzimTextField();
         this.add(ggtpField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,3));
-        heField = new JTextField();
+        heField = new EnzimTextField();
         this.add(heField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,3));
-        gldgField = new JTextField();
+        gldgField = new EnzimTextField();
         this.add(gldgField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,3));
     }
 
@@ -142,15 +144,15 @@ public class TreePanel extends JPanel {
     }
 
     private void addResults(){
-        label = new JLabel(rb.getString("organs.Injured_organ"));
-        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,5));
+        label = new EnzimLabel(rb.getString("organs.Injured_organ"));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,5,2));
         injuredOrgan = new JLabel("");
-        this.add(injuredOrgan, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,5,3));
+        this.add(injuredOrgan, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,5,2));
 
-        label = new JLabel(rb.getString("diseases.Disease"));
-        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,6));
+        label = new EnzimLabel(rb.getString("diseases.Disease"));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,6,2));
         disease = new JLabel("");
-        this.add(disease, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,6,3));
+        this.add(disease, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,6,2));
 
     }
 

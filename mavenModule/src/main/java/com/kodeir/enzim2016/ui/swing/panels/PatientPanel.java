@@ -1,46 +1,11 @@
-/*
- * Copyright (c) 2007, 2016 Vyacheslav Ryabinin and/or his affiliates. All rights reserved.
- *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
- *
- *   - Redistributions of source code must retain the above copyright
- *     notice, this list of conditions and the following disclaimer.
- *   - Redistributions in binary form must reproduce the above copyright
- *     notice, this list of conditions and the following disclaimer in the
- *     documentation and/or other materials provided with the distribution.
- *
- *   - Neither the name of Vyacheslav Ryabinin or the names of his
- *     affiliates may be used to endorse or promote products derived
- *     from this software without specific prior written permission.
- *
- *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
- *  IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
- *  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
- *  PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT OWNER OR
- *  CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
- *  EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
- *  PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
- *  PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF
- *  LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING
- *  NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
- *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
- */
-
 package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
-import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
-import com.kodeir.enzim2016.ui.swing.commons.EnzimDateField;
-import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
-import com.kodeir.enzim2016.ui.swing.commons.EnzimTextField;
+import com.kodeir.enzim2016.ui.swing.commons.*;
+import com.kodeir.enzim2016.ui.swing.listeners.PatientPanelListener;
 
 import javax.swing.*;
-import javax.swing.text.MaskFormatter;
 import java.awt.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
 /**
@@ -50,6 +15,8 @@ public class PatientPanel extends JPanel {
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
+    private JFrame frame;
+
     private JLabel label;
 
     private JTextField patientNameField;
@@ -57,14 +24,14 @@ public class PatientPanel extends JPanel {
     private JTextField patientPatronymicField;
     private JFormattedTextField patientBirthdateField;
 
-    private JTextField astField;
-    private JTextField altField;
-    private JTextField kfkField;
-    private JTextField ldgField;
-    private JTextField shfField;
-    private JTextField ggtpField;
-    private JTextField heField;
-    private JTextField gldgField;
+    private JFormattedTextField astField;
+    private JFormattedTextField altField;
+    private JFormattedTextField kfkField;
+    private JFormattedTextField ldgField;
+    private JFormattedTextField shfField;
+    private JFormattedTextField ggtpField;
+    private JFormattedTextField heField;
+    private JFormattedTextField gldgField;
     private JFormattedTextField checkupDateField;
 
     private JButton addPatientBtn;
@@ -78,15 +45,77 @@ public class PatientPanel extends JPanel {
         return returnBtn;
     }
 
+    public JFrame getFrame(){
+        return frame;
+    }
+
+    public void setFrame(JFrame frame){
+        this.frame = frame;
+    }
+
+    public JTextField getPatientNameField() {
+        return patientNameField;
+    }
+
+    public JTextField getPatientSurnameField() {
+        return patientSurnameField;
+    }
+
+    public JTextField getPatientPatronymicField() {
+        return patientPatronymicField;
+    }
+
+    public JFormattedTextField getPatientBirthdateField() {
+        return patientBirthdateField;
+    }
+
+    public JFormattedTextField getAstField() {
+        return astField;
+    }
+
+    public JFormattedTextField getAltField() {
+        return altField;
+    }
+
+    public JFormattedTextField getKfkField() {
+        return kfkField;
+    }
+
+    public JFormattedTextField getLdgField() {
+        return ldgField;
+    }
+
+    public JFormattedTextField getShfField() {
+        return shfField;
+    }
+
+    public JFormattedTextField getGgtpField() {
+        return ggtpField;
+    }
+
+    public JFormattedTextField getHeField() {
+        return heField;
+    }
+
+    public JFormattedTextField getGldgField() {
+        return gldgField;
+    }
+
+    public JFormattedTextField getCheckupDateField() {
+        return checkupDateField;
+    }
+
     public PatientPanel() {
         this.setLayout(new GridBagLayout());
         addPatientComponents();
         addCoefficientsComponents();
         addButtons();
+        addListeners();
     }
 
     private void addPatientComponents(){
         label = new EnzimLabel("New patient");
+        label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,0,2));
 
         //Name
@@ -118,6 +147,7 @@ public class PatientPanel extends JPanel {
 
     private void addCoefficientsComponents(){
         label = new JLabel("Coefficients");
+        label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,5,2));
 
         label = new EnzimLabel(rb.getString("coefficients.ast"));
@@ -129,13 +159,13 @@ public class PatientPanel extends JPanel {
         label = new EnzimLabel(rb.getString("coefficients.ldg"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,6));
 
-        astField = new EnzimTextField();
+        astField = new EnzimFloatField();
         this.add(astField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,7));
-        altField = new EnzimTextField();
+        altField = new EnzimFloatField();
         this.add(altField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,7));
-        kfkField = new EnzimTextField();
+        kfkField = new EnzimFloatField();
         this.add(kfkField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,7));
-        ldgField = new EnzimTextField();
+        ldgField = new EnzimFloatField();
         this.add(ldgField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,7));
 
         label = new EnzimLabel(rb.getString("coefficients.shf"));
@@ -147,26 +177,34 @@ public class PatientPanel extends JPanel {
         label = new EnzimLabel(rb.getString("coefficients.gldg"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,8));
 
-        shfField = new EnzimTextField();
+        shfField = new EnzimFloatField();
         this.add(shfField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,9));
-        ggtpField = new EnzimTextField();
+        ggtpField = new EnzimFloatField();
         this.add(ggtpField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,9));
-        heField = new EnzimTextField();
+        heField = new EnzimFloatField();
         this.add(heField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,9));
-        gldgField = new EnzimTextField();
+        gldgField = new EnzimFloatField();
         this.add(gldgField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,9));
 
         label = new EnzimLabel("Checkup Date");
-        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,10,2));
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,10));
         checkupDateField = new EnzimDateField();
-        this.add(checkupDateField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,10,2));
+        this.add(checkupDateField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,10));
+        label = new EnzimLabel("(yyyy-mm-dd)");
+        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,10));
+
     }
 
     private void addButtons(){
         addPatientBtn = new JButton("Add patient to the database");
-        this.add(addPatientBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,11,2));
+        this.add(addPatientBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,11,2));
 
         returnBtn = new JButton("Return with no changes");
-        this.add(returnBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,12,2));
+        this.add(returnBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,12,2));
+    }
+
+    private void addListeners(){
+        addPatientBtn.addActionListener(new PatientPanelListener(this));
+        returnBtn.addActionListener(new PatientPanelListener(this));
     }
 }

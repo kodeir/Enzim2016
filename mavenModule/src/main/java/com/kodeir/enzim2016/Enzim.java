@@ -1,5 +1,6 @@
 package com.kodeir.enzim2016;
 
+import com.kodeir.enzim2016.commons.InitialDatabase;
 import com.kodeir.enzim2016.ui.cmd.CmdUi;
 import com.kodeir.enzim2016.ui.swing.SwingApp;
 
@@ -48,5 +49,12 @@ public class Enzim {
     public static void main(String[] args) {
         //CmdUi.startCmd();
         SwingApp.startSwing();
+        checkDatabase();
+    }
+
+    private static void checkDatabase(){
+        if (!InitialDatabase.checkIfDbFileExists()){
+            InitialDatabase.createInitialDatabase();
+        }
     }
 }

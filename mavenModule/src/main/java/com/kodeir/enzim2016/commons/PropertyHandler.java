@@ -28,36 +28,40 @@
  *  SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.kodeir.enzim2016.ui.swing.commons;
+package com.kodeir.enzim2016.commons;
 
-import javax.swing.*;
-import javax.swing.text.MaskFormatter;
-import java.awt.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
 
 /**
- * Created by Sergei Riabinin on 24.07.2016.
+ * Created by Sergei Riabinin on 31.07.2016.
  */
-public class EnzimDateField extends JFormattedTextField {
+public class PropertyHandler {
 
-    public EnzimDateField(){
-        this(100, 25);
+    private static PropertyHandler instance = null;
+
+    private Properties properties = null;
+
+    private String path = "./config/database.properties";
+
+    public static PropertyHandler getInstance() {
+        if (instance == null){
+            instance = new PropertyHandler();
+        }
+        return instance;
     }
 
-    public EnzimDateField(int width, int height){
-        super(new SimpleDateFormat("yyyy-MM-dd"));
-        setupDateTextField();
-        setPreferredSize(new Dimension(width,height));
-    }
-
-    private void setupDateTextField(){
+    private PropertyHandler() {
+        properties = new Properties();
         try {
-            MaskFormatter maskFormatter = new MaskFormatter("####-##-##");
-            maskFormatter.install(this);
-        } catch (ParseException e) {
+            properties.load(new FileInputStream(path));
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
+    public String getValue(String propKey) {
+        return properties.getProperty(propKey);
+    }
 }
