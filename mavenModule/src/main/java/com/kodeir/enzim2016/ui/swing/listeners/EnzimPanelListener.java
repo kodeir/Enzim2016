@@ -2,6 +2,7 @@ package com.kodeir.enzim2016.ui.swing.listeners;
 
 import com.kodeir.enzim2016.commons.Database;
 import com.kodeir.enzim2016.commons.PropertyHandler;
+import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.SwingApp;
 import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
@@ -11,11 +12,14 @@ import com.kodeir.enzim2016.ui.swing.panels.TreePanel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 /**
  * Created by Sergei Riabinin on 03.07.2016.
  */
 public class EnzimPanelListener implements ActionListener{
+
+    private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private EnzimPanel enzimPanel;
 
@@ -38,7 +42,7 @@ public class EnzimPanelListener implements ActionListener{
 
     private void createNewPatientPanel(){
         PatientPanel patientPanel = new PatientPanel();
-        patientPanel.setFrame(setupPanel("New patient", patientPanel));
+        patientPanel.setFrame(setupPanel(rb.getString("interface.create.new_patient"), patientPanel));
     }
 
     private void createDatabasePanel(){
@@ -46,7 +50,7 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createTreePanel(){
-        setupPanel("Diagnoses Tree", new TreePanel());
+        setupPanel(rb.getString("interface.tree.panel"), new TreePanel());
     }
 
     private EnzimFrame setupPanel(String frameName, JPanel panel){
