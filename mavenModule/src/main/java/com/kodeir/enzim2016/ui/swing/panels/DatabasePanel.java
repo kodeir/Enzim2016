@@ -1,11 +1,13 @@
 package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.pi.Patient;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
 import com.kodeir.enzim2016.ui.swing.listeners.DatabasePanelListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -18,7 +20,9 @@ public class DatabasePanel extends JPanel {
     private JLabel label;
 
     private JList<String> patientsList;
+    private DefaultListModel patientsListModel;
     private JButton addNewPatient;
+    private List<Patient> patients;
 
     private JPanel patientPIPanel;
 
@@ -40,11 +44,23 @@ public class DatabasePanel extends JPanel {
         this.frame = frame;
     }
 
+    public DefaultListModel getPatientsListModel() {
+        return patientsListModel;
+    }
+
+    public JList<String> getPatientsList() {
+        return patientsList;
+    }
+
+    public void setPatientsListModel(String s) {
+        patientsListModel.addElement(s);
+    }
+
     public JButton getExitBtn() {
         return exitBtn;
     }
 
-    public DatabasePanel(){
+    public DatabasePanel(List<Patient> patients){
         this.setLayout(new GridBagLayout());
         addPatientsPanel();
         addPatientPIPanel();
@@ -52,10 +68,12 @@ public class DatabasePanel extends JPanel {
         addDiagnosePanel();
         addExitButton();
         addListeners();
+        this.patients = patients;
     }
 
     private void addPatientsPanel() {
-        patientsList = new JList<>();
+        patientsListModel = new DefaultListModel();
+        patientsList = new JList<>(patientsListModel);
         JScrollPane scrollPane = new JScrollPane(patientsList);
         this.add(scrollPane, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,0,1,14));
 
@@ -88,6 +106,7 @@ public class DatabasePanel extends JPanel {
     }
 
     private void addListeners(){
+        patientsList.addListSelectionListener(new DatabasePanelListener(this));
         exitBtn.addActionListener(new DatabasePanelListener(this));
     }
 

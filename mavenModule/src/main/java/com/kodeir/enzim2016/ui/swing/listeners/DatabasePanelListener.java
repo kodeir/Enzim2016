@@ -4,6 +4,8 @@ import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ResourceBundle;
@@ -11,7 +13,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Sergei Riabinin on 31.07.2016.
  */
-public class DatabasePanelListener implements ActionListener {
+public class DatabasePanelListener implements ActionListener, ListSelectionListener {
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
@@ -42,5 +44,10 @@ public class DatabasePanelListener implements ActionListener {
         ) == JOptionPane.YES_OPTION){
             databasePanel.getFrame().dispose();
         }
+    }
+
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        JOptionPane.showMessageDialog(null,databasePanel.getPatientsListModel().get(databasePanel.getPatientsList().getSelectedIndex()));
     }
 }

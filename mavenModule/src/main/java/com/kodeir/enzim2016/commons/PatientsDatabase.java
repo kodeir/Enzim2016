@@ -106,12 +106,12 @@ public class PatientsDatabase {
                 PropertyHandler.getInstance().getValue("datasource.password"));
     }
 
-    public static String selectAll(Database database){
+    public static List<Patient> selectAll(Database database){
+        List<Patient> patients = new ArrayList<>();
         ResultSet rs = database.runSelectQuery("SELECT * " +
                 "FROM PATIENTS P " +
                 "JOIN COEFFICIENTS C " +
                 "ON P.patient_id = C.patient_id");
-        List<Patient> patients = new ArrayList<>();
         try {
             while (rs.next()){
                 Coefficients coefficients = new Coefficients(rs.getLong("COEFFICIENT_ID"),rs.getLong("PATIENT_ID"),
@@ -128,6 +128,6 @@ public class PatientsDatabase {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return Arrays.toString(patients.toArray());
+        return patients;
     }
 }
