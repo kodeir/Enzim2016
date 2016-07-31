@@ -56,6 +56,14 @@ public class DatabasePanel extends JPanel {
         patientsListModel.addElement(s);
     }
 
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public JPanel getPatientPIPanel() {
+        return patientPIPanel;
+    }
+
     public JButton getExitBtn() {
         return exitBtn;
     }

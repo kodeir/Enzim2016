@@ -60,7 +60,8 @@ public class EnzimPanelListener implements ActionListener{
         DatabasePanel databasePanel = new DatabasePanel(patients);
         databasePanel.setFrame(setupPanel(rb.getString("interface.database"), databasePanel));
         for (Patient p: patients){
-            databasePanel.setPatientsListModel(p.getSurname() + " " +
+            databasePanel.setPatientsListModel(p.getId() + ". " +
+                    p.getSurname() + " " +
                     p.getName().substring(0,1) + "." +
                     p.getPatronymic().substring(0,1) + ". ; " +
                     rb.getString("interface.database.birthdate") + p.getBirthDate());
