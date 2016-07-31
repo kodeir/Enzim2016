@@ -114,39 +114,39 @@ public class PatientPanel extends JPanel {
     }
 
     private void addPatientComponents(){
-        label = new EnzimLabel("New patient");
+        label = new EnzimLabel(rb.getString("patient.new_patient"));
         label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,0,2));
 
         //Name
-        label = new EnzimLabel("Name");
+        label = new EnzimLabel(rb.getString("patient.name"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,1,1));
         patientNameField = new EnzimTextField(300,25);
         this.add(patientNameField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,1,3));
 
         //Surname
-        label = new EnzimLabel("Surname");
+        label = new EnzimLabel(rb.getString("patient.surname"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,2,1));
         patientSurnameField = new EnzimTextField(300,25);
         this.add(patientSurnameField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,2,3));
 
         //Patronymic
-        label = new EnzimLabel("Patronymic");
+        label = new EnzimLabel(rb.getString("patient.patronymic"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,3,1));
         patientPatronymicField = new EnzimTextField(300,25);
         this.add(patientPatronymicField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,3,3));
 
         //Birthdate
-        label = new EnzimLabel("Birthdate");
+        label = new EnzimLabel(rb.getString("patient.birthdate"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,4,1));
         patientBirthdateField = new EnzimDateField();
         this.add(patientBirthdateField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,4));
-        label = new EnzimLabel("(yyyy-mm-dd)");
+        label = new EnzimLabel(rb.getString("interface.date_format"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,4));
     }
 
     private void addCoefficientsComponents(){
-        label = new JLabel("Coefficients");
+        label = new JLabel(rb.getString("coefficients"));
         label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,5,2));
 
@@ -186,20 +186,20 @@ public class PatientPanel extends JPanel {
         gldgField = new EnzimFloatField();
         this.add(gldgField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,3,9));
 
-        label = new EnzimLabel("Checkup Date");
+        label = new EnzimLabel(rb.getString("coefficients.checkup_date"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,10));
         checkupDateField = new EnzimDateField();
         this.add(checkupDateField, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,10));
-        label = new EnzimLabel("(yyyy-mm-dd)");
+        label = new EnzimLabel(rb.getString("interface.date_format"));
         this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,2,10));
 
     }
 
     private void addButtons(){
-        addPatientBtn = new JButton("Add patient to the database");
+        addPatientBtn = new JButton(rb.getString("interface.patient.add"));
         this.add(addPatientBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,11,2));
 
-        returnBtn = new JButton("Return with no changes");
+        returnBtn = new JButton(rb.getString("interface.patient.quit.button"));
         this.add(returnBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,12,2));
     }
 

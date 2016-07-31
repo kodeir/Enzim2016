@@ -3,19 +3,14 @@ package com.kodeir.enzim2016.ui.swing.listeners;
 import com.kodeir.enzim2016.commons.Database;
 import com.kodeir.enzim2016.commons.PatientsDatabase;
 import com.kodeir.enzim2016.commons.PropertyHandler;
-import com.kodeir.enzim2016.pi.Coefficients;
-import com.kodeir.enzim2016.pi.Patient;
+import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.ResourceBundle;
 
 /**
  * Created by Sergei Riabinin on 31.07.2016.
@@ -23,6 +18,7 @@ import java.util.List;
 public class PatientPanelListener implements ActionListener {
 
     private Database database;
+    private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private String name;
     private String surname;
@@ -38,6 +34,8 @@ public class PatientPanelListener implements ActionListener {
     private float gldg;
     private LocalDate checkupDate;
 
+    private StringBuilder errors;
+
     private PatientPanel patientPanel;
 
     public PatientPanelListener(PatientPanel patientPanel){
@@ -47,25 +45,23 @@ public class PatientPanelListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(patientPanel.getAddPatientBtn())){
-            if (connectToDatabase()){
-                System.out.println(database.setStatement());
-                if (checkInput()){
-                    JOptionPane.showMessageDialog(null, "All is OK!");
-                    database.runExecuteUpdateQuery(PatientsDatabase.insertToPatiens(name, surname, patronymic, birthDate));
-                    database.runExecuteUpdateQuery(PatientsDatabase.insertToCoefficients(checkupDate, ast, alt, kfk, ldg, shf, ggtp, he, gldg));
-                    System.out.println(PatientsDatabase.selectAll(database));
-                }
-                database.closeConnection();
-            }
+            addPatient();
         } else if (e.getSource().equals(patientPanel.getReturnBtn())){
-            int choice = JOptionPane.showConfirmDialog(null,
-                    "Your input will be lost. Do you want to quit?",
-                    "Warning",
-                    JOptionPane.YES_NO_OPTION,
-                    JOptionPane.QUESTION_MESSAGE);
-            if (choice==0){
-                patientPanel.getFrame().dispose();
+            exit();
+        }
+    }
+
+    private void addPatient(){
+        if (connectToDatabase()){
+            database.setStatement();
+            if (checkInput()){
+                database.runExecuteUpdateQuery(PatientsDatabase.insertToPatiens(name, surname, patronymic, birthDate));
+                database.runExecuteUpdateQuery(PatientsDatabase.insertToCoefficients(checkupDate, ast, alt, kfk, ldg, shf, ggtp, he, gldg));
+                JOptionPane.showMessageDialog(null, rb.getString("interface.patient.added"));
+            } else {
+                JOptionPane.showMessageDialog(null,errors.toString());
             }
+            database.closeConnection();
         }
     }
 
@@ -79,59 +75,66 @@ public class PatientPanelListener implements ActionListener {
 
     private boolean checkInput(){
         boolean check = true;
+        errors = new StringBuilder();
+        buildErrorString(rb.getString("errors.coefficients.missed"));
         if (!checkName()){
-            JOptionPane.showMessageDialog(null, "Name input is not correct!");
+            buildErrorString(rb.getString("patient.name"));
             check = false;
         }
         if (!checkSurname()){
-            JOptionPane.showMessageDialog(null, "Surname input is not correct!");
+            buildErrorString(rb.getString("patient.surname"));
             check = false;
         }
         if (!checkPatronymic()){
-            JOptionPane.showMessageDialog(null, "Patronymic input is not correct!");
+            buildErrorString(rb.getString("patient.patronymic"));
             check = false;
         }
         if (!checkBirthdate()){
-            JOptionPane.showMessageDialog(null, "Birthdate input is not correct!");
+            buildErrorString(rb.getString("patient.birthdate"));
             check = false;
         }
         if (!checkAst()){
-            JOptionPane.showMessageDialog(null, "Ast input is not correct!");
+            buildErrorString(rb.getString("coefficients.ast"));
             check = false;
         }
         if (!checkAlt()){
-            JOptionPane.showMessageDialog(null, "Alt input is not correct!");
+            buildErrorString(rb.getString("coefficients.alt"));
             check = false;
         }
         if (!checkKfk()){
-            JOptionPane.showMessageDialog(null, "Kfk input is not correct!");
+            buildErrorString(rb.getString("coefficients.kfk"));
             check = false;
         }
         if (!checkLdg()){
-            JOptionPane.showMessageDialog(null, "Ldg input is not correct!");
+            buildErrorString(rb.getString("coefficients.ldg"));
             check = false;
         }
         if (!checkShf()){
-            JOptionPane.showMessageDialog(null, "Shf input is not correct!");
+            buildErrorString(rb.getString("coefficients.shf"));
             check = false;
         }
         if (!checkGgtp()){
-            JOptionPane.showMessageDialog(null, "GGTP input is not correct!");
+            buildErrorString(rb.getString("coefficients.ggtp"));
             check = false;
         }
         if (!checkHe()){
-            JOptionPane.showMessageDialog(null, "He input is not correct!");
+            buildErrorString(rb.getString("coefficients.he"));
             check = false;
         }
         if (!checkGldg()){
-            JOptionPane.showMessageDialog(null, "Gldg input is not correct!");
+            buildErrorString(rb.getString("coefficients.gldg"));
             check = false;
         }
         if (!checkCheckupdate()){
-            JOptionPane.showMessageDialog(null, "Checkup date input is not correct!");
+            buildErrorString(rb.getString("coefficients.checkup_date"));
             check = false;
         }
         return check;
+    }
+
+    private void buildErrorString(String s){
+        errors.append(s);
+        errors.append(System.getProperty("line.separator"));
     }
 
     private boolean checkName(){
@@ -256,6 +259,22 @@ public class PatientPanelListener implements ActionListener {
             return false;
         } else {
             return true;
+        }
+    }
+
+    private void exit(){
+        Object[] options = {rb.getString("interface.patient.quit.yes"),
+                rb.getString("interface.patient.quit.no")};
+        if (JOptionPane.showOptionDialog(null,
+                rb.getString("interface.patient.quit.question"),
+                "",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE,
+                null,
+                options,
+                options[0]
+        ) == JOptionPane.YES_OPTION){
+            patientPanel.getFrame().dispose();
         }
     }
 }
