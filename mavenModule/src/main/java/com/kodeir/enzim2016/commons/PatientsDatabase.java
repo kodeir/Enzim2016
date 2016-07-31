@@ -116,7 +116,7 @@ public class PatientsDatabase {
             while (rs.next()){
                 Coefficients coefficients = new Coefficients(rs.getLong("COEFFICIENT_ID"),rs.getLong("PATIENT_ID"),
                         rs.getFloat("AST"),rs.getFloat("ALT"),rs.getFloat("KFK"),rs.getFloat("LDG"),
-                        rs.getFloat("SHF"),rs.getFloat("GGTP"),rs.getFloat("GLDG"),rs.getFloat("HE"),
+                        rs.getFloat("SHF"),rs.getFloat("GGTP"),rs.getFloat("HE"),rs.getFloat("GLDG"),
                         rs.getDate("CHECKUP_DATE").toLocalDate());
                 List<Coefficients> coefficientses = new ArrayList<>();
                 coefficientses.add(coefficients);

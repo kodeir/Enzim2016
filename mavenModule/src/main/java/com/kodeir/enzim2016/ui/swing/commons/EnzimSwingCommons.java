@@ -35,7 +35,7 @@ import java.awt.*;
 /**
  * Created by Sergei Riabinin on 03.07.2016.
  */
-public class EnzimGridBagConstraints {
+public class EnzimSwingCommons {
 
     public static GridBagConstraints setConstraintsHorizontal(double weightx, int gridx, int gridy){
         return setConstraintsHorizontal(weightx, gridx, gridy, 1);
@@ -54,5 +54,11 @@ public class EnzimGridBagConstraints {
         constraints.gridheight = gridheight;
         constraints.fill = GridBagConstraints.HORIZONTAL;
         return constraints;
+    }
+
+    public static void setSize(Component component, int width, int height){
+        component.setMinimumSize(new Dimension(width,height));
+        component.setMaximumSize(new Dimension(width,height));
+        component.setPreferredSize(new Dimension(width,height));
     }
 }

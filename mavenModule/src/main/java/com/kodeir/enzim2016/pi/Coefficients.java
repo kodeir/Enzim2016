@@ -30,12 +30,17 @@
 
 package com.kodeir.enzim2016.pi;
 
+import com.kodeir.enzim2016.commons.UTF8Control;
+
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 /**
  * Created by Sergei Riabinin on 24.07.2016.
  */
 public class Coefficients {
+
+    private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private long coefficients_id;
     private long patient_id;
@@ -163,5 +168,20 @@ public class Coefficients {
                 ggtp + ", " +
                 he + ", " +
                 gldg + "; ";
+    }
+
+    public Object[] toObjects(){
+        Object[] objects = new Object[10];
+        objects[0] = patient_id;
+        objects[1] = rb.getString("coefficients.checkup_date") + " " + checkupDate;
+        objects[2] = rb.getString("coefficients.ast") + " " + ast;
+        objects[3] = rb.getString("coefficients.alt") + " " + alt;
+        objects[4] = rb.getString("coefficients.kfk") + " " + kfk;
+        objects[5] = rb.getString("coefficients.ldg") + " " + ldg;
+        objects[6] = rb.getString("coefficients.shf") + " " + shf;
+        objects[7] = rb.getString("coefficients.ggtp") + " " + ggtp;
+        objects[8] = rb.getString("coefficients.he") + " " + he;
+        objects[9] = rb.getString("coefficients.gldg") + " " + gldg;
+        return objects;
     }
 }

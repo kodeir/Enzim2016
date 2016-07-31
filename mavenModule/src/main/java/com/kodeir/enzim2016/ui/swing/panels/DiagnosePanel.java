@@ -1,7 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
-import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
 
 import javax.swing.*;
@@ -42,17 +42,17 @@ public class DiagnosePanel extends JPanel {
 
     private void addDiagnoseComponents(){
         label = new EnzimLabel(rb.getString("organs.Injured_organ"));
-        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,0,2));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,0,2));
 
         injuredOrgan = new JLabel("");
         injuredOrgan.setFont(new Font(injuredOrgan.getFont().getFontName(), Font.BOLD, injuredOrgan.getFont().getSize()+2));
-        this.add(injuredOrgan, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,1,4));
+        this.add(injuredOrgan, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,1,4));
 
         label = new EnzimLabel(rb.getString("diseases.Disease"));
-        this.add(label, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,2,2));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,2,2));
 
         disease = new JLabel("");
         disease.setFont(new Font(disease.getFont().getFontName(), Font.BOLD, disease.getFont().getSize()+2));
-        this.add(disease, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,3,4));
+        this.add(disease, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,3,4));
     }
 }

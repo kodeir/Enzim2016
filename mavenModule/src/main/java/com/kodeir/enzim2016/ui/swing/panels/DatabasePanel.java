@@ -1,8 +1,9 @@
 package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.pi.Coefficients;
 import com.kodeir.enzim2016.pi.Patient;
-import com.kodeir.enzim2016.ui.swing.commons.EnzimGridBagConstraints;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.DatabasePanelListener;
 
 import javax.swing.*;
@@ -19,14 +20,18 @@ public class DatabasePanel extends JPanel {
 
     private JLabel label;
 
+    private int listClicker = 0;
+
     private JList<String> patientsList;
     private DefaultListModel patientsListModel;
-    private JButton addNewPatient;
+    private JButton addNewPatientBtn;
     private List<Patient> patients;
 
-    private JPanel patientPIPanel;
+    private PatientPIPanel patientPIPanel;
 
-    private JTable coefficientsTable;
+    private JList<String> coefficientsList;
+    private DefaultListModel coefficientsListModel;
+    private List<Coefficients> coefficientses;
 
     private DiagnosePanel diagnosePanel;
 
@@ -35,6 +40,38 @@ public class DatabasePanel extends JPanel {
     private JFrame frame;
 
     private JButton exitBtn;
+
+    public int getListClicker() {
+        return listClicker;
+    }
+
+    public void setListClicker(int listClicker) {
+        this.listClicker = listClicker;
+    }
+
+    public List<Coefficients> getCoefficientses() {
+        return coefficientses;
+    }
+
+    public void setCoefficientses(List<Coefficients> coefficientses) {
+        this.coefficientses = coefficientses;
+    }
+
+    public JButton getAddNewPatientBtn() {
+        return addNewPatientBtn;
+    }
+
+    public JButton getAddNewCoefficients() {
+        return addNewCoefficients;
+    }
+
+    public JList<String> getCoefficientsList() {
+        return coefficientsList;
+    }
+
+    public DiagnosePanel getDiagnosePanel() {
+        return diagnosePanel;
+    }
 
     public JFrame getFrame(){
         return frame;
@@ -60,8 +97,16 @@ public class DatabasePanel extends JPanel {
         return patients;
     }
 
-    public JPanel getPatientPIPanel() {
+    public PatientPIPanel getPatientPIPanel() {
         return patientPIPanel;
+    }
+
+    public DefaultListModel getCoefficientsListModel() {
+        return coefficientsListModel;
+    }
+
+    public void setCoefficientsListModel(String s) {
+        coefficientsListModel.addElement(s);
     }
 
     public JButton getExitBtn() {
@@ -80,42 +125,59 @@ public class DatabasePanel extends JPanel {
     }
 
     private void addPatientsPanel() {
+        label = new JLabel(rb.getString("interface.database.patients_list"));
+        label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,0));
+
         patientsListModel = new DefaultListModel();
         patientsList = new JList<>(patientsListModel);
-        JScrollPane scrollPane = new JScrollPane(patientsList);
-        this.add(scrollPane, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,0,1,14));
+        patientsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(patientsList);
+        EnzimSwingCommons.setSize(scrollPane,300,375);
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,1,1,15));
 
-        addNewPatient = new JButton(rb.getString("interface.patient.add"));
-        this.add(addNewPatient, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,0,15,1));
+        addNewPatientBtn = new JButton(rb.getString("interface.patient.add"));
+        this.add(addNewPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,16));
     }
 
     private void addPatientPIPanel() {
         patientPIPanel = new PatientPIPanel();
-        this.add(patientPIPanel, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,0,4,5));
+        this.add(patientPIPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,0,4,5));
     }
 
     private void addCoefficientsPanel() {
-        coefficientsTable = new JTable();
-        JScrollPane scrollPane = new JScrollPane(coefficientsTable);
-        this.add(scrollPane, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,5,4,5));
+        label = new JLabel(rb.getString("interface.database.coefficients_list"));
+        label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,5,2));
+
+        coefficientsListModel = new DefaultListModel();
+        coefficientsList = new JList<>(coefficientsListModel);
+        coefficientsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane scrollPane = new JScrollPane();
+        scrollPane.setViewportView(coefficientsList);
+        EnzimSwingCommons.setSize(scrollPane,600,125);
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,6,4,5));
 
         addNewCoefficients = new JButton(rb.getString("interface.database.add_coefficients"));
-        this.add(addNewCoefficients, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,10,4));
+        this.add(addNewCoefficients, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,11,2));
     }
 
     private void addDiagnosePanel() {
         diagnosePanel = new DiagnosePanel();
-        this.add(diagnosePanel, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,1,11,4,4));
+        this.add(diagnosePanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,12,4,4));
     }
 
     private void addExitButton() {
         exitBtn = new JButton(rb.getString("interface.database.close"));
-        this.add(exitBtn, EnzimGridBagConstraints.setConstraintsHorizontal(0.5,4,15,1));
+        this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,16,2));
     }
 
     private void addListeners(){
         patientsList.addListSelectionListener(new DatabasePanelListener(this));
+        coefficientsList.addListSelectionListener(new DatabasePanelListener(this));
         exitBtn.addActionListener(new DatabasePanelListener(this));
+        addNewPatientBtn.addActionListener(new DatabasePanelListener(this));
     }
 
 }
