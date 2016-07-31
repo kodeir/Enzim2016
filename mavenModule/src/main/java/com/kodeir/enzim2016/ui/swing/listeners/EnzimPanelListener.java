@@ -80,7 +80,7 @@ public class EnzimPanelListener implements ActionListener{
     private List<Patient> getPatients(){
         if (connectToDatabase()){
             database.setStatement();
-            //JOptionPane.showMessageDialog(null, Arrays.toString(PatientsDatabase.selectAll(database).toArray()));
+            //return PatientsDatabase.selectAll(database);
             List<Patient> patients = new ArrayList<>();
             JOptionPane.showMessageDialog(null,"array");
             ResultSet rs = database.runSelectQuery("SELECT * " +
@@ -92,24 +92,17 @@ public class EnzimPanelListener implements ActionListener{
                 JOptionPane.showMessageDialog(null,"0");
             }
             try {
-
-                JOptionPane.showMessageDialog(null,"00");
                 while (rs.next()){
-                    JOptionPane.showMessageDialog(null,"1");
                     Coefficients coefficients = new Coefficients(rs.getLong("COEFFICIENT_ID"),rs.getLong("PATIENT_ID"),
                             rs.getFloat("AST"),rs.getFloat("ALT"),rs.getFloat("KFK"),rs.getFloat("LDG"),
                             rs.getFloat("SHF"),rs.getFloat("GGTP"),rs.getFloat("HE"),rs.getFloat("GLDG"),
                             rs.getDate("CHECKUP_DATE").toLocalDate());
-                    JOptionPane.showMessageDialog(null,"2");
                     List<Coefficients> coefficientses = new ArrayList<>();
-                    JOptionPane.showMessageDialog(null,"3");
                     coefficientses.add(coefficients);
-                    JOptionPane.showMessageDialog(null,"4");
                     patients.add(new Patient(rs.getLong("PATIENT_ID"),
                             rs.getString("NAME"),rs.getString("SURNAME"),rs.getString("PATRONYMIC"),
                             rs.getDate("BIRTHDATE").toLocalDate(),
                             coefficientses));
-                    JOptionPane.showMessageDialog(null,"5");
                 }
             } catch (SQLException e) {
                 JOptionPane.showMessageDialog(null,e.getMessage());

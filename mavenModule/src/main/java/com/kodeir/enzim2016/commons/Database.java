@@ -1,5 +1,6 @@
 package com.kodeir.enzim2016.commons;
 
+import javax.swing.*;
 import javax.xml.crypto.Data;
 import java.sql.*;
 import java.util.logging.Level;
@@ -123,6 +124,7 @@ public class Database {
             return statement.executeQuery(sql);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null,e.getMessage());
             return null;
         }
     }
