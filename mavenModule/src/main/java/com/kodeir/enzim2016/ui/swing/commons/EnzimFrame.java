@@ -20,8 +20,4 @@ public class EnzimFrame extends JFrame {
             setVisible(true);
         });
     }
-
-    public static EnzimFrame setupPanel(String frameName, JPanel panel){
-        return new EnzimFrame(frameName, panel);
-    }
 }

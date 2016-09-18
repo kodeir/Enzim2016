@@ -62,7 +62,7 @@ public class DatabasePanelCreator {
     private void createDatabasePanel(){
         List<Patient> patients = getPatients();
         DatabasePanel databasePanel = new DatabasePanel(patients);
-        databasePanel.setFrame(EnzimFrame.setupPanel(rb.getString("interface.database"), databasePanel));
+        databasePanel.setFrame(new EnzimFrame(rb.getString("interface.database"), databasePanel));
         for (Patient p: patients){
             databasePanel.setPatientsListModel(p.getId() + ". " +
                     p.getSurname() + " " +

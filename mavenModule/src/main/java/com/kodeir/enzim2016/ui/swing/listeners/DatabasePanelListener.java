@@ -36,6 +36,8 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
         if (e.getSource().equals(databasePanel.getAddNewPatientBtn())) {
             PatientPanel patientPanel = new PatientPanel();
             patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
+        } else if (e.getSource().equals(databasePanel.getAddNewCoefficients())) {
+            //JOptionPane.showMessageDialog(null,"add new coeff");
         } else if (e.getSource().equals(databasePanel.getExitBtn())) {
             exit();
         }

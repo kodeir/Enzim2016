@@ -53,7 +53,7 @@ public class EnzimPanelListener implements ActionListener{
 
     private void createNewPatientPanel(){
         PatientPanel patientPanel = new PatientPanel();
-        patientPanel.setFrame(EnzimFrame.setupPanel(rb.getString("interface.create.new_patient"), patientPanel));
+        patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
     }
 
     private void createDatabasePanel(){
@@ -61,7 +61,7 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createTreePanel(){
-        EnzimFrame.setupPanel(rb.getString("interface.tree.panel"), new TreePanel());
+        new EnzimFrame(rb.getString("interface.tree.panel"), new TreePanel());
     }
 
 }
