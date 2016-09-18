@@ -69,7 +69,7 @@ public class PatientPanelListener implements ActionListener {
                         options,
                         options[0]
                 ) == JOptionPane.YES_OPTION){
-                    //open database
+                    new DatabasePanelCreator(database);
                 }
             } else {
                 JOptionPane.showMessageDialog(null,errors.toString());
