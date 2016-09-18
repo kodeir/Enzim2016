@@ -75,32 +75,32 @@ public class DatabasePanelCreator {
     private List<Patient> getPatients(){
         if (connectToDatabase()){
             database.setStatement();
-            //return PatientsDatabase.selectAll(database);
             List<Patient> patients = new ArrayList<>();
-            JOptionPane.showMessageDialog(null,"array");
+            //JOptionPane.showMessageDialog(null,"array");
             ResultSet rs = database.runSelectQuery("SELECT * " +
                     "FROM PATIENTS P " +
                     "JOIN COEFFICIENTS C " +
                     "ON P.patient_id = C.patient_id");
-            JOptionPane.showMessageDialog(null,"before try");
+            //JOptionPane.showMessageDialog(null,"before try");
             if (rs == null) {
                 JOptionPane.showMessageDialog(null,"0");
-            }
-            try {
-                while (rs.next()){
-                    Coefficients coefficients = new Coefficients(rs.getLong("COEFFICIENT_ID"),rs.getLong("PATIENT_ID"),
-                            rs.getFloat("AST"),rs.getFloat("ALT"),rs.getFloat("KFK"),rs.getFloat("LDG"),
-                            rs.getFloat("SHF"),rs.getFloat("GGTP"),rs.getFloat("HE"),rs.getFloat("GLDG"),
-                            rs.getDate("CHECKUP_DATE").toLocalDate());
-                    List<Coefficients> coefficientses = new ArrayList<>();
-                    coefficientses.add(coefficients);
-                    patients.add(new Patient(rs.getLong("PATIENT_ID"),
-                            rs.getString("NAME"),rs.getString("SURNAME"),rs.getString("PATRONYMIC"),
-                            rs.getDate("BIRTHDATE").toLocalDate(),
-                            coefficientses));
+            } else {
+                try {
+                    while (rs.next()) {
+                        Coefficients coefficients = new Coefficients(rs.getLong("COEFFICIENT_ID"), rs.getLong("PATIENT_ID"),
+                                rs.getFloat("AST"), rs.getFloat("ALT"), rs.getFloat("KFK"), rs.getFloat("LDG"),
+                                rs.getFloat("SHF"), rs.getFloat("GGTP"), rs.getFloat("HE"), rs.getFloat("GLDG"),
+                                rs.getDate("CHECKUP_DATE").toLocalDate());
+                        List<Coefficients> coefficientses = new ArrayList<>();
+                        coefficientses.add(coefficients);
+                        patients.add(new Patient(rs.getLong("PATIENT_ID"),
+                                rs.getString("NAME"), rs.getString("SURNAME"), rs.getString("PATRONYMIC"),
+                                rs.getDate("BIRTHDATE").toLocalDate(),
+                                coefficientses));
+                    }
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
                 }
-            } catch (SQLException e) {
-                JOptionPane.showMessageDialog(null,e.getMessage());
             }
             return patients;
         }
@@ -108,9 +108,9 @@ public class DatabasePanelCreator {
     }
 
     private boolean connectToDatabase(){
-        JOptionPane.showMessageDialog(null,"before db");
+        //JOptionPane.showMessageDialog(null,"before db");
         database = new Database();
-        JOptionPane.showMessageDialog(null,"db");
+        //JOptionPane.showMessageDialog(null,"db");
         return database.setConnectionIfDbExist(
                 PropertyHandler.getInstance().getValue("datasource.url"),
                 PropertyHandler.getInstance().getValue("datasource.username"),
