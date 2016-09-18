@@ -35,7 +35,7 @@ public class DatabasePanel extends JPanel {
 
     private DiagnosePanel diagnosePanel;
 
-    private JButton addNewCoefficients;
+    private JButton addNewCoefficientsBtn;
 
     private JFrame frame;
 
@@ -61,8 +61,8 @@ public class DatabasePanel extends JPanel {
         return addNewPatientBtn;
     }
 
-    public JButton getAddNewCoefficients() {
-        return addNewCoefficients;
+    public JButton getAddNewCoefficientsBtn() {
+        return addNewCoefficientsBtn;
     }
 
     public JList<String> getCoefficientsList() {
@@ -159,8 +159,8 @@ public class DatabasePanel extends JPanel {
         EnzimSwingCommons.setSize(scrollPane,600,125);
         this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,6,4,5));
 
-        addNewCoefficients = new JButton(rb.getString("interface.database.add_coefficients"));
-        this.add(addNewCoefficients, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,11,2));
+        addNewCoefficientsBtn = new JButton(rb.getString("interface.database.add_coefficients"));
+        this.add(addNewCoefficientsBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,11,2));
     }
 
     private void addDiagnosePanel() {
