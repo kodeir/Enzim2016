@@ -42,10 +42,10 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
     }
 
     private void exit(){
-        Object[] options = {"Yes",
-                "No"};
+        Object[] options = {rb.getString("interface.Yes"),
+                rb.getString("interface.No")};
         if (JOptionPane.showOptionDialog(null,
-                "Close database?",
+                rb.getString("interface.database.close"),
                 "",
                 JOptionPane.YES_NO_OPTION,
                 JOptionPane.QUESTION_MESSAGE,
