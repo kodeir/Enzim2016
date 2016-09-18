@@ -57,7 +57,20 @@ public class PatientPanelListener implements ActionListener {
             if (checkInput()){
                 database.runExecuteUpdateQuery(PatientsDatabase.insertToPatiens(name, surname, patronymic, birthDate));
                 database.runExecuteUpdateQuery(PatientsDatabase.insertToCoefficients(checkupDate, ast, alt, kfk, ldg, shf, ggtp, he, gldg));
-                JOptionPane.showMessageDialog(null, rb.getString("interface.patient.added"));
+
+                Object[] options = {rb.getString("interface.Yes"),
+                        rb.getString("interface.No")};
+                if (JOptionPane.showOptionDialog(null,
+                        rb.getString("interface.patient.added"),
+                        "",
+                        JOptionPane.YES_NO_OPTION,
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        options,
+                        options[0]
+                ) == JOptionPane.YES_OPTION){
+                    //open database
+                }
             } else {
                 JOptionPane.showMessageDialog(null,errors.toString());
             }
