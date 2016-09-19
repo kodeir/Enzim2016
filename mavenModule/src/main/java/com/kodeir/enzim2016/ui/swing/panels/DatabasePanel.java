@@ -178,6 +178,7 @@ public class DatabasePanel extends JPanel {
         coefficientsList.addListSelectionListener(new DatabasePanelListener(this));
         exitBtn.addActionListener(new DatabasePanelListener(this));
         addNewPatientBtn.addActionListener(new DatabasePanelListener(this));
+        addNewCoefficientsBtn.addActionListener(new DatabasePanelListener(this));
     }
 
 }
