@@ -94,11 +94,11 @@ public class PatientPanel extends JPanel {
 
     public PatientPanel(boolean createdFromDB) {
         this.setLayout(new GridBagLayout());
+        this.createdFromDB = createdFromDB;
         addPatientComponents();
         addCoefficientsComponents();
         addButtons();
         addListeners();
-        this.createdFromDB = createdFromDB;
     }
 
     private void addPatientComponents(){

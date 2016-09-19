@@ -54,7 +54,7 @@ public class PatientPanelListener implements ActionListener {
         if (e.getSource().equals(patientPanel.getAddPatientBtn())){
             addPatient();
         } else if (e.getSource().equals(patientPanel.getReturnBtn())){
-            exit();
+            exit(false);
         }
     }
 
@@ -65,11 +65,14 @@ public class PatientPanelListener implements ActionListener {
                 database.runExecuteUpdateQuery(PatientsDatabase.insertToPatiens(name, surname, patronymic, birthDate));
                 database.runExecuteUpdateQuery(PatientsDatabase.insertToCoefficients(checkupDate, ast, alt, kfk, ldg, shf, ggtp, he, gldg));
 
-                if (!createdFromDB) {
+                if (createdFromDB) {
+                    JOptionPane.showMessageDialog(null, rb.getString("interface.patient.added"));
+                    exit(true);
+                } else {
                     Object[] options = {rb.getString("interface.Yes"),
                             rb.getString("interface.No")};
                     if (JOptionPane.showOptionDialog(null,
-                            rb.getString("interface.patient.added"),
+                            rb.getString("interface.patient.added.goto"),
                             "",
                             JOptionPane.YES_NO_OPTION,
                             JOptionPane.QUESTION_MESSAGE,
@@ -80,6 +83,7 @@ public class PatientPanelListener implements ActionListener {
                         new DatabasePanelCreator(database);
                     }
                 }
+
             } else {
                 JOptionPane.showMessageDialog(null,errors.toString());
             }
@@ -284,19 +288,23 @@ public class PatientPanelListener implements ActionListener {
         }
     }
 
-    private void exit(){
-        Object[] options = {rb.getString("interface.patient.quit.yes"),
-                rb.getString("interface.patient.quit.no")};
-        if (JOptionPane.showOptionDialog(null,
-                rb.getString("interface.patient.quit.question"),
-                "",
-                JOptionPane.YES_NO_OPTION,
-                JOptionPane.QUESTION_MESSAGE,
-                null,
-                options,
-                options[0]
-        ) == JOptionPane.YES_OPTION){
+    private void exit(boolean forceExit){
+        if (forceExit){
             patientPanel.getFrame().dispose();
+        } else {
+            Object[] options = {rb.getString("interface.patient.quit.yes"),
+                    rb.getString("interface.patient.quit.no")};
+            if (JOptionPane.showOptionDialog(null,
+                    rb.getString("interface.patient.quit.question"),
+                    "",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    options,
+                    options[0]
+            ) == JOptionPane.YES_OPTION) {
+                patientPanel.getFrame().dispose();
+            }
         }
     }
 }
