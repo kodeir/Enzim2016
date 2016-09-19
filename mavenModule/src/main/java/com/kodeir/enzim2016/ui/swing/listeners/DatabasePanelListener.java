@@ -62,6 +62,7 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
+        databasePanel.getAddNewCoefficientsBtn().setEnabled(true);
         if (e.getSource().equals(databasePanel.getPatientsList())){
             setPatient();
         } else if (e.getSource().equals(databasePanel.getCoefficientsList())){

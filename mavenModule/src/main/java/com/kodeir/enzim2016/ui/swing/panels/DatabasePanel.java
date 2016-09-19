@@ -160,6 +160,7 @@ public class DatabasePanel extends JPanel {
         this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,6,4,5));
 
         addNewCoefficientsBtn = new JButton(rb.getString("interface.database.add_coefficients"));
+        addNewCoefficientsBtn.setEnabled(false);
         this.add(addNewCoefficientsBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,11,2));
     }
 
