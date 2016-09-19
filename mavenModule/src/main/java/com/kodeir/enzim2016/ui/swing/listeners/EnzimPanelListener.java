@@ -52,7 +52,7 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createNewPatientPanel(){
-        PatientPanel patientPanel = new PatientPanel();
+        PatientPanel patientPanel = new PatientPanel(false);
         patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
     }
 

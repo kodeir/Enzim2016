@@ -38,8 +38,15 @@ public class PatientPanelListener implements ActionListener {
 
     private PatientPanel patientPanel;
 
+    private boolean createdFromDB;
+
     public PatientPanelListener(PatientPanel patientPanel){
         this.patientPanel = patientPanel;
+    }
+
+    public PatientPanelListener(PatientPanel patientPanel, boolean createdFromDB){
+        this.patientPanel = patientPanel;
+        this.createdFromDB = createdFromDB;
     }
 
     @Override
@@ -58,18 +65,20 @@ public class PatientPanelListener implements ActionListener {
                 database.runExecuteUpdateQuery(PatientsDatabase.insertToPatiens(name, surname, patronymic, birthDate));
                 database.runExecuteUpdateQuery(PatientsDatabase.insertToCoefficients(checkupDate, ast, alt, kfk, ldg, shf, ggtp, he, gldg));
 
-                Object[] options = {rb.getString("interface.Yes"),
-                        rb.getString("interface.No")};
-                if (JOptionPane.showOptionDialog(null,
-                        rb.getString("interface.patient.added"),
-                        "",
-                        JOptionPane.YES_NO_OPTION,
-                        JOptionPane.QUESTION_MESSAGE,
-                        null,
-                        options,
-                        options[0]
-                ) == JOptionPane.YES_OPTION){
-                    new DatabasePanelCreator(database);
+                if (!createdFromDB) {
+                    Object[] options = {rb.getString("interface.Yes"),
+                            rb.getString("interface.No")};
+                    if (JOptionPane.showOptionDialog(null,
+                            rb.getString("interface.patient.added"),
+                            "",
+                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.QUESTION_MESSAGE,
+                            null,
+                            options,
+                            options[0]
+                    ) == JOptionPane.YES_OPTION) {
+                        new DatabasePanelCreator(database);
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null,errors.toString());

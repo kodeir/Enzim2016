@@ -34,6 +34,8 @@ public class PatientPanel extends JPanel {
     private JButton addPatientBtn;
     private JButton returnBtn;
 
+    private boolean createdFromDB;
+
     public JButton getAddPatientBtn() {
         return addPatientBtn;
     }
@@ -90,12 +92,13 @@ public class PatientPanel extends JPanel {
         return checkupDateField;
     }
 
-    public PatientPanel() {
+    public PatientPanel(boolean createdFromDB) {
         this.setLayout(new GridBagLayout());
         addPatientComponents();
         addCoefficientsComponents();
         addButtons();
         addListeners();
+        this.createdFromDB = createdFromDB;
     }
 
     private void addPatientComponents(){
@@ -162,7 +165,7 @@ public class PatientPanel extends JPanel {
     }
 
     private void addListeners(){
-        addPatientBtn.addActionListener(new PatientPanelListener(this));
+        addPatientBtn.addActionListener(new PatientPanelListener(this, createdFromDB));
         returnBtn.addActionListener(new PatientPanelListener(this));
     }
 }
