@@ -70,18 +70,22 @@ public class PatientPanelListener implements ActionListener {
                     exit(true);
                 } else {
                     Object[] options = {rb.getString("interface.Yes"),
-                            rb.getString("interface.No")};
-                    if (JOptionPane.showOptionDialog(null,
+                            rb.getString("interface.No.add"),
+                            rb.getString("interface.exit")};
+                    int choice = JOptionPane.showOptionDialog(null,
                             rb.getString("interface.patient.added.goto"),
                             "",
-                            JOptionPane.YES_NO_OPTION,
+                            JOptionPane.YES_NO_CANCEL_OPTION,
                             JOptionPane.QUESTION_MESSAGE,
                             null,
                             options,
-                            options[0]
-                    ) == JOptionPane.YES_OPTION) {
-                        new DatabasePanelCreator(database);
+                            options[2]);
+                    switch (choice){
+                        case JOptionPane.YES_OPTION: new DatabasePanelCreator(database);
+                            exit(true);
+                        case JOptionPane.CANCEL_OPTION: exit(true);
                     }
+
                 }
 
             } else {
