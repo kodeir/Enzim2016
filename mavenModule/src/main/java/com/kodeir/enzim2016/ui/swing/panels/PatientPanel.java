@@ -17,19 +17,8 @@ public class PatientPanel extends JPanel {
 
     private JFrame frame;
 
-    private JLabel label;
-
     private PatientPIPanel patientPIPanel;
-
-    private JFormattedTextField astField;
-    private JFormattedTextField altField;
-    private JFormattedTextField kfkField;
-    private JFormattedTextField ldgField;
-    private JFormattedTextField shfField;
-    private JFormattedTextField ggtpField;
-    private JFormattedTextField heField;
-    private JFormattedTextField gldgField;
-    private JFormattedTextField checkupDateField;
+    private CoefficientsPanel coefficientsPanel;
 
     private JButton addPatientBtn;
     private JButton returnBtn;
@@ -56,41 +45,6 @@ public class PatientPanel extends JPanel {
         return patientPIPanel;
     }
 
-    public JFormattedTextField getAstField() {
-        return astField;
-    }
-
-    public JFormattedTextField getAltField() {
-        return altField;
-    }
-
-    public JFormattedTextField getKfkField() {
-        return kfkField;
-    }
-
-    public JFormattedTextField getLdgField() {
-        return ldgField;
-    }
-
-    public JFormattedTextField getShfField() {
-        return shfField;
-    }
-
-    public JFormattedTextField getGgtpField() {
-        return ggtpField;
-    }
-
-    public JFormattedTextField getHeField() {
-        return heField;
-    }
-
-    public JFormattedTextField getGldgField() {
-        return gldgField;
-    }
-
-    public JFormattedTextField getCheckupDateField() {
-        return checkupDateField;
-    }
 
     public PatientPanel(boolean createdFromDB) {
         this.setLayout(new GridBagLayout());
@@ -107,53 +61,8 @@ public class PatientPanel extends JPanel {
     }
 
     private void addCoefficientsComponents(){
-        label = new JLabel(rb.getString("coefficients"));
-        label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,5,2));
-
-        label = new EnzimLabel(rb.getString("coefficients.ast"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,6,1));
-        label = new EnzimLabel(rb.getString("coefficients.alt"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,6));
-        label = new EnzimLabel(rb.getString("coefficients.kfk"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,6));
-        label = new EnzimLabel(rb.getString("coefficients.ldg"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,6));
-
-        astField = new EnzimFloatField();
-        this.add(astField, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,7));
-        altField = new EnzimFloatField();
-        this.add(altField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,7));
-        kfkField = new EnzimFloatField();
-        this.add(kfkField, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,7));
-        ldgField = new EnzimFloatField();
-        this.add(ldgField, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,7));
-
-        label = new EnzimLabel(rb.getString("coefficients.shf"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,8));
-        label = new EnzimLabel(rb.getString("coefficients.ggtp"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,8));
-        label = new EnzimLabel(rb.getString("coefficients.he"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,8));
-        label = new EnzimLabel(rb.getString("coefficients.gldg"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,8));
-
-        shfField = new EnzimFloatField();
-        this.add(shfField, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,9));
-        ggtpField = new EnzimFloatField();
-        this.add(ggtpField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,9));
-        heField = new EnzimFloatField();
-        this.add(heField, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,9));
-        gldgField = new EnzimFloatField();
-        this.add(gldgField, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,9));
-
-        label = new EnzimLabel(rb.getString("coefficients.checkup_date"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,10));
-        checkupDateField = new EnzimDateField();
-        this.add(checkupDateField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,10));
-        label = new EnzimLabel(rb.getString("interface.date_format"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,10));
-
+        coefficientsPanel = new CoefficientsPanel();
+        this.add(coefficientsPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,5,4,4));
     }
 
     private void addButtons(){
@@ -165,7 +74,7 @@ public class PatientPanel extends JPanel {
     }
 
     private void addListeners(){
-        addPatientBtn.addActionListener(new PatientPanelListener(this, createdFromDB));
-        returnBtn.addActionListener(new PatientPanelListener(this));
+        addPatientBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
+        returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel));
     }
 }

@@ -7,6 +7,7 @@ import com.kodeir.enzim2016.pi.Coefficients;
 import com.kodeir.enzim2016.pi.Patient;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
+import com.kodeir.enzim2016.ui.swing.panels.NewCoefficientsPanel;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
 
 import javax.swing.*;
@@ -37,7 +38,8 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
             PatientPanel patientPanel = new PatientPanel(true);
             patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
         } else if (e.getSource().equals(databasePanel.getAddNewCoefficientsBtn())) {
-            JOptionPane.showMessageDialog(null, "add new coeff btn");
+            NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel();
+            newCoefficientsPanel.setFrame(new EnzimFrame("Add new coefficients", newCoefficientsPanel));
         } else if (e.getSource().equals(databasePanel.getExitBtn())) {
             exit();
         }
@@ -62,7 +64,8 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        databasePanel.getAddNewCoefficientsBtn().setEnabled(true);
+        databasePanel.getAddNewCoefficientsBtn().setEnabled(true
+        );
         if (e.getSource().equals(databasePanel.getPatientsList())){
             setPatient();
         } else if (e.getSource().equals(databasePanel.getCoefficientsList())){

@@ -4,6 +4,7 @@ import com.kodeir.enzim2016.commons.Database;
 import com.kodeir.enzim2016.commons.PatientsDatabase;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.ui.swing.panels.CoefficientsPanel;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
 
 import javax.swing.*;
@@ -24,29 +25,24 @@ public class PatientPanelListener implements ActionListener {
     private String surname;
     private String patronymic;
     private LocalDate birthDate;
-    private float ast;
-    private float alt;
-    private float kfk;
-    private float ldg;
-    private float shf;
-    private float ggtp;
-    private float he;
-    private float gldg;
-    private LocalDate checkupDate;
 
     private StringBuilder errors;
 
     private PatientPanel patientPanel;
+    private CoefficientsPanel coefficientsPanel;
+    private CoefficientsHandler coefficientsHandler;
 
     private boolean createdFromDB;
 
-    public PatientPanelListener(PatientPanel patientPanel){
-        this.patientPanel = patientPanel;
+    public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel){
+        new PatientPanelListener(patientPanel, coefficientsPanel, false);
     }
 
-    public PatientPanelListener(PatientPanel patientPanel, boolean createdFromDB){
+    public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel, boolean createdFromDB){
         this.patientPanel = patientPanel;
+        this.coefficientsPanel = coefficientsPanel;
         this.createdFromDB = createdFromDB;
+        coefficientsHandler = new CoefficientsHandler(coefficientsPanel);
     }
 
     @Override
@@ -61,10 +57,18 @@ public class PatientPanelListener implements ActionListener {
     private void addPatient(){
         if (connectToDatabase()){
             database.setStatement();
+
             if (checkInput()){
                 database.runExecuteUpdateQuery(PatientsDatabase.insertToPatiens(name, surname, patronymic, birthDate));
-                database.runExecuteUpdateQuery(PatientsDatabase.insertToCoefficients(checkupDate, ast, alt, kfk, ldg, shf, ggtp, he, gldg));
-
+                database.runExecuteUpdateQuery(PatientsDatabase.insertToCoefficients(coefficientsHandler.getCheckupDate(),
+                        coefficientsHandler.getAst(),
+                        coefficientsHandler.getAlt(),
+                        coefficientsHandler.getKfk(),
+                        coefficientsHandler.getLdg(),
+                        coefficientsHandler.getShf(),
+                        coefficientsHandler.getGgtp(),
+                        coefficientsHandler.getHe(),
+                        coefficientsHandler.getGldg()));
                 if (createdFromDB) {
                     JOptionPane.showMessageDialog(null, rb.getString("interface.patient.added"));
                     exit(true);
@@ -85,9 +89,7 @@ public class PatientPanelListener implements ActionListener {
                             exit(true);
                         case JOptionPane.CANCEL_OPTION: exit(true);
                     }
-
                 }
-
             } else {
                 JOptionPane.showMessageDialog(null,errors.toString());
             }
@@ -123,39 +125,39 @@ public class PatientPanelListener implements ActionListener {
             buildErrorString(rb.getString("patient.birthdate"));
             check = false;
         }
-        if (!checkAst()){
+        if (!coefficientsHandler.checkAst()){
             buildErrorString(rb.getString("coefficients.ast"));
             check = false;
         }
-        if (!checkAlt()){
+        if (!coefficientsHandler.checkAlt()){
             buildErrorString(rb.getString("coefficients.alt"));
             check = false;
         }
-        if (!checkKfk()){
+        if (!coefficientsHandler.checkKfk()){
             buildErrorString(rb.getString("coefficients.kfk"));
             check = false;
         }
-        if (!checkLdg()){
+        if (!coefficientsHandler.checkLdg()){
             buildErrorString(rb.getString("coefficients.ldg"));
             check = false;
         }
-        if (!checkShf()){
+        if (!coefficientsHandler.checkShf()){
             buildErrorString(rb.getString("coefficients.shf"));
             check = false;
         }
-        if (!checkGgtp()){
+        if (!coefficientsHandler.checkGgtp()){
             buildErrorString(rb.getString("coefficients.ggtp"));
             check = false;
         }
-        if (!checkHe()){
+        if (!coefficientsHandler.checkHe()){
             buildErrorString(rb.getString("coefficients.he"));
             check = false;
         }
-        if (!checkGldg()){
+        if (!coefficientsHandler.checkGldg()){
             buildErrorString(rb.getString("coefficients.gldg"));
             check = false;
         }
-        if (!checkCheckupdate()){
+        if (!coefficientsHandler.checkCheckupdate()){
             buildErrorString(rb.getString("coefficients.checkup_date"));
             check = false;
         }
@@ -197,87 +199,6 @@ public class PatientPanelListener implements ActionListener {
     private boolean checkBirthdate(){
         if (checkDate(patientPanel.getPatientPIPanel().getPatientBirthdateField().getText())){
             birthDate = LocalDate.parse(patientPanel.getPatientPIPanel().getPatientBirthdateField().getText());
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    private boolean checkAst(){
-        if (patientPanel.getAstField().getText().equals("")){
-            return false;
-        } else {
-            ast = ((Number) patientPanel.getAstField().getValue()).floatValue();
-            return true;
-        }
-    }
-
-    private boolean checkAlt(){
-        if (patientPanel.getAltField().getText().equals("")){
-            return false;
-        } else {
-            alt = ((Number) patientPanel.getAltField().getValue()).floatValue();
-            return true;
-        }
-    }
-
-    private boolean checkKfk(){
-        if (patientPanel.getKfkField().getText().equals("")){
-            return false;
-        } else {
-            kfk = ((Number) patientPanel.getKfkField().getValue()).floatValue();
-            return true;
-        }
-    }
-
-    private boolean checkLdg(){
-        if (patientPanel.getLdgField().getText().equals("")){
-            return false;
-        } else {
-            ldg = ((Number) patientPanel.getLdgField().getValue()).floatValue();
-            return true;
-        }
-    }
-
-    private boolean checkShf(){
-        if (patientPanel.getShfField().getText().equals("")){
-            return false;
-        } else {
-            shf = ((Number) patientPanel.getShfField().getValue()).floatValue();
-            return true;
-        }
-    }
-
-    private boolean checkGgtp(){
-        if (patientPanel.getGgtpField().getText().equals("")){
-            return false;
-        } else {
-            ggtp = ((Number) patientPanel.getGgtpField().getValue()).floatValue();
-            return true;
-        }
-    }
-
-    private boolean checkHe(){
-        if (patientPanel.getHeField().getText().equals("")){
-            return false;
-        } else {
-            he = ((Number) patientPanel.getHeField().getValue()).floatValue();
-            return true;
-        }
-    }
-
-    private boolean checkGldg(){
-        if (patientPanel.getGldgField().getText().equals("")){
-            return false;
-        } else {
-            gldg = ((Number) patientPanel.getGldgField().getValue()).floatValue();
-            return true;
-        }
-    }
-
-    private boolean checkCheckupdate(){
-        if (checkDate(patientPanel.getCheckupDateField().getText())){
-            checkupDate = LocalDate.parse(patientPanel.getCheckupDateField().getText());
             return true;
         } else {
             return false;

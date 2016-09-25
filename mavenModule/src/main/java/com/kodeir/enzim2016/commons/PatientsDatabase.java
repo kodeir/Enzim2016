@@ -92,6 +92,21 @@ public class PatientsDatabase {
                 ")";
     }
 
+    public static String insertToCoefficientsManual(LocalDate checkupDate, long patient_id, float ast, float alt, float kfk, float ldg, float shf, float ggtp, float he, float gldg){
+        return "INSERT INTO COEFFICIENTS(checkup_date, patient_id, AST, ALT, KFK, LDG, SHF, GGTP, GLDG, HE) VALUES(" +
+                " '" + checkupDate + "'" +
+                ", " + patient_id +
+                ", " + ast +
+                ", " + alt +
+                ", " + kfk +
+                ", " + ldg +
+                ", " + shf +
+                ", " + ggtp +
+                ", " + gldg +
+                ", " + he +
+                ")";
+    }
+
     public static boolean connectToDatabaseAnyway(Database database){
         return database.setConnection(
                 PropertyHandler.getInstance().getValue("datasource.url"),
