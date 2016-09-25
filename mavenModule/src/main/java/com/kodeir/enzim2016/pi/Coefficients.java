@@ -159,7 +159,8 @@ public class Coefficients {
     }
 
     public String toString(){
-        return checkupDate + ": " +
+        return coefficients_id + ", " +
+                checkupDate + ": " +
                 ast + ", " +
                 alt + ", " +
                 kfk + ", " +
@@ -172,7 +173,7 @@ public class Coefficients {
 
     public Object[] toObjects(){
         Object[] objects = new Object[10];
-        objects[0] = patient_id;
+        objects[0] = coefficients_id;
         objects[1] = rb.getString("coefficients.checkup_date") + " " + checkupDate;
         objects[2] = rb.getString("coefficients.ast") + " " + ast;
         objects[3] = rb.getString("coefficients.alt") + " " + alt;

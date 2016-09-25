@@ -65,10 +65,16 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
     public void valueChanged(ListSelectionEvent e) {
         databasePanel.getAddNewCoefficientsBtn().setEnabled(true
         );
-        if (e.getSource().equals(databasePanel.getPatientsList())){
-            setPatient();
-        } else if (e.getSource().equals(databasePanel.getCoefficientsList())){
-            setCoefficients();
+        if (!e.getValueIsAdjusting()) {
+            if (e.getSource().equals(databasePanel.getPatientsList())) {
+                setPatient();
+                //System.out.println(1);
+            } else if (e.getSource().equals(databasePanel.getCoefficientsList())) {
+                if (!databasePanel.getCoefficientsList().isSelectionEmpty()) {
+                    setCoefficients();
+                    //System.out.println(2);
+                }
+            }
         }
     }
 
@@ -78,6 +84,7 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
         long patientId = Long.parseLong(id.substring(0,spaceIndex));
 
         List<Patient> patients = databasePanel.getPatients();
+        //System.out.println(patients.toString());
         for (Patient p : patients){
             if (p.getId() == patientId){
                 databasePanel.getPatientPIPanel().setPatientNameField(p.getName());
@@ -90,17 +97,20 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
                 databasePanel.getCoefficientsListModel().removeAllElements();
 
                 databasePanel.setCoefficientses(p.getCoefficients());
-
-                for (Coefficients c: databasePanel.getCoefficientses()){
+                System.out.println(databasePanel.getCoefficientses());
+                for (Coefficients c: p.getCoefficients()){
                     String coefficients = Arrays.toString(c.toObjects());
+                    System.out.println(coefficients);
                     coefficients = coefficients.substring(1,coefficients.length());
                     databasePanel.setCoefficientsListModel(coefficients);
+                    //System.out.println(coefficients);
                 }
             }
         }
     }
 
     private void setCoefficients() {
+        /*
         if (databasePanel.getCoefficientsListModel().getSize() == 0) {
             databasePanel.setListClicker(1);
         } else if (databasePanel.getListClicker()==1){
@@ -110,6 +120,20 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
             int spaceIndex = id.indexOf(",");
             long coefficientId = Long.parseLong(id.substring(0, spaceIndex));
 
+            for (Coefficients c: databasePanel.getCoefficientses()){
+                if (c.getCoefficients_id() == coefficientId) {
+                    Diagnosis diagnosis = new EnzimLogic();
+                    databasePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(c));
+                    databasePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.defineInjuredOrgan(c));
+                }
+            }
+        }
+        */
+        if (databasePanel.getCoefficientsListModel().getSize() != 0) {
+            String id = databasePanel.getCoefficientsListModel().get(databasePanel.getCoefficientsList().getSelectedIndex()).toString();
+            System.out.println(id);
+            long coefficientId = Long.parseLong(id.substring(0, id.indexOf(",")));
+            System.out.println(coefficientId);
             for (Coefficients c: databasePanel.getCoefficientses()){
                 if (c.getCoefficients_id() == coefficientId) {
                     Diagnosis diagnosis = new EnzimLogic();
