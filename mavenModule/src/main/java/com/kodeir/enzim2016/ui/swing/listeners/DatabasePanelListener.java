@@ -25,8 +25,7 @@ import java.util.ResourceBundle;
 public class DatabasePanelListener implements ActionListener, ListSelectionListener {
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
-
-    DatabasePanel databasePanel;
+    private DatabasePanel databasePanel;
 
     public DatabasePanelListener(DatabasePanel databasePanel){
         this.databasePanel = databasePanel;
@@ -38,7 +37,7 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
             PatientPanel patientPanel = new PatientPanel(true);
             patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
         } else if (e.getSource().equals(databasePanel.getAddNewCoefficientsBtn())) {
-            NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel();
+            NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel(databasePanel.getId());
             newCoefficientsPanel.setFrame(new EnzimFrame("Add new coefficients", newCoefficientsPanel));
         } else if (e.getSource().equals(databasePanel.getExitBtn())) {
             exit();
@@ -85,6 +84,8 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
                 databasePanel.getPatientPIPanel().setPatientSurnameField(p.getSurname());
                 databasePanel.getPatientPIPanel().setPatientPatronymicField(p.getPatronymic());
                 databasePanel.getPatientPIPanel().setPatientBirthdateField(p.getBirthDate().toString());
+
+                databasePanel.setId(patientId);
 
                 databasePanel.getCoefficientsListModel().removeAllElements();
 

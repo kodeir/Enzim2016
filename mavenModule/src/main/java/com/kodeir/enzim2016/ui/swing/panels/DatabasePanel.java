@@ -19,6 +19,7 @@ public class DatabasePanel extends JPanel {
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private JLabel label;
+    private JLabel idLabel;
 
     private int listClicker = 0;
 
@@ -40,6 +41,14 @@ public class DatabasePanel extends JPanel {
     private JFrame frame;
 
     private JButton exitBtn;
+
+    public long getId(){
+        return Long.parseLong(this.idLabel.getText());
+    }
+
+    public void setId(long patientId){
+        idLabel.setText(String.valueOf(patientId));
+    }
 
     public int getListClicker() {
         return listClicker;
@@ -135,21 +144,24 @@ public class DatabasePanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(patientsList);
         EnzimSwingCommons.setSize(scrollPane,300,375);
-        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,1,1,15));
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,1,1,16));
 
         addNewPatientBtn = new JButton(rb.getString("interface.patient.add"));
-        this.add(addNewPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,16));
+        this.add(addNewPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,17));
     }
 
     private void addPatientPIPanel() {
         patientPIPanel = new PatientPIPanel();
         this.add(patientPIPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,0,4,5));
+
+        idLabel = new JLabel("0");
+        this.add(idLabel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,5));
     }
 
     private void addCoefficientsPanel() {
         label = new JLabel(rb.getString("interface.database.coefficients_list"));
         label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,5,2));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,6,2));
 
         coefficientsListModel = new DefaultListModel();
         coefficientsList = new JList<>(coefficientsListModel);
@@ -157,21 +169,21 @@ public class DatabasePanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(coefficientsList);
         EnzimSwingCommons.setSize(scrollPane,600,125);
-        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,6,4,5));
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,7,4,5));
 
         addNewCoefficientsBtn = new JButton(rb.getString("interface.database.add_coefficients"));
         addNewCoefficientsBtn.setEnabled(false);
-        this.add(addNewCoefficientsBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,11,2));
+        this.add(addNewCoefficientsBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,12,2));
     }
 
     private void addDiagnosePanel() {
         diagnosePanel = new DiagnosePanel();
-        this.add(diagnosePanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,12,4,4));
+        this.add(diagnosePanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,13,4,4));
     }
 
     private void addExitButton() {
         exitBtn = new JButton(rb.getString("interface.database.close"));
-        this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,16,2));
+        this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,17,2));
     }
 
     private void addListeners(){

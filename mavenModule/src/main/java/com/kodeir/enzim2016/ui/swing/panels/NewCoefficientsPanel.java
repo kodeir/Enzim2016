@@ -20,6 +20,8 @@ public class NewCoefficientsPanel extends JPanel{
     private JButton addNewCoefficientsBtn;
     private JButton returnBtn;
 
+    private long patientId;
+
     private CoefficientsPanel coefficientsPanel;
 
     public JButton getAddNewCoefficientsBtn() {
@@ -30,6 +32,10 @@ public class NewCoefficientsPanel extends JPanel{
         return returnBtn;
     }
 
+    public CoefficientsPanel getCoefficientsPanel(){
+        return this.coefficientsPanel;
+    }
+
     public JFrame getFrame(){
         return frame;
     }
@@ -38,8 +44,9 @@ public class NewCoefficientsPanel extends JPanel{
         this.frame = frame;
     }
 
-    public NewCoefficientsPanel() {
+    public NewCoefficientsPanel(long patientId) {
         this.setLayout(new GridBagLayout());
+        this.patientId = patientId;
         addCoefficientsComponents();
         addButtons();
         addListeners();
@@ -59,7 +66,7 @@ public class NewCoefficientsPanel extends JPanel{
     }
 
     private void addListeners() {
-        addNewCoefficientsBtn.addActionListener(new NewCoefficientsListener(this));
-        returnBtn.addActionListener(new NewCoefficientsListener(this));
+        addNewCoefficientsBtn.addActionListener(new NewCoefficientsListener(this, patientId));
+        returnBtn.addActionListener(new NewCoefficientsListener(this, patientId));
     }
 }
