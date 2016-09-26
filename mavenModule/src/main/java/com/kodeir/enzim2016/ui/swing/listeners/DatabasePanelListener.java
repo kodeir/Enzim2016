@@ -116,6 +116,18 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
                     Diagnosis diagnosis = new EnzimLogic();
                     databasePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(c));
                     databasePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.defineInjuredOrgan(c));
+
+                    databasePanel.getCoefficientsPanel().setValues(
+                            c.getAst(),
+                            c.getAlt(),
+                            c.getKfk(),
+                            c.getLdg(),
+                            c.getShf(),
+                            c.getGgtp(),
+                            c.getHe(),
+                            c.getGldg(),
+                            c.getCheckupDate()
+                    );
                 }
             }
         }

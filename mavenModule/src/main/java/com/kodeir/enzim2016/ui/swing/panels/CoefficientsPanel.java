@@ -8,6 +8,7 @@ import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 
 import javax.swing.*;
 import java.awt.*;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 /**
@@ -118,5 +119,19 @@ public class CoefficientsPanel extends JPanel{
         this.add(checkupDateField, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,5));
         label = new EnzimLabel(rb.getString("interface.date_format"));
         this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,5));
+    }
+
+    public void setValues(float ast, float alt, float kfk, float ldg,
+                     float shf, float ggtp, float he, float gldg,
+                     LocalDate checkupDate){
+        astField.setText(String.valueOf(ast));
+        altField.setText(String.valueOf(alt));
+        kfkField.setText(String.valueOf(kfk));
+        ldgField.setText(String.valueOf(shf));
+        shfField.setText(String.valueOf(ldg));
+        ggtpField.setText(String.valueOf(ggtp));
+        heField.setText(String.valueOf(he));
+        gldgField.setText(String.valueOf(gldg));
+        checkupDateField.setText(String.valueOf(checkupDate));
     }
 }
