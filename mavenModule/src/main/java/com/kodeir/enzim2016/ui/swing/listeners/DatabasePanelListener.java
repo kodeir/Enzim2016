@@ -37,12 +37,18 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
             PatientPanel patientPanel = new PatientPanel(true);
             patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
         } else if (e.getSource().equals(databasePanel.getAddNewCoefficientsBtn())) {
-            NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel(databasePanel.getId());
+            NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel(getPatientId());
             newCoefficientsPanel.setFrame(new EnzimFrame("Add new coefficients", newCoefficientsPanel));
         } else if (e.getSource().equals(databasePanel.getExitBtn())) {
             exit();
         }
 
+    }
+
+    private long getPatientId(){
+        String id = databasePanel.getPatientsListModel().get(databasePanel.getPatientsList().getSelectedIndex()).toString();
+        System.out.println(id);
+        return Long.parseLong(id.substring(0, id.indexOf(".")));
     }
 
     private void exit(){
@@ -91,8 +97,6 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
                 databasePanel.getPatientPIPanel().setPatientSurnameField(p.getSurname());
                 databasePanel.getPatientPIPanel().setPatientPatronymicField(p.getPatronymic());
                 databasePanel.getPatientPIPanel().setPatientBirthdateField(p.getBirthDate().toString());
-
-                databasePanel.setId(patientId);
 
                 databasePanel.getCoefficientsListModel().removeAllElements();
 
