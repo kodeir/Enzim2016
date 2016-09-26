@@ -42,6 +42,8 @@ public class DatabasePanelCreator {
                     p.getPatronymic().substring(0,1) + ". ; " +
                     rb.getString("interface.database.birthdate") + p.getBirthDate());
         }
+        databasePanel.getPatientPIPanel().setEditable(false);
+        databasePanel.getCoefficientsPanel().setEditable(false);
     }
 
     private List<Patient> getPatients(){

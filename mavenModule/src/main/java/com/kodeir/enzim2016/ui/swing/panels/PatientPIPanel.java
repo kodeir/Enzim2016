@@ -92,4 +92,11 @@ public class PatientPIPanel extends JPanel{
         label = new EnzimLabel(rb.getString("interface.date_format"));
         this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,4));
     }
+
+    public void setEditable(boolean editable){
+        patientNameField.setEditable(editable);
+        patientSurnameField.setEditable(editable);
+        patientPatronymicField.setEditable(editable);
+        patientBirthdateField.setEditable(editable);
+    }
 }

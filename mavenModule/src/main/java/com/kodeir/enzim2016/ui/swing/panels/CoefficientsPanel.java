@@ -30,7 +30,6 @@ public class CoefficientsPanel extends JPanel{
     private JFormattedTextField gldgField;
     private JFormattedTextField checkupDateField;
 
-
     public JFormattedTextField getAstField() {
         return astField;
     }
@@ -133,5 +132,17 @@ public class CoefficientsPanel extends JPanel{
         heField.setText(String.valueOf(he));
         gldgField.setText(String.valueOf(gldg));
         checkupDateField.setText(String.valueOf(checkupDate));
+    }
+
+    public void setEditable(boolean editable){
+        astField.setEditable(editable);
+        altField.setEditable(editable);
+        kfkField.setEditable(editable);
+        ldgField.setEditable(editable);
+        shfField.setEditable(editable);
+        ggtpField.setEditable(editable);
+        heField.setEditable(editable);
+        gldgField.setEditable(editable);
+        checkupDateField.setEditable(editable);
     }
 }
