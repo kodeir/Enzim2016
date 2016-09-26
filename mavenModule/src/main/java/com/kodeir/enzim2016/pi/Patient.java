@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by Sergei Riabinin on 11.06.2016.
  */
-public class Patient {
+public class Patient implements Comparable{
 
     private long id;
     private String name;
@@ -18,7 +18,7 @@ public class Patient {
     private List<Coefficients> coefficients;
 
     public Patient(long id, String name, String surname, String patronymic, LocalDate birthDate) {
-        this(id, name, surname, patronymic, birthDate, new ArrayList<Coefficients>());
+        this(id, name, surname, patronymic, birthDate, new ArrayList<>());
     }
 
     public Patient(long id, String name, String surname, String patronymic, LocalDate birthDate, List<Coefficients> coefficients) {
@@ -87,4 +87,9 @@ public class Patient {
                 + newLine;
     }
 
+    @Override
+    public int compareTo(Object o) {
+        Patient p = (Patient) o;
+        return p.surname.compareTo(p.surname) == 0 ? p.name.compareTo(p.name) : p.surname.compareTo(p.surname);
+    }
 }

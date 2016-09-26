@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -31,6 +32,7 @@ public class DatabasePanelCreator {
 
     private void createDatabasePanel(){
         List<Patient> patients = getPatients();
+        Collections.sort(patients);
         DatabasePanel databasePanel = new DatabasePanel(patients);
         databasePanel.setFrame(new EnzimFrame(rb.getString("interface.database"), databasePanel));
         for (Patient p: patients){
