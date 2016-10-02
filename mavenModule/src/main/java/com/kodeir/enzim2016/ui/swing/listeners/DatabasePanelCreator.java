@@ -23,7 +23,7 @@ public class DatabasePanelCreator {
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
-    Database database;
+    private Database database;
 
     public DatabasePanelCreator(){
         database = new Database();
