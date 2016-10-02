@@ -24,6 +24,8 @@ public class DatabasePanelCreator {
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private Database database;
+    private DatabasePanel databasePanel;
+    private List<Patient> patients;
 
     public DatabasePanelCreator(){
         database = new Database();
@@ -31,20 +33,35 @@ public class DatabasePanelCreator {
     }
 
     private void createDatabasePanel(){
-        List<Patient> patients = getPatients();
+        setPatients();
+        initializePanel();
+        fillPatientsListModel();
+    }
+
+    private void setPatients(){
+        patients = getPatientsFromDb();
+        //TODO: get sorted right
         Collections.sort(patients);
-        DatabasePanel databasePanel = new DatabasePanel(patients);
+    }
+
+    private void initializePanel(){
+        databasePanel = new DatabasePanel(patients);
         databasePanel.setFrame(new EnzimFrame(rb.getString("interface.database"), databasePanel));
+    }
+
+    private void fillPatientsListModel(){
         for (Patient p: patients){
-            databasePanel.setPatientsListModel(p.getId() + ". " +
+            databasePanel.setPatientsListModel(
+                    p.getId() + ". " +
                     p.getSurname() + " " +
                     p.getName().substring(0,1) + "." +
                     p.getPatronymic().substring(0,1) + ". ; " +
-                    rb.getString("interface.database.birthdate") + p.getBirthDate());
+                    rb.getString("interface.database.birthdate") + p.getBirthDate()
+            );
         }
     }
 
-    private List<Patient> getPatients(){
+    private List<Patient> getPatientsFromDb(){
         if (connectToDatabase()){
             database.setStatement();
             List<Patient> patients = new ArrayList<>();
@@ -90,7 +107,6 @@ public class DatabasePanelCreator {
     }
 
     private boolean connectToDatabase(){
-        database = new Database();
         return database.setConnectionIfDbExist(
                 PropertyHandler.getInstance().getValue("datasource.url"),
                 PropertyHandler.getInstance().getValue("datasource.username"),
