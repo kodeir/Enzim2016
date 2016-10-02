@@ -85,7 +85,7 @@ public class PatientPanelListener implements ActionListener {
                             options,
                             options[2]);
                     switch (choice){
-                        case JOptionPane.YES_OPTION: new DatabasePanelCreator(database);
+                        case JOptionPane.YES_OPTION: new DatabasePanelCreator();
                             exit(true);
                         case JOptionPane.CANCEL_OPTION: exit(true);
                     }

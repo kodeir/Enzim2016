@@ -25,8 +25,8 @@ public class DatabasePanelCreator {
 
     Database database;
 
-    public DatabasePanelCreator(Database database){
-        this.database = database;
+    public DatabasePanelCreator(){
+        database = new Database();
         createDatabasePanel();
     }
 

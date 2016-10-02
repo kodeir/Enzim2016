@@ -30,8 +30,6 @@ public class EnzimPanelListener implements ActionListener{
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
-    private Database database;
-
     private EnzimPanel enzimPanel;
 
     public EnzimPanelListener(EnzimPanel enzimPanel){
@@ -57,7 +55,7 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createDatabasePanel(){
-        new DatabasePanelCreator(database);
+        new DatabasePanelCreator();
     }
 
     private void createTreePanel(){
