@@ -38,6 +38,8 @@ import com.kodeir.enzim2016.ui.swing.listeners.TreeListener;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import java.awt.*;
 import java.util.ResourceBundle;
 
@@ -69,6 +71,28 @@ public class TreePanel extends JPanel {
     private float[] floats;
     private String missedCoefficients;
     private String wrongCoefficients;
+
+    private DefaultMutableTreeNode injuredOrgan;
+    private DefaultMutableTreeNode disease;
+    private JTree tree;
+    private DefaultTreeModel treeModel;
+    private DefaultMutableTreeNode AlT_Node_0;
+
+    public DefaultMutableTreeNode getAlT_Node_0(){
+        return AlT_Node_0;
+    }
+    public DefaultMutableTreeNode getInjuredOrgan(){
+        return injuredOrgan;
+    }
+    public DefaultMutableTreeNode getdisease(){
+        return disease;
+    }
+    public JTree getTree(){
+        return tree;
+    }
+    public DefaultTreeModel getTreeModel(){
+        return treeModel;
+    }
 
     public JButton getDoDiagnoseBtn() {
         return doDiagnoseBtn;
@@ -148,9 +172,12 @@ public class TreePanel extends JPanel {
         root.add(createInjuredOrganBranch());
         root.add(createDiseaseBranch());
 
-        JTree tree = new JTree(root);
+        treeModel = new DefaultTreeModel(root);
+
+        tree = new JTree(treeModel);
         tree.setRootVisible(false);
         tree.setMinimumSize(new Dimension(600,500));
+        tree.getExpandsSelectedPaths();
 
         JScrollPane scrollPane = new JScrollPane(tree);
         scrollPane.setMinimumSize(new Dimension(600,500));
@@ -158,11 +185,11 @@ public class TreePanel extends JPanel {
     }
 
     private DefaultMutableTreeNode createInjuredOrganBranch(){
-        DefaultMutableTreeNode injuredOrgan = new DefaultMutableTreeNode(rb.getString("organs.Injured_organ"));
+        injuredOrgan = new DefaultMutableTreeNode(rb.getString("organs.Injured_organ"));
 
         DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast.41_150"));
         injuredOrgan.add(AsT_Node);
-        DefaultMutableTreeNode AlT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.41_250"));
+         AlT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.41_250"));
         DefaultMutableTreeNode AlT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.0_40"));
         AsT_Node.add(AlT_Node_0);
         AsT_Node.add(AlT_Node_1);
@@ -205,7 +232,7 @@ public class TreePanel extends JPanel {
     }
 
     private DefaultMutableTreeNode createDiseaseBranch(){
-        DefaultMutableTreeNode disease = new DefaultMutableTreeNode(rb.getString("diseases.Disease"));
+        disease = new DefaultMutableTreeNode(rb.getString("diseases.Disease"));
 
         DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast.41_150"));
         disease.add(AsT_Node);

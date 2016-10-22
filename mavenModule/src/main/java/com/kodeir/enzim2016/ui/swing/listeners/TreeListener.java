@@ -7,6 +7,7 @@ import com.kodeir.enzim2016.pi.Patient;
 import com.kodeir.enzim2016.ui.swing.panels.TreePanel;
 
 import javax.swing.*;
+import javax.swing.tree.TreePath;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -36,6 +37,9 @@ public class TreeListener implements ActionListener {
             Diagnosis diagnosis = new EnzimLogic();
             treePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.defineInjuredOrgan(coefficients));
             treePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(coefficients));
+
+            treePanel.getTree().setSelectionPath(new TreePath(
+                    treePanel.getTreeModel().getPathToRoot(treePanel.getAlT_Node_0())));
         } else {
             JOptionPane.showMessageDialog(null, treePanel.getMissedCoefficients());
             JOptionPane.showMessageDialog(null, treePanel.getWrongCoefficients());
