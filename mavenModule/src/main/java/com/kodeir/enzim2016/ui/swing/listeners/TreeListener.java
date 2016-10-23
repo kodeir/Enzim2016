@@ -38,8 +38,8 @@ public class TreeListener implements ActionListener {
             treePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.defineInjuredOrgan(coefficients));
             treePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(coefficients));
 
-            treePanel.getTree().setSelectionPath(new TreePath(
-                    treePanel.getTreeModel().getPathToRoot(treePanel.getAlT_Node_0())));
+            //treePanel.getTree().setSelectionPath(new TreePath(
+            //        treePanel.getTreeModel().getPathToRoot(treePanel.getAlT_Node_0())));
         } else {
             JOptionPane.showMessageDialog(null, treePanel.getMissedCoefficients());
             JOptionPane.showMessageDialog(null, treePanel.getWrongCoefficients());

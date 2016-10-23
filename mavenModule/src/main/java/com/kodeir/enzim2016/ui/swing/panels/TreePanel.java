@@ -72,21 +72,9 @@ public class TreePanel extends JPanel {
     private String missedCoefficients;
     private String wrongCoefficients;
 
-    private DefaultMutableTreeNode injuredOrgan;
-    private DefaultMutableTreeNode disease;
     private JTree tree;
     private DefaultTreeModel treeModel;
-    private DefaultMutableTreeNode AlT_Node_0;
 
-    public DefaultMutableTreeNode getAlT_Node_0(){
-        return AlT_Node_0;
-    }
-    public DefaultMutableTreeNode getInjuredOrgan(){
-        return injuredOrgan;
-    }
-    public DefaultMutableTreeNode getdisease(){
-        return disease;
-    }
     public JTree getTree(){
         return tree;
     }
@@ -185,11 +173,11 @@ public class TreePanel extends JPanel {
     }
 
     private DefaultMutableTreeNode createInjuredOrganBranch(){
-        injuredOrgan = new DefaultMutableTreeNode(rb.getString("organs.Injured_organ"));
+        DefaultMutableTreeNode injuredOrgan = new DefaultMutableTreeNode(rb.getString("organs.Injured_organ"));
 
         DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast.41_150"));
         injuredOrgan.add(AsT_Node);
-         AlT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.41_250"));
+        DefaultMutableTreeNode AlT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.41_250"));
         DefaultMutableTreeNode AlT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.0_40"));
         AsT_Node.add(AlT_Node_0);
         AsT_Node.add(AlT_Node_1);
@@ -232,7 +220,7 @@ public class TreePanel extends JPanel {
     }
 
     private DefaultMutableTreeNode createDiseaseBranch(){
-        disease = new DefaultMutableTreeNode(rb.getString("diseases.Disease"));
+        DefaultMutableTreeNode disease = new DefaultMutableTreeNode(rb.getString("diseases.Disease"));
 
         DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast.41_150"));
         disease.add(AsT_Node);
