@@ -45,7 +45,6 @@ public class PatientPanel extends JPanel {
         return patientPIPanel;
     }
 
-
     public PatientPanel(boolean createdFromDB) {
         this.setLayout(new GridBagLayout());
         this.createdFromDB = createdFromDB;
@@ -75,6 +74,6 @@ public class PatientPanel extends JPanel {
 
     private void addListeners(){
         addPatientBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
-        returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel));
+        returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
     }
 }

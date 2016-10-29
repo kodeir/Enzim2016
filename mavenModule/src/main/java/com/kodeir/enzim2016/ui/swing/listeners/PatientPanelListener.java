@@ -34,10 +34,6 @@ public class PatientPanelListener implements ActionListener {
 
     private boolean createdFromDB;
 
-    public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel){
-        new PatientPanelListener(patientPanel, coefficientsPanel, false);
-    }
-
     public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel, boolean createdFromDB){
         this.patientPanel = patientPanel;
         this.coefficientsPanel = coefficientsPanel;

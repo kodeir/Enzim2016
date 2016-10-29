@@ -18,6 +18,7 @@ public class EnzimPanelListener implements ActionListener{
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private EnzimPanel enzimPanel;
+    private PatientPanel patientPanel;
 
     public EnzimPanelListener(EnzimPanel enzimPanel){
         this.enzimPanel = enzimPanel;
@@ -37,7 +38,7 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createNewPatientPanel(){
-        PatientPanel patientPanel = new PatientPanel(false);
+        patientPanel = new PatientPanel(false);
         patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
     }
 
