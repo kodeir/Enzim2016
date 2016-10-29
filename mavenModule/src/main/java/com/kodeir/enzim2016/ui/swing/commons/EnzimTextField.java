@@ -45,5 +45,7 @@ public class EnzimTextField extends JTextField {
     public EnzimTextField(int width, int height){
         super();
         setPreferredSize(new Dimension(width,height));
+        setMinimumSize(new Dimension(width,height));
+        setMaximumSize(new Dimension(width,height));
     }
 }
