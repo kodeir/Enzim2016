@@ -14,9 +14,9 @@ public class TreeNodesMap {
 
     private static ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
-    private static Map<DefaultMutableTreeNode,String> injuredOrganMap = new HashMap<>();
+    private static Map<Integer,DefaultMutableTreeNode> injuredOrganMap = new HashMap<>();
 
-    public static Map<DefaultMutableTreeNode, String> getinjuredOrganMap() {
+    public static Map<Integer,DefaultMutableTreeNode> getInjuredOrganMap() {
         return injuredOrganMap;
     }
 
@@ -27,7 +27,7 @@ public class TreeNodesMap {
     }
 
     private static DefaultMutableTreeNode injuredOrgan_LIVER_BILIARY_TRACT_ALT = new DefaultMutableTreeNode(
-            rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT"));
+            rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"));
 
     private static DefaultMutableTreeNode injuredOrgan_SKELETAL_MUSCLE = new DefaultMutableTreeNode(
             rb.getString("organs.SKELETAL_MUSCLE"));
@@ -39,7 +39,7 @@ public class TreeNodesMap {
             rb.getString("organs.BLOOD"));
 
     private static DefaultMutableTreeNode injuredOrgan_LIVER_BILIARY_TRACT_GGTP = new DefaultMutableTreeNode(
-            rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT"));
+            rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"));
 
     private static DefaultMutableTreeNode injuredOrgan_LIVER = new DefaultMutableTreeNode(
             rb.getString("organs.LIVER"));
@@ -76,15 +76,13 @@ public class TreeNodesMap {
     }
 
     static {
-        injuredOrganMap.put(injuredOrgan_LIVER_BILIARY_TRACT_ALT,
-                rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT"));
-        injuredOrganMap.put(injuredOrgan_SKELETAL_MUSCLE, rb.getString("organs.SKELETAL_MUSCLE"));
-        injuredOrganMap.put(injuredOrgan_HEART, rb.getString("organs.HEART"));
-        injuredOrganMap.put(injuredOrgan_BLOOD, rb.getString("organs.BLOOD"));
-        injuredOrganMap.put(injuredOrgan_LIVER_BILIARY_TRACT_GGTP,
-                rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT"));
-        injuredOrganMap.put(injuredOrgan_LIVER, rb.getString("organs.LIVER"));
-        injuredOrganMap.put(injuredOrgan_BONE_TISSUE, rb.getString("organs.BONE_TISSUE"));
+        injuredOrganMap.put(1, injuredOrgan_LIVER_BILIARY_TRACT_ALT);
+        injuredOrganMap.put(2, injuredOrgan_BONE_TISSUE);
+        injuredOrganMap.put(3, injuredOrgan_LIVER);
+        injuredOrganMap.put(4, injuredOrgan_LIVER_BILIARY_TRACT_GGTP);
+        injuredOrganMap.put(5, injuredOrgan_BLOOD);
+        injuredOrganMap.put(6, injuredOrgan_HEART);
+        injuredOrganMap.put(7, injuredOrgan_SKELETAL_MUSCLE);
     }
 
     private static DefaultMutableTreeNode disease_result_1 = new DefaultMutableTreeNode(

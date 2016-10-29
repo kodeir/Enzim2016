@@ -3,7 +3,6 @@ package com.kodeir.enzim2016.ui.swing.listeners;
 import com.kodeir.enzim2016.logic.Diagnosis;
 import com.kodeir.enzim2016.logic.EnzimLogic;
 import com.kodeir.enzim2016.pi.Coefficients;
-import com.kodeir.enzim2016.pi.Patient;
 import com.kodeir.enzim2016.ui.swing.panels.TreePanel;
 
 import javax.swing.*;
@@ -37,11 +36,16 @@ public class TreeListener implements ActionListener {
             Coefficients coefficients = new Coefficients(0, 0, floats[0], floats[1], floats[2], floats[3], floats[4], floats[5], floats[6], floats[7], LocalDate.now());
             Diagnosis diagnosis = new EnzimLogic();
 
-            treePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.getDiagnose(diagnosis.defineInjuredOrgan(coefficients)));
+            Map<Integer,String> diagnoseMap = diagnosis.defineInjuredOrgan(coefficients);
+            treePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.getDiagnose(diagnoseMap));
+            treePanel.getTree().setSelectionPath(new TreePath(
+                    treePanel.getTreeModel().getPathToRoot(
+                            TreeNodesMap.getInjuredOrganMap().get(
+                                    diagnosis.getKey(diagnoseMap)))));
+
             treePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(coefficients));
 
-            //treePanel.getTree().setSelectionPath(new TreePath(
-            //        treePanel.getTreeModel().getPathToRoot(TreeNodesMap.getinjuredOrganMap().);
+
         } else {
             JOptionPane.showMessageDialog(null, treePanel.getMissedCoefficients());
             JOptionPane.showMessageDialog(null, treePanel.getWrongCoefficients());

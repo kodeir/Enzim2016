@@ -71,6 +71,15 @@ public class EnzimLogic implements Diagnosis {
         this.GlDG = coefficients.getGldg();
     }
 
+    /**
+     *
+     * @param coefficients patient coefficients
+     * @return Map<Integer, String> where String is an injured organ
+     * and Integer is a key to map injured organ with a tree node
+     *
+     * @see com.kodeir.enzim2016.ui.swing.listeners.TreeNodesMap
+     * @see com.kodeir.enzim2016.ui.swing.listeners.TreeListener
+     */
     public Map<Integer, String> defineInjuredOrgan(Coefficients coefficients){
         setCoefficients(coefficients);
         if (isBetween(AsT,41,151)) {
@@ -85,7 +94,7 @@ public class EnzimLogic implements Diagnosis {
                             } else if (isBetween(GGTP,51,151)){
                                 return createMap(3, rb.getString("organs.LIVER"));
                             } else if (isBetween(GGTP,151,951)){
-                                return createMap(4, rb.getString("organs.BILIARY_TRACT"));
+                                return createMap(4, rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"));
                             } else {
                                 return createMap(0, rb.getString("errors.calc.ggtp.btwn.0_950"));
                             }
@@ -136,6 +145,15 @@ public class EnzimLogic implements Diagnosis {
             diagnose = entry.getValue();
         }
         return diagnose;
+    }
+
+    @Override
+    public Integer getKey(Map<Integer, String> diagnoseMap) {
+        int key = 0;
+        for (Map.Entry<Integer,String> entry: diagnoseMap.entrySet()){
+            key = entry.getKey();
+        }
+        return key;
     }
 
     private String deRitisRatio_01_05(){
