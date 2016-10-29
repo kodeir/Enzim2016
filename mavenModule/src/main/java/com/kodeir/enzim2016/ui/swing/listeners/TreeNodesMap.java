@@ -85,152 +85,348 @@ public class TreeNodesMap {
         injuredOrganMap.put(7, injuredOrgan_SKELETAL_MUSCLE);
     }
 
-    private static DefaultMutableTreeNode disease_result_1 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_1_MONONUCLEOSIS_INFECTIOUS = new DefaultMutableTreeNode(
             rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS"));
 
-    private static DefaultMutableTreeNode disease_result_2 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_2_OBSTRUCTIVE_JAUNDICE = new DefaultMutableTreeNode(
             rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_3 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_3_OBSTRUCTIVE_JAUNDICE = new DefaultMutableTreeNode(
             rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
 
-    private static DefaultMutableTreeNode disease_result_4 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_4_OBSTRUCTIVE_JAUNDICE = new DefaultMutableTreeNode(
             rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_5 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_5_TOXIC_DAMAGE = new DefaultMutableTreeNode(
             rb.getString("diseases.TOXIC_DAMAGE"));
 
-    private static DefaultMutableTreeNode disease_result_6 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_6_TOXIC_DAMAGE = new DefaultMutableTreeNode(
             rb.getString("diseases.TOXIC_DAMAGE") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_7 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_7_HEPATITIS_ALCOHOLIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_8 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_8_HEPATITIS_ALCOHOLIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_ALCOHOLIC"));
 
-    private static DefaultMutableTreeNode disease_result_9 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_9_HEPATITIS_ALCOHOLIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_10 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_10_HEPATITIS_VIRAL = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_VIRAL") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_11 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_11_HEPATITIS_VIRAL = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_VIRAL"));
 
-    private static DefaultMutableTreeNode disease_result_12 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_12_HEPATITIS_VIRAL = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_VIRAL") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_13 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_13_FATTY_LIVER = new DefaultMutableTreeNode(
             rb.getString("diseases.FATTY_LIVER"));
 
-    private static DefaultMutableTreeNode disease_result_14 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_14_OBSTRUCTIVE_JAUNDICE = new DefaultMutableTreeNode(
             rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
 
-    private static DefaultMutableTreeNode disease_result_15 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_15_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_16 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_16_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC"));
 
-    private static DefaultMutableTreeNode disease_result_17 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_17_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_18 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_18_HEPATITIS_CHRONIC_PERSISTENT = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_19 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_19_HEPATITIS_CHRONIC_PERSISTENT = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT"));
 
-    private static DefaultMutableTreeNode disease_result_20 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_20_TOXIC_DAMAGE = new DefaultMutableTreeNode(
             rb.getString("diseases.TOXIC_DAMAGE"));
 
-    private static DefaultMutableTreeNode disease_result_21 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_21_FATTY_LIVER = new DefaultMutableTreeNode(
             rb.getString("diseases.FATTY_LIVER"));
 
-    private static DefaultMutableTreeNode disease_result_22 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_22_OBSTRUCTIVE_JAUNDICE = new DefaultMutableTreeNode(
             rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
 
-    private static DefaultMutableTreeNode disease_result_23 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_23_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_24 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_24_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC"));
 
-    private static DefaultMutableTreeNode disease_result_25 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_25_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_26 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_26_HEPATITIS_CHRONIC_PERSISTENT = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_27 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_27_HEPATITIS_CHRONIC_PERSISTENT = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT"));
 
-    private static DefaultMutableTreeNode disease_result_28 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_28_TOXIC_DAMAGE = new DefaultMutableTreeNode(
             rb.getString("diseases.TOXIC_DAMAGE"));
 
-    private static DefaultMutableTreeNode disease_result_29 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_29_HEPATITIS_CHRONIC_AGGRESSIVE = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE"));
 
-    private static DefaultMutableTreeNode disease_result_30 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_30_LIVER_METASTATIC_TUMOR_NODULES = new DefaultMutableTreeNode(
             rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_31 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_31_LIVER_METASTATIC_TUMOR_NODULES = new DefaultMutableTreeNode(
             rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES"));
 
-    private static DefaultMutableTreeNode disease_result_32 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_32_CIRRHOSIS_BILIARY = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_33 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_33_CIRRHOSIS_BILIARY = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_BILIARY"));
 
-    private static DefaultMutableTreeNode disease_result_34 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_34_CIRRHOSIS_BILIARY = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_35 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_35_CIRRHOSIS_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_36 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_36_CIRRHOSIS_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC"));
 
-    private static DefaultMutableTreeNode disease_result_37 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_37_CIRRHOSIS_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_38 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_38_HEPATITIS_CHRONIC_AGGRESSIVE = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE"));
 
-    private static DefaultMutableTreeNode disease_result_39 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_39_HEPATITIS_NONSPECIFIC_REACTIVE = new DefaultMutableTreeNode(
             rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE"));
 
-    private static DefaultMutableTreeNode disease_result_40 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_40_LIVER_METASTASES_CIRRHOSIS_BILIARY = new DefaultMutableTreeNode(
             rb.getString("diseases.LIVER_METASTASES") + " ? " + " , " + rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_41 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_41_LIVER_METASTATIC_TUMOR_NODULES = new DefaultMutableTreeNode(
             rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_42 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_42_LIVER_METASTATIC_TUMOR_NODULES = new DefaultMutableTreeNode(
             rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES"));
 
-    private static DefaultMutableTreeNode disease_result_43 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_43_CIRRHOSIS_BILIARY = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_44 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_44_CIRRHOSIS_BILIARY = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_BILIARY"));
 
-    private static DefaultMutableTreeNode disease_result_45 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_45_CIRRHOSIS_BILIARY = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_46 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_46_CIRRHOSIS_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_47 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_47_CIRRHOSIS_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC"));
 
-    private static DefaultMutableTreeNode disease_result_48 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_48_CIRRHOSIS_ALCOHOLIC_TOXIC = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
 
-    private static DefaultMutableTreeNode disease_result_49 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode disease_49_CIRRHOSIS_POSTHEPATITIS = new DefaultMutableTreeNode(
             rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS"));
+
+    public static DefaultMutableTreeNode getDisease_1_MONONUCLEOSIS_INFECTIOUS() {
+        return disease_1_MONONUCLEOSIS_INFECTIOUS;
+    }
+
+    public static DefaultMutableTreeNode getDisease_2_OBSTRUCTIVE_JAUNDICE() {
+        return disease_2_OBSTRUCTIVE_JAUNDICE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_3_OBSTRUCTIVE_JAUNDICE() {
+        return disease_3_OBSTRUCTIVE_JAUNDICE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_4_OBSTRUCTIVE_JAUNDICE() {
+        return disease_4_OBSTRUCTIVE_JAUNDICE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_5_TOXIC_DAMAGE() {
+        return disease_5_TOXIC_DAMAGE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_6_TOXIC_DAMAGE() {
+        return disease_6_TOXIC_DAMAGE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_7_HEPATITIS_ALCOHOLIC() {
+        return disease_7_HEPATITIS_ALCOHOLIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_8_HEPATITIS_ALCOHOLIC() {
+        return disease_8_HEPATITIS_ALCOHOLIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_9_HEPATITIS_ALCOHOLIC() {
+        return disease_9_HEPATITIS_ALCOHOLIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_10_HEPATITIS_VIRAL() {
+        return disease_10_HEPATITIS_VIRAL;
+    }
+
+    public static DefaultMutableTreeNode getDisease_11_HEPATITIS_VIRAL() {
+        return disease_11_HEPATITIS_VIRAL;
+    }
+
+    public static DefaultMutableTreeNode getDisease_12_HEPATITIS_VIRAL() {
+        return disease_12_HEPATITIS_VIRAL;
+    }
+
+    public static DefaultMutableTreeNode getDisease_13_FATTY_LIVER() {
+        return disease_13_FATTY_LIVER;
+    }
+
+    public static DefaultMutableTreeNode getDisease_14_OBSTRUCTIVE_JAUNDICE() {
+        return disease_14_OBSTRUCTIVE_JAUNDICE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_15_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC() {
+        return disease_15_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_16_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC() {
+        return disease_16_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_17_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC() {
+        return disease_17_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_18_HEPATITIS_CHRONIC_PERSISTENT() {
+        return disease_18_HEPATITIS_CHRONIC_PERSISTENT;
+    }
+
+    public static DefaultMutableTreeNode getDisease_19_HEPATITIS_CHRONIC_PERSISTENT() {
+        return disease_19_HEPATITIS_CHRONIC_PERSISTENT;
+    }
+
+    public static DefaultMutableTreeNode getDisease_20_TOXIC_DAMAGE() {
+        return disease_20_TOXIC_DAMAGE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_21_FATTY_LIVER() {
+        return disease_21_FATTY_LIVER;
+    }
+
+    public static DefaultMutableTreeNode getDisease_22_OBSTRUCTIVE_JAUNDICE() {
+        return disease_22_OBSTRUCTIVE_JAUNDICE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_23_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC() {
+        return disease_23_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_24_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC() {
+        return disease_24_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_25_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC() {
+        return disease_25_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_26_HEPATITIS_CHRONIC_PERSISTENT() {
+        return disease_26_HEPATITIS_CHRONIC_PERSISTENT;
+    }
+
+    public static DefaultMutableTreeNode getDisease_27_HEPATITIS_CHRONIC_PERSISTENT() {
+        return disease_27_HEPATITIS_CHRONIC_PERSISTENT;
+    }
+
+    public static DefaultMutableTreeNode getDisease_28_TOXIC_DAMAGE() {
+        return disease_28_TOXIC_DAMAGE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_29_HEPATITIS_CHRONIC_AGGRESSIVE() {
+        return disease_29_HEPATITIS_CHRONIC_AGGRESSIVE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_30_LIVER_METASTATIC_TUMOR_NODULES() {
+        return disease_30_LIVER_METASTATIC_TUMOR_NODULES;
+    }
+
+    public static DefaultMutableTreeNode getDisease_31_LIVER_METASTATIC_TUMOR_NODULES() {
+        return disease_31_LIVER_METASTATIC_TUMOR_NODULES;
+    }
+
+    public static DefaultMutableTreeNode getDisease_32_CIRRHOSIS_BILIARY() {
+        return disease_32_CIRRHOSIS_BILIARY;
+    }
+
+    public static DefaultMutableTreeNode getDisease_33_CIRRHOSIS_BILIARY() {
+        return disease_33_CIRRHOSIS_BILIARY;
+    }
+
+    public static DefaultMutableTreeNode getDisease_34_CIRRHOSIS_BILIARY() {
+        return disease_34_CIRRHOSIS_BILIARY;
+    }
+
+    public static DefaultMutableTreeNode getDisease_35_CIRRHOSIS_ALCOHOLIC_TOXIC() {
+        return disease_35_CIRRHOSIS_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_36_CIRRHOSIS_ALCOHOLIC_TOXIC() {
+        return disease_36_CIRRHOSIS_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_37_CIRRHOSIS_ALCOHOLIC_TOXIC() {
+        return disease_37_CIRRHOSIS_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_38_HEPATITIS_CHRONIC_AGGRESSIVE() {
+        return disease_38_HEPATITIS_CHRONIC_AGGRESSIVE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_39_HEPATITIS_NONSPECIFIC_REACTIVE() {
+        return disease_39_HEPATITIS_NONSPECIFIC_REACTIVE;
+    }
+
+    public static DefaultMutableTreeNode getDisease_40_LIVER_METASTASES_CIRRHOSIS_BILIARY() {
+        return disease_40_LIVER_METASTASES_CIRRHOSIS_BILIARY;
+    }
+
+    public static DefaultMutableTreeNode getDisease_41_LIVER_METASTATIC_TUMOR_NODULES() {
+        return disease_41_LIVER_METASTATIC_TUMOR_NODULES;
+    }
+
+    public static DefaultMutableTreeNode getDisease_42_LIVER_METASTATIC_TUMOR_NODULES() {
+        return disease_42_LIVER_METASTATIC_TUMOR_NODULES;
+    }
+
+    public static DefaultMutableTreeNode getDisease_43_CIRRHOSIS_BILIARY() {
+        return disease_43_CIRRHOSIS_BILIARY;
+    }
+
+    public static DefaultMutableTreeNode getDisease_44_CIRRHOSIS_BILIARY() {
+        return disease_44_CIRRHOSIS_BILIARY;
+    }
+
+    public static DefaultMutableTreeNode getDisease_45_CIRRHOSIS_BILIARY() {
+        return disease_45_CIRRHOSIS_BILIARY;
+    }
+
+    public static DefaultMutableTreeNode getDisease_46_CIRRHOSIS_ALCOHOLIC_TOXIC() {
+        return disease_46_CIRRHOSIS_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_47_CIRRHOSIS_ALCOHOLIC_TOXIC() {
+        return disease_47_CIRRHOSIS_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_48_CIRRHOSIS_ALCOHOLIC_TOXIC() {
+        return disease_48_CIRRHOSIS_ALCOHOLIC_TOXIC;
+    }
+
+    public static DefaultMutableTreeNode getDisease_49_CIRRHOSIS_POSTHEPATITIS() {
+        return disease_49_CIRRHOSIS_POSTHEPATITIS;
+    }
 
     static {
 

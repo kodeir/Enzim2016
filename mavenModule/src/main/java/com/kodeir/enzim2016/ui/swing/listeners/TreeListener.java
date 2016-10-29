@@ -38,14 +38,23 @@ public class TreeListener implements ActionListener {
 
             Map<Integer,String> diagnoseMap = diagnosis.defineInjuredOrgan(coefficients);
             treePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.getDiagnose(diagnoseMap));
-            treePanel.getTree().setSelectionPath(new TreePath(
-                    treePanel.getTreeModel().getPathToRoot(
-                            TreeNodesMap.getInjuredOrganMap().get(
-                                    diagnosis.getKey(diagnoseMap)))));
+            if (diagnosis.getKey(diagnoseMap) > 0){
+                treePanel.collapseTree();
+                treePanel.getTree().setSelectionPath(new TreePath(
+                        treePanel.getTreeModel().getPathToRoot(
+                                TreeNodesMap.getInjuredOrganMap().get(
+                                        diagnosis.getKey(diagnoseMap)))));
+            }
 
             diagnoseMap = diagnosis.defineDisease(coefficients);
             treePanel.getDiagnosePanel().setDisease(diagnosis.getDiagnose(diagnoseMap));
-
+            if (diagnosis.getKey(diagnoseMap) > 0){
+                treePanel.collapseTree();
+                treePanel.getTree().setSelectionPath(new TreePath(
+                        treePanel.getTreeModel().getPathToRoot(
+                                TreeNodesMap.getDiseaseMap().get(
+                                        diagnosis.getKey(diagnoseMap)))));
+            }
 
         } else {
             JOptionPane.showMessageDialog(null, treePanel.getMissedCoefficients());
