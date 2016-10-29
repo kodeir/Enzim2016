@@ -84,7 +84,7 @@ public class DatabasePanelCreator {
                             patients.get(position).getCoefficients().add(setCoefficients(rs));
                         } else {
                             check = patientId;
-                            patients.add(setPetient(rs, patientId, new ArrayList<>(Collections.singletonList(setCoefficients(rs)))));
+                            patients.add(setPatient(rs, patientId, new ArrayList<>(Collections.singletonList(setCoefficients(rs)))));
                             position = patients.size() - 1;
                         }
                     }
@@ -112,7 +112,7 @@ public class DatabasePanelCreator {
                 rs.getDate(rb.getString("database.checkup.date")).toLocalDate());
     }
 
-    private Patient setPetient(ResultSet rs, long patientId, List<Coefficients> coefficientsList) throws SQLException {
+    private Patient setPatient(ResultSet rs, long patientId, List<Coefficients> coefficientsList) throws SQLException {
         return new Patient(
                 patientId,
                 rs.getString(rb.getString("database.patient.name")),
