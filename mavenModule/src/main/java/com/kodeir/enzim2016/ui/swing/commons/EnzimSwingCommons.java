@@ -53,6 +53,8 @@ public class EnzimSwingCommons {
         constraints.gridwidth = gridwidth;
         constraints.gridheight = gridheight;
         constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        constraints.ipady = 5;
         return constraints;
     }
 

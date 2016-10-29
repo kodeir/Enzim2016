@@ -131,11 +131,12 @@ public class DatabasePanel extends JPanel {
         patientsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(patientsList);
-        EnzimSwingCommons.setSize(scrollPane,300,375);
-        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,1,1,20));
+        // (gridheight) 18 * 25 = 450, (ipady) 18 * 5 = 90; 540
+        EnzimSwingCommons.setSize(scrollPane,300,540);
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,1,1,18));
 
         addNewPatientBtn = new JButton(rb.getString("interface.patient.add"));
-        this.add(addNewPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,21));
+        this.add(addNewPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,19));
     }
 
     private void addPatientPIPanel() {
@@ -153,6 +154,7 @@ public class DatabasePanel extends JPanel {
         coefficientsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollPane = new JScrollPane();
         scrollPane.setViewportView(coefficientsList);
+        // (gridheight) 5 * 25 = 125
         EnzimSwingCommons.setSize(scrollPane,600,125);
         this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,6,4,5));
 
@@ -166,12 +168,12 @@ public class DatabasePanel extends JPanel {
 
     private void addDiagnosePanel() {
         diagnosePanel = new DiagnosePanel();
-        this.add(diagnosePanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,17,4,4));
+        this.add(diagnosePanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,17,4,2));
     }
 
     private void addExitButton() {
         exitBtn = new JButton(rb.getString("interface.database.close"));
-        this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,21,2));
+        this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5,3,19,2));
     }
 
     private void addListeners(){
