@@ -1,6 +1,6 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
-import com.kodeir.enzim2016.commons.Database;
+import com.kodeir.enzim2016.commons.EnzimDatabase;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.pi.Coefficients;
@@ -20,14 +20,14 @@ public class DatabasePanelCreator {
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
-    private Database database;
+    private EnzimDatabase database;
     private DatabasePanel databasePanel;
     private List<Patient> patients;
 
     private String sqlQuery = "SELECT * FROM PATIENTS P JOIN COEFFICIENTS C ON P.patient_id = C.patient_id ORDER BY P.patient_id ASC";
 
     public DatabasePanelCreator(){
-        database = new Database();
+        database = new EnzimDatabase();
         createDatabasePanel();
     }
 

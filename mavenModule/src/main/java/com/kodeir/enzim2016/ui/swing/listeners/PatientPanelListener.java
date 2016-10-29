@@ -1,6 +1,6 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
-import com.kodeir.enzim2016.commons.Database;
+import com.kodeir.enzim2016.commons.EnzimDatabase;
 import com.kodeir.enzim2016.commons.PatientsDatabase;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
  */
 public class PatientPanelListener implements ActionListener {
 
-    private Database database;
+    private EnzimDatabase database;
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private String name;
@@ -98,7 +98,7 @@ public class PatientPanelListener implements ActionListener {
     }
 
     private boolean connectToDatabase(){
-        database = new Database();
+        database = new EnzimDatabase();
         return database.setConnectionIfDbExist(
                 PropertyHandler.getInstance().getValue("datasource.url"),
                 PropertyHandler.getInstance().getValue("datasource.username"),

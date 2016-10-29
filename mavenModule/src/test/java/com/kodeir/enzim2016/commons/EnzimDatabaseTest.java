@@ -37,9 +37,9 @@ import static org.junit.Assert.*;
 /**
  * Created by Sergei Riabinin on 10.07.2016.
  */
-public class DatabaseTest {
+public class EnzimDatabaseTest {
 
-    private static Database database = new Database();
+    private static EnzimDatabase database = new EnzimDatabase();
     private static String testDbName = "database";
     private static String testDbUser = "user";
     private static String testDbPwd = "password password";

@@ -1,6 +1,6 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
-import com.kodeir.enzim2016.commons.Database;
+import com.kodeir.enzim2016.commons.EnzimDatabase;
 import com.kodeir.enzim2016.commons.PatientsDatabase;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
@@ -24,7 +24,7 @@ public class NewCoefficientsListener implements ActionListener {
 
     private NewCoefficientsPanel newCoefficientsPanel;
     private CoefficientsHandler coefficientsHandler;
-    private Database database;
+    private EnzimDatabase database;
 
     public NewCoefficientsListener(NewCoefficientsPanel newCoefficientsPanel, long patientId){
         this.newCoefficientsPanel = newCoefficientsPanel;
@@ -125,7 +125,7 @@ public class NewCoefficientsListener implements ActionListener {
     }
 
     private boolean connectToDatabase(){
-        database = new Database();
+        database = new EnzimDatabase();
         return database.setConnectionIfDbExist(
                 PropertyHandler.getInstance().getValue("datasource.url"),
                 PropertyHandler.getInstance().getValue("datasource.username"),

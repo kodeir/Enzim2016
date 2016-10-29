@@ -1,26 +1,13 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
-import com.kodeir.enzim2016.commons.Database;
-import com.kodeir.enzim2016.commons.PatientsDatabase;
-import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
-import com.kodeir.enzim2016.pi.Coefficients;
-import com.kodeir.enzim2016.pi.Patient;
-import com.kodeir.enzim2016.ui.swing.SwingApp;
-import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
 import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
 import com.kodeir.enzim2016.ui.swing.panels.TreePanel;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
