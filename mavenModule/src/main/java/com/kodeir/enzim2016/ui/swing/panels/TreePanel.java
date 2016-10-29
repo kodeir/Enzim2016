@@ -44,7 +44,12 @@ import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
- * Created by Rowan on 03.07.2016.
+ * Created by Sergei Riabinin on 03.07.2016.
+ *
+ * The TreePanel class implements diagnostic algorithms for liver diseases,
+ * which was introduced by Vyacheslav Ryabinin in "The development and use
+ * of new approaches to the analysis of laboratory and biochemical tests
+ * for the differential diagnosis of liver diseases.", Chelyabinsk, 2007.
  *
  */
 
@@ -72,20 +77,25 @@ public class TreePanel extends JPanel {
     private String missedCoefficients;
     private String wrongCoefficients;
 
-    private JTree tree;
-    private DefaultTreeModel treeModel;
-    private DefaultMutableTreeNode disease;
+    private JTree injuredOrganTree;
+    private JTree diseaseTree;
+    private DefaultTreeModel injuredOrganTreeModel;
+    private DefaultTreeModel diseaseTreeModel;
 
-    public DefaultMutableTreeNode getDisease() {
-        return disease;
+    public JTree getInjuredOrganTree() {
+        return injuredOrganTree;
     }
 
-    public JTree getTree(){
-        return tree;
+    public JTree getDiseaseTree() {
+        return diseaseTree;
     }
 
-    public DefaultTreeModel getTreeModel(){
-        return treeModel;
+    public DefaultTreeModel getInjuredOrganTreeModel() {
+        return injuredOrganTreeModel;
+    }
+
+    public DefaultTreeModel getDiseaseTreeModel() {
+        return diseaseTreeModel;
     }
 
     public JButton getDoDiagnoseBtn() {
@@ -109,7 +119,8 @@ public class TreePanel extends JPanel {
         addFields();
         addResultButton();
         addResults();
-        addTree();
+        addInjuredOrganTree();
+        addDiseaseTree();
         addListeners();
     }
 
@@ -161,21 +172,36 @@ public class TreePanel extends JPanel {
         this.add(diagnosePanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,5,4,4));
     }
 
-    private void addTree(){
+    private void addInjuredOrganTree(){
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
         root.add(createInjuredOrganBranch());
+
+        injuredOrganTreeModel = new DefaultTreeModel(root);
+
+        injuredOrganTree = new JTree(injuredOrganTreeModel);
+        injuredOrganTree.setRootVisible(false);
+        //EnzimSwingCommons.setSize(injuredOrganTree, 600, 125);
+        injuredOrganTree.getExpandsSelectedPaths();
+
+        JScrollPane scrollPane = new JScrollPane(injuredOrganTree);
+        EnzimSwingCommons.setSize(scrollPane, 600, 125);
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,9,4));
+    }
+
+    private void addDiseaseTree(){
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
         root.add(createDiseaseBranch());
 
-        treeModel = new DefaultTreeModel(root);
+        diseaseTreeModel = new DefaultTreeModel(root);
 
-        tree = new JTree(treeModel);
-        tree.setRootVisible(false);
-        tree.setMinimumSize(new Dimension(600,500));
-        tree.getExpandsSelectedPaths();
+        diseaseTree = new JTree(diseaseTreeModel);
+        diseaseTree.setRootVisible(false);
+        //EnzimSwingCommons.setSize(diseaseTree, 600, 250);
+        diseaseTree.getExpandsSelectedPaths();
 
-        JScrollPane scrollPane = new JScrollPane(tree);
-        scrollPane.setMinimumSize(new Dimension(600,500));
-        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,9,4));
+        JScrollPane scrollPane = new JScrollPane(diseaseTree);
+        EnzimSwingCommons.setSize(scrollPane, 600, 250);
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,10,4));
     }
 
     private DefaultMutableTreeNode createInjuredOrganBranch(){
@@ -224,7 +250,7 @@ public class TreePanel extends JPanel {
     }
 
     private DefaultMutableTreeNode createDiseaseBranch(){
-        disease = new DefaultMutableTreeNode(rb.getString("diseases.Disease"));
+        DefaultMutableTreeNode disease = new DefaultMutableTreeNode(rb.getString("diseases.Disease"));
 
         DefaultMutableTreeNode AsT_Node = new DefaultMutableTreeNode(rb.getString("coefficients.ast.41_150"));
         disease.add(AsT_Node);
@@ -657,13 +683,13 @@ public class TreePanel extends JPanel {
         }
     }
 
-    public void collapseTree(){
+    public void collapseTree(JTree tree){
         int row = tree.getRowCount() - 1;
         while (row >= 0) {
             tree.collapseRow(row);
             row--;
         }
-        //treePanel.getTree().collapsePath(new TreePath(treePanel.getTree()));
+        //treePanel.getTree().collapsePath(new TreePath(tree));
         tree.clearSelection();
     }
 }

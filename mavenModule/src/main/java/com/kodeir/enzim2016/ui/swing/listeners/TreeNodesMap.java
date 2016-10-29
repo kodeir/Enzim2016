@@ -20,9 +20,9 @@ public class TreeNodesMap {
         return injuredOrganMap;
     }
 
-    private static Map<String,DefaultMutableTreeNode> diseaseMap = new HashMap<>();
+    private static Map<Integer,DefaultMutableTreeNode> diseaseMap = new HashMap<>();
 
-    public static Map<String, DefaultMutableTreeNode> getDiseaseMap() {
+    public static Map<Integer, DefaultMutableTreeNode> getDiseaseMap() {
         return diseaseMap;
     }
 
@@ -429,6 +429,54 @@ public class TreeNodesMap {
     }
 
     static {
-
+        diseaseMap.put(1, disease_1_MONONUCLEOSIS_INFECTIOUS);
+        diseaseMap.put(2, disease_2_OBSTRUCTIVE_JAUNDICE);
+        diseaseMap.put(3, disease_3_OBSTRUCTIVE_JAUNDICE);
+        diseaseMap.put(4, disease_4_OBSTRUCTIVE_JAUNDICE);
+        diseaseMap.put(5, disease_5_TOXIC_DAMAGE);
+        diseaseMap.put(6, disease_6_TOXIC_DAMAGE);
+        diseaseMap.put(7, disease_7_HEPATITIS_ALCOHOLIC);
+        diseaseMap.put(8, disease_8_HEPATITIS_ALCOHOLIC);
+        diseaseMap.put(9, disease_9_HEPATITIS_ALCOHOLIC);
+        diseaseMap.put(10, disease_10_HEPATITIS_VIRAL);
+        diseaseMap.put(11, disease_11_HEPATITIS_VIRAL);
+        diseaseMap.put(12, disease_12_HEPATITIS_VIRAL);
+        diseaseMap.put(13, disease_13_FATTY_LIVER);
+        diseaseMap.put(14, disease_14_OBSTRUCTIVE_JAUNDICE);
+        diseaseMap.put(15, disease_15_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC);
+        diseaseMap.put(16, disease_16_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC);
+        diseaseMap.put(17, disease_17_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC);
+        diseaseMap.put(18, disease_18_HEPATITIS_CHRONIC_PERSISTENT);
+        diseaseMap.put(19, disease_19_HEPATITIS_CHRONIC_PERSISTENT);
+        diseaseMap.put(20, disease_20_TOXIC_DAMAGE);
+        diseaseMap.put(21, disease_21_FATTY_LIVER);
+        diseaseMap.put(22, disease_22_OBSTRUCTIVE_JAUNDICE);
+        diseaseMap.put(23, disease_23_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC);
+        diseaseMap.put(24, disease_24_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC);
+        diseaseMap.put(25, disease_25_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC);
+        diseaseMap.put(26, disease_26_HEPATITIS_CHRONIC_PERSISTENT);
+        diseaseMap.put(27, disease_27_HEPATITIS_CHRONIC_PERSISTENT);
+        diseaseMap.put(28, disease_28_TOXIC_DAMAGE);
+        diseaseMap.put(29, disease_29_HEPATITIS_CHRONIC_AGGRESSIVE);
+        diseaseMap.put(30, disease_30_LIVER_METASTATIC_TUMOR_NODULES);
+        diseaseMap.put(31, disease_31_LIVER_METASTATIC_TUMOR_NODULES);
+        diseaseMap.put(32, disease_32_CIRRHOSIS_BILIARY);
+        diseaseMap.put(33, disease_33_CIRRHOSIS_BILIARY);
+        diseaseMap.put(34, disease_34_CIRRHOSIS_BILIARY);
+        diseaseMap.put(35, disease_35_CIRRHOSIS_ALCOHOLIC_TOXIC);
+        diseaseMap.put(36, disease_36_CIRRHOSIS_ALCOHOLIC_TOXIC);
+        diseaseMap.put(37, disease_37_CIRRHOSIS_ALCOHOLIC_TOXIC);
+        diseaseMap.put(38, disease_38_HEPATITIS_CHRONIC_AGGRESSIVE);
+        diseaseMap.put(39, disease_39_HEPATITIS_NONSPECIFIC_REACTIVE);
+        diseaseMap.put(40, disease_40_LIVER_METASTASES_CIRRHOSIS_BILIARY);
+        diseaseMap.put(41, disease_41_LIVER_METASTATIC_TUMOR_NODULES);
+        diseaseMap.put(42, disease_42_LIVER_METASTATIC_TUMOR_NODULES);
+        diseaseMap.put(43, disease_43_CIRRHOSIS_BILIARY);
+        diseaseMap.put(44, disease_44_CIRRHOSIS_BILIARY);
+        diseaseMap.put(45, disease_45_CIRRHOSIS_BILIARY);
+        diseaseMap.put(46, disease_46_CIRRHOSIS_ALCOHOLIC_TOXIC);
+        diseaseMap.put(47, disease_47_CIRRHOSIS_ALCOHOLIC_TOXIC);
+        diseaseMap.put(48, disease_48_CIRRHOSIS_ALCOHOLIC_TOXIC);
+        diseaseMap.put(49, disease_49_CIRRHOSIS_POSTHEPATITIS);
     }
 }
