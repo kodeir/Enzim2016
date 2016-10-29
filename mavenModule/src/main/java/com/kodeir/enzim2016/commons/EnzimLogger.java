@@ -6,17 +6,17 @@ import java.util.logging.*;
 /**
  * Created by Sergei Riabinin on 29.10.2016.
  */
-public class EnzimLoger extends Logger {
+public class EnzimLogger extends Logger {
 
-    public EnzimLoger(String name) {
+    public EnzimLogger(String name) {
         this(name, 1000000, (byte)10, "./logs/");
     }
 
-    public EnzimLoger(String name, int fileSize, byte filesCount, String path){
+    public EnzimLogger(String name, int fileSize, byte filesCount, String path){
         this(name, fileSize, filesCount, path, Level.INFO, Level.INFO);
     }
 
-    public EnzimLoger(String name, int fileSize, byte filesCount, String path, Level fileLevel, Level consoleLevel){
+    public EnzimLogger(String name, int fileSize, byte filesCount, String path, Level fileLevel, Level consoleLevel){
         super(name, null);
         if (checkPath(path)){
             setLogger(name, fileSize, filesCount, path, fileLevel, consoleLevel);

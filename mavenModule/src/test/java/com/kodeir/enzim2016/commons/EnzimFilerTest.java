@@ -1,6 +1,5 @@
 package com.kodeir.enzim2016.commons;
 
-import com.kodeir.enzim2016.Enzim;
 import org.junit.AfterClass;
 import org.junit.Test;
 
