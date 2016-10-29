@@ -11,6 +11,7 @@ import javax.swing.tree.TreePath;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.util.Map;
 
 /**
  * Created by Sergei Riabinin on 03.07.2016.
@@ -35,7 +36,8 @@ public class TreeListener implements ActionListener {
             float[] floats = treePanel.getFloats();
             Coefficients coefficients = new Coefficients(0, 0, floats[0], floats[1], floats[2], floats[3], floats[4], floats[5], floats[6], floats[7], LocalDate.now());
             Diagnosis diagnosis = new EnzimLogic();
-            treePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.defineInjuredOrgan(coefficients));
+
+            treePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.getDiagnose(diagnosis.defineInjuredOrgan(coefficients)));
             treePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(coefficients));
 
             //treePanel.getTree().setSelectionPath(new TreePath(

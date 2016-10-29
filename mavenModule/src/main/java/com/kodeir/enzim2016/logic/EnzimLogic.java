@@ -34,6 +34,8 @@ import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.pi.Coefficients;
 import com.kodeir.enzim2016.pi.Patient;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.ResourceBundle;
 
 /**
@@ -69,44 +71,44 @@ public class EnzimLogic implements Diagnosis {
         this.GlDG = coefficients.getGldg();
     }
 
-    public String defineInjuredOrgan(Coefficients coefficients){
+    public Map<Integer, String> defineInjuredOrgan(Coefficients coefficients){
         setCoefficients(coefficients);
         if (isBetween(AsT,41,151)) {
             if (isBetween(AlT,41,251)){
-                return rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT");
+                return createMap(1, rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT"));
             } else if (isBetween(AlT,0,41)){
                 if (isBetween(KFK,15,176)){
                     if (isBetween(LDG,150,591)){
                         if (ShF >= 80 ){
                             if (isBetween(GGTP,0,51)) {
-                                return rb.getString("organs.BONE_TISSUE");
+                                return createMap(2, rb.getString("organs.BONE_TISSUE"));
                             } else if (isBetween(GGTP,51,151)){
-                                return rb.getString("organs.LIVER");
+                                return createMap(3, rb.getString("organs.LIVER"));
                             } else if (isBetween(GGTP,151,951)){
-                                return rb.getString("organs.LIVER") + ", " + rb.getString("organs.BILIARY_TRACT");
+                                return createMap(4, rb.getString("organs.BILIARY_TRACT"));
                             } else {
-                                return rb.getString("errors.calc.ggtp.btwn.0_950");
+                                return createMap(0, rb.getString("errors.calc.ggtp.btwn.0_950"));
                             }
                         } else {
-                            return rb.getString("errors.shf.more.80");
+                            return createMap(0, rb.getString("errors.shf.more.80"));
                         }
                     } else if (isBetween(LDG,591,2751)) {
-                        return rb.getString("organs.BLOOD");
+                        return createMap(5, rb.getString("organs.BLOOD"));
                     } else {
-                        return rb.getString("errors.calc.ldg.btwn.150_2750");
+                        return createMap(0, rb.getString("errors.calc.ldg.btwn.150_2750"));
                     }
                 } else if (isBetween(KFK,176,501)) {
-                    return rb.getString("organs.HEART");
+                    return createMap(6, rb.getString("organs.HEART"));
                 } else if (isBetween(KFK,501,1751)) {
-                    return rb.getString("organs.SKELETAL_MUSCLE");
+                    return createMap(7, rb.getString("organs.SKELETAL_MUSCLE"));
                 } else {
-                    return rb.getString("errors.calc.kfk.btwn.15_1750");
+                    return createMap(0, rb.getString("errors.calc.kfk.btwn.15_1750"));
                 }
             } else {
-                return rb.getString("errors.calc.alt.btwn.0_250");
+                return createMap(0, rb.getString("errors.calc.alt.btwn.0_250"));
             }
         } else {
-            return rb.getString("errors.calc.ast.btwn.41-150");
+            return createMap(0, rb.getString("errors.calc.ast.btwn.41-150"));
         }
     }
 
@@ -125,6 +127,15 @@ public class EnzimLogic implements Diagnosis {
         } else {
             return rb.getString("errors.calc.ast.btwn.41-150");
         }
+    }
+
+    @Override
+    public String getDiagnose(Map<Integer, String> diagnoseMap) {
+        String diagnose = "";
+        for (Map.Entry<Integer,String> entry: diagnoseMap.entrySet()){
+            diagnose = entry.getValue();
+        }
+        return diagnose;
     }
 
     private String deRitisRatio_01_05(){
@@ -300,5 +311,11 @@ public class EnzimLogic implements Diagnosis {
      */
     private boolean isBetween(float numberToCheck, float lowest, float highest){
         return (numberToCheck >= lowest && numberToCheck < highest);
+    }
+
+    private Map<Integer,String> createMap(Integer i, String s){
+        Map<Integer,String> map = new HashMap<>();
+        map.put(i,s);
+        return map;
     }
 }
