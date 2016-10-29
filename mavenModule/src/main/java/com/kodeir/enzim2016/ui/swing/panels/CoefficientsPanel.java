@@ -127,8 +127,8 @@ public class CoefficientsPanel extends JPanel{
         astField.setText(String.valueOf(ast));
         altField.setText(String.valueOf(alt));
         kfkField.setText(String.valueOf(kfk));
-        ldgField.setText(String.valueOf(shf));
-        shfField.setText(String.valueOf(ldg));
+        ldgField.setText(String.valueOf(ldg));
+        shfField.setText(String.valueOf(shf));
         ggtpField.setText(String.valueOf(ggtp));
         heField.setText(String.valueOf(he));
         gldgField.setText(String.valueOf(gldg));
