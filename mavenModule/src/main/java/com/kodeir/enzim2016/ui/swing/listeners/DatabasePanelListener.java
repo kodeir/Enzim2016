@@ -6,9 +6,7 @@ import com.kodeir.enzim2016.logic.EnzimLogic;
 import com.kodeir.enzim2016.pi.Coefficients;
 import com.kodeir.enzim2016.pi.Patient;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
-import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
-import com.kodeir.enzim2016.ui.swing.panels.NewCoefficientsPanel;
-import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
+import com.kodeir.enzim2016.ui.swing.panels.*;
 
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
@@ -26,9 +24,15 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
     private DatabasePanel databasePanel;
+    private CoefficientsPanel coefficientsPanel;
 
     public DatabasePanelListener(DatabasePanel databasePanel){
         this.databasePanel = databasePanel;
+    }
+
+    public DatabasePanelListener(DatabasePanel databasePanel, CoefficientsPanel coefficientsPanel){
+        this.databasePanel = databasePanel;
+        this.coefficientsPanel = coefficientsPanel;
     }
 
     @Override
@@ -39,6 +43,8 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
         } else if (e.getSource().equals(databasePanel.getAddNewCoefficientsBtn())) {
             NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel(getPatientId());
             newCoefficientsPanel.setFrame(new EnzimFrame("Add new coefficients", newCoefficientsPanel));
+        } else if (e.getSource().equals(databasePanel.getShowTreeBtn())) {
+            showTree();
         } else if (e.getSource().equals(databasePanel.getExitBtn())) {
             exit();
         }
@@ -49,6 +55,21 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
         String id = databasePanel.getPatientsListModel().get(databasePanel.getPatientsList().getSelectedIndex()).toString();
         System.out.println(id);
         return Long.parseLong(id.substring(0, id.indexOf(".")));
+    }
+
+    private void showTree(){
+        TreePanel treePanel = new TreePanel(
+                    coefficientsPanel.getAstField().getText(),
+                    coefficientsPanel.getAltField().getText(),
+                    coefficientsPanel.getKfkField().getText(),
+                    coefficientsPanel.getLdgField().getText(),
+                    coefficientsPanel.getShfField().getText(),
+                    coefficientsPanel.getGgtpField().getText(),
+                    coefficientsPanel.getHeField().getText(),
+                    coefficientsPanel.getGldgField().getText()
+            );
+
+        treePanel.setFrame(new EnzimFrame(rb.getString("interface.tree.panel"), treePanel));
     }
 
     private void exit(){
@@ -69,12 +90,12 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
 
     @Override
     public void valueChanged(ListSelectionEvent e) {
-        databasePanel.getAddNewCoefficientsBtn().setEnabled(true
-        );
+        databasePanel.getAddNewCoefficientsBtn().setEnabled(true);
         if (!e.getValueIsAdjusting()) {
             if (e.getSource().equals(databasePanel.getPatientsList())) {
                 setPatient();
             } else if (e.getSource().equals(databasePanel.getCoefficientsList())) {
+                databasePanel.getShowTreeBtn().setEnabled(true);
                 if (!databasePanel.getCoefficientsList().isSelectionEmpty()) {
                     setCoefficients();
                 }
@@ -114,8 +135,8 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
             for (Coefficients c: databasePanel.getCoefficientses()){
                 if (c.getCoefficients_id() == coefficientId) {
                     Diagnosis diagnosis = new EnzimLogic();
-                    databasePanel.getDiagnosePanel().setDisease(diagnosis.getDiagnose(diagnosis.defineInjuredOrgan(c)));
                     databasePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.getDiagnose(diagnosis.defineInjuredOrgan(c)));
+                    databasePanel.getDiagnosePanel().setDisease(diagnosis.getDiagnose(diagnosis.defineDisease(c)));
 
                     databasePanel.getCoefficientsPanel().setValues(
                             c.getAst(),

@@ -58,6 +58,11 @@ public class TreePanel extends JPanel {
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
+    private JFrame frame;
+    public void setFrame(JFrame frame){
+        this.frame = frame;
+    }
+
     private JLabel label;
 
     private JTextField astField;
@@ -122,6 +127,27 @@ public class TreePanel extends JPanel {
         addInjuredOrganTree();
         addDiseaseTree();
         addListeners();
+    }
+
+    public TreePanel(String ast, String alt, String kfk, String ldg, String shf, String ggtp, String he, String gldg){
+        this.setLayout(new GridBagLayout());
+        addFields();
+        addResultButton();
+        addResults();
+        addInjuredOrganTree();
+        addDiseaseTree();
+        addListeners();
+
+        astField.setText(ast);
+        altField.setText(alt);
+        kfkField.setText(kfk);
+        ldgField.setText(ldg);
+        shfField.setText(shf);
+        ggtpField.setText(ggtp);
+        heField.setText(he);
+        gldgField.setText(gldg);
+
+        doDiagnoseBtn.doClick();
     }
 
     private void addFields(){
@@ -692,4 +718,6 @@ public class TreePanel extends JPanel {
         //treePanel.getTree().collapsePath(new TreePath(tree));
         tree.clearSelection();
     }
+
+
 }
