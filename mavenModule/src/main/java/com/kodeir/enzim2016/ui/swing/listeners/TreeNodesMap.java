@@ -14,46 +14,77 @@ public class TreeNodesMap {
 
     private static ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
-    private static Map<String,DefaultMutableTreeNode> treeNodeMap = new HashMap<>();
+    private static Map<DefaultMutableTreeNode,String> injuredOrganMap = new HashMap<>();
 
-    private static DefaultMutableTreeNode injuredOrgan_diagnose_1 = new DefaultMutableTreeNode(
-            rb.getString("organs.LIVER")
-                    + rb.getString("organs.BILIARY_TRACT"));
+    public static Map<DefaultMutableTreeNode, String> getinjuredOrganMap() {
+        return injuredOrganMap;
+    }
 
-    private static DefaultMutableTreeNode injuredOrgan_diagnose_2 = new DefaultMutableTreeNode(
+    private static Map<String,DefaultMutableTreeNode> diseaseMap = new HashMap<>();
+
+    public static Map<String, DefaultMutableTreeNode> getDiseaseMap() {
+        return diseaseMap;
+    }
+
+    private static DefaultMutableTreeNode injuredOrgan_LIVER_BILIARY_TRACT_ALT = new DefaultMutableTreeNode(
+            rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT"));
+
+    private static DefaultMutableTreeNode injuredOrgan_SKELETAL_MUSCLE = new DefaultMutableTreeNode(
             rb.getString("organs.SKELETAL_MUSCLE"));
 
-    private static DefaultMutableTreeNode injuredOrgan_diagnose_3 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode injuredOrgan_HEART = new DefaultMutableTreeNode(
             rb.getString("organs.HEART"));
 
-    private static DefaultMutableTreeNode injuredOrgan_diagnose_4 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode injuredOrgan_BLOOD = new DefaultMutableTreeNode(
             rb.getString("organs.BLOOD"));
 
-    private static DefaultMutableTreeNode injuredOrgan_diagnose_5 = new DefaultMutableTreeNode(
-            rb.getString("organs.LIVER")
-                    + rb.getString("organs.BILIARY_TRACT"));
+    private static DefaultMutableTreeNode injuredOrgan_LIVER_BILIARY_TRACT_GGTP = new DefaultMutableTreeNode(
+            rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT"));
 
-    private static DefaultMutableTreeNode injuredOrgan_diagnose_6 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode injuredOrgan_LIVER = new DefaultMutableTreeNode(
             rb.getString("organs.LIVER"));
 
-    private static DefaultMutableTreeNode injuredOrgan_diagnose_7 = new DefaultMutableTreeNode(
+    private static DefaultMutableTreeNode injuredOrgan_BONE_TISSUE = new DefaultMutableTreeNode(
             rb.getString("organs.BONE_TISSUE"));
 
+    public static DefaultMutableTreeNode getInjuredOrgan_LIVER_BILIARY_TRACT_ALT() {
+        return injuredOrgan_LIVER_BILIARY_TRACT_ALT;
+    }
+
+    public static DefaultMutableTreeNode getInjuredOrgan_SKELETAL_MUSCLE() {
+        return injuredOrgan_SKELETAL_MUSCLE;
+    }
+
+    public static DefaultMutableTreeNode getInjuredOrgan_HEART() {
+        return injuredOrgan_HEART;
+    }
+
+    public static DefaultMutableTreeNode getInjuredOrgan_BLOOD() {
+        return injuredOrgan_BLOOD;
+    }
+
+    public static DefaultMutableTreeNode getInjuredOrgan_LIVER_BILIARY_TRACT_GGTP() {
+        return injuredOrgan_LIVER_BILIARY_TRACT_GGTP;
+    }
+
+    public static DefaultMutableTreeNode getInjuredOrgan_LIVER() {
+        return injuredOrgan_LIVER;
+    }
+
+    public static DefaultMutableTreeNode getInjuredOrgan_BONE_TISSUE() {
+        return injuredOrgan_BONE_TISSUE;
+    }
+
     static {
-        treeNodeMap.put(rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT")
-                ,injuredOrgan_diagnose_1);
-        treeNodeMap.put(rb.getString("organs.SKELETAL_MUSCLE")
-                ,injuredOrgan_diagnose_2);
-        treeNodeMap.put(rb.getString("organs.HEART")
-                ,injuredOrgan_diagnose_3);
-        treeNodeMap.put(rb.getString("organs.BLOOD")
-                ,injuredOrgan_diagnose_4);
-        treeNodeMap.put(rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT")
-                ,injuredOrgan_diagnose_5);
-        treeNodeMap.put(rb.getString("organs.LIVER")
-                ,injuredOrgan_diagnose_6);
-        treeNodeMap.put(rb.getString("organs.BONE_TISSUE")
-                ,injuredOrgan_diagnose_7);
+        injuredOrganMap.put(injuredOrgan_LIVER_BILIARY_TRACT_ALT,
+                rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT"));
+        injuredOrganMap.put(injuredOrgan_SKELETAL_MUSCLE, rb.getString("organs.SKELETAL_MUSCLE"));
+        injuredOrganMap.put(injuredOrgan_HEART, rb.getString("organs.HEART"));
+        injuredOrganMap.put(injuredOrgan_BLOOD, rb.getString("organs.BLOOD"));
+        injuredOrganMap.put(injuredOrgan_LIVER_BILIARY_TRACT_GGTP,
+                rb.getString("organs.LIVER") + rb.getString("organs.BILIARY_TRACT"));
+        injuredOrganMap.put(injuredOrgan_LIVER, rb.getString("organs.LIVER"));
+        injuredOrganMap.put(injuredOrgan_BONE_TISSUE, rb.getString("organs.BONE_TISSUE"));
     }
 
     private static DefaultMutableTreeNode disease_result_1 = new DefaultMutableTreeNode(
@@ -156,71 +187,71 @@ public class TreeNodesMap {
             rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
 
     static {
-        treeNodeMap.put(rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")
+        diseaseMap.put(rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS")
                 ,disease_result_1);
-        treeNodeMap.put(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? "
+        diseaseMap.put(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? "
                 ,disease_result_2);
-        treeNodeMap.put(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE")
+        diseaseMap.put(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE")
                 ,disease_result_3);
-        treeNodeMap.put(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? "
+        diseaseMap.put(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? "
                 ,disease_result_4);
-        treeNodeMap.put(rb.getString("diseases.TOXIC_DAMAGE")
+        diseaseMap.put(rb.getString("diseases.TOXIC_DAMAGE")
                 ,disease_result_5);
-        treeNodeMap.put(rb.getString("diseases.TOXIC_DAMAGE") + " ? "
+        diseaseMap.put(rb.getString("diseases.TOXIC_DAMAGE") + " ? "
                 ,disease_result_6);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? "
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? "
                 ,disease_result_7);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_ALCOHOLIC")
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_ALCOHOLIC")
                 ,disease_result_8);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? "
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? "
                 ,disease_result_9);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_VIRAL") + " ? "
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_VIRAL") + " ? "
                 ,disease_result_10);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_VIRAL")
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_VIRAL")
                 ,disease_result_11);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_VIRAL") + " ? "
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_VIRAL") + " ? "
                 ,disease_result_12);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_CHRONIC")
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_CHRONIC")
                 ,disease_result_13);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE")
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE")
                 ,disease_result_14);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE")
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE")
                 ,disease_result_15);
-        treeNodeMap.put(rb.getString("diseases.LIVER_METASTASES")
+        diseaseMap.put(rb.getString("diseases.LIVER_METASTASES")
                 ,disease_result_16);
-        treeNodeMap.put(rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")
+        diseaseMap.put(rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS")
                 ,disease_result_17);
-        treeNodeMap.put(rb.getString("diseases.FATTY_LIVER")
+        diseaseMap.put(rb.getString("diseases.FATTY_LIVER")
                 ,disease_result_18);
-        treeNodeMap.put(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE")
+        diseaseMap.put(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE")
                 ,disease_result_19);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? "
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? "
                 ,disease_result_20);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC")
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC")
                 ,disease_result_21);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? "
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? "
                 ,disease_result_22);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? "
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? "
                 ,disease_result_23);
-        treeNodeMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT")
+        diseaseMap.put(rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT")
                 ,disease_result_24);
-        treeNodeMap.put(rb.getString("diseases.TOXIC_DAMAGE")
+        diseaseMap.put(rb.getString("diseases.TOXIC_DAMAGE")
                 ,disease_result_25);
-        treeNodeMap.put(rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? "
+        diseaseMap.put(rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? "
                 ,disease_result_26);
-        treeNodeMap.put(rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES")
+        diseaseMap.put(rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES")
                 ,disease_result_27);
-        treeNodeMap.put(rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? "
+        diseaseMap.put(rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? "
                 ,disease_result_28);
-        treeNodeMap.put(rb.getString("diseases.CIRRHOSIS_BILIARY")
+        diseaseMap.put(rb.getString("diseases.CIRRHOSIS_BILIARY")
                 ,disease_result_29);
-        treeNodeMap.put(rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? "
+        diseaseMap.put(rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? "
                 ,disease_result_30);
-        treeNodeMap.put(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? "
+        diseaseMap.put(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? "
                 ,disease_result_31);
-        treeNodeMap.put(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC")
+        diseaseMap.put(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC")
                 ,disease_result_32);
-        treeNodeMap.put(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? "
+        diseaseMap.put(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? "
                 ,disease_result_33);
     }
 }

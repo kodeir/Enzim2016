@@ -35,11 +35,11 @@ import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimTextField;
 import com.kodeir.enzim2016.ui.swing.listeners.TreeListener;
+import com.kodeir.enzim2016.ui.swing.listeners.TreeNodesMap;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
-import javax.swing.tree.TreeModel;
 import java.awt.*;
 import java.util.ResourceBundle;
 
@@ -181,8 +181,7 @@ public class TreePanel extends JPanel {
         DefaultMutableTreeNode AlT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.0_40"));
         AsT_Node.add(AlT_Node_0);
         AsT_Node.add(AlT_Node_1);
-        DefaultMutableTreeNode diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER")
-                + rb.getString("organs.BILIARY_TRACT"));
+        DefaultMutableTreeNode diagnose = TreeNodesMap.getInjuredOrgan_LIVER_BILIARY_TRACT_ALT();
         AlT_Node_0.add(diagnose);
         DefaultMutableTreeNode KFK_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.kfk.501_1750"));
         DefaultMutableTreeNode KFK_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.kfk.176_500"));
@@ -190,15 +189,15 @@ public class TreePanel extends JPanel {
         AlT_Node_1.add(KFK_Node_0);
         AlT_Node_1.add(KFK_Node_1);
         AlT_Node_1.add(KFK_Node_2);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.SKELETAL_MUSCLE"));
+        diagnose = TreeNodesMap.getInjuredOrgan_SKELETAL_MUSCLE();
         KFK_Node_0.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.HEART"));
+        diagnose = TreeNodesMap.getInjuredOrgan_HEART();
         KFK_Node_1.add(diagnose);
         DefaultMutableTreeNode LDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.591_2750"));
         DefaultMutableTreeNode LDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.150_590"));
         KFK_Node_2.add(LDG_Node_0);
         KFK_Node_2.add(LDG_Node_1);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.BLOOD"));
+        diagnose = TreeNodesMap.getInjuredOrgan_BLOOD();
         LDG_Node_0.add(diagnose);
         DefaultMutableTreeNode SHF_Node = new DefaultMutableTreeNode(rb.getString("coefficients.shf.more.80"));
         LDG_Node_1.add(SHF_Node);
@@ -208,12 +207,11 @@ public class TreePanel extends JPanel {
         SHF_Node.add(GGTP_Node_0);
         SHF_Node.add(GGTP_Node_1);
         SHF_Node.add(GGTP_Node_2);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER")
-                + rb.getString("organs.BILIARY_TRACT"));
+        diagnose = TreeNodesMap.getInjuredOrgan_LIVER_BILIARY_TRACT_GGTP();
         GGTP_Node_0.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER"));
+        diagnose = TreeNodesMap.getInjuredOrgan_LIVER();
         GGTP_Node_1.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.BONE_TISSUE"));
+        diagnose = TreeNodesMap.getInjuredOrgan_BONE_TISSUE();
         GGTP_Node_2.add(diagnose);
 
         return injuredOrgan;

@@ -39,7 +39,7 @@ public class TreeListener implements ActionListener {
             treePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(coefficients));
 
             //treePanel.getTree().setSelectionPath(new TreePath(
-            //        treePanel.getTreeModel().getPathToRoot(treePanel.getAlT_Node_0())));
+            //        treePanel.getTreeModel().getPathToRoot(TreeNodesMap.getinjuredOrganMap().);
         } else {
             JOptionPane.showMessageDialog(null, treePanel.getMissedCoefficients());
             JOptionPane.showMessageDialog(null, treePanel.getWrongCoefficients());
