@@ -114,7 +114,7 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
             for (Coefficients c: databasePanel.getCoefficientses()){
                 if (c.getCoefficients_id() == coefficientId) {
                     Diagnosis diagnosis = new EnzimLogic();
-                    databasePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(c));
+                    databasePanel.getDiagnosePanel().setDisease(diagnosis.getDiagnose(diagnosis.defineInjuredOrgan(c)));
                     databasePanel.getDiagnosePanel().setInjuredOrgan(diagnosis.getDiagnose(diagnosis.defineInjuredOrgan(c)));
 
                     databasePanel.getCoefficientsPanel().setValues(

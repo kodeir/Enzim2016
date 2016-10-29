@@ -10,7 +10,7 @@ import java.util.Map;
 public interface Diagnosis {
 
     Map<Integer, String> defineInjuredOrgan(Coefficients coefficients);
-    String defineDisease(Coefficients coefficients);
+    Map<Integer, String> defineDisease(Coefficients coefficients);
 
     String getDiagnose(Map<Integer,String> diagnoseMap);
     Integer getKey(Map<Integer,String> diagnoseMap);

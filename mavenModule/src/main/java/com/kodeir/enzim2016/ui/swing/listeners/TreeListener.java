@@ -43,7 +43,8 @@ public class TreeListener implements ActionListener {
                             TreeNodesMap.getInjuredOrganMap().get(
                                     diagnosis.getKey(diagnoseMap)))));
 
-            treePanel.getDiagnosePanel().setDisease(diagnosis.defineDisease(coefficients));
+            diagnoseMap = diagnosis.defineDisease(coefficients);
+            treePanel.getDiagnosePanel().setDisease(diagnosis.getDiagnose(diagnoseMap));
 
 
         } else {

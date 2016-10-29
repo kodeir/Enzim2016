@@ -75,7 +75,7 @@ public class EnzimLogic implements Diagnosis {
      *
      * @param coefficients patient coefficients
      * @return Map<Integer, String> where String is an injured organ
-     * and Integer is a key to map injured organ with a tree node
+     * and Integer is a key to map injured organ with a tree node in injuredOrganMap
      *
      * @see com.kodeir.enzim2016.ui.swing.listeners.TreeNodesMap
      * @see com.kodeir.enzim2016.ui.swing.listeners.TreeListener
@@ -121,7 +121,16 @@ public class EnzimLogic implements Diagnosis {
         }
     }
 
-    public String defineDisease(Coefficients coefficients){
+    /**
+     *
+     * @param coefficients patient coefficients
+     * @return Map<Integer, String> where String is a disease
+     * and Integer is a key to map disease with a tree node in diseaseMap
+     *
+     * @see com.kodeir.enzim2016.ui.swing.listeners.TreeNodesMap
+     * @see com.kodeir.enzim2016.ui.swing.listeners.TreeListener
+     */
+    public Map<Integer, String> defineDisease(Coefficients coefficients){
         setCoefficients(coefficients);
         if (isBetween(AsT, 41, 151)) {
             if (isBetween(AsT/AlT, 0.1f, 0.6f)) {
@@ -131,10 +140,10 @@ public class EnzimLogic implements Diagnosis {
             } else if (AsT/AlT >= 1) {
                 return deRitisRatio_1();
             } else {
-                return rb.getString("errors.calc.error");
+                return createMap(0, rb.getString("errors.calc.error"));
             }
         } else {
-            return rb.getString("errors.calc.ast.btwn.41-150");
+            return createMap(0, rb.getString("errors.calc.ast.btwn.41-150"));
         }
     }
 
@@ -156,167 +165,175 @@ public class EnzimLogic implements Diagnosis {
         return key;
     }
 
-    private String deRitisRatio_01_05(){
+    private Map<Integer, String> deRitisRatio_01_05(){
         if (isBetween(LDG, 591, 2751)){
-            return rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS");
+            return createMap(1, rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS"));
         } else if (isBetween(LDG, 150, 591)){
             if (ShF > 270){
                 if (isBetween(GlDG,11,76)){
-                    if (((AsT+AlT)/GlDG >= 51) || ((AsT+AlT)/GlDG < 40)) {
-                        return rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ";
-                    } else if (isBetween(((AsT+AlT)/GlDG),40,51)){
-                        return rb.getString("diseases.OBSTRUCTIVE_JAUNDICE");
+                    if ((AsT+AlT)/GlDG >= 51) {
+                        return createMap(2, rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ");
+                    } else if (isBetween(((AsT+AlT)/GlDG),40,51)) {
+                        return createMap(3, rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
+                    } else if ((AsT+AlT)/GlDG < 40){
+                        return createMap(4, rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ");
                     } else {
-                        return rb.getString("errors.calc.error");
+                        return createMap(0, rb.getString("errors.calc.error"));
                     }
                 } else if (isBetween(GlDG,0,11)){
                     if ((AsT+AlT)/GlDG >= 51){
-                        return rb.getString("diseases.TOXIC_DAMAGE");
+                        return createMap(5, rb.getString("diseases.TOXIC_DAMAGE"));
                     } else if ((AsT+AlT)/GlDG < 51){
-                        return rb.getString("diseases.TOXIC_DAMAGE") + " ? ";
+                        return createMap(6, rb.getString("diseases.TOXIC_DAMAGE") + " ? ");
                     } else {
-                        return rb.getString("errors.calc.error");
+                        return createMap(0, rb.getString("errors.calc.error"));
                     }
                 } else {
-                    return rb.getString("errors.calc.gldg.btwn.0_75");
+                    return createMap(0, rb.getString("errors.calc.gldg.btwn.0_75"));
                 }
             } else if (isBetween(ShF,80,271)){
                 if (GGTP >= 151){
-                    if ((GGTP/AsT >= 7) || (GGTP/AsT < 3)){
-                        return rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ";
+                    if (GGTP/AsT >= 7){
+                        return createMap(7, rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ");
                     } else if (isBetween((GGTP/AsT),3,7)){
-                        return rb.getString("diseases.HEPATITIS_ALCOHOLIC");
+                        return createMap(8, rb.getString("diseases.HEPATITIS_ALCOHOLIC"));
+                    } else if (GGTP/AsT < 3) {
+                        return createMap(9, rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ");
                     } else {
-                        return rb.getString("errors.calc.error");
+                        return createMap(0, rb.getString("errors.calc.error"));
                     }
                 } else if (GGTP < 150){
-                    if ((GGTP/AsT >= 4) || (GGTP/AsT < 1)){
-                        return rb.getString("diseases.HEPATITIS_VIRAL") + " ? ";
+                    if (GGTP/AsT >= 4){
+                        return createMap(10, rb.getString("diseases.HEPATITIS_VIRAL") + " ? ");
                     } else if (isBetween((GGTP/AsT),1,4)){
-                        return rb.getString("diseases.HEPATITIS_VIRAL");
+                        return createMap(11, rb.getString("diseases.HEPATITIS_VIRAL"));
+                    } else if (GGTP/AsT < 1){
+                        return createMap(12, rb.getString("diseases.HEPATITIS_VIRAL") + " ? ");
                     } else {
-                        return rb.getString("errors.calc.error");
+                        return createMap(0, rb.getString("errors.calc.error"));
                     }
                 } else {
-                    return rb.getString("errors.calc.error");
+                    return createMap(0, rb.getString("errors.calc.error"));
                 }
             } else {
-                return rb.getString("errors.shf.more.80");
+                return createMap(0, rb.getString("errors.shf.more.80"));
             }
         } else {
-            return rb.getString("errors.calc.ldg.btwn.150_2750");
+            return createMap(0, rb.getString("errors.calc.ldg.btwn.150_2750"));
         }
     }
 
-    private String deRitisRatio_06_09(){
+    private Map<Integer, String> deRitisRatio_06_09(){
         if (isBetween(ShF, 371, 1501)){
-            return deRitisRatio_06_09_HE_calcs();
+            return deRitisRatio_06_09_HE_calcs(13);
         } else if (isBetween(ShF, 80, 371)){
             if (GGTP >= 11) {
-                return deRitisRatio_06_09_HE_calcs();
+                return deRitisRatio_06_09_HE_calcs(21);
             } else if (isBetween(GGTP, 0, 11)){
-                return rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE");
+                return createMap(29, rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE"));
             } else {
-                return rb.getString("errors.calc.ggtp.less.0");
+                return createMap(0, rb.getString("errors.calc.ggtp.less.0"));
             }
         } else {
-            return rb.getString("errors.shf.btwn.80_1500");
+            return createMap(0, rb.getString("errors.shf.btwn.80_1500"));
         }
     }
 
-    private String deRitisRatio_06_09_HE_calcs(){
+    private Map<Integer, String> deRitisRatio_06_09_HE_calcs(int mapKeyCount){
         if (isBetween(HE,2701,3751)){
-            return rb.getString("diseases.FATTY_LIVER");
+            return createMap(mapKeyCount, rb.getString("diseases.FATTY_LIVER"));
         } else if (isBetween(HE,1751,2701)){
             if (GlDG >= 11){
-                return rb.getString("diseases.OBSTRUCTIVE_JAUNDICE");
+                return createMap(mapKeyCount+1, rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
             } else if (isBetween(GlDG, 0, 11)) {
-                if ((GGTP/AsT >= 4) || (GGTP/AsT < 1)){
-                    return rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ";
-                } else if (isBetween((GGTP/AsT),1,4)){
-                    return rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC");
+                if (GGTP/AsT >= 4){
+                    return createMap(mapKeyCount+2, rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
+                } else if (isBetween((GGTP/AsT),1,4)) {
+                    return createMap(mapKeyCount+3, rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC"));
+                } else if (GGTP/AsT < 1){
+                    return createMap(mapKeyCount+4, rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
                 } else {
-                    return rb.getString("errors.calc.error");
+                    return createMap(0, rb.getString("errors.calc.error"));
                 }
             } else {
-                return rb.getString("errors.calc.ggtp_ast.more.0");
+                return createMap(0, rb.getString("errors.calc.ggtp_ast.more.0"));
             }
         } else if (isBetween(HE,1201,1751)){
             if (GGTP / AsT >= 2){
-                return rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? ";
+                return createMap(mapKeyCount+5, rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? ");
             } else if (isBetween(GGTP / AsT, 0, 2)) {
-                return rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT");
+                return createMap(mapKeyCount+6, rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT"));
             } else {
-                return rb.getString("errors.calc.ggtp_ast.more.0");
+                return createMap(0, rb.getString("errors.calc.ggtp_ast.more.0"));
             }
         } else if (isBetween(HE,500,1201)){
-            return rb.getString("diseases.TOXIC_DAMAGE");
+            return createMap(mapKeyCount+7, rb.getString("diseases.TOXIC_DAMAGE"));
         } else {
-            return rb.getString("errors.calc.he.btwn.500_3750");
+            return createMap(0, rb.getString("errors.calc.he.btwn.500_3750"));
         }
     }
 
-    private String deRitisRatio_1(){
+    private Map<Integer, String> deRitisRatio_1(){
         if (HE >= 1501){
             if (GGTP >= 251){
-                return deRitisRatio_1_ShF_calcs();
+                return deRitisRatio_1_ShF_calcs(30);
             } else if (isBetween(GGTP,151,251)){
-                return rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE");
+                return createMap(38, rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE"));
             } else if (GGTP < 151){
-                return rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE");
+                return createMap(39, rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE"));
             } else {
-                return rb.getString("errors.calc.error");
+                return createMap(0, rb.getString("errors.calc.error"));
             }
         } else if (isBetween(HE, 500, 1501)){
             if (GGTP >= 351){
-                return rb.getString("diseases.LIVER_METASTASES") + " ? " + " , " + rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ";
+                return createMap(40, rb.getString("diseases.LIVER_METASTASES") + " ? " + " , " + rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
             } else if (isBetween(GGTP,151,351)){
-                return deRitisRatio_1_ShF_calcs();
+                return deRitisRatio_1_ShF_calcs(41);
             } else if (GGTP < 151){
-                return rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS");
+                return createMap(49, rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS"));
             } else {
-                return rb.getString("errors.calc.error");
+                return createMap(0, rb.getString("errors.calc.error"));
             }
         } else {
-            return rb.getString("errors.calc.he.less.500");
+            return createMap(0, rb.getString("errors.calc.he.less.500"));
         }
     }
 
-    private String deRitisRatio_1_ShF_calcs(){
+    private Map<Integer, String> deRitisRatio_1_ShF_calcs(int mapKeyCount){
         if (isBetween(ShF, 471, 1501)) {
             if (isBetween(GlDG, 11, 76)){
                 if ((AsT + AlT)/GlDG >= 11){
-                    return rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? ";
+                    return createMap(mapKeyCount, rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? ");
                 } else if (isBetween(((AsT + AlT)/GlDG),0,11)){
-                    return rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES");
+                    return createMap(mapKeyCount+1, rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES"));
                 } else {
-                    return rb.getString("errors.calc.ast_alt_gldg.more.0");
+                    return createMap(0, rb.getString("errors.calc.ast_alt_gldg.more.0"));
                 }
             } else if (isBetween(GlDG, 0, 11)){
                 if ((AsT + AlT)/GlDG >= 21){
-                    return rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ";
+                    return createMap(mapKeyCount+2, rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
                 } else if (isBetween(((AsT + AlT)/GlDG),5,21)){
-                    return rb.getString("diseases.CIRRHOSIS_BILIARY");
+                    return createMap(mapKeyCount+3, rb.getString("diseases.CIRRHOSIS_BILIARY"));
                 } else if ((AsT + AlT)/GlDG < 5){
-                    return rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ";
+                    return createMap(mapKeyCount+4, rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
                 } else {
-                    return rb.getString("errors.calc.error");
+                    return createMap(0, rb.getString("errors.calc.error"));
                 }
             } else {
-                return rb.getString("errors.calc.gldg.btwn.0_75");
+                return createMap(0, rb.getString("errors.calc.gldg.btwn.0_75"));
             }
         } else if (isBetween(ShF, 80, 471)){
             if (GGTP/AsT >= 7){
-                return rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ";
+                return createMap(mapKeyCount+5, rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
             } else if (isBetween((GGTP/AsT),3,7)){
-                return rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC");
+                return createMap(mapKeyCount+6, rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC"));
             } else if (GGTP/AsT < 3){
-                return rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ";
+                return createMap(mapKeyCount+7, rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
             } else {
-                return rb.getString("errors.calc.error");
+                return createMap(0, rb.getString("errors.calc.error"));
             }
         } else {
-            return rb.getString("errors.shf.btwn.80_1500");
+            return createMap(0, rb.getString("errors.shf.btwn.80_1500"));
         }
     }
 
