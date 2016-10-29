@@ -1,8 +1,6 @@
 package com.kodeir.enzim2016.commons;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.*;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -19,13 +17,13 @@ public class EnzimLoggerTest {
     private String testLogName = "testName";
     private String lofFileEnding = ".0.log";
 
-    @BeforeClass
-    public static void create() throws Exception{
+    @Before
+    public void create() throws Exception{
         EnzimFiler.createDir(testLogDirectory);
     }
 
-    @AfterClass
-    public static void clean() throws Exception{
+    @After
+    public void clean() throws Exception{
         EnzimFiler.deleteDirRecursively(testLogDirectory);
     }
 

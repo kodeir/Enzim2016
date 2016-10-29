@@ -12,13 +12,13 @@ import java.util.logging.Logger;
  */
 public class EnzimDatabase implements Database {
 
-    //private static final LogManager log = new LogManager(EnzimDatabase.class.getName());
+    private static final EnzimLogger logger = new EnzimLogger(EnzimDatabase.class.getName());
+
     private Connection connection = null;
     private Statement statement = null;
 
-    /*
     private boolean printSqlException(SQLException e, String message){
-        log.log(Level.SEVERE, message
+        logger.log(Level.SEVERE, message
                                 + "\n"
                                 + "Error code: " + e.getErrorCode()
                                 + "\n"
@@ -27,7 +27,6 @@ public class EnzimDatabase implements Database {
                                 , e);
         return false;
     }
-    */
 
     public boolean setConnectionIfDbExist(String database, String user, String password){
         try {
@@ -35,8 +34,7 @@ public class EnzimDatabase implements Database {
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return false;
-            //return printSqlException(e, "Failed to open connection to " + database + " with user = " + user + "!");
+            return printSqlException(e, "Failed to open connection to " + database + " with user = " + user + "!");
         }
     }
 
@@ -46,8 +44,7 @@ public class EnzimDatabase implements Database {
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
-            return false;
-            //return printSqlException(e, "Failed to open connection to " + database + " with user = " + user + "!");
+            return printSqlException(e, "Failed to open connection to " + database + " with user = " + user + "!");
         }
     }
 
@@ -55,26 +52,24 @@ public class EnzimDatabase implements Database {
         try{
             if (statement != null) {
                 statement.close();
-                //log.log(Level.FINE, "Statement was closed successfully.");
+                logger.log(Level.FINE, "Statement was closed successfully.");
                 return true;
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return false;
-            //return printSqlException(e, "Failed to close statement.");
+            return printSqlException(e, "Failed to close a statement.");
         }
         try{
             if (connection != null) {
                 connection.close();
+                logger.log(Level.FINE, "Connection was closed successfully.");
                 return true;
-                //log.log(Level.FINE, "Connection was closed successfully.");
             } else {
                 return true;
             }
         } catch (SQLException e){
             System.out.println(e.getMessage());
-            return false;
-            //return printSqlException(e, "Failed to close connection.");
+            return printSqlException(e, "Failed to close a connection.");
         }
     }
 
@@ -83,8 +78,7 @@ public class EnzimDatabase implements Database {
             statement = connection.createStatement();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            return printSqlException(e, "Failed to create a statement.");
         }
     }
 
@@ -93,8 +87,7 @@ public class EnzimDatabase implements Database {
             statement.close();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            return printSqlException(e, "Failed to close a statement.");
         }
     }
 
@@ -103,8 +96,7 @@ public class EnzimDatabase implements Database {
             statement.executeUpdate(sql);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            return printSqlException(e, "ExecuteUpdateQuery failed");
         }
     }
 
@@ -113,8 +105,7 @@ public class EnzimDatabase implements Database {
             statement.execute(sql);
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            return printSqlException(e, "ExecuteQuery failed");
         }
     }
 
@@ -123,8 +114,7 @@ public class EnzimDatabase implements Database {
         try {
             return statement.executeQuery(sql);
         } catch (SQLException e) {
-            e.printStackTrace();
-            JOptionPane.showMessageDialog(null,e.getMessage());
+            printSqlException(e, "SelectQuery failed");
             return null;
         }
     }
@@ -142,8 +132,7 @@ public class EnzimDatabase implements Database {
             connection.commit();
             return true;
         } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
+            return printSqlException(e, "Commit failed");
         }
     }
 
