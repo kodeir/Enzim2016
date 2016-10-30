@@ -72,9 +72,7 @@ public class NewCoefficientsListener implements ActionListener {
     }
 
     private void updateDatabasePanel(){
-        int index = databasePanel.getPatientsList().getSelectedIndex();
         new DatabasePanelCreator(databasePanel);
-        databasePanel.getPatientsList().setSelectedIndex(index);
     }
 
     private boolean addCoefficients() {

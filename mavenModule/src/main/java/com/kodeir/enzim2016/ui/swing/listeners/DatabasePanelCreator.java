@@ -57,9 +57,13 @@ public class DatabasePanelCreator {
     }
 
     private void updateDatabasePanel(){
+        //int selectedIndex is used to remember current patient (where cursor is)
+        int selectedIndex = databasePanel.getPatientsList().getSelectedIndex();
         setPatients();
         cleanDatabasePanelLists();
         fillPatientsListModel();
+        //after data and panel are refreshed, back cursor to previously selected patient
+        databasePanel.getPatientsList().setSelectedIndex(selectedIndex);
     }
 
     private void setPatients(){
