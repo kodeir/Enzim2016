@@ -50,7 +50,7 @@ import java.util.logging.Level;
  */
 public class Enzim {
 
-    private static final EnzimLogger logger = new EnzimLogger(EnzimDatabase.class.getName());
+    private static final EnzimLogger logger = new EnzimLogger(Enzim.class.getName());
 
     public static void main(String[] args) {
         checkDatabase();

@@ -38,6 +38,7 @@ import com.kodeir.enzim2016.ui.swing.listeners.EnzimPanelListener;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.net.URI;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.util.ResourceBundle;
@@ -142,10 +143,9 @@ public class EnzimPanel extends JPanel {
         ImageIcon icon = null;
         try {
             logger.log(Level.INFO, "Loading image " + imageName + ";");
-            icon = new ImageIcon(Paths.get(ClassLoader.getSystemResource(imageName).toURI()).toString());
-            logger.log(Level.INFO, "Resizing image " + imageName + "to fit button size;");
+            icon = new ImageIcon(getClass().getClassLoader().getResource(imageName));
             icon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
-        } catch (URISyntaxException e) {
+        } catch (NullPointerException e) {
             logger.log(Level.WARNING, "Image can't be loaded: " + e);
         }
         return icon;

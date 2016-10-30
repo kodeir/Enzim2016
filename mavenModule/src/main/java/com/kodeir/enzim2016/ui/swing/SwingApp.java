@@ -16,7 +16,7 @@ import java.util.logging.Level;
  */
 public class SwingApp {
 
-    private static final EnzimLogger logger = new EnzimLogger(EnzimDatabase.class.getName());
+    private static final EnzimLogger logger = new EnzimLogger(SwingApp.class.getName());
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
