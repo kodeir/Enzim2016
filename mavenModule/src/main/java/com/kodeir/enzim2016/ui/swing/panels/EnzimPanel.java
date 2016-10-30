@@ -95,7 +95,7 @@ public class EnzimPanel extends JPanel {
 
     public void addNewPatient(){
         newPatientBtn = new JButton(addImage(newPatientBtnIcoPath));
-        EnzimSwingCommons.setSize(newPatientBtn, 50, 50);
+        EnzimSwingCommons.setSize(newPatientBtn, 55, 55);
         this.add(newPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 0));
 
         label = new JLabel(rb.getString("interface.create.new_patient"));
@@ -104,7 +104,7 @@ public class EnzimPanel extends JPanel {
 
     public void addOpenDatabase(){
         openDatabaseBtn = new JButton(addImage(openDatabaseBtnIcoPath));
-        EnzimSwingCommons.setSize(openDatabaseBtn, 50, 50);
+        EnzimSwingCommons.setSize(openDatabaseBtn, 55, 55);
         this.add(openDatabaseBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
 
         label = new JLabel(rb.getString("interface.open.database"));
@@ -113,7 +113,7 @@ public class EnzimPanel extends JPanel {
 
     public void addShowTree(){
         showTreeButton = new JButton(addImage(showTreeButtonIcoPath));
-        EnzimSwingCommons.setSize(showTreeButton, 50, 50);
+        EnzimSwingCommons.setSize(showTreeButton, 55, 55);
         this.add(showTreeButton, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
 
         label = new JLabel(rb.getString("interface.open.tree"));
@@ -122,7 +122,7 @@ public class EnzimPanel extends JPanel {
 
     public void addExit(){
         exitBtn = new JButton(addImage(exitBtnIcoPath));
-        EnzimSwingCommons.setSize(exitBtn, 50, 50);
+        EnzimSwingCommons.setSize(exitBtn, 55, 55);
         this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
 
         label = new JLabel(rb.getString("interface.exit"));
