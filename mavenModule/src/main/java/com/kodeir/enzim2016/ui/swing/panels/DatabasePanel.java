@@ -91,6 +91,10 @@ public class DatabasePanel extends JPanel {
         return patients;
     }
 
+    public void setPatients(List<Patient> patients){
+        this.patients = patients;
+    }
+
     public PatientPIPanel getPatientPIPanel() {
         return patientPIPanel;
     }

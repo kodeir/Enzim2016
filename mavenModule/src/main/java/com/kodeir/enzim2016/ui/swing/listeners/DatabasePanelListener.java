@@ -41,7 +41,7 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
             PatientPanel patientPanel = new PatientPanel(true);
             patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
         } else if (e.getSource().equals(databasePanel.getAddNewCoefficientsBtn())) {
-            NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel(getPatientId());
+            NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel(getPatientId(), databasePanel);
             newCoefficientsPanel.setFrame(new EnzimFrame("Add new coefficients", newCoefficientsPanel));
         } else if (e.getSource().equals(databasePanel.getShowTreeBtn())) {
             showTree();
@@ -93,7 +93,9 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
         databasePanel.getAddNewCoefficientsBtn().setEnabled(true);
         if (!e.getValueIsAdjusting()) {
             if (e.getSource().equals(databasePanel.getPatientsList())) {
-                setPatient();
+                if (!databasePanel.getPatientsListModel().isEmpty()) {
+                    setPatient();
+                }
             } else if (e.getSource().equals(databasePanel.getCoefficientsList())) {
                 databasePanel.getShowTreeBtn().setEnabled(true);
                 if (!databasePanel.getCoefficientsList().isSelectionEmpty()) {

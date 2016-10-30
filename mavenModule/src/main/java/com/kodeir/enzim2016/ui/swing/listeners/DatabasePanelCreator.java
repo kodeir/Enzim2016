@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
 import com.kodeir.enzim2016.commons.EnzimDatabase;
+import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.pi.Coefficients;
@@ -12,11 +13,14 @@ import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.logging.Level;
 
 /**
  * Created by Sergei Riabinin on 18.09.2016.
  */
 public class DatabasePanelCreator {
+
+    private static final EnzimLogger logger = new EnzimLogger(DatabasePanelCreator.class.getName());
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
@@ -26,41 +30,44 @@ public class DatabasePanelCreator {
 
     private String sqlQuery = "SELECT * FROM PATIENTS P JOIN COEFFICIENTS C ON P.patient_id = C.patient_id ORDER BY P.patient_id ASC";
 
+    /**
+     * Default constructor is used for creating Database Panel with the panel itself
+     */
     public DatabasePanelCreator(){
+        //logger.log(Level.INFO, "DatabasePanelCreator default constructor");
         database = new EnzimDatabase();
         createDatabasePanel();
     }
 
+    /**
+     * Used for updating current Database Panel
+     * @param databasePanel DatabasePanel
+     */
+    public DatabasePanelCreator(DatabasePanel databasePanel){
+        //logger.log(Level.INFO, "DatabasePanelCreator Update constructor");
+        this.databasePanel = databasePanel;
+        database = new EnzimDatabase();
+        updateDatabasePanel();
+    }
+
     private void createDatabasePanel(){
         setPatients();
-        initializePanel();
+        initializeDatabasePanel();
+        fillPatientsListModel();
+    }
+
+    private void updateDatabasePanel(){
+        setPatients();
+        cleanDatabasePanelLists();
         fillPatientsListModel();
     }
 
     private void setPatients(){
         patients = getPatientsFromDb();
-        //TODO: get sorted right
-        Collections.sort(patients);
+        // TODO: get sorted right
+        // Collections.sort(patients);
     }
 
-    private void initializePanel(){
-        databasePanel = new DatabasePanel(patients);
-        databasePanel.setFrame(new EnzimFrame(rb.getString("interface.database"), databasePanel));
-    }
-
-    private void fillPatientsListModel(){
-        for (Patient p: patients){
-            databasePanel.setPatientsListModel(
-                    p.getId() + ". " +
-                    p.getSurname() + " " +
-                    p.getName().substring(0,1) + "." +
-                    p.getPatronymic().substring(0,1) + ". ; " +
-                    rb.getString("interface.database.birthdate") + p.getBirthDate()
-            );
-        }
-    }
-
-    //TODO: move to DAO
     private List<Patient> getPatientsFromDb(){
         if (connectToDatabase()){
             database.setStatement();
@@ -95,6 +102,31 @@ public class DatabasePanelCreator {
             return patients;
         }
         return new ArrayList<>();
+    }
+
+    private void initializeDatabasePanel(){
+        databasePanel = new DatabasePanel(patients);
+        databasePanel.setFrame(new EnzimFrame(rb.getString("interface.database"), databasePanel));
+    }
+
+    private void cleanDatabasePanelLists() {
+        databasePanel.getPatientsListModel().removeAllElements();
+        databasePanel.getCoefficientsListModel().removeAllElements();
+        //logger.log(Level.INFO, "List Model were cleaned");
+        databasePanel.setPatients(patients);
+        //logger.log(Level.INFO, "Patiens List was reloaded");
+    }
+
+    private void fillPatientsListModel(){
+        for (Patient p: patients){
+            databasePanel.setPatientsListModel(
+                    p.getId() + ". " +
+                    p.getSurname() + " " +
+                    p.getName().substring(0,1) + "." +
+                    p.getPatronymic().substring(0,1) + ". ; " +
+                    rb.getString("interface.database.birthdate") + p.getBirthDate()
+            );
+        }
     }
 
     private Coefficients setCoefficients(ResultSet rs) throws SQLException {

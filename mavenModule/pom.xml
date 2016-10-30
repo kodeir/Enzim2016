@@ -6,7 +6,7 @@
 
     <groupId>kodeir</groupId>
     <artifactId>enzim2016</artifactId>
-    <version>0.2.8-SNAPSHOT</version>
+    <version>0.2.9-SNAPSHOT</version>
 
 
     <dependencies>
