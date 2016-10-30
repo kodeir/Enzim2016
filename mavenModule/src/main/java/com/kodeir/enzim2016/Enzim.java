@@ -1,8 +1,12 @@
 package com.kodeir.enzim2016;
 
+import com.kodeir.enzim2016.commons.EnzimDatabase;
+import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.InitialDatabase;
 import com.kodeir.enzim2016.ui.cmd.CmdUi;
 import com.kodeir.enzim2016.ui.swing.SwingApp;
+
+import java.util.logging.Level;
 
 /*
  * Copyright (c) 2007, 2016 Vyacheslav Ryabinin and/or his affiliates. All rights reserved.
@@ -46,15 +50,25 @@ import com.kodeir.enzim2016.ui.swing.SwingApp;
  */
 public class Enzim {
 
+    private static final EnzimLogger logger = new EnzimLogger(EnzimDatabase.class.getName());
+
     public static void main(String[] args) {
-        //CmdUi.startCmd();
-        SwingApp.startSwing();
         checkDatabase();
+        if (args.length != 0) {
+            logger.log(Level.INFO, "Starting in CMD mode;");
+            CmdUi.startCmd();
+        } else {
+            logger.log(Level.INFO, "Starting with GUI;");
+            SwingApp.startSwing();
+        }
     }
 
     private static void checkDatabase(){
         if (!InitialDatabase.checkIfDbFileExists()){
+            logger.log(Level.INFO, "Creating database;");
             InitialDatabase.createInitialDatabase();
+        } else {
+            logger.log(Level.INFO, "Existing database is used;");
         }
     }
 }
