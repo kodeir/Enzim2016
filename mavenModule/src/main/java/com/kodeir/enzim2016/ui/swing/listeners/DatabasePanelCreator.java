@@ -68,8 +68,7 @@ public class DatabasePanelCreator {
 
     private void setPatients(){
         patients = getPatientsFromDb();
-        // TODO: get sorted right
-        // Collections.sort(patients);
+        Collections.sort(patients);
     }
 
     private List<Patient> getPatientsFromDb(){
