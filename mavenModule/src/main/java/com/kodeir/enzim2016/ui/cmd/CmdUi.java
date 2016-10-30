@@ -20,12 +20,12 @@ public class CmdUi {
     }
 
     public static void startCmd(){
-        CmdUi cmdUi = new CmdUi();
+        new CmdUi();
     }
 
     private void runCmd(){
         System.out.println("Enzim 2016");
-        System.out.println("--");
+        System.out.println("CMD interface is under construction, sorry.");
         //createPatient();
         //fillCoefficients();
         //doDiagnostic();
