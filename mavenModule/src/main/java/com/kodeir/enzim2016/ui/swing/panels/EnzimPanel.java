@@ -30,18 +30,25 @@
 
 package com.kodeir.enzim2016.ui.swing.panels;
 
+import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.EnzimPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 /**
  * Created by Sergei Riabinin on 03.07.2016.
  */
 public class EnzimPanel extends JPanel {
+
+    private static final EnzimLogger logger = new EnzimLogger(EnzimPanel.class.getName());
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
@@ -50,6 +57,16 @@ public class EnzimPanel extends JPanel {
     private JButton openDatabaseBtn;
     private JButton showTreeButton;
     private JButton exitBtn;
+
+    /*
+    The following icons are Designed by Freepik and distributed by Flaticon
+    http://www.flaticon.com/packs/hospital-set
+     */
+    private String newPatientBtnIcoPath = "clinic-history.png";
+    private String openDatabaseBtnIcoPath = "laptop.png";
+    private String showTreeButtonIcoPath = "stethoscope.png";
+    private String exitBtnIcoPath = "band-aid.png";
+
 
     public JButton getNewPatientBtn() {
         return newPatientBtn;
@@ -77,7 +94,8 @@ public class EnzimPanel extends JPanel {
     }
 
     public void addNewPatient(){
-        newPatientBtn = new JButton("new P icon");
+        newPatientBtn = new JButton(addImage(newPatientBtnIcoPath));
+        EnzimSwingCommons.setSize(newPatientBtn, 50, 50);
         this.add(newPatientBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 0));
 
         label = new JLabel(rb.getString("interface.create.new_patient"));
@@ -85,7 +103,8 @@ public class EnzimPanel extends JPanel {
     }
 
     public void addOpenDatabase(){
-        openDatabaseBtn = new JButton("new DB icon");
+        openDatabaseBtn = new JButton(addImage(openDatabaseBtnIcoPath));
+        EnzimSwingCommons.setSize(openDatabaseBtn, 50, 50);
         this.add(openDatabaseBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
 
         label = new JLabel(rb.getString("interface.open.database"));
@@ -93,7 +112,8 @@ public class EnzimPanel extends JPanel {
     }
 
     public void addShowTree(){
-        showTreeButton = new JButton("tree icon");
+        showTreeButton = new JButton(addImage(showTreeButtonIcoPath));
+        EnzimSwingCommons.setSize(showTreeButton, 50, 50);
         this.add(showTreeButton, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
 
         label = new JLabel(rb.getString("interface.open.tree"));
@@ -101,7 +121,8 @@ public class EnzimPanel extends JPanel {
     }
 
     public void addExit(){
-        exitBtn = new JButton("exit icon");
+        exitBtn = new JButton(addImage(exitBtnIcoPath));
+        EnzimSwingCommons.setSize(exitBtn, 50, 50);
         this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
 
         label = new JLabel(rb.getString("interface.exit"));
@@ -113,5 +134,16 @@ public class EnzimPanel extends JPanel {
         getOpenDatabaseBtn().addActionListener(new EnzimPanelListener(this));
         getShowTreeButton().addActionListener(new EnzimPanelListener(this));
         getExitBtn().addActionListener(new EnzimPanelListener(this));
+    }
+
+    private ImageIcon addImage(String imageName){
+        ImageIcon icon = null;
+        try {
+            icon = new ImageIcon(Paths.get(ClassLoader.getSystemResource(imageName).toURI()).toString());
+            icon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
+        } catch (URISyntaxException e) {
+            logger.log(Level.WARNING, "Image can't be loaded: " + e);
+        }
+        return icon;
     }
 }
