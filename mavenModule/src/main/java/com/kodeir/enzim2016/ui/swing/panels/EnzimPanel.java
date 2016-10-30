@@ -85,12 +85,14 @@ public class EnzimPanel extends JPanel {
     }
 
     public EnzimPanel(){
+        logger.log(Level.INFO, "Creating main panel - EnzimPanel;");
         this.setLayout(new GridBagLayout());
         addNewPatient();
         addOpenDatabase();
         addShowTree();
         addExit();
         addListeners();
+        logger.log(Level.INFO, "EnzimPanel is created;");
     }
 
     public void addNewPatient(){
@@ -139,7 +141,9 @@ public class EnzimPanel extends JPanel {
     private ImageIcon addImage(String imageName){
         ImageIcon icon = null;
         try {
+            logger.log(Level.INFO, "Loading image " + imageName + ";");
             icon = new ImageIcon(Paths.get(ClassLoader.getSystemResource(imageName).toURI()).toString());
+            logger.log(Level.INFO, "Resizing image " + imageName + "to fit button size;");
             icon = new ImageIcon(icon.getImage().getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH));
         } catch (URISyntaxException e) {
             logger.log(Level.WARNING, "Image can't be loaded: " + e);
