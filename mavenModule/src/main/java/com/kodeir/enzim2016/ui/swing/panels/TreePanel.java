@@ -121,6 +121,18 @@ public class TreePanel extends JPanel {
 
     public TreePanel(){
         this.setLayout(new GridBagLayout());
+        fillPanel();
+        expandTrees();
+    }
+
+    public TreePanel(String ast, String alt, String kfk, String ldg, String shf, String ggtp, String he, String gldg){
+        this.setLayout(new GridBagLayout());
+        fillPanel();
+        setCoefficients(ast, alt, kfk, ldg, shf, ggtp, he, gldg);
+        doDiagnoseBtn.doClick();
+    }
+
+    private void fillPanel(){
         addFields();
         addResultButton();
         addResults();
@@ -129,15 +141,12 @@ public class TreePanel extends JPanel {
         addListeners();
     }
 
-    public TreePanel(String ast, String alt, String kfk, String ldg, String shf, String ggtp, String he, String gldg){
-        this.setLayout(new GridBagLayout());
-        addFields();
-        addResultButton();
-        addResults();
-        addInjuredOrganTree();
-        addDiseaseTree();
-        addListeners();
+    private void expandTrees(){
+        expandTree(injuredOrganTree);
+        expandTree(diseaseTree);
+    }
 
+    private void setCoefficients(String ast, String alt, String kfk, String ldg, String shf, String ggtp, String he, String gldg){
         astField.setText(ast);
         altField.setText(alt);
         kfkField.setText(kfk);
@@ -146,8 +155,6 @@ public class TreePanel extends JPanel {
         ggtpField.setText(ggtp);
         heField.setText(he);
         gldgField.setText(gldg);
-
-        doDiagnoseBtn.doClick();
     }
 
     private void addFields(){
@@ -206,7 +213,6 @@ public class TreePanel extends JPanel {
 
         injuredOrganTree = new JTree(injuredOrganTreeModel);
         injuredOrganTree.setRootVisible(false);
-        //EnzimSwingCommons.setSize(injuredOrganTree, 600, 125);
         injuredOrganTree.getExpandsSelectedPaths();
 
         JScrollPane scrollPane = new JScrollPane(injuredOrganTree);
@@ -222,7 +228,6 @@ public class TreePanel extends JPanel {
 
         diseaseTree = new JTree(diseaseTreeModel);
         diseaseTree.setRootVisible(false);
-        //EnzimSwingCommons.setSize(diseaseTree, 600, 250);
         diseaseTree.getExpandsSelectedPaths();
 
         JScrollPane scrollPane = new JScrollPane(diseaseTree);
@@ -715,9 +720,12 @@ public class TreePanel extends JPanel {
             tree.collapseRow(row);
             row--;
         }
-        //treePanel.getTree().collapsePath(new TreePath(tree));
         tree.clearSelection();
     }
 
-
+    public void expandTree(JTree tree){
+        for (int i = 0; i < tree.getRowCount(); i++) {
+            tree.expandRow(i);
+        }
+    }
 }
