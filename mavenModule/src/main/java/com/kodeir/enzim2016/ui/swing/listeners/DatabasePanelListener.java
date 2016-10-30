@@ -38,7 +38,7 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(databasePanel.getAddNewPatientBtn())) {
-            PatientPanel patientPanel = new PatientPanel(true);
+            PatientPanel patientPanel = new PatientPanel(true, databasePanel);
             patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
         } else if (e.getSource().equals(databasePanel.getAddNewCoefficientsBtn())) {
             NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel(getPatientId(), databasePanel);

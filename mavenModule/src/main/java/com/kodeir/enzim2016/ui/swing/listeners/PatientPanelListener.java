@@ -5,6 +5,7 @@ import com.kodeir.enzim2016.commons.PatientsDatabase;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.panels.CoefficientsPanel;
+import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
 
 import javax.swing.*;
@@ -29,15 +30,21 @@ public class PatientPanelListener implements ActionListener {
     private StringBuilder errors;
 
     private PatientPanel patientPanel;
-    private CoefficientsPanel coefficientsPanel;
     private CoefficientsHandler coefficientsHandler;
+    private DatabasePanel databasePanel;
 
     private boolean createdFromDB;
 
     public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel, boolean createdFromDB){
         this.patientPanel = patientPanel;
-        this.coefficientsPanel = coefficientsPanel;
         this.createdFromDB = createdFromDB;
+        coefficientsHandler = new CoefficientsHandler(coefficientsPanel);
+    }
+
+    public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel, boolean createdFromDB, DatabasePanel databasePanel){
+        this.patientPanel = patientPanel;
+        this.createdFromDB = createdFromDB;
+        this.databasePanel = databasePanel;
         coefficientsHandler = new CoefficientsHandler(coefficientsPanel);
     }
 
@@ -67,6 +74,7 @@ public class PatientPanelListener implements ActionListener {
                         coefficientsHandler.getGldg()));
                 if (createdFromDB) {
                     JOptionPane.showMessageDialog(null, rb.getString("interface.patient.added"));
+                    updateDatabasePanel();
                     exit(true);
                 } else {
                     Object[] options = {rb.getString("interface.Yes"),
@@ -91,6 +99,10 @@ public class PatientPanelListener implements ActionListener {
             }
             database.closeConnection();
         }
+    }
+
+    private void updateDatabasePanel(){
+        new DatabasePanelCreator(databasePanel);
     }
 
     private boolean connectToDatabase(){
