@@ -3,6 +3,7 @@ package com.kodeir.enzim2016.ui.swing.panels;
 import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
+import com.kodeir.enzim2016.ui.swing.listeners.TutorialPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,6 +67,7 @@ public class TutorialPanel extends JPanel {
                 addNewCoefficientsGuide();
             }
         }
+        addListeners();
     }
 
     private void setupPanel() {
@@ -126,5 +128,13 @@ public class TutorialPanel extends JPanel {
 
     public void addNewCoefficientsGuide() {
         textArea.setText("coeff guide");
+    }
+
+    private void addListeners(){
+        mainMenuGuide.addActionListener(new TutorialPanelListener(this));
+        newPatientGuide.addActionListener(new TutorialPanelListener(this));
+        databaseGuide.addActionListener(new TutorialPanelListener(this));
+        treeGuide.addActionListener(new TutorialPanelListener(this));
+        newCoefficientsGuide.addActionListener(new TutorialPanelListener(this));
     }
 }
