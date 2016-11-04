@@ -6,6 +6,7 @@ import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
 import com.kodeir.enzim2016.ui.swing.panels.TreePanel;
+import sun.reflect.generics.tree.Tree;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,7 +20,6 @@ public class EnzimPanelListener implements ActionListener{
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private EnzimPanel enzimPanel;
-    private PatientPanel patientPanel;
 
     public EnzimPanelListener(EnzimPanel enzimPanel){
         this.enzimPanel = enzimPanel;
@@ -41,8 +41,7 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createNewPatientPanel(){
-        //setting up the panel's frame for the correct panel closing
-        patientPanel = new PatientPanel(false);
+        PatientPanel patientPanel = new PatientPanel(false);
         patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
     }
 
@@ -51,7 +50,8 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createTreePanel(){
-        new EnzimFrame(rb.getString("interface.tree.panel"), new TreePanel());
+        TreePanel treePanel = new TreePanel();
+        treePanel.setFrame(new EnzimFrame(rb.getString("interface.tree.panel"), new TreePanel()));
     }
 
     private void createAboutPanel() {
