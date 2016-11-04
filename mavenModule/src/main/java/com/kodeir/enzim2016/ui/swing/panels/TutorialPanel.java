@@ -108,23 +108,23 @@ public class TutorialPanel extends JPanel {
         this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 5, 2, 1));
     }
 
-    private void addMainMenuGuide() {
+    public void addMainMenuGuide() {
         textArea.setText("main guide");
     }
 
-    private void addPatientPanelGuide() {
+    public void addPatientPanelGuide() {
         textArea.setText("new patient guide");
     }
 
-    private void addDatabasePanelGuide() {
+    public void addDatabasePanelGuide() {
         textArea.setText("db guide");
     }
 
-    private void addTreeGuide() {
+    public void addTreeGuide() {
         textArea.setText("tree guide");
     }
 
-    private void addNewCoefficientsGuide() {
+    public void addNewCoefficientsGuide() {
         textArea.setText("coeff guide");
     }
 }
