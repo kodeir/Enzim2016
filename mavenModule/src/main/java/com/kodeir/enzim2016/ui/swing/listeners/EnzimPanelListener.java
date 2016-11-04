@@ -41,6 +41,7 @@ public class EnzimPanelListener implements ActionListener{
     }
 
     private void createNewPatientPanel(){
+        //setting up the panel's frame for the correct panel closing
         patientPanel = new PatientPanel(false);
         patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
     }
