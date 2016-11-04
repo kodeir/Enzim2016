@@ -33,6 +33,7 @@ public class EnzimPanel extends JPanel {
     private String newPatientBtnIcoPath = "clinic-history.png";
     private String openDatabaseBtnIcoPath = "laptop.png";
     private String showTreeButtonIcoPath = "stethoscope.png";
+    private String aboutButtonIcoPath = "microscope.png";
     private String exitBtnIcoPath = "band-aid.png";
 
 
@@ -96,7 +97,7 @@ public class EnzimPanel extends JPanel {
     }
 
     public void addAbout(){
-        aboutBtn = new JButton();
+        aboutBtn = new JButton(addImage(aboutButtonIcoPath));
         EnzimSwingCommons.setSize(aboutBtn, 55, 55);
         this.add(aboutBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
 
