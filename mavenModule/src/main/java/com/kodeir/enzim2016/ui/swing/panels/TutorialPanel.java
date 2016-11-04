@@ -109,22 +109,22 @@ public class TutorialPanel extends JPanel {
     }
 
     private void addMainMenuGuide() {
-
+        textArea.setText("main guide");
     }
 
     private void addPatientPanelGuide() {
-
+        textArea.setText("new patient guide");
     }
 
     private void addDatabasePanelGuide() {
-
+        textArea.setText("db guide");
     }
 
     private void addTreeGuide() {
-
+        textArea.setText("tree guide");
     }
 
     private void addNewCoefficientsGuide() {
-
+        textArea.setText("coeff guide");
     }
 }
