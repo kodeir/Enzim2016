@@ -33,7 +33,7 @@ public class TutorialPanelListener implements ActionListener {
         } else if (e.getSource().equals(tutorialPanel.getTreeGuide())){
             tutorialPanel.addTreeGuide();
         } else if (e.getSource().equals(tutorialPanel.getNewCoefficientsGuide())){
-            tutorialPanel.addTreeGuide();
+            tutorialPanel.addNewCoefficientsGuide();
         }
     }
 }
