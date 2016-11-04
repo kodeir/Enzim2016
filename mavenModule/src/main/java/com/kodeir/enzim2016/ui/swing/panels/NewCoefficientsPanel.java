@@ -2,6 +2,7 @@ package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 import com.kodeir.enzim2016.ui.swing.listeners.NewCoefficientsListener;
 
 import javax.swing.*;
@@ -70,5 +71,6 @@ public class NewCoefficientsPanel extends JPanel{
     private void addListeners() {
         addNewCoefficientsBtn.addActionListener(new NewCoefficientsListener(this, patientId, databasePanel));
         returnBtn.addActionListener(new NewCoefficientsListener(this, patientId));
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyboardListener(this));
     }
 }

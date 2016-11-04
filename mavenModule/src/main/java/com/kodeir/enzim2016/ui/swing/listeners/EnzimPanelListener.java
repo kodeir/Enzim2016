@@ -51,7 +51,7 @@ public class EnzimPanelListener implements ActionListener{
 
     private void createTreePanel(){
         TreePanel treePanel = new TreePanel();
-        treePanel.setFrame(new EnzimFrame(rb.getString("interface.tree.panel"), new TreePanel()));
+        treePanel.setFrame(new EnzimFrame(rb.getString("interface.tree.panel"), treePanel));
     }
 
     private void createAboutPanel() {
