@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  * Created by Sergei Riabinin on 04.11.2016.
  */
 public class AboutPanelListener implements ActionListener{
-    private static final EnzimLogger logger = new EnzimLogger(EnzimPanel.class.getName());
+    private static final EnzimLogger logger = new EnzimLogger(AboutPanelListener.class.getName());
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private AboutPanel aboutPanel;
