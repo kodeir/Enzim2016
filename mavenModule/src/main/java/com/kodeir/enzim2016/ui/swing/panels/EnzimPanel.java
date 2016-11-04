@@ -117,6 +117,7 @@ public class EnzimPanel extends JPanel {
         getNewPatientBtn().addActionListener(new EnzimPanelListener(this));
         getOpenDatabaseBtn().addActionListener(new EnzimPanelListener(this));
         getShowTreeBtn().addActionListener(new EnzimPanelListener(this));
+        aboutBtn.addActionListener(new EnzimPanelListener(this));
         getExitBtn().addActionListener(new EnzimPanelListener(this));
     }
 
