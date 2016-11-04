@@ -59,6 +59,9 @@ public class TreePanel extends JPanel {
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private JFrame frame;
+    public JFrame getFrame(){
+        return frame;
+    }
     public void setFrame(JFrame frame){
         this.frame = frame;
     }

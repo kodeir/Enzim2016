@@ -2,11 +2,14 @@ package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.EnzimPanelListener;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
@@ -120,6 +123,7 @@ public class EnzimPanel extends JPanel {
         showTreeBtn.addActionListener(new EnzimPanelListener(this));
         aboutBtn.addActionListener(new EnzimPanelListener(this));
         exitBtn.addActionListener(new EnzimPanelListener(this));
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyboardListener(this));
     }
 
     private ImageIcon addImage(String imageName){
