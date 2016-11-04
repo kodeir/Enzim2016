@@ -16,32 +16,45 @@ public class AboutPanel extends JPanel {
     private static final EnzimLogger logger = new EnzimLogger(EnzimPanel.class.getName());
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
-    private JLabel label;
-    private JTextArea aboutTxtArea;
+    private JButton tutorialBtn;
 
     public AboutPanel(){
         logger.log(Level.INFO, "Creating AboutPanel;");
         this.setLayout(new GridBagLayout());
         addAbout();
         addLicense();
-        addFaq();
+        addTutorial();
+        addListeners();
         logger.log(Level.INFO, "AboutPanel is created;");
     }
 
     private void addAbout() {
-        label = new JLabel(rb.getString("interface.about"));
+        JLabel label = new JLabel(rb.getString("interface.about"));
         this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 0));
 
-        aboutTxtArea = new JTextArea();
-        EnzimSwingCommons.setSize(aboutTxtArea, 600, 150);
+        JTextArea aboutTxtArea = new JTextArea();
+        EnzimSwingCommons.setSize(aboutTxtArea, 600, 100);
+        aboutTxtArea.setEditable(false);
         this.add(aboutTxtArea, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
     }
 
     private void addLicense() {
+        JLabel label = new JLabel(rb.getString("interface.about.copyright"));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
 
+        JTextArea licenseTxtArea = new JTextArea();
+        EnzimSwingCommons.setSize(licenseTxtArea, 600, 300);
+        licenseTxtArea.setEditable(false);
+        this.add(licenseTxtArea, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
     }
 
-    private void addFaq() {
+    private void addTutorial() {
+        tutorialBtn = new JButton(rb.getString("interface.about.tutorial"));
+        EnzimSwingCommons.setSize(tutorialBtn, 600, 25);
+        this.add(tutorialBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 4));
+    }
 
+    public void addListeners(){
+        //tutorialBtn.addActionListener();
     }
 }
