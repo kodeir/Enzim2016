@@ -3,6 +3,7 @@ package com.kodeir.enzim2016.ui.swing.panels;
 import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
+import com.kodeir.enzim2016.ui.swing.listeners.AboutPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -17,6 +18,10 @@ public class AboutPanel extends JPanel {
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private JButton tutorialBtn;
+
+    public JButton getTutorialBtn(){
+        return tutorialBtn;
+    }
 
     public AboutPanel(){
         logger.log(Level.INFO, "Creating AboutPanel;");
@@ -55,6 +60,6 @@ public class AboutPanel extends JPanel {
     }
 
     public void addListeners(){
-        //tutorialBtn.addActionListener();
+        tutorialBtn.addActionListener(new AboutPanelListener(this));
     }
 }
