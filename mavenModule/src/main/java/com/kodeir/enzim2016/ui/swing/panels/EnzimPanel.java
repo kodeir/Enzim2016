@@ -114,11 +114,11 @@ public class EnzimPanel extends JPanel {
     }
 
     private void addListeners(){
-        getNewPatientBtn().addActionListener(new EnzimPanelListener(this));
-        getOpenDatabaseBtn().addActionListener(new EnzimPanelListener(this));
-        getShowTreeBtn().addActionListener(new EnzimPanelListener(this));
+        newPatientBtn.addActionListener(new EnzimPanelListener(this));
+        openDatabaseBtn.addActionListener(new EnzimPanelListener(this));
+        showTreeBtn.addActionListener(new EnzimPanelListener(this));
         aboutBtn.addActionListener(new EnzimPanelListener(this));
-        getExitBtn().addActionListener(new EnzimPanelListener(this));
+        exitBtn.addActionListener(new EnzimPanelListener(this));
     }
 
     private ImageIcon addImage(String imageName){
