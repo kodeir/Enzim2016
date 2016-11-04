@@ -6,6 +6,10 @@ import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.TutorialPanelListener;
 
 import javax.swing.*;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.Style;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.util.ResourceBundle;
 
@@ -21,7 +25,9 @@ public class TutorialPanel extends JPanel {
     private JButton databaseGuide;
     private JButton treeGuide;
     private JButton newCoefficientsGuide;
-    private JTextArea textArea;
+
+    private JTextPane textPane;
+    private StyledDocument styledDocument;
 
     public JButton getMainMenuGuide() {
         return mainMenuGuide;
@@ -44,28 +50,24 @@ public class TutorialPanel extends JPanel {
     }
 
     public TutorialPanel(){
-        this(4);
+        this(0);
     }
 
     public TutorialPanel(int panelId){
         setupPanel();
         switch (panelId){
-            // 0 - New Patient Panel
-            case 0: addPatientPanelGuide();
-            // 1 - Database Panel
-            case 1: addDatabasePanelGuide();
-            // 2 - Diagnose Tree Panel
-            case 2: addTreeGuide();
-            // 3 - New Coefficients Panel
-            case 3: addNewCoefficientsGuide();
-            // 4 - About Panel
-            case 4: {
-                addMainMenuGuide();
-                addPatientPanelGuide();
-                addDatabasePanelGuide();
-                addTreeGuide();
-                addNewCoefficientsGuide();
-            }
+            case 0: addMainMenuGuide();
+                    break;
+            case 1: addPatientPanelGuide();
+                    break;
+            case 2: addDatabasePanelGuide();
+                    break;
+            case 3: addTreeGuide();
+                    break;
+            case 4: addNewCoefficientsGuide();
+                    break;
+            default: addMainMenuGuide();
+                    break;
         }
         addListeners();
     }
@@ -73,61 +75,98 @@ public class TutorialPanel extends JPanel {
     private void setupPanel() {
         this.setLayout(new GridBagLayout());
 
-        mainMenuGuide = new JButton("mainBtn");
+        mainMenuGuide = new JButton(rb.getString("interface.tutorial.instructions") +
+                rb.getString("interface.tutorial.instructions.panels.main"));
         EnzimSwingCommons.setSize(mainMenuGuide, 100, 25);
         this.add(mainMenuGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 0));
-        JLabel label = new JLabel("main");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 0));
 
-        newPatientGuide = new JButton("pBtn");
+        newPatientGuide = new JButton(rb.getString("interface.tutorial.instructions") +
+                rb.getString("interface.tutorial.instructions.panels.patient"));
         EnzimSwingCommons.setSize(newPatientGuide, 100, 25);
         this.add(newPatientGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
-        label = new JLabel("p");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 1));
 
-        databaseGuide = new JButton("dbBtn");
+        databaseGuide = new JButton(rb.getString("interface.tutorial.instructions") +
+                rb.getString("interface.tutorial.instructions.panels.database"));
         EnzimSwingCommons.setSize(databaseGuide, 100, 25);
         this.add(databaseGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
-        label = new JLabel("db");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 2));
 
-        treeGuide = new JButton("treeBtn");
+        treeGuide = new JButton(rb.getString("interface.tutorial.instructions") +
+                rb.getString("interface.tutorial.instructions.panels.tree"));
         EnzimSwingCommons.setSize(treeGuide, 100, 25);
         this.add(treeGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
-        label = new JLabel("tree");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 3));
 
-        newCoefficientsGuide = new JButton("coeffBtn");
+        newCoefficientsGuide = new JButton(rb.getString("interface.tutorial.instructions") +
+                rb.getString("interface.tutorial.instructions.panels.coefficients"));
         EnzimSwingCommons.setSize(newCoefficientsGuide, 100, 25);
         this.add(newCoefficientsGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 4));
-        label = new JLabel("coeff");
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 4));
 
-        textArea = new JTextArea();
-        textArea.setEditable(false);
-        JScrollPane scrollPane = new JScrollPane(textArea);
+        textPane = new JTextPane();
+        textPane.setEditable(false);
+        styledDocument = textPane.getStyledDocument();
+        JScrollPane scrollPane = new JScrollPane(textPane);
         EnzimSwingCommons.setSize(scrollPane, 500, 300);
-        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 5, 2, 1));
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 5));
     }
 
     public void addMainMenuGuide() {
-        textArea.setText("main guide");
+        textPane.setText(rb.getString("interface.tutorial.instructions.panels.main.1"));
+
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    "\n" + "\n" +
+                    rb.getString("interface.tutorial.instructions.button") +
+                    " \"" + rb.getString("interface.create.new_patient") + "\"" + ": " +
+                    rb.getString("interface.tutorial.instructions.panels.main.2") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.3") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.4") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.5") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.further") +
+                    " \"" + rb.getString("interface.tutorial.instructions") +
+                    rb.getString("interface.tutorial.instructions.panels.patient") + "\"."
+
+                    + "\n" + "\n" +
+                    rb.getString("interface.tutorial.instructions.button") +
+                    " \"" + rb.getString("interface.create.new_patient") + "\"" + ": " +
+                    rb.getString("interface.tutorial.instructions.panels.main.2") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.3") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.4") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.5") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.further") +
+                    " \"" + rb.getString("interface.tutorial.instructions") +
+                    rb.getString("interface.tutorial.instructions.panels.patient") + "\"."
+
+                    + "\n" + "\n" +
+                    rb.getString("interface.tutorial.instructions.button") +
+                    " \"" + rb.getString("interface.create.new_patient") + "\"" + ": " +
+                    rb.getString("interface.tutorial.instructions.panels.main.2") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.3") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.4") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.main.5") + "\n" +
+                    rb.getString("interface.tutorial.instructions.panels.further") +
+                    " \"" + rb.getString("interface.tutorial.instructions") +
+                    rb.getString("interface.tutorial.instructions.panels.patient") + "\"."
+                    + "\n" + "\n"
+                    ,setStyleHeader(false)
+            );
+        } catch (BadLocationException e) {
+            e.printStackTrace();
+        }
     }
 
     public void addPatientPanelGuide() {
-        textArea.setText("new patient guide");
+        textPane.setText("new patient guide");
     }
 
     public void addDatabasePanelGuide() {
-        textArea.setText("db guide");
+        textPane.setText("db guide");
     }
 
     public void addTreeGuide() {
-        textArea.setText("tree guide");
+        textPane.setText("tree guide");
     }
 
     public void addNewCoefficientsGuide() {
-        textArea.setText("coeff guide");
+        textPane.setText("coeff guide");
     }
 
     private void addListeners(){
@@ -136,5 +175,11 @@ public class TutorialPanel extends JPanel {
         databaseGuide.addActionListener(new TutorialPanelListener(this));
         treeGuide.addActionListener(new TutorialPanelListener(this));
         newCoefficientsGuide.addActionListener(new TutorialPanelListener(this));
+    }
+
+    private Style setStyleHeader(boolean bold){
+        Style style = textPane.addStyle("header", null);
+        StyleConstants.setBold(style, bold);
+        return style;
     }
 }
