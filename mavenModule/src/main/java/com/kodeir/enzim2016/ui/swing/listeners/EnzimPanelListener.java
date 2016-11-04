@@ -30,7 +30,7 @@ public class EnzimPanelListener implements ActionListener{
             createNewPatientPanel();
         } else if (e.getSource().equals(enzimPanel.getOpenDatabaseBtn())) {
             createDatabasePanel();
-        } else if (e.getSource().equals(enzimPanel.getShowTreeButton())) {
+        } else if (e.getSource().equals(enzimPanel.getShowTreeBtn())) {
             createTreePanel();
         } else if (e.getSource().equals(enzimPanel.getExitBtn())) {
             System.exit(0);

@@ -37,10 +37,6 @@ import com.kodeir.enzim2016.ui.swing.listeners.EnzimPanelListener;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.nio.file.Paths;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
@@ -56,7 +52,8 @@ public class EnzimPanel extends JPanel {
     private JLabel label;
     private JButton newPatientBtn;
     private JButton openDatabaseBtn;
-    private JButton showTreeButton;
+    private JButton showTreeBtn;
+    private JButton aboutBtn;
     private JButton exitBtn;
 
     /*
@@ -77,8 +74,12 @@ public class EnzimPanel extends JPanel {
         return openDatabaseBtn;
     }
 
-    public JButton getShowTreeButton() {
-        return showTreeButton;
+    public JButton getShowTreeBtn() {
+        return showTreeBtn;
+    }
+
+    public JButton getAboutBtn() {
+        return aboutBtn;
     }
 
     public JButton getExitBtn() {
@@ -91,6 +92,7 @@ public class EnzimPanel extends JPanel {
         addNewPatient();
         addOpenDatabase();
         addShowTree();
+        addAbout();
         addExit();
         addListeners();
         logger.log(Level.INFO, "EnzimPanel is created;");
@@ -115,27 +117,36 @@ public class EnzimPanel extends JPanel {
     }
 
     public void addShowTree(){
-        showTreeButton = new JButton(addImage(showTreeButtonIcoPath));
-        EnzimSwingCommons.setSize(showTreeButton, 55, 55);
-        this.add(showTreeButton, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
+        showTreeBtn = new JButton(addImage(showTreeButtonIcoPath));
+        EnzimSwingCommons.setSize(showTreeBtn, 55, 55);
+        this.add(showTreeBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
 
         label = new JLabel(rb.getString("interface.open.tree"));
         this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 2));
     }
 
+    public void addAbout(){
+        aboutBtn = new JButton();
+        EnzimSwingCommons.setSize(aboutBtn, 55, 55);
+        this.add(aboutBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
+
+        label = new JLabel(rb.getString("interface.about"));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 3));
+    }
+
     public void addExit(){
         exitBtn = new JButton(addImage(exitBtnIcoPath));
         EnzimSwingCommons.setSize(exitBtn, 55, 55);
-        this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
+        this.add(exitBtn, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 4));
 
         label = new JLabel(rb.getString("interface.exit"));
-        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 3));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 1, 4));
     }
 
     private void addListeners(){
         getNewPatientBtn().addActionListener(new EnzimPanelListener(this));
         getOpenDatabaseBtn().addActionListener(new EnzimPanelListener(this));
-        getShowTreeButton().addActionListener(new EnzimPanelListener(this));
+        getShowTreeBtn().addActionListener(new EnzimPanelListener(this));
         getExitBtn().addActionListener(new EnzimPanelListener(this));
     }
 
