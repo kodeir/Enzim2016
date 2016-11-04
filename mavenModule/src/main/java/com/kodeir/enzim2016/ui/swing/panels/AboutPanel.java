@@ -38,9 +38,12 @@ public class AboutPanel extends JPanel {
         this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 0));
 
         JTextArea aboutTxtArea = new JTextArea();
-        EnzimSwingCommons.setSize(aboutTxtArea, 600, 100);
         aboutTxtArea.setEditable(false);
-        this.add(aboutTxtArea, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
+
+        JScrollPane scrollPane = new JScrollPane(aboutTxtArea);
+        EnzimSwingCommons.setSize(scrollPane, 600, 100);
+
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
     }
 
     private void addLicense() {
