@@ -25,7 +25,15 @@ public class TutorialPanelListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(tutorialPanel.getMainMenuGuide())){
-            //tutorialPanel
+            tutorialPanel.addMainMenuGuide();
+        } else if (e.getSource().equals(tutorialPanel.getNewPatientGuide())){
+            tutorialPanel.addPatientPanelGuide();
+        } else if (e.getSource().equals(tutorialPanel.getDatabaseGuide())){
+            tutorialPanel.addDatabasePanelGuide();
+        } else if (e.getSource().equals(tutorialPanel.getTreeGuide())){
+            tutorialPanel.addTreeGuide();
+        } else if (e.getSource().equals(tutorialPanel.getNewCoefficientsGuide())){
+            tutorialPanel.addTreeGuide();
         }
     }
 }
