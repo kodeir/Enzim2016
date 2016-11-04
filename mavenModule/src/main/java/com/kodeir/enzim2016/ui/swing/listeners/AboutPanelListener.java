@@ -21,6 +21,12 @@ public class AboutPanelListener implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        //if (e.getSource().equals(aboutPanel)
+        if (e.getSource().equals(aboutPanel.getTutorialBtn())){
+            createTutorialPanel();
+        }
+    }
+
+    private void createTutorialPanel() {
+
     }
 }
