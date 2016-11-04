@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.ui.swing.panels.AboutPanel;
 import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
@@ -32,6 +33,8 @@ public class EnzimPanelListener implements ActionListener{
             createDatabasePanel();
         } else if (e.getSource().equals(enzimPanel.getShowTreeBtn())) {
             createTreePanel();
+        } else if (e.getSource().equals(enzimPanel.getAboutBtn())) {
+            createAboutPanel();
         } else if (e.getSource().equals(enzimPanel.getExitBtn())) {
             System.exit(0);
         }
@@ -48,6 +51,10 @@ public class EnzimPanelListener implements ActionListener{
 
     private void createTreePanel(){
         new EnzimFrame(rb.getString("interface.tree.panel"), new TreePanel());
+    }
+
+    private void createAboutPanel() {
+        new EnzimFrame(rb.getString("interface.about"), new AboutPanel());
     }
 
 }
