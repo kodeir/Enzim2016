@@ -109,7 +109,7 @@ public class DatabasePanelCreator {
 
     private void initializeDatabasePanel(){
         databasePanel = new DatabasePanel(patients);
-        databasePanel.setFrame(new EnzimFrame(rb.getString("interface.database"), databasePanel));
+        databasePanel.setFrame(new EnzimFrame(rb.getString("interface.database"), databasePanel, 2));
     }
 
     private void cleanDatabasePanelLists() {

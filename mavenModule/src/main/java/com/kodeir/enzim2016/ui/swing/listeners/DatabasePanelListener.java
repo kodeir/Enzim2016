@@ -39,10 +39,10 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
     public void actionPerformed(ActionEvent e) {
         if (e.getSource().equals(databasePanel.getAddNewPatientBtn())) {
             PatientPanel patientPanel = new PatientPanel(true, databasePanel);
-            patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
+            patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel, 1));
         } else if (e.getSource().equals(databasePanel.getAddNewCoefficientsBtn())) {
             NewCoefficientsPanel newCoefficientsPanel = new NewCoefficientsPanel(getPatientId(), databasePanel);
-            newCoefficientsPanel.setFrame(new EnzimFrame(rb.getString("interface.database.coefficients_add"), newCoefficientsPanel));
+            newCoefficientsPanel.setFrame(new EnzimFrame(rb.getString("interface.database.coefficients_add"), newCoefficientsPanel, 4));
         } else if (e.getSource().equals(databasePanel.getShowTreeBtn())) {
             showTree();
         } else if (e.getSource().equals(databasePanel.getExitBtn())) {
@@ -69,7 +69,7 @@ public class DatabasePanelListener implements ActionListener, ListSelectionListe
                     coefficientsPanel.getGldgField().getText()
             );
 
-        treePanel.setFrame(new EnzimFrame(rb.getString("interface.tree.panel"), treePanel));
+        treePanel.setFrame(new EnzimFrame(rb.getString("interface.tree.panel"), treePanel, 3));
     }
 
     private void exit(){

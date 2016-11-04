@@ -5,7 +5,6 @@ import com.kodeir.enzim2016.pi.Coefficients;
 import com.kodeir.enzim2016.pi.Patient;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.DatabasePanelListener;
-import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -200,7 +199,6 @@ public class DatabasePanel extends JPanel {
         exitBtn.addActionListener(new DatabasePanelListener(this));
         addNewPatientBtn.addActionListener(new DatabasePanelListener(this));
         addNewCoefficientsBtn.addActionListener(new DatabasePanelListener(this));
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyboardListener(this));
     }
 
 }

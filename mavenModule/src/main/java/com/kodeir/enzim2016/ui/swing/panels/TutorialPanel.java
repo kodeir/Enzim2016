@@ -29,6 +29,16 @@ public class TutorialPanel extends JPanel {
     private JTextPane textPane;
     private StyledDocument styledDocument;
 
+    private JFrame frame;
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void setFrame(JFrame frame) {
+        this.frame = frame;
+    }
+
     public JButton getMainMenuGuide() {
         return mainMenuGuide;
     }

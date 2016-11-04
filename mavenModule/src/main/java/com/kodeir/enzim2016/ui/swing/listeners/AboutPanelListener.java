@@ -32,6 +32,6 @@ public class AboutPanelListener implements ActionListener{
     }
 
     private void createTutorialPanel() {
-        new EnzimFrame(rb.getString("interface.tutorial"), new TutorialPanel());
+        new EnzimFrame(rb.getString("interface.tutorial"), new TutorialPanel(), 0);
     }
 }

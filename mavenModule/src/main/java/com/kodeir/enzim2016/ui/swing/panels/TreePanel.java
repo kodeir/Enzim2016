@@ -34,7 +34,6 @@ import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimTextField;
-import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 import com.kodeir.enzim2016.ui.swing.listeners.TreeListener;
 import com.kodeir.enzim2016.ui.swing.listeners.TreeNodesMap;
 
@@ -707,7 +706,6 @@ public class TreePanel extends JPanel {
 
     private void addListeners(){
         doDiagnoseBtn.addActionListener(new TreeListener(this));
-        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyboardListener(this));
     }
 
     private boolean parseFloatFromString(String s){
