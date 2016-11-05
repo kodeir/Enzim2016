@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.data.HelpMapping;
 import com.kodeir.enzim2016.pi.Coefficients;
 import com.kodeir.enzim2016.pi.Patient;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
@@ -151,7 +152,7 @@ public class DatabasePanel extends JPanel {
     }
 
     private void addPatientPIPanel() {
-        patientPIPanel = new PatientPIPanel(2);
+        patientPIPanel = new PatientPIPanel(HelpMapping.HELP_DATABASE);
         this.add(patientPIPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,0,4,5));
     }
 
@@ -201,7 +202,7 @@ public class DatabasePanel extends JPanel {
         addNewPatientBtn.addActionListener(new DatabasePanelListener(this));
         addNewCoefficientsBtn.addActionListener(new DatabasePanelListener(this));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(2));
+            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_DATABASE));
         }
     }
 

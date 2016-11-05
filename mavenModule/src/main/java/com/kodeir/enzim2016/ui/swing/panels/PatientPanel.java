@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.data.HelpMapping;
 import com.kodeir.enzim2016.ui.swing.commons.*;
 import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 import com.kodeir.enzim2016.ui.swing.listeners.PatientPanelListener;
@@ -17,7 +18,6 @@ public class PatientPanel extends JPanel {
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private JFrame frame;
-    private static final int HELPMAP = 1;
 
     private PatientPIPanel patientPIPanel;
     private CoefficientsPanel coefficientsPanel;
@@ -68,7 +68,7 @@ public class PatientPanel extends JPanel {
     }
 
     private void addPatientComponents(){
-        patientPIPanel = new PatientPIPanel(HELPMAP);
+        patientPIPanel = new PatientPIPanel(HelpMapping.HELP_PATIENT);
         this.add(patientPIPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,0,4,4));
     }
 
@@ -89,7 +89,7 @@ public class PatientPanel extends JPanel {
         addPatientBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB, databasePanel));
         returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(HELPMAP));
+            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_PATIENT));
         }
     }
 }
