@@ -151,7 +151,7 @@ public class DatabasePanel extends JPanel {
     }
 
     private void addPatientPIPanel() {
-        patientPIPanel = new PatientPIPanel();
+        patientPIPanel = new PatientPIPanel(2);
         this.add(patientPIPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,1,0,4,5));
     }
 

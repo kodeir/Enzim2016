@@ -17,6 +17,7 @@ public class PatientPanel extends JPanel {
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private JFrame frame;
+    private static final int HELPMAP = 1;
 
     private PatientPIPanel patientPIPanel;
     private CoefficientsPanel coefficientsPanel;
@@ -67,7 +68,7 @@ public class PatientPanel extends JPanel {
     }
 
     private void addPatientComponents(){
-        patientPIPanel = new PatientPIPanel();
+        patientPIPanel = new PatientPIPanel(HELPMAP);
         this.add(patientPIPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,0,4,4));
     }
 
@@ -88,7 +89,7 @@ public class PatientPanel extends JPanel {
         addPatientBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB, databasePanel));
         returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(1));
+            c.addKeyListener(new KeyboardListener(HELPMAP));
         }
     }
 }
