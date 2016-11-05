@@ -4,8 +4,7 @@ import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.AboutPanel;
-import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
-import com.kodeir.enzim2016.ui.swing.panels.TutorialPanel;
+import com.kodeir.enzim2016.ui.swing.panels.HelpPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -32,6 +31,6 @@ public class AboutPanelListener implements ActionListener{
     }
 
     private void createTutorialPanel() {
-        new EnzimFrame(rb.getString("interface.tutorial"), new TutorialPanel(), 0);
+        new EnzimFrame(rb.getString("interface.tutorial"), new HelpPanel(), 0);
     }
 }

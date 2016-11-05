@@ -3,7 +3,7 @@ package com.kodeir.enzim2016.ui.swing.listeners;
 import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
-import com.kodeir.enzim2016.ui.swing.panels.TutorialPanel;
+import com.kodeir.enzim2016.ui.swing.panels.HelpPanel;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -40,8 +40,8 @@ public class KeyboardListener implements KeyListener{
         switch (e.getKeyCode()){
             case KeyEvent.VK_F1:
                 logger.log(Level.INFO, "(listener) F1 was released;");
-                TutorialPanel tutorialPanel = new TutorialPanel();
-                tutorialPanel.setFrame(new EnzimFrame(rb.getString("interface.tutorial"), new TutorialPanel(helpMap)));
+                HelpPanel helpPanel = new HelpPanel();
+                helpPanel.setFrame(new EnzimFrame(rb.getString("interface.tutorial"), new HelpPanel(helpMap)));
                 break;
             /*
             case KeyEvent.VK_ESCAPE:

@@ -16,7 +16,7 @@ import java.util.ResourceBundle;
 /**
  * Created by Sergei Riabinin on 04.11.2016.
  */
-public class TutorialPanel extends JPanel {
+public class HelpPanel extends JPanel {
     private static final EnzimLogger logger = new EnzimLogger(EnzimPanel.class.getName());
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
@@ -59,11 +59,11 @@ public class TutorialPanel extends JPanel {
         return newCoefficientsGuide;
     }
 
-    public TutorialPanel(){
+    public HelpPanel(){
         this(0);
     }
 
-    public TutorialPanel(int panelId){
+    public HelpPanel(int panelId){
         setupPanel();
         switch (panelId){
             case 0: addMainMenuGuide();
