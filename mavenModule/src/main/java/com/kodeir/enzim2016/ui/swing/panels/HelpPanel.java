@@ -86,37 +86,39 @@ public class HelpPanel extends JPanel {
     private void setupPanel() {
         this.setLayout(new GridBagLayout());
 
-        mainMenuGuide = new JButton(rb.getString("interface.tutorial.instructions") +
-                rb.getString("interface.tutorial.instructions.panels.main"));
+        JLabel label = new JLabel("Instructions on using Enzyme 2016.");
+        label.setFont(new Font(label.getFont().getFontName(), Font.BOLD, label.getFont().getSize()+2));
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 0));
+
+        label = new JLabel("Use the buttons below to get the needful information.");
+        this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
+
+        mainMenuGuide = new JButton(rb.getString("interface.tutorial.instructions.panels.main"));
         EnzimSwingCommons.setSize(mainMenuGuide, 100, 25);
-        this.add(mainMenuGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 0));
+        this.add(mainMenuGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
 
-        newPatientGuide = new JButton(rb.getString("interface.tutorial.instructions") +
-                rb.getString("interface.tutorial.instructions.panels.patient"));
+        newPatientGuide = new JButton(rb.getString("interface.tutorial.instructions.panels.patient"));
         EnzimSwingCommons.setSize(newPatientGuide, 100, 25);
-        this.add(newPatientGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 1));
+        this.add(newPatientGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
 
-        databaseGuide = new JButton(rb.getString("interface.tutorial.instructions") +
-                rb.getString("interface.tutorial.instructions.panels.database"));
+        databaseGuide = new JButton(rb.getString("interface.tutorial.instructions.panels.database"));
         EnzimSwingCommons.setSize(databaseGuide, 100, 25);
-        this.add(databaseGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 2));
+        this.add(databaseGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 4));
 
-        treeGuide = new JButton(rb.getString("interface.tutorial.instructions") +
-                rb.getString("interface.tutorial.instructions.panels.tree"));
+        treeGuide = new JButton(rb.getString("interface.tutorial.instructions.panels.tree"));
         EnzimSwingCommons.setSize(treeGuide, 100, 25);
-        this.add(treeGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 3));
+        this.add(treeGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 5));
 
-        newCoefficientsGuide = new JButton(rb.getString("interface.tutorial.instructions") +
-                rb.getString("interface.tutorial.instructions.panels.coefficients"));
+        newCoefficientsGuide = new JButton(rb.getString("interface.tutorial.instructions.panels.coefficients"));
         EnzimSwingCommons.setSize(newCoefficientsGuide, 100, 25);
-        this.add(newCoefficientsGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 4));
+        this.add(newCoefficientsGuide, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 6));
 
         textPane = new JTextPane();
         textPane.setEditable(false);
         styledDocument = textPane.getStyledDocument();
         JScrollPane scrollPane = new JScrollPane(textPane);
         EnzimSwingCommons.setSize(scrollPane, 500, 300);
-        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 5));
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5, 0, 7));
     }
 
     public void addMainMenuGuide() {
