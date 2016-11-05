@@ -5,6 +5,7 @@ import com.kodeir.enzim2016.ui.swing.commons.EnzimDateField;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFloatField;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -67,9 +68,10 @@ public class CoefficientsPanel extends JPanel{
         return checkupDateField;
     }
 
-    public CoefficientsPanel(){
+    public CoefficientsPanel(int helpMap){
         this.setLayout(new GridBagLayout());
         addComponents();
+        addListeners(helpMap);
     }
 
     private void addComponents() {
@@ -133,5 +135,11 @@ public class CoefficientsPanel extends JPanel{
         heField.setText(String.valueOf(he));
         gldgField.setText(String.valueOf(gldg));
         checkupDateField.setText(String.valueOf(checkupDate));
+    }
+
+    public void addListeners(int helpMap){
+        for (Component c: this.getComponents()){
+            c.addKeyListener(new KeyboardListener(helpMap));
+        }
     }
 }

@@ -73,7 +73,7 @@ public class PatientPanel extends JPanel {
     }
 
     private void addCoefficientsComponents(){
-        coefficientsPanel = new CoefficientsPanel();
+        coefficientsPanel = new CoefficientsPanel(HelpMapping.HELP_PATIENT);
         this.add(coefficientsPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,5,4,4));
     }
 
