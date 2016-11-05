@@ -12,6 +12,7 @@ import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 import java.awt.*;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 /**
  * Created by Sergei Riabinin on 04.11.2016.
@@ -119,47 +120,59 @@ public class HelpPanel extends JPanel {
     }
 
     public void addMainMenuGuide() {
-        textPane.setText(rb.getString("interface.tutorial.instructions.panels.main.1"));
+        textPane.setText(rb.getString("interface.tutorial.instructions.panels.main.1") +
+                "\n" + "\n");
 
         try {
+            // new patient
             styledDocument.insertString(styledDocument.getLength(),
-                    "\n" + "\n" +
                     rb.getString("interface.tutorial.instructions.button") +
-                    " \"" + rb.getString("interface.create.new_patient") + "\"" + ": " +
+                            " \"" + rb.getString("interface.create.new_patient") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength(),
                     rb.getString("interface.tutorial.instructions.panels.main.2") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.3") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.4") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.5") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.further") +
-                    " \"" + rb.getString("interface.tutorial.instructions") +
-                    rb.getString("interface.tutorial.instructions.panels.patient") + "\"."
-
-                    + "\n" + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.main.3") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.main.4") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.main.5") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.further") +
+                            " \"" + rb.getString("interface.tutorial.instructions") +
+                            rb.getString("interface.tutorial.instructions.panels.patient") + "\"." + "\n" + "\n"
+                    ,setStyle(false)
+            );
+            // database
+            styledDocument.insertString(styledDocument.getLength(),
                     rb.getString("interface.tutorial.instructions.button") +
-                    " \"" + rb.getString("interface.create.new_patient") + "\"" + ": " +
-                    rb.getString("interface.tutorial.instructions.panels.main.2") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.3") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.4") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.5") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.further") +
-                    " \"" + rb.getString("interface.tutorial.instructions") +
-                    rb.getString("interface.tutorial.instructions.panels.patient") + "\"."
-
-                    + "\n" + "\n" +
+                            " \"" + rb.getString("interface.open.database") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.panels.main.6") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.main.7") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.main.8") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.further") +
+                            " \"" + rb.getString("interface.tutorial.instructions") +
+                            rb.getString("interface.tutorial.instructions.panels.database") + "\"." + "\n" + "\n"
+                    ,setStyle(false)
+            );
+            // tree
+            styledDocument.insertString(styledDocument.getLength(),
                     rb.getString("interface.tutorial.instructions.button") +
-                    " \"" + rb.getString("interface.create.new_patient") + "\"" + ": " +
-                    rb.getString("interface.tutorial.instructions.panels.main.2") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.3") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.4") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.main.5") + "\n" +
-                    rb.getString("interface.tutorial.instructions.panels.further") +
-                    " \"" + rb.getString("interface.tutorial.instructions") +
-                    rb.getString("interface.tutorial.instructions.panels.patient") + "\"."
-                    + "\n" + "\n"
-                    ,setStyleHeader(false)
+                            " \"" + rb.getString("interface.open.tree") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.panels.main.9") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.main.10") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.main.11") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.main.12") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.further") +
+                            " \"" + rb.getString("interface.tutorial.instructions") +
+                            rb.getString("interface.tutorial.instructions.panels.tree") + "\"." + "\n" + "\n"
+                    ,setStyle(false)
             );
         } catch (BadLocationException e) {
-            e.printStackTrace();
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
         }
     }
 
@@ -187,7 +200,7 @@ public class HelpPanel extends JPanel {
         newCoefficientsGuide.addActionListener(new TutorialPanelListener(this));
     }
 
-    private Style setStyleHeader(boolean bold){
+    private Style setStyle(boolean bold){
         Style style = textPane.addStyle("header", null);
         StyleConstants.setBold(style, bold);
         return style;
