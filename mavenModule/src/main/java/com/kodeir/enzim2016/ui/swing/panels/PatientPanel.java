@@ -2,6 +2,7 @@ package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.*;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 import com.kodeir.enzim2016.ui.swing.listeners.PatientPanelListener;
 
 import javax.swing.*;
@@ -86,5 +87,8 @@ public class PatientPanel extends JPanel {
     private void addListeners(){
         addPatientBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB, databasePanel));
         returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
+        for (Component c: this.getComponents()){
+            c.addKeyListener(new KeyboardListener(1));
+        }
     }
 }

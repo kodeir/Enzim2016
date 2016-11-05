@@ -4,6 +4,7 @@ import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.EnzimPanelListener;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -120,6 +121,9 @@ public class EnzimPanel extends JPanel {
         showTreeBtn.addActionListener(new EnzimPanelListener(this));
         aboutBtn.addActionListener(new EnzimPanelListener(this));
         exitBtn.addActionListener(new EnzimPanelListener(this));
+        for (Component c: this.getComponents()){
+            c.addKeyListener(new KeyboardListener(0));
+        }
     }
 
     private ImageIcon addImage(String imageName){
