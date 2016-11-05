@@ -170,7 +170,7 @@ public class HelpPanel extends JPanel {
                             rb.getString("interface.tutorial.instructions.panels.main.12") + "\n" +
                             rb.getString("interface.tutorial.instructions.panels.further") +
                             " \"" + rb.getString("interface.tutorial.instructions") +
-                            rb.getString("interface.tutorial.instructions.panels.tree") + "\"." + "\n" + "\n"
+                            rb.getString("interface.tutorial.instructions.panels.tree") + "\"."
                     ,setStyle(false)
             );
         } catch (BadLocationException e) {
@@ -179,7 +179,70 @@ public class HelpPanel extends JPanel {
     }
 
     public void addPatientPanelGuide() {
-        textPane.setText("new patient guide");
+        textPane.setText(rb.getString("interface.tutorial.instructions.panels.patient.1") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.2") + " \"" + rb.getString("interface.create.new_patient")
+                + "\"" + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.3") + " \"" + rb.getString("interface.patient.add")
+                + "\"" + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.4") +
+                "\n" + "\n");
+
+        // patientPI panel
+        try {
+            styledDocument.insertString(styledDocument.getLength()
+                    ,rb.getString("patient.new_patient") + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , rb.getString("interface.tutorial.instructions.panels.patient.5") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.6") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.7") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.8") + "\n" +
+                            " 2016-10-11; 2016-01-01." + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.9") + "\n" + "\n"
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
+        // coefficients panel
+        try {
+            styledDocument.insertString(styledDocument.getLength()
+                    ,rb.getString("coefficients") + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , rb.getString("interface.tutorial.instructions.panels.patient.10") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.11") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.12") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.13") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.14") + "\n" +
+                            " 2016-10-11; 2016-01-01." + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.9") + "\n" + "\n"
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
+        // add patient btn
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.button") +
+                            " \"" + rb.getString("interface.patient.add") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , rb.getString("interface.tutorial.instructions.panels.patient.15") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.16") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.17")
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
     }
 
     public void addDatabasePanelGuide() {
