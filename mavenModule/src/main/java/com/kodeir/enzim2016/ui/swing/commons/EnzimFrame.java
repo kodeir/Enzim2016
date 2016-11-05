@@ -1,15 +1,10 @@
 package com.kodeir.enzim2016.ui.swing.commons;
 
 import com.kodeir.enzim2016.commons.EnzimLogger;
-import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
-import com.kodeir.enzim2016.ui.swing.panels.TutorialPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.ResourceBundle;
 import java.util.logging.Level;
 
 /**
@@ -21,11 +16,13 @@ public class EnzimFrame extends JFrame {
 
     public EnzimFrame(String frameName, JPanel panel){
         super(frameName);
+        logger.log(Level.INFO, "Default EnzimFrame to be created;");
         invoke(panel, 0);
     }
 
     public EnzimFrame(String frameName, JPanel panel, int helpMap){
         super(frameName);
+        logger.log(Level.INFO, "Mapped EnzimFrame to be created;");
         invoke(panel, helpMap);
     }
 
@@ -34,7 +31,7 @@ public class EnzimFrame extends JFrame {
             getContentPane().add(panel);
             pack();
             setLocationRelativeTo(null);
-            setResizable(true);
+            setResizable(false);
             setExtendedState(Frame.NORMAL);
             setVisible(true);
             addKeyListener(new KeyboardListener(helpMap));
