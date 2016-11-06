@@ -39,6 +39,11 @@ public class AboutPanel extends JPanel {
 
         JTextArea aboutTxtArea = new JTextArea();
         aboutTxtArea.setEditable(false);
+        aboutTxtArea.setText(
+                rb.getString("interface.about.1") +
+                        rb.getString("interface.about.2") +
+                        rb.getString("interface.tutorial.instructions.panels.patient.11")
+        );
 
         JScrollPane scrollPane = new JScrollPane(aboutTxtArea);
         EnzimSwingCommons.setSize(scrollPane, 600, 100);
@@ -51,6 +56,14 @@ public class AboutPanel extends JPanel {
 
         JTextArea licenseTxtArea = new JTextArea();
         licenseTxtArea.setEditable(false);
+        licenseTxtArea.setText(
+                rb.getString("interface.about.copyright.1") +
+                        rb.getString("interface.about.copyright.2") +
+                        rb.getString("interface.about.copyright.3") +
+                        rb.getString("interface.about.copyright.4") +
+                        rb.getString("interface.about.copyright.5") +
+                        rb.getString("interface.about.copyright.6")
+                );
 
         JScrollPane scrollPane = new JScrollPane(licenseTxtArea);
         EnzimSwingCommons.setSize(scrollPane, 600, 300);
