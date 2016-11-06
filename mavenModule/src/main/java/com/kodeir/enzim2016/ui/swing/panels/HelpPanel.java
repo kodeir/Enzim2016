@@ -248,23 +248,23 @@ public class HelpPanel extends JPanel {
     public void addDatabasePanelGuide() {
 
         textPane.setText(
-                "The database is initially filled with example data and consists of the following elements:"
+                rb.getString("interface.tutorial.instructions.panels.database.1")
                         + "\n" + "\n"
         );
 
         // patients list
         try {
             styledDocument.insertString(styledDocument.getLength(),
-                    " - patients list" + "\n"
+                    rb.getString("interface.tutorial.instructions.panels.database.2") + "\n"
                     ,setStyle(true)
             );
             styledDocument.insertString(styledDocument.getLength()
-                    , "All patients from the database are loaded to this list." + "\n" +
-                            "If patient is clicked, his PI data and set of coefficients will loaded." + "\n" +
-                            "This list refreshed automatically if a new patient was added with the use of" + "\n" +
+                    , rb.getString("interface.tutorial.instructions.panels.database.3") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.4") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.5") + "\n" +
                             "\"" + rb.getString("interface.patient.add") + "\"" + "\n" +
-                            "Also, when the patient is selected, it will activate" + "\n" +
-                            "\"" + rb.getString("interface.database.add_coefficients") + "\"" + "\n"
+                            rb.getString("interface.tutorial.instructions.panels.database.6") + "\n" +
+                            "\"" + rb.getString("interface.database.add_coefficients") + "\"" + "\n" + "\n"
                     ,setStyle(false)
             );
         } catch (BadLocationException e) {
@@ -274,16 +274,67 @@ public class HelpPanel extends JPanel {
         // patients data
         try {
             styledDocument.insertString(styledDocument.getLength(),
-                    " - patient data (PI and list of coefficients)" + "\n"
+                    rb.getString("interface.tutorial.instructions.panels.database.7") + "\n"
                     ,setStyle(true)
             );
             styledDocument.insertString(styledDocument.getLength()
-                    , "Shows data for a selected patient." + "\n" +
-                            "List of coefficients has all sets of indicating enzymes for selected patient." + "\n" +
-                            "When list is clicked, the coefficients will be loaded to separate fields for better view," + "\n" +
-                            "And the preliminary diagnose will be shown." + "\n" +
-                            "It will also activate" + "\"" + rb.getString("interface.database.tree") + "\"" + "\n" +
-                            "Clicking it will open a Diagnostic Tree view for a current diagnose." + "\n"
+                    , rb.getString("interface.tutorial.instructions.panels.database.8") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.9") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.10") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.11") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.12") + "\"" + rb.getString("interface.database.tree") + "\"" + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.13") + "\n" + "\n"
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
+        // add patient btn
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.button") +
+                            " \"" + rb.getString("interface.patient.add") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , rb.getString("interface.tutorial.instructions.panels.patient.15") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.16") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.14") + "\n" + "\n"
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
+        // add new coefficients btn
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.button") +
+                            " \"" + rb.getString("interface.database.add_coefficients") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , rb.getString("interface.tutorial.instructions.panels.coefficients.2") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.coefficients.3") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.coefficients.4") + "\n" + "\n"
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
+        // add tree btn
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.button") +
+                            " \"" + rb.getString("interface.open.tree") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.panels.database.15") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.16") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.database.17") + "\n"
                     ,setStyle(false)
             );
         } catch (BadLocationException e) {
