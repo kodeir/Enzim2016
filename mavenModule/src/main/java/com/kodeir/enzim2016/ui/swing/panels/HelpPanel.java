@@ -218,7 +218,7 @@ public class HelpPanel extends JPanel {
                             rb.getString("interface.tutorial.instructions.panels.patient.12") + "\n" +
                             rb.getString("interface.tutorial.instructions.panels.patient.13") + "\n" +
                             rb.getString("interface.tutorial.instructions.panels.patient.14") + "\n" +
-                            " 2016-10-11; 2016-01-01." + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.patient.18") + "\n" +
                             rb.getString("interface.tutorial.instructions.panels.patient.9") + "\n" + "\n"
                     ,setStyle(false)
             );
@@ -285,7 +285,37 @@ public class HelpPanel extends JPanel {
     }
 
     public void addNewCoefficientsGuide() {
-        textPane.setText("coeff guide");
+
+        textPane.setText(rb.getString("interface.tutorial.instructions.panels.coefficients.1") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.coefficients.2") + "\n" + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.10") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.11") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.12") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.13") + "\n" + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.14") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.18") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.9") + "\n" + "\n"
+        );
+
+        // add new coefficients btn
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.button") +
+                            " \"" + rb.getString("interface.database.coefficients_add") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , rb.getString("interface.tutorial.instructions.panels.tree.5") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.coefficients.3") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.coefficients.4") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.tree.7") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.tree.8")
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
     }
 
     private void addListeners(){
