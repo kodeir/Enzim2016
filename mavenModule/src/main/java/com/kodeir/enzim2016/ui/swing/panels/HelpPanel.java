@@ -250,7 +250,38 @@ public class HelpPanel extends JPanel {
     }
 
     public void addTreeGuide() {
-        textPane.setText("tree guide");
+
+        textPane.setText(rb.getString("interface.tutorial.instructions.panels.tree.1") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.main.10") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.main.11") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.main.12") + "\n" + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.tree.2") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.tree.3") + "\n" + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.tree.4") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.11") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.12") + "\n" +
+                rb.getString("interface.tutorial.instructions.panels.patient.13") + "\n" + "\n"
+        );
+
+        // diagnose btn
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    rb.getString("interface.tutorial.instructions.button") +
+                            " \"" + rb.getString("diagnose.do") + "\"" + ": " + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , rb.getString("interface.tutorial.instructions.panels.tree.5") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.tree.6") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.tree.3") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.tree.7") + "\n" +
+                            rb.getString("interface.tutorial.instructions.panels.tree.8")
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
     }
 
     public void addNewCoefficientsGuide() {
