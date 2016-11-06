@@ -708,7 +708,7 @@ public class TreePanel extends JPanel {
     private void addListeners(){
         doDiagnoseBtn.addActionListener(new TreeListener(this));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(3));
+            c.addKeyListener(new KeyboardListener(3, this));
         }
     }
 

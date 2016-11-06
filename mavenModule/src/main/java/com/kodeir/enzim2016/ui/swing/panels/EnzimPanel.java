@@ -122,7 +122,7 @@ public class EnzimPanel extends JPanel {
         aboutBtn.addActionListener(new EnzimPanelListener(this));
         exitBtn.addActionListener(new EnzimPanelListener(this));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(0));
+            c.addKeyListener(new KeyboardListener(0, this));
         }
     }
 

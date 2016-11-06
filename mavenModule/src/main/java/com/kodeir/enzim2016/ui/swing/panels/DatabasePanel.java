@@ -202,7 +202,7 @@ public class DatabasePanel extends JPanel {
         addNewPatientBtn.addActionListener(new DatabasePanelListener(this));
         addNewCoefficientsBtn.addActionListener(new DatabasePanelListener(this));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_DATABASE));
+            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_DATABASE, this));
         }
     }
 

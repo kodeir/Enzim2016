@@ -89,7 +89,7 @@ public class PatientPanel extends JPanel {
         addPatientBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB, databasePanel));
         returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_PATIENT));
+            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_PATIENT, this));
         }
     }
 }

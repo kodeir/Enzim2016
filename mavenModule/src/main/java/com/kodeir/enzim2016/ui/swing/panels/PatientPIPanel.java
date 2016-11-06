@@ -97,7 +97,7 @@ public class PatientPIPanel extends JPanel{
 
     public void addListeners(int helpMap){
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(helpMap));
+            c.addKeyListener(new KeyboardListener(helpMap, this));
         }
     }
 }

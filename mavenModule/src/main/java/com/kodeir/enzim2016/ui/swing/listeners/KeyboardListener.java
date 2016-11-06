@@ -5,6 +5,7 @@ import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.HelpPanel;
 
+import javax.swing.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ResourceBundle;
@@ -19,9 +20,11 @@ public class KeyboardListener implements KeyListener{
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private int helpMap;
+    private JPanel panel;
 
-    public KeyboardListener(int helpMap){
+    public KeyboardListener(int helpMap, JPanel panel){
         this.helpMap = helpMap;
+        this.panel = panel;
     }
 
     @Override
@@ -39,10 +42,14 @@ public class KeyboardListener implements KeyListener{
         logger.log(Level.INFO, "KeyEvent");
         switch (e.getKeyCode()){
             case KeyEvent.VK_F1:
-                logger.log(Level.INFO, "(listener) F1 was released;");
-                HelpPanel helpPanel = new HelpPanel();
-                helpPanel.setFrame(new EnzimFrame(rb.getString("interface.tutorial"), new HelpPanel(helpMap)));
-                break;
+                logger.log(Level.INFO, "F1 was released;");
+                if (panel!=null){
+                    if (!(panel instanceof HelpPanel)){
+                        HelpPanel helpPanel = new HelpPanel();
+                        helpPanel.setFrame(new EnzimFrame(rb.getString("interface.tutorial"), new HelpPanel(helpMap)));
+                        break;
+                    }
+                }
             /*
             case KeyEvent.VK_ESCAPE:
                 logger.log(Level.INFO, "ESCAPE was released;");

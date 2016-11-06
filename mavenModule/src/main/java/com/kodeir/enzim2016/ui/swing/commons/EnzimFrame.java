@@ -53,7 +53,7 @@ public class EnzimFrame extends JFrame {
             setResizable(false);
             setExtendedState(Frame.NORMAL);
             setVisible(true);
-            addKeyListener(new KeyboardListener(helpMap));
+            addKeyListener(new KeyboardListener(helpMap, panel));
             setFocusable(true);
             setFocusTraversalKeysEnabled(false);
         });
