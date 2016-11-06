@@ -246,7 +246,50 @@ public class HelpPanel extends JPanel {
     }
 
     public void addDatabasePanelGuide() {
-        textPane.setText("db guide");
+
+        textPane.setText(
+                "The database is initially filled with example data and consists of the following elements:"
+                        + "\n" + "\n"
+        );
+
+        // patients list
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    " - patients list" + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , "All patients from the database are loaded to this list." + "\n" +
+                            "If patient is clicked, his PI data and set of coefficients will loaded." + "\n" +
+                            "This list refreshed automatically if a new patient was added with the use of" + "\n" +
+                            "\"" + rb.getString("interface.patient.add") + "\"" + "\n" +
+                            "Also, when the patient is selected, it will activate" + "\n" +
+                            "\"" + rb.getString("interface.database.add_coefficients") + "\"" + "\n"
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
+        // patients data
+        try {
+            styledDocument.insertString(styledDocument.getLength(),
+                    " - patient data (PI and list of coefficients)" + "\n"
+                    ,setStyle(true)
+            );
+            styledDocument.insertString(styledDocument.getLength()
+                    , "Shows data for a selected patient." + "\n" +
+                            "List of coefficients has all sets of indicating enzymes for selected patient." + "\n" +
+                            "When list is clicked, the coefficients will be loaded to separate fields for better view," + "\n" +
+                            "And the preliminary diagnose will be shown." + "\n" +
+                            "It will also activate" + "\"" + rb.getString("interface.database.tree") + "\"" + "\n" +
+                            "Clicking it will open a Diagnostic Tree view for a current diagnose." + "\n"
+                    ,setStyle(false)
+            );
+        } catch (BadLocationException e) {
+            logger.log(Level.SEVERE, "Failed to add strings to StyledDocument: " + e);
+        }
+
     }
 
     public void addTreeGuide() {
