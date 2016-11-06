@@ -73,7 +73,7 @@ public class NewCoefficientsPanel extends JPanel{
         addNewCoefficientsBtn.addActionListener(new NewCoefficientsListener(this, patientId, databasePanel));
         returnBtn.addActionListener(new NewCoefficientsListener(this, patientId));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(4, this));
+            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_NEW_COEFFICIENTS, this));
         }
     }
 }

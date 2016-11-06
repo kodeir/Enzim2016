@@ -2,6 +2,7 @@ package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.data.HelpMapping;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.listeners.EnzimPanelListener;
 import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
@@ -122,7 +123,7 @@ public class EnzimPanel extends JPanel {
         aboutBtn.addActionListener(new EnzimPanelListener(this));
         exitBtn.addActionListener(new EnzimPanelListener(this));
         for (Component c: this.getComponents()){
-            c.addKeyListener(new KeyboardListener(0, this));
+            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_MAIN, this));
         }
     }
 

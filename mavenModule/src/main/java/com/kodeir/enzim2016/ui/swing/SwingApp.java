@@ -2,6 +2,7 @@ package com.kodeir.enzim2016.ui.swing;
 
 import com.kodeir.enzim2016.commons.EnzimLogger;
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.data.HelpMapping;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 
@@ -23,7 +24,7 @@ public class SwingApp {
 
     public SwingApp(){
         logger.log(Level.INFO, "Starting Swing application;");
-        frame = new EnzimFrame(rb.getString("interface.name"), new EnzimPanel(), 0);
+        frame = new EnzimFrame(rb.getString("interface.name"), new EnzimPanel(), HelpMapping.HELP_MAIN);
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
 

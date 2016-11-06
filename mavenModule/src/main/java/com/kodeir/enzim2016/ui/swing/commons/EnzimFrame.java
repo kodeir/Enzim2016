@@ -1,6 +1,7 @@
 package com.kodeir.enzim2016.ui.swing.commons;
 
 import com.kodeir.enzim2016.commons.EnzimLogger;
+import com.kodeir.enzim2016.data.HelpMapping;
 import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 
 import javax.swing.*;
@@ -19,7 +20,7 @@ public class EnzimFrame extends JFrame {
     public EnzimFrame(String frameName, JPanel panel){
         super(frameName);
         logger.log(Level.INFO, "Default EnzimFrame to be created;");
-        invoke(panel, 0);
+        invoke(panel, HelpMapping.HELP_MAIN);
     }
 
     /**
