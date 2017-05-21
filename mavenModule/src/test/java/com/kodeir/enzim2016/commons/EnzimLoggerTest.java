@@ -2,6 +2,7 @@ package com.kodeir.enzim2016.commons;
 
 import org.junit.*;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Level;
@@ -13,7 +14,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class EnzimLoggerTest {
 
-    private static String testLogDirectory = "./testDir";
+    private static String testLogDirectory = "."+ File.separator+"testDir";
     private String testLogName = "testName";
     private String lofFileEnding = ".0.log";
 

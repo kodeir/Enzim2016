@@ -1,5 +1,6 @@
 package com.kodeir.enzim2016.commons;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.logging.*;
 
@@ -9,7 +10,7 @@ import java.util.logging.*;
 public class EnzimLogger extends Logger {
 
     public EnzimLogger(String name) {
-        this(name, 1000000, (byte)10, "./logs/");
+        this(name, 1000000, (byte)10, "."+ File.separator+"logs"+File.separator);
     }
 
     public EnzimLogger(String name, int fileSize, byte filesCount, String path){

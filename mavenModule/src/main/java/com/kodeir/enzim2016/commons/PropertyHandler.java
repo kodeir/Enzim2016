@@ -1,5 +1,6 @@
 package com.kodeir.enzim2016.commons;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
@@ -13,7 +14,7 @@ public class PropertyHandler {
 
     private Properties properties = null;
 
-    private String path = "./config/database.properties";
+    private String path = "."+ File.separator+"config"+File.separator+"database.properties";
 
     public static PropertyHandler getInstance() {
         if (instance == null){

@@ -30,7 +30,11 @@ public class InitialDatabase {
     }
 
     public static boolean checkIfDbFileExists(){
-        return (new File("./data/"+PropertyHandler.getInstance().getValue("datasource.url")+".mv.db").exists());
+        return (new File("."
+                +File.separator
+                +"data"
+                +File.separator
+                +PropertyHandler.getInstance().getValue("datasource.url")+".mv.db").exists());
     }
 
     private static void createPatients(){
