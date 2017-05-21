@@ -2,6 +2,7 @@ package com.kodeir.enzim2016.commons;
 
 import javax.swing.*;
 import javax.xml.crypto.Data;
+import java.io.File;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
@@ -17,6 +18,10 @@ public class EnzimDatabase implements Database {
     private Connection connection = null;
     private Statement statement = null;
 
+    private String dbUrl = "jdbc:h2:."+File.separator+"data"+File.separator;
+    private String dbUrlCrypt = ";CIPHER=AES";
+    private String dbUrlExists = ";IFEXISTS=TRUE";
+
     private boolean printSqlException(SQLException e, String message){
         logger.log(Level.SEVERE, message
                                 + "\n"
@@ -30,7 +35,7 @@ public class EnzimDatabase implements Database {
 
     public boolean setConnectionIfDbExist(String database, String user, String password){
         try {
-            connection = DriverManager.getConnection("jdbc:h2:./data/" + database + ";CIPHER=AES;IFEXISTS=TRUE", user, password);
+            connection = DriverManager.getConnection(dbUrl + database + dbUrlCrypt + dbUrlExists, user, password);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -40,7 +45,7 @@ public class EnzimDatabase implements Database {
 
     public boolean setConnection(String database, String user, String password){
         try {
-            connection = DriverManager.getConnection("jdbc:h2:./data/" + database + ";CIPHER=AES", user, password);
+            connection = DriverManager.getConnection(dbUrl + database + dbUrlCrypt, user, password);
             return true;
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -138,7 +143,7 @@ public class EnzimDatabase implements Database {
 
     private void deleteDatabase(String dbName){
         runExecute("SHUTDOWN");
-        org.h2.tools.DeleteDbFiles.execute("./data",dbName,true);
+        org.h2.tools.DeleteDbFiles.execute("."+File.separator+"data",dbName,true);
     }
 
 }
