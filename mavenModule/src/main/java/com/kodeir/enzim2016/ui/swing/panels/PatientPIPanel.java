@@ -5,6 +5,7 @@ import com.kodeir.enzim2016.ui.swing.commons.EnzimDateField;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimTextField;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -56,9 +57,10 @@ public class PatientPIPanel extends JPanel{
         patientBirthdateField.setText(s);
     }
 
-    public PatientPIPanel(){
+    public PatientPIPanel(int helpMap){
         this.setLayout(new GridBagLayout());
         addPatientPIComponents();
+        addListeners(helpMap);
     }
 
     private void addPatientPIComponents(){
@@ -93,10 +95,9 @@ public class PatientPIPanel extends JPanel{
         this.add(label, EnzimSwingCommons.setConstraintsHorizontal(0.5,2,4));
     }
 
-    public void setEditable(boolean editable){
-        patientNameField.setEditable(editable);
-        patientSurnameField.setEditable(editable);
-        patientPatronymicField.setEditable(editable);
-        patientBirthdateField.setEditable(editable);
+    public void addListeners(int helpMap){
+        for (Component c: this.getComponents()){
+            c.addKeyListener(new KeyboardListener(helpMap, this));
+        }
     }
 }

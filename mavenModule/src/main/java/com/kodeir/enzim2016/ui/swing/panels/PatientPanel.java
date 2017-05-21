@@ -1,7 +1,9 @@
 package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.data.HelpMapping;
 import com.kodeir.enzim2016.ui.swing.commons.*;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 import com.kodeir.enzim2016.ui.swing.listeners.PatientPanelListener;
 
 import javax.swing.*;
@@ -19,6 +21,7 @@ public class PatientPanel extends JPanel {
 
     private PatientPIPanel patientPIPanel;
     private CoefficientsPanel coefficientsPanel;
+    private DatabasePanel databasePanel;
 
     private JButton addPatientBtn;
     private JButton returnBtn;
@@ -45,7 +48,6 @@ public class PatientPanel extends JPanel {
         return patientPIPanel;
     }
 
-
     public PatientPanel(boolean createdFromDB) {
         this.setLayout(new GridBagLayout());
         this.createdFromDB = createdFromDB;
@@ -55,13 +57,23 @@ public class PatientPanel extends JPanel {
         addListeners();
     }
 
+    public PatientPanel(boolean createdFromDB, DatabasePanel databasePanel) {
+        this.setLayout(new GridBagLayout());
+        this.createdFromDB = createdFromDB;
+        this.databasePanel = databasePanel;
+        addPatientComponents();
+        addCoefficientsComponents();
+        addButtons();
+        addListeners();
+    }
+
     private void addPatientComponents(){
-        patientPIPanel = new PatientPIPanel();
+        patientPIPanel = new PatientPIPanel(HelpMapping.HELP_PATIENT);
         this.add(patientPIPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,0,4,4));
     }
 
     private void addCoefficientsComponents(){
-        coefficientsPanel = new CoefficientsPanel();
+        coefficientsPanel = new CoefficientsPanel(HelpMapping.HELP_PATIENT);
         this.add(coefficientsPanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,5,4,4));
     }
 
@@ -74,7 +86,10 @@ public class PatientPanel extends JPanel {
     }
 
     private void addListeners(){
-        addPatientBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
-        returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel));
+        addPatientBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB, databasePanel));
+        returnBtn.addActionListener(new PatientPanelListener(this, coefficientsPanel, createdFromDB));
+        for (Component c: this.getComponents()){
+            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_PATIENT, this));
+        }
     }
 }

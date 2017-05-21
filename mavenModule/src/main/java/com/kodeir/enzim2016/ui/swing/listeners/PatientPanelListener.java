@@ -1,10 +1,11 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
-import com.kodeir.enzim2016.commons.Database;
+import com.kodeir.enzim2016.commons.EnzimDatabase;
 import com.kodeir.enzim2016.commons.PatientsDatabase;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
 import com.kodeir.enzim2016.ui.swing.panels.CoefficientsPanel;
+import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
 
 import javax.swing.*;
@@ -18,7 +19,7 @@ import java.util.ResourceBundle;
  */
 public class PatientPanelListener implements ActionListener {
 
-    private Database database;
+    private EnzimDatabase database;
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
 
     private String name;
@@ -29,19 +30,21 @@ public class PatientPanelListener implements ActionListener {
     private StringBuilder errors;
 
     private PatientPanel patientPanel;
-    private CoefficientsPanel coefficientsPanel;
     private CoefficientsHandler coefficientsHandler;
+    private DatabasePanel databasePanel;
 
     private boolean createdFromDB;
 
-    public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel){
-        new PatientPanelListener(patientPanel, coefficientsPanel, false);
-    }
-
     public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel, boolean createdFromDB){
         this.patientPanel = patientPanel;
-        this.coefficientsPanel = coefficientsPanel;
         this.createdFromDB = createdFromDB;
+        coefficientsHandler = new CoefficientsHandler(coefficientsPanel);
+    }
+
+    public PatientPanelListener(PatientPanel patientPanel, CoefficientsPanel coefficientsPanel, boolean createdFromDB, DatabasePanel databasePanel){
+        this.patientPanel = patientPanel;
+        this.createdFromDB = createdFromDB;
+        this.databasePanel = databasePanel;
         coefficientsHandler = new CoefficientsHandler(coefficientsPanel);
     }
 
@@ -71,6 +74,7 @@ public class PatientPanelListener implements ActionListener {
                         coefficientsHandler.getGldg()));
                 if (createdFromDB) {
                     JOptionPane.showMessageDialog(null, rb.getString("interface.patient.added"));
+                    updateDatabasePanel();
                     exit(true);
                 } else {
                     Object[] options = {rb.getString("interface.Yes"),
@@ -85,7 +89,7 @@ public class PatientPanelListener implements ActionListener {
                             options,
                             options[2]);
                     switch (choice){
-                        case JOptionPane.YES_OPTION: new DatabasePanelCreator(database);
+                        case JOptionPane.YES_OPTION: new DatabasePanelCreator();
                             exit(true);
                         case JOptionPane.CANCEL_OPTION: exit(true);
                     }
@@ -97,8 +101,12 @@ public class PatientPanelListener implements ActionListener {
         }
     }
 
+    private void updateDatabasePanel(){
+        new DatabasePanelCreator(databasePanel);
+    }
+
     private boolean connectToDatabase(){
-        database = new Database();
+        database = new EnzimDatabase();
         return database.setConnectionIfDbExist(
                 PropertyHandler.getInstance().getValue("datasource.url"),
                 PropertyHandler.getInstance().getValue("datasource.username"),

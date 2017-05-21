@@ -1,9 +1,10 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
-import com.kodeir.enzim2016.commons.Database;
+import com.kodeir.enzim2016.commons.EnzimDatabase;
 import com.kodeir.enzim2016.commons.PatientsDatabase;
 import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
 import com.kodeir.enzim2016.ui.swing.panels.NewCoefficientsPanel;
 
 import javax.swing.*;
@@ -23,12 +24,20 @@ public class NewCoefficientsListener implements ActionListener {
     private long patientId;
 
     private NewCoefficientsPanel newCoefficientsPanel;
+    private DatabasePanel databasePanel;
     private CoefficientsHandler coefficientsHandler;
-    private Database database;
+    private EnzimDatabase database;
 
     public NewCoefficientsListener(NewCoefficientsPanel newCoefficientsPanel, long patientId){
         this.newCoefficientsPanel = newCoefficientsPanel;
         this.patientId = patientId;
+        coefficientsHandler = new CoefficientsHandler(newCoefficientsPanel.getCoefficientsPanel());
+    }
+
+    public NewCoefficientsListener(NewCoefficientsPanel newCoefficientsPanel, long patientId, DatabasePanel databasePanel){
+        this.newCoefficientsPanel = newCoefficientsPanel;
+        this.patientId = patientId;
+        this.databasePanel = databasePanel;
         coefficientsHandler = new CoefficientsHandler(newCoefficientsPanel.getCoefficientsPanel());
     }
 
@@ -51,13 +60,19 @@ public class NewCoefficientsListener implements ActionListener {
                             coefficientsHandler.getGldg()
                     ));
                 }
-                JOptionPane.showMessageDialog(null,"true");
+                JOptionPane.showMessageDialog(null, rb.getString("interface.coefficients.added"));
+                updateDatabasePanel();
+                exit(rb.getString("interface.return"));
             } else {
-                JOptionPane.showMessageDialog(null,errors.toString());
+                JOptionPane.showMessageDialog(null, errors.toString());
             }
         } else if (e.getSource().equals(newCoefficientsPanel.getReturnBtn())) {
-            exit("Return?");
+            exit(rb.getString("interface.return"));
         }
+    }
+
+    private void updateDatabasePanel(){
+        new DatabasePanelCreator(databasePanel);
     }
 
     private boolean addCoefficients() {
@@ -125,7 +140,7 @@ public class NewCoefficientsListener implements ActionListener {
     }
 
     private boolean connectToDatabase(){
-        database = new Database();
+        database = new EnzimDatabase();
         return database.setConnectionIfDbExist(
                 PropertyHandler.getInstance().getValue("datasource.url"),
                 PropertyHandler.getInstance().getValue("datasource.username"),

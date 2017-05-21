@@ -31,18 +31,27 @@
 package com.kodeir.enzim2016.ui.swing.panels;
 
 import com.kodeir.enzim2016.commons.UTF8Control;
+import com.kodeir.enzim2016.data.HelpMapping;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimTextField;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 import com.kodeir.enzim2016.ui.swing.listeners.TreeListener;
+import com.kodeir.enzim2016.ui.swing.listeners.TreeNodesMap;
 
 import javax.swing.*;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.util.ResourceBundle;
 
 /**
- * Created by Rowan on 03.07.2016.
+ * Created by Sergei Riabinin on 03.07.2016.
+ *
+ * The TreePanel class implements diagnostic algorithms for liver diseases,
+ * which was introduced by Vyacheslav Ryabinin in "The development and use
+ * of new approaches to the analysis of laboratory and biochemical tests
+ * for the differential diagnosis of liver diseases.", Chelyabinsk, 2007.
  *
  */
 
@@ -50,6 +59,14 @@ import java.util.ResourceBundle;
 public class TreePanel extends JPanel {
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
+
+    private JFrame frame;
+    public JFrame getFrame(){
+        return frame;
+    }
+    public void setFrame(JFrame frame){
+        this.frame = frame;
+    }
 
     private JLabel label;
 
@@ -70,6 +87,27 @@ public class TreePanel extends JPanel {
     private String missedCoefficients;
     private String wrongCoefficients;
 
+    private JTree injuredOrganTree;
+    private JTree diseaseTree;
+    private DefaultTreeModel injuredOrganTreeModel;
+    private DefaultTreeModel diseaseTreeModel;
+
+    public JTree getInjuredOrganTree() {
+        return injuredOrganTree;
+    }
+
+    public JTree getDiseaseTree() {
+        return diseaseTree;
+    }
+
+    public DefaultTreeModel getInjuredOrganTreeModel() {
+        return injuredOrganTreeModel;
+    }
+
+    public DefaultTreeModel getDiseaseTreeModel() {
+        return diseaseTreeModel;
+    }
+
     public JButton getDoDiagnoseBtn() {
         return doDiagnoseBtn;
     }
@@ -88,11 +126,40 @@ public class TreePanel extends JPanel {
 
     public TreePanel(){
         this.setLayout(new GridBagLayout());
+        fillPanel();
+        expandTrees();
+    }
+
+    public TreePanel(String ast, String alt, String kfk, String ldg, String shf, String ggtp, String he, String gldg){
+        this.setLayout(new GridBagLayout());
+        fillPanel();
+        setCoefficients(ast, alt, kfk, ldg, shf, ggtp, he, gldg);
+        doDiagnoseBtn.doClick();
+    }
+
+    private void fillPanel(){
         addFields();
         addResultButton();
         addResults();
-        addTree();
+        addInjuredOrganTree();
+        addDiseaseTree();
         addListeners();
+    }
+
+    private void expandTrees(){
+        expandTree(injuredOrganTree);
+        expandTree(diseaseTree);
+    }
+
+    private void setCoefficients(String ast, String alt, String kfk, String ldg, String shf, String ggtp, String he, String gldg){
+        astField.setText(ast);
+        altField.setText(alt);
+        kfkField.setText(kfk);
+        ldgField.setText(ldg);
+        shfField.setText(shf);
+        ggtpField.setText(ggtp);
+        heField.setText(he);
+        gldgField.setText(gldg);
     }
 
     private void addFields(){
@@ -143,18 +210,34 @@ public class TreePanel extends JPanel {
         this.add(diagnosePanel, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,5,4,4));
     }
 
-    private void addTree(){
+    private void addInjuredOrganTree(){
         DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
         root.add(createInjuredOrganBranch());
+
+        injuredOrganTreeModel = new DefaultTreeModel(root);
+
+        injuredOrganTree = new JTree(injuredOrganTreeModel);
+        injuredOrganTree.setRootVisible(false);
+        injuredOrganTree.getExpandsSelectedPaths();
+
+        JScrollPane scrollPane = new JScrollPane(injuredOrganTree);
+        EnzimSwingCommons.setSize(scrollPane, 600, 125);
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,9,4));
+    }
+
+    private void addDiseaseTree(){
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("root");
         root.add(createDiseaseBranch());
 
-        JTree tree = new JTree(root);
-        tree.setRootVisible(false);
-        tree.setMinimumSize(new Dimension(600,500));
+        diseaseTreeModel = new DefaultTreeModel(root);
 
-        JScrollPane scrollPane = new JScrollPane(tree);
-        scrollPane.setMinimumSize(new Dimension(600,500));
-        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,9,4));
+        diseaseTree = new JTree(diseaseTreeModel);
+        diseaseTree.setRootVisible(false);
+        diseaseTree.getExpandsSelectedPaths();
+
+        JScrollPane scrollPane = new JScrollPane(diseaseTree);
+        EnzimSwingCommons.setSize(scrollPane, 600, 250);
+        this.add(scrollPane, EnzimSwingCommons.setConstraintsHorizontal(0.5,0,10,4));
     }
 
     private DefaultMutableTreeNode createInjuredOrganBranch(){
@@ -166,8 +249,7 @@ public class TreePanel extends JPanel {
         DefaultMutableTreeNode AlT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.alt.0_40"));
         AsT_Node.add(AlT_Node_0);
         AsT_Node.add(AlT_Node_1);
-        DefaultMutableTreeNode diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER")
-                + rb.getString("organs.BILIARY_TRACT"));
+        DefaultMutableTreeNode diagnose = TreeNodesMap.getInjuredOrgan_LIVER_BILIARY_TRACT_ALT();
         AlT_Node_0.add(diagnose);
         DefaultMutableTreeNode KFK_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.kfk.501_1750"));
         DefaultMutableTreeNode KFK_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.kfk.176_500"));
@@ -175,15 +257,15 @@ public class TreePanel extends JPanel {
         AlT_Node_1.add(KFK_Node_0);
         AlT_Node_1.add(KFK_Node_1);
         AlT_Node_1.add(KFK_Node_2);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.SKELETAL_MUSCLE"));
+        diagnose = TreeNodesMap.getInjuredOrgan_SKELETAL_MUSCLE();
         KFK_Node_0.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.HEART"));
+        diagnose = TreeNodesMap.getInjuredOrgan_HEART();
         KFK_Node_1.add(diagnose);
         DefaultMutableTreeNode LDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.591_2750"));
         DefaultMutableTreeNode LDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ldg.150_590"));
         KFK_Node_2.add(LDG_Node_0);
         KFK_Node_2.add(LDG_Node_1);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.BLOOD"));
+        diagnose = TreeNodesMap.getInjuredOrgan_BLOOD();
         LDG_Node_0.add(diagnose);
         DefaultMutableTreeNode SHF_Node = new DefaultMutableTreeNode(rb.getString("coefficients.shf.more.80"));
         LDG_Node_1.add(SHF_Node);
@@ -193,12 +275,11 @@ public class TreePanel extends JPanel {
         SHF_Node.add(GGTP_Node_0);
         SHF_Node.add(GGTP_Node_1);
         SHF_Node.add(GGTP_Node_2);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER")
-                + rb.getString("organs.BILIARY_TRACT"));
+        diagnose = TreeNodesMap.getInjuredOrgan_LIVER_BILIARY_TRACT_GGTP();
         GGTP_Node_0.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.LIVER"));
+        diagnose = TreeNodesMap.getInjuredOrgan_LIVER();
         GGTP_Node_1.add(diagnose);
-        diagnose = new DefaultMutableTreeNode(rb.getString("organs.BONE_TISSUE"));
+        diagnose = TreeNodesMap.getInjuredOrgan_BONE_TISSUE();
         GGTP_Node_2.add(diagnose);
 
         return injuredOrgan;
@@ -224,7 +305,7 @@ public class TreePanel extends JPanel {
         deRitis01_05_Node.add(LDG_Node_0);
         deRitis01_05_Node.add(LDG_Node_1);
 
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.MONONUCLEOSIS_INFECTIOUS"));
+        DefaultMutableTreeNode result = TreeNodesMap.getDisease_1_MONONUCLEOSIS_INFECTIOUS();
         LDG_Node_0.add(result);
 
         DefaultMutableTreeNode SHF_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.more.270"));
@@ -247,11 +328,11 @@ public class TreePanel extends JPanel {
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_1);
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_2);
 
-        result = new DefaultMutableTreeNode(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ");
+        result = TreeNodesMap.getDisease_2_OBSTRUCTIVE_JAUNDICE();
         AsT_AlT_GLDG_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
+        result = TreeNodesMap.getDisease_3_OBSTRUCTIVE_JAUNDICE();
         AsT_AlT_GLDG_Node_1.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE") + " ? ");
+        result = TreeNodesMap.getDisease_4_OBSTRUCTIVE_JAUNDICE();
         AsT_AlT_GLDG_Node_2.add(result);
 
         AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.50"));
@@ -260,9 +341,9 @@ public class TreePanel extends JPanel {
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_0);
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_1);
 
-        result = new DefaultMutableTreeNode(rb.getString("diseases.TOXIC_DAMAGE"));
+        result = TreeNodesMap.getDisease_5_TOXIC_DAMAGE();
         AsT_AlT_GLDG_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.TOXIC_DAMAGE") + " ? ");
+        result = TreeNodesMap.getDisease_6_TOXIC_DAMAGE();
         AsT_AlT_GLDG_Node_1.add(result);
 
         DefaultMutableTreeNode GGTP_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.more.150"));
@@ -279,11 +360,11 @@ public class TreePanel extends JPanel {
         GGTP_Node_0.add(GGTP_AsT_Node_1);
         GGTP_Node_0.add(GGTP_AsT_Node_2);
 
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ");
+        result = TreeNodesMap.getDisease_7_HEPATITIS_ALCOHOLIC();
         GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_ALCOHOLIC"));
+        result = TreeNodesMap.getDisease_8_HEPATITIS_ALCOHOLIC();
         GGTP_AsT_Node_1.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_ALCOHOLIC") + " ? ");
+        result = TreeNodesMap.getDisease_9_HEPATITIS_ALCOHOLIC();
         GGTP_AsT_Node_2.add(result);
 
         GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.3"));
@@ -294,11 +375,11 @@ public class TreePanel extends JPanel {
         GGTP_Node_1.add(GGTP_AsT_Node_1);
         GGTP_Node_1.add(GGTP_AsT_Node_2);
 
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_VIRAL") + " ? ");
+        result = TreeNodesMap.getDisease_10_HEPATITIS_VIRAL();
         GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_VIRAL"));
+        result = TreeNodesMap.getDisease_11_HEPATITIS_VIRAL();
         GGTP_AsT_Node_1.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_VIRAL") + " ? ");
+        result = TreeNodesMap.getDisease_12_HEPATITIS_VIRAL();
         GGTP_AsT_Node_2.add(result);
 
         // de ritis 0.6-0.9
@@ -309,28 +390,102 @@ public class TreePanel extends JPanel {
         deRitis06_09_Node.add(SHF_Node_0);
         deRitis06_09_Node.add(SHF_Node_1);
 
-        SHF_Node_0.add(add_HE_Node_0());
-        SHF_Node_0.add(add_HE_Node_1());
-        SHF_Node_0.add(add_HE_Node_2());
-        SHF_Node_0.add(add_HE_Node_3());
+        DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.he.2701_3750"));
+        result = TreeNodesMap.getDisease_13_FATTY_LIVER();
+        HE_Node_0.add(result);
+        SHF_Node_0.add(HE_Node_0);
+
+        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.he.1751_2700"));
+        GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.more.10"));
+        GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
+        HE_Node_1.add(GLDG_Node_0);
+        HE_Node_1.add(GLDG_Node_1);
+        result = TreeNodesMap.getDisease_14_OBSTRUCTIVE_JAUNDICE();
+        GLDG_Node_0.add(result);
+        GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.3"));
+        GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.1_3"));
+        GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
+        GLDG_Node_1.add(GGTP_AsT_Node_0);
+        GLDG_Node_1.add(GGTP_AsT_Node_1);
+        GLDG_Node_1.add(GGTP_AsT_Node_2);
+        result = TreeNodesMap.getDisease_15_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_0.add(result);
+        result = TreeNodesMap.getDisease_16_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_1.add(result);
+        result = TreeNodesMap.getDisease_17_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_2.add(result);
+        SHF_Node_0.add(HE_Node_1);
+
+        DefaultMutableTreeNode HE_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.he.1201-1750"));
+        GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.1"));
+        GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.0_1"));
+        HE_Node_2.add(GGTP_AsT_Node_0);
+        HE_Node_2.add(GGTP_AsT_Node_1);
+        result = TreeNodesMap.getDisease_18_HEPATITIS_CHRONIC_PERSISTENT();
+        GGTP_AsT_Node_0.add(result);
+        result = TreeNodesMap.getDisease_19_HEPATITIS_CHRONIC_PERSISTENT();
+        GGTP_AsT_Node_1.add(result);
+        SHF_Node_0.add(HE_Node_2);
+
+        DefaultMutableTreeNode HE_Node_3 = new DefaultMutableTreeNode(rb.getString("coefficients.he.500_1200"));
+        result = TreeNodesMap.getDisease_20_TOXIC_DAMAGE();
+        HE_Node_3.add(result);
+        SHF_Node_0.add(HE_Node_3);
 
         GGTP_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.more.11"));
         GGTP_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.0_10"));
         SHF_Node_1.add(GGTP_Node_0);
         SHF_Node_1.add(GGTP_Node_1);
 
-        GGTP_Node_0.add(add_HE_Node_0());
-        GGTP_Node_0.add(add_HE_Node_1());
-        GGTP_Node_0.add(add_HE_Node_2());
-        GGTP_Node_0.add(add_HE_Node_3());
+        HE_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.he.2701_3750"));
+        result = TreeNodesMap.getDisease_21_FATTY_LIVER();
+        HE_Node_0.add(result);
+        GGTP_Node_0.add(HE_Node_0);
 
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC"));
+        HE_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.he.1751_2700"));
+        GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.more.10"));
+        GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
+        HE_Node_1.add(GLDG_Node_0);
+        HE_Node_1.add(GLDG_Node_1);
+        result = TreeNodesMap.getDisease_22_OBSTRUCTIVE_JAUNDICE();
+        GLDG_Node_0.add(result);
+        GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.3"));
+        GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.1_3"));
+        GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
+        GLDG_Node_1.add(GGTP_AsT_Node_0);
+        GLDG_Node_1.add(GGTP_AsT_Node_1);
+        GLDG_Node_1.add(GGTP_AsT_Node_2);
+        result = TreeNodesMap.getDisease_23_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_0.add(result);
+        result = TreeNodesMap.getDisease_24_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_1.add(result);
+        result = TreeNodesMap.getDisease_25_HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_2.add(result);
+        GGTP_Node_0.add(HE_Node_1);
+
+        HE_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.he.1201-1750"));
+        GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.1"));
+        GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.0_1"));
+        HE_Node_2.add(GGTP_AsT_Node_0);
+        HE_Node_2.add(GGTP_AsT_Node_1);
+        result = TreeNodesMap.getDisease_26_HEPATITIS_CHRONIC_PERSISTENT();
+        GGTP_AsT_Node_0.add(result);
+        result = TreeNodesMap.getDisease_27_HEPATITIS_CHRONIC_PERSISTENT();
+        GGTP_AsT_Node_1.add(result);
+        GGTP_Node_0.add(HE_Node_2);
+
+        HE_Node_3 = new DefaultMutableTreeNode(rb.getString("coefficients.he.500_1200"));
+        result = TreeNodesMap.getDisease_28_TOXIC_DAMAGE();
+        HE_Node_3.add(result);
+        GGTP_Node_0.add(HE_Node_3);
+
+        result = TreeNodesMap.getDisease_29_HEPATITIS_CHRONIC_AGGRESSIVE();
         GGTP_Node_1.add(result);
 
         // deRitis 1
 
-        DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.he.more.1500"));
-        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.he.500_1500"));
+        HE_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.he.more.1500"));
+        HE_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.he.500_1500"));
         deRitis1_Node.add(HE_Node_0);
         deRitis1_Node.add(HE_Node_1);
 
@@ -341,12 +496,51 @@ public class TreePanel extends JPanel {
         HE_Node_0.add(GGTP_Node_1);
         HE_Node_0.add(GGTP_Node_2);
 
-        GGTP_Node_0.add(add_SHF_Node_0());
-        GGTP_Node_0.add(add_SHF_Node_1());
+        SHF_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.471_1500"));
+        GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.11_75"));
+        GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
+        SHF_Node_0.add(GLDG_Node_0);
+        SHF_Node_0.add(GLDG_Node_1);
+        AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.10"));
+        AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.0_10"));
+        GLDG_Node_0.add(AsT_AlT_GLDG_Node_0);
+        GLDG_Node_0.add(AsT_AlT_GLDG_Node_1);
+        result = TreeNodesMap.getDisease_30_LIVER_METASTATIC_TUMOR_NODULES();
+        AsT_AlT_GLDG_Node_0.add(result);
+        result = TreeNodesMap.getDisease_31_LIVER_METASTATIC_TUMOR_NODULES();
+        AsT_AlT_GLDG_Node_1.add(result);
+        AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.20"));
+        AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.5_20"));
+        AsT_AlT_GLDG_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.less.5"));
+        GLDG_Node_1.add(AsT_AlT_GLDG_Node_0);
+        GLDG_Node_1.add(AsT_AlT_GLDG_Node_1);
+        GLDG_Node_1.add(AsT_AlT_GLDG_Node_2);
+        result = TreeNodesMap.getDisease_32_CIRRHOSIS_BILIARY();
+        AsT_AlT_GLDG_Node_0.add(result);
+        result = TreeNodesMap.getDisease_33_CIRRHOSIS_BILIARY();
+        AsT_AlT_GLDG_Node_1.add(result);
+        result = TreeNodesMap.getDisease_34_CIRRHOSIS_BILIARY();
+        AsT_AlT_GLDG_Node_2.add(result);
+        GGTP_Node_0.add(SHF_Node_0);
 
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_AGGRESSIVE"));
+        SHF_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.80_470"));
+        GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.6"));
+        GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.3_6"));
+        GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
+        SHF_Node_1.add(GGTP_AsT_Node_0);
+        SHF_Node_1.add(GGTP_AsT_Node_1);
+        SHF_Node_1.add(GGTP_AsT_Node_2);
+        result = TreeNodesMap.getDisease_35_CIRRHOSIS_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_0.add(result);
+        result = TreeNodesMap.getDisease_36_CIRRHOSIS_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_1.add(result);
+        result = TreeNodesMap.getDisease_37_CIRRHOSIS_ALCOHOLIC_TOXIC();
+        GGTP_AsT_Node_2.add(result);
+        GGTP_Node_0.add(SHF_Node_1);
+
+        result = TreeNodesMap.getDisease_38_HEPATITIS_CHRONIC_AGGRESSIVE();
         GGTP_Node_1.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_NONSPECIFIC_REACTIVE"));
+        result = TreeNodesMap.getDisease_39_HEPATITIS_NONSPECIFIC_REACTIVE();
         GGTP_Node_2.add(result);
 
         GGTP_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp.more.350"));
@@ -355,112 +549,55 @@ public class TreePanel extends JPanel {
         HE_Node_1.add(GGTP_Node_0);
         HE_Node_1.add(GGTP_Node_1);
         HE_Node_1.add(GGTP_Node_2);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.LIVER_METASTASES") + " ? " + rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
+        result = TreeNodesMap.getDisease_40_LIVER_METASTASES_CIRRHOSIS_BILIARY();
         GGTP_Node_0.add(result);
 
-        GGTP_Node_1.add(add_SHF_Node_0());
-        GGTP_Node_1.add(add_SHF_Node_1());
-
-        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_POSTHEPATITIS"));
-        GGTP_Node_2.add(result);
-
-        return disease;
-    }
-
-    private DefaultMutableTreeNode add_HE_Node_0() {
-        DefaultMutableTreeNode HE_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.he.2701_3750"));
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.FATTY_LIVER"));
-        HE_Node_0.add(result);
-        return HE_Node_0;
-    }
-
-    private DefaultMutableTreeNode add_HE_Node_1() {
-        DefaultMutableTreeNode HE_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.he.1751_2700"));
-        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.more.10"));
-        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
-        HE_Node_1.add(GLDG_Node_0);
-        HE_Node_1.add(GLDG_Node_1);
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.OBSTRUCTIVE_JAUNDICE"));
-        GLDG_Node_0.add(result);
-        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.3"));
-        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.1_3"));
-        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
-        GLDG_Node_1.add(GGTP_AsT_Node_0);
-        GLDG_Node_1.add(GGTP_AsT_Node_1);
-        GLDG_Node_1.add(GGTP_AsT_Node_2);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
-        GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC"));
-        GGTP_AsT_Node_1.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_ALCOHOLIC_TOXIC") + " ? ");
-        GGTP_AsT_Node_2.add(result);
-        return HE_Node_1;
-    }
-
-    private DefaultMutableTreeNode add_HE_Node_2() {
-        DefaultMutableTreeNode HE_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.he.1201-1750"));
-        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.1"));
-        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.0_1"));
-        HE_Node_2.add(GGTP_AsT_Node_0);
-        HE_Node_2.add(GGTP_AsT_Node_1);
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT") + " ? ");
-        GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.HEPATITIS_CHRONIC_PERSISTENT"));
-        GGTP_AsT_Node_1.add(result);
-        return HE_Node_2;
-    }
-
-    private DefaultMutableTreeNode add_HE_Node_3() {
-        DefaultMutableTreeNode HE_Node_3 = new DefaultMutableTreeNode(rb.getString("coefficients.he.500_1200"));
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.TOXIC_DAMAGE"));
-        HE_Node_3.add(result);
-        return HE_Node_3;
-    }
-
-    private DefaultMutableTreeNode add_SHF_Node_0() {
-        DefaultMutableTreeNode SHF_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.471_1500"));
-        DefaultMutableTreeNode GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.11_75"));
-        DefaultMutableTreeNode GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
+        SHF_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.471_1500"));
+        GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.11_75"));
+        GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.gldg.0_10"));
         SHF_Node_0.add(GLDG_Node_0);
         SHF_Node_0.add(GLDG_Node_1);
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.10"));
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.0_10"));
+        AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.10"));
+        AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.0_10"));
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_0);
         GLDG_Node_0.add(AsT_AlT_GLDG_Node_1);
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES") + " ? ");
+        result = TreeNodesMap.getDisease_41_LIVER_METASTATIC_TUMOR_NODULES();
         AsT_AlT_GLDG_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.LIVER_METASTATIC_TUMOR_NODULES"));
+        result = TreeNodesMap.getDisease_42_LIVER_METASTATIC_TUMOR_NODULES();
         AsT_AlT_GLDG_Node_1.add(result);
         AsT_AlT_GLDG_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.more.20"));
         AsT_AlT_GLDG_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.5_20"));
-        DefaultMutableTreeNode AsT_AlT_GLDG_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.less.5"));
+        AsT_AlT_GLDG_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ast_alt_gldg.less.5"));
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_0);
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_1);
         GLDG_Node_1.add(AsT_AlT_GLDG_Node_2);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
+        result = TreeNodesMap.getDisease_43_CIRRHOSIS_BILIARY();
         AsT_AlT_GLDG_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_BILIARY"));
+        result = TreeNodesMap.getDisease_44_CIRRHOSIS_BILIARY();
         AsT_AlT_GLDG_Node_1.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_BILIARY") + " ? ");
+        result = TreeNodesMap.getDisease_45_CIRRHOSIS_BILIARY();
         AsT_AlT_GLDG_Node_2.add(result);
-        return SHF_Node_0;
-    }
+        GGTP_Node_1.add(SHF_Node_0);
 
-    private DefaultMutableTreeNode add_SHF_Node_1() {
-        DefaultMutableTreeNode SHF_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.80_470"));
-        DefaultMutableTreeNode GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.6"));
-        DefaultMutableTreeNode GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.3_6"));
-        DefaultMutableTreeNode GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
+        SHF_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.shf.80_470"));
+        GGTP_AsT_Node_0 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.more.6"));
+        GGTP_AsT_Node_1 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.3_6"));
+        GGTP_AsT_Node_2 = new DefaultMutableTreeNode(rb.getString("coefficients.ggtp_ast.less.3"));
         SHF_Node_1.add(GGTP_AsT_Node_0);
         SHF_Node_1.add(GGTP_AsT_Node_1);
         SHF_Node_1.add(GGTP_AsT_Node_2);
-        DefaultMutableTreeNode result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
+        result = TreeNodesMap.getDisease_46_CIRRHOSIS_ALCOHOLIC_TOXIC();
         GGTP_AsT_Node_0.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC"));
+        result = TreeNodesMap.getDisease_47_CIRRHOSIS_ALCOHOLIC_TOXIC();
         GGTP_AsT_Node_1.add(result);
-        result = new DefaultMutableTreeNode(rb.getString("diseases.CIRRHOSIS_ALCOHOLIC_TOXIC") + " ? ");
+        result = TreeNodesMap.getDisease_48_CIRRHOSIS_ALCOHOLIC_TOXIC();
         GGTP_AsT_Node_2.add(result);
-        return SHF_Node_1;
+        GGTP_Node_1.add(SHF_Node_1);
+
+        result = TreeNodesMap.getDisease_49_CIRRHOSIS_POSTHEPATITIS();
+        GGTP_Node_2.add(result);
+
+        return disease;
     }
 
     public float[] getFloats(){
@@ -571,6 +708,9 @@ public class TreePanel extends JPanel {
 
     private void addListeners(){
         doDiagnoseBtn.addActionListener(new TreeListener(this));
+        for (Component c: this.getComponents()){
+            c.addKeyListener(new KeyboardListener(HelpMapping.HELP_TREE, this));
+        }
     }
 
     private boolean parseFloatFromString(String s){
@@ -579,6 +719,21 @@ public class TreePanel extends JPanel {
             return true;
         } catch (NumberFormatException e){
             return false;
+        }
+    }
+
+    public void collapseTree(JTree tree){
+        int row = tree.getRowCount() - 1;
+        while (row >= 0) {
+            tree.collapseRow(row);
+            row--;
+        }
+        tree.clearSelection();
+    }
+
+    public void expandTree(JTree tree){
+        for (int i = 0; i < tree.getRowCount(); i++) {
+            tree.expandRow(i);
         }
     }
 }

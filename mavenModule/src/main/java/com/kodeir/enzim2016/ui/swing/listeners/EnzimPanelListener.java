@@ -1,26 +1,15 @@
 package com.kodeir.enzim2016.ui.swing.listeners;
 
-import com.kodeir.enzim2016.commons.Database;
-import com.kodeir.enzim2016.commons.PatientsDatabase;
-import com.kodeir.enzim2016.commons.PropertyHandler;
 import com.kodeir.enzim2016.commons.UTF8Control;
-import com.kodeir.enzim2016.pi.Coefficients;
-import com.kodeir.enzim2016.pi.Patient;
-import com.kodeir.enzim2016.ui.swing.SwingApp;
-import com.kodeir.enzim2016.ui.swing.panels.DatabasePanel;
+import com.kodeir.enzim2016.ui.swing.panels.AboutPanel;
 import com.kodeir.enzim2016.ui.swing.panels.EnzimPanel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFrame;
 import com.kodeir.enzim2016.ui.swing.panels.PatientPanel;
 import com.kodeir.enzim2016.ui.swing.panels.TreePanel;
+import sun.reflect.generics.tree.Tree;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.ResourceBundle;
 
 /**
@@ -29,8 +18,6 @@ import java.util.ResourceBundle;
 public class EnzimPanelListener implements ActionListener{
 
     private ResourceBundle rb = ResourceBundle.getBundle("rb", new UTF8Control());
-
-    private Database database;
 
     private EnzimPanel enzimPanel;
 
@@ -44,8 +31,10 @@ public class EnzimPanelListener implements ActionListener{
             createNewPatientPanel();
         } else if (e.getSource().equals(enzimPanel.getOpenDatabaseBtn())) {
             createDatabasePanel();
-        } else if (e.getSource().equals(enzimPanel.getShowTreeButton())) {
+        } else if (e.getSource().equals(enzimPanel.getShowTreeBtn())) {
             createTreePanel();
+        } else if (e.getSource().equals(enzimPanel.getAboutBtn())) {
+            createAboutPanel();
         } else if (e.getSource().equals(enzimPanel.getExitBtn())) {
             System.exit(0);
         }
@@ -53,15 +42,20 @@ public class EnzimPanelListener implements ActionListener{
 
     private void createNewPatientPanel(){
         PatientPanel patientPanel = new PatientPanel(false);
-        patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel));
+        patientPanel.setFrame(new EnzimFrame(rb.getString("interface.create.new_patient"), patientPanel, 1));
     }
 
     private void createDatabasePanel(){
-        new DatabasePanelCreator(database);
+        new DatabasePanelCreator();
     }
 
     private void createTreePanel(){
-        new EnzimFrame(rb.getString("interface.tree.panel"), new TreePanel());
+        TreePanel treePanel = new TreePanel();
+        treePanel.setFrame(new EnzimFrame(rb.getString("interface.tree.panel"), treePanel, 3));
+    }
+
+    private void createAboutPanel() {
+        new EnzimFrame(rb.getString("interface.about"), new AboutPanel(), 0);
     }
 
 }

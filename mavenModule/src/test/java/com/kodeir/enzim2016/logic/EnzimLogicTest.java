@@ -129,7 +129,7 @@ public class EnzimLogicTest {
     @Test
     public void testDiagnose() throws Exception {
         Diagnosis diagnosis = new EnzimLogic();
-        assertEquals(injuredOrgan, diagnosis.defineInjuredOrgan(coefficients));
-        assertEquals(disease, diagnosis.defineDisease(coefficients));
+        assertEquals(injuredOrgan, diagnosis.getDiagnose(diagnosis.defineInjuredOrgan(coefficients)));
+        assertEquals(disease, diagnosis.getDiagnose(diagnosis.defineDisease(coefficients)));
     }
 }

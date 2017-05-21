@@ -5,6 +5,7 @@ import com.kodeir.enzim2016.ui.swing.commons.EnzimDateField;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimFloatField;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimLabel;
 import com.kodeir.enzim2016.ui.swing.commons.EnzimSwingCommons;
+import com.kodeir.enzim2016.ui.swing.listeners.KeyboardListener;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,7 @@ public class CoefficientsPanel extends JPanel{
     private JFormattedTextField heField;
     private JFormattedTextField gldgField;
     private JFormattedTextField checkupDateField;
+
 
     public JFormattedTextField getAstField() {
         return astField;
@@ -66,9 +68,10 @@ public class CoefficientsPanel extends JPanel{
         return checkupDateField;
     }
 
-    public CoefficientsPanel(){
+    public CoefficientsPanel(int helpMap){
         this.setLayout(new GridBagLayout());
         addComponents();
+        addListeners(helpMap);
     }
 
     private void addComponents() {
@@ -126,23 +129,17 @@ public class CoefficientsPanel extends JPanel{
         astField.setText(String.valueOf(ast));
         altField.setText(String.valueOf(alt));
         kfkField.setText(String.valueOf(kfk));
-        ldgField.setText(String.valueOf(shf));
-        shfField.setText(String.valueOf(ldg));
+        ldgField.setText(String.valueOf(ldg));
+        shfField.setText(String.valueOf(shf));
         ggtpField.setText(String.valueOf(ggtp));
         heField.setText(String.valueOf(he));
         gldgField.setText(String.valueOf(gldg));
         checkupDateField.setText(String.valueOf(checkupDate));
     }
 
-    public void setEditable(boolean editable){
-        astField.setEditable(editable);
-        altField.setEditable(editable);
-        kfkField.setEditable(editable);
-        ldgField.setEditable(editable);
-        shfField.setEditable(editable);
-        ggtpField.setEditable(editable);
-        heField.setEditable(editable);
-        gldgField.setEditable(editable);
-        checkupDateField.setEditable(editable);
+    public void addListeners(int helpMap){
+        for (Component c: this.getComponents()){
+            c.addKeyListener(new KeyboardListener(helpMap, this));
+        }
     }
 }

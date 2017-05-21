@@ -90,6 +90,6 @@ public class Patient implements Comparable{
     @Override
     public int compareTo(Object o) {
         Patient p = (Patient) o;
-        return p.surname.compareTo(p.surname) == 0 ? p.name.compareTo(p.name) : p.surname.compareTo(p.surname);
+        return surname.compareTo(p.surname) == 0 ? name.compareTo(p.name) : surname.compareTo(p.surname);
     }
 }
